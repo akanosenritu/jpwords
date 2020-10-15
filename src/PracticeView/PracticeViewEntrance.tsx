@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from "react";
-import {Box, Button, Container, Grid, TextField, Typography} from "@material-ui/core";
+import {Box, Button, TextField, Typography} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 
 export const PracticeViewEntrance: React.FC = () => {

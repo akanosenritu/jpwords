@@ -1,5 +1,4 @@
 import data from "../words.json";
-import {Category} from "@material-ui/icons";
 import {sample, shuffle} from "lodash";
 
 const categoryList = ['adj-pn', 'u-v-i', 'adj', 'vt', 'vk', 'number', 'n-temp', 'conj', 'n-adv',

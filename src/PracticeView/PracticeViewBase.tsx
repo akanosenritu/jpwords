@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import {Box, Container, LinearProgress, Paper, Typography} from "@material-ui/core";
 import {MeaningSelection} from "./MeaningSelection";
 import {Word, useWords, Category, getSimilarWords} from "../data/Word";
-import {shuffle} from "lodash";
 
 type PracticeViewBaseProps = {
   words: Word[]
