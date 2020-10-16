@@ -1,15 +1,17 @@
 import data from "../words.json";
 import {sample, shuffle} from "lodash";
 
-const categoryList = ['adj-pn', 'u-v-i', 'adj', 'vt', 'vk', 'number', 'n-temp', 'conj', 'n-adv',
-                    'n-t', 'adj-no', 'u-v', 'vs', 'int', 'n col', 'pref', 'vs-i', 'exp', 'expr', 'gn',
-                    'kana only', 'adv', 'suf', 'no-adj', 'p-suru', 'vi', 'n', 'ru-v', 'na-adj', 'num',
-                    'uk', 'n-suf', 'v5n', 'gn-adv', 'prt', 'pren-adj', 'prefix', ''] as const;
+export const categoryList = ['adj-pn', 'u-v-i', 'adj', 'vt', 'vk', 'number', 'n-temp', 'conj', 'n-adv',
+                              'n-t', 'adj-no', 'u-v', 'vs', 'int', 'n col', 'pref', 'vs-i', 'exp', 'expr', 'gn',
+                              'kana only', 'adv', 'suf', 'no-adj', 'p-suru', 'vi', 'n', 'ru-v', 'na-adj', 'num',
+                              'uk', 'n-suf', 'v5n', 'gn-adv', 'prt', 'pren-adj', 'prefix', ''] as const;
+
+export const HiraganaList = []
 
 type CategoryTuple = typeof categoryList;
 export type Category = CategoryTuple[number];
 
-const isCategory = (obj: any): obj is Category => {
+export const isCategory = (obj: any): obj is Category => {
   return categoryList.includes(obj);
 }
 
@@ -65,6 +67,10 @@ export const loadWordsByIndex = (start: number, end: number) => {
   return words.slice(start, end)
 }
 
+export const loadWordsByHiragana = (startHiragana: string, endHiragana: string) => {
+
+}
+
 export const getSimilarWords = (word: Word, quantity: number) => {
   const category = word.category.length > 0? word.category[0] : "";
   const availableWords = shuffle(wordsByCategory.get(category));
@@ -77,6 +83,16 @@ export const getSimilarWords = (word: Word, quantity: number) => {
     if (candidate === undefined) continue;
     if (candidate.meaning === word.meaning) continue;
     result.push(candidate);
+  }
+  // if got less number of words, fill it randomly with all words
+  if (result.length < quantity) {
+    while (result.length < quantity) {
+       const randomWord = sample(words);
+       if (randomWord === undefined) continue;
+       if (randomWord.meaning === word.meaning) continue;
+       if (result.includes(randomWord)) continue;
+       result.push(randomWord);
+    }
   }
   return result;
 }

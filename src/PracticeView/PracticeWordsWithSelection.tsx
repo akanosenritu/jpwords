@@ -46,7 +46,7 @@ type MeaningSelectionProps = {
   position: number
 }
 
-export const MeaningSelection: React.FC<MeaningSelectionProps> = (props) => {
+export const PracticeWordsWithSelection: React.FC<MeaningSelectionProps> = (props) => {
   console.log(props.optionWords.length)
   const [isAnswered, setIsAnswered] = useState(false);
   const [didAnswerCorrectly, setDidAnswerCorrectly] = useState(false);
@@ -63,7 +63,7 @@ export const MeaningSelection: React.FC<MeaningSelectionProps> = (props) => {
   const wrongOptions = props.optionWords.map(option => {
     return <WrongOption word={option} isCorrect={false} onAnswered={onWronglyAnswered} isAnswered={isAnswered} />
   })
-  let options = wrongOptions;
+  let options = wrongOptions
   options.splice(props.position, 0, correctOption);
   const onNextWrong = () => {
     props.onNext(false);

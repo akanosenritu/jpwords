@@ -7,21 +7,20 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
-import {PracticeViewAll} from "./PracticeView/PracticeViewAll";
-import {PracticeViewEntrance} from "./PracticeView/PracticeViewEntrance";
 import {PracticeView} from "./PracticeView/PracticeView";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path={"/practice"}>
-          <PracticeView />
-        </Route>
-      </Switch>
-    </Router>
+    <div style={{width: 400, margin: "auto"}}>
+      <Router>
+        <Switch>
+          <Route path={"/practice"}>
+            <PracticeView />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 

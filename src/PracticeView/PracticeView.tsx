@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import {PracticeViewAll} from "./PracticeViewAll";
 import {PracticeViewEntrance} from "./PracticeViewEntrance";
-import {PracticeViewByIndex} from "./PracticeViewByIndex";
+import {PracticeViewByIndex, PracticeViewByIndexRandom} from "./PracticeViewByIndex";
 
 export const PracticeView: React.FC = () => {
   const match = useRouteMatch();
@@ -17,8 +17,14 @@ export const PracticeView: React.FC = () => {
     <Route path={`${match.path}/all`}>
       <PracticeViewAll />
     </Route>
-    <Route path={`${match.path}/index/:start/:end`}>
+    <Route path={`${match.path}/byIndex/:start/:end`}>
       <PracticeViewByIndex />
+    </Route>
+    <Route path={`${match.path}/byIndex`}>
+
+    </Route>
+    <Route path={`${match.path}/byIndexRandom/:start/:end`}>
+      <PracticeViewByIndexRandom />
     </Route>
     <Route path={match.path}>
       <PracticeViewEntrance />
