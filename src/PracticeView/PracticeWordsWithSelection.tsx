@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import {Box, Typography, makeStyles, Button} from "@material-ui/core";
+import {Box, Button, makeStyles, Typography} from "@material-ui/core";
 import {Word} from "../data/Word";
-import {CorrectOption, WrongOption} from "./Option";
+import {CorrectOption, CorrectOptionReversed, WrongOption, WrongOptionReversed} from "./Option";
 
 
 const useStyles = makeStyles(theme => ({
@@ -17,26 +17,6 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-type OptionProps = {
-  meaning: string,
-  isCorrect: boolean,
-  onAnswered: (num: number) => void,
-  isAnswered: boolean
-  num: number
-}
-
-const Option: React.FC<OptionProps> = (props) => {
-  const handleClick = () => {
-    props.onAnswered(props.num)
-  }
-  return <Button onClick={handleClick} style={{textTransform: "none"}}>
-    <Typography variant={"h6"}>{props.meaning}
-      {props.isAnswered && props.isCorrect && " ○"}
-      {props.isAnswered && !props.isCorrect && " ×"}
-    </Typography>
-  </Button>
-}
-
 type MeaningSelectionProps = {
   word: Word,
   optionWords: Word[],
@@ -44,8 +24,8 @@ type MeaningSelectionProps = {
   position: number
 }
 
-export const PracticeWordsWithSelection: React.FC<MeaningSelectionProps> = (props) => {
-  console.log(props.optionWords.length)
+// JtE stands for "Japanese to English"
+const PracticeWordsWithSelectionJtE: React.FC<MeaningSelectionProps> = (props) => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [didAnswerCorrectly, setDidAnswerCorrectly] = useState(false);
   const word = props.word;
@@ -58,10 +38,9 @@ export const PracticeWordsWithSelection: React.FC<MeaningSelectionProps> = (prop
     setIsAnswered(true);
   }
   const correctOption = <CorrectOption word={props.word} isCorrect={true} onAnswered={onCorrectlyAnswered} isAnswered={isAnswered} />
-  const wrongOptions = props.optionWords.map(option => {
-    return <WrongOption word={option} isCorrect={false} onAnswered={onWronglyAnswered} isAnswered={isAnswered} />
+  let options = props.optionWords.map(option => {
+    return <WrongOption word={option} isCorrect={false} onAnswered={onWronglyAnswered} isAnswered={isAnswered}/>
   })
-  let options = wrongOptions
   options.splice(props.position, 0, correctOption);
   const onNextWrong = () => {
     props.onNext(false);
@@ -78,7 +57,54 @@ export const PracticeWordsWithSelection: React.FC<MeaningSelectionProps> = (prop
       {options}
     </Box>
     <Box mt={2}>
-      {!didAnswerCorrectly && isAnswered && <Button variant={"contained"} color={"primary"} size={"small"} onClick={onNextWrong}>Next</Button> }
+      {!didAnswerCorrectly && isAnswered && <Button variant={"contained"} color={"primary"} onClick={onNextWrong} fullWidth>Next</Button> }
     </Box>
   </div>
+}
+
+// EtJ stands for "English to Japanese"
+const PracticeWordsWithSelectionEtJ: React.FC<MeaningSelectionProps> = (props) => {
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [didAnswerCorrectly, setDidAnswerCorrectly] = useState(false);
+  const word = props.word;
+  const onCorrectlyAnswered = () => {
+    setIsAnswered(true);
+    setDidAnswerCorrectly(true);
+    setTimeout(props.onNext, 1000, [true]);
+  };
+  const onWronglyAnswered = () => {
+    setIsAnswered(true);
+  }
+  const correctOption = <CorrectOptionReversed word={props.word} isCorrect={true} onAnswered={onCorrectlyAnswered} isAnswered={isAnswered} />
+  let options = props.optionWords.map(option => {
+    return <WrongOptionReversed word={option} isCorrect={false} onAnswered={onWronglyAnswered} isAnswered={isAnswered}/>
+  })
+  options.splice(props.position, 0, correctOption);
+  const onNextWrong = () => {
+    props.onNext(false);
+  }
+  const classes = useStyles();
+  return <div style={{textAlign: "center"}}>
+    <Box mt={2}>
+      <Typography variant={"h3"}>{word.meaning}</Typography>
+    </Box>
+    <Box className={classes.root} mt={4}>
+      {options}
+    </Box>
+    <Box mt={2}>
+      {!didAnswerCorrectly && isAnswered && <Button variant={"contained"} color={"primary"} onClick={onNextWrong} fullWidth>Next</Button> }
+    </Box>
+  </div>
+}
+
+type PracticeWordsWithSelectionProps = MeaningSelectionProps & {
+  type: "JtE" | "EtJ"
+}
+
+export const PracticeWordsWithSelection: React.FC<PracticeWordsWithSelectionProps> = props => {
+  return props.type === "JtE" ?
+    <PracticeWordsWithSelectionJtE word={props.word} optionWords={props.optionWords} onNext={props.onNext}
+                                   position={props.position}/> :
+    <PracticeWordsWithSelectionEtJ word={props.word} optionWords={props.optionWords} onNext={props.onNext}
+                                   position={props.position}/>
 }

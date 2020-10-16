@@ -1,8 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {PracticeViewBase} from "./PracticeView/PracticeViewBase";
-import {Box} from "@material-ui/core";
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,7 +9,7 @@ import {PracticeView} from "./PracticeView/PracticeView";
 
 function App() {
   return (
-    <div style={{width: 400, margin: "auto"}}>
+    <div style={{minWidth: 320, maxWidth: 500, margin: "auto"}}>
       <Router>
         <Switch>
           <Route path={"/practice"}>

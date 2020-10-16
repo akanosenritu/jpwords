@@ -10,20 +10,13 @@ import {
   MenuItem
 } from "@material-ui/core";
 import {useHistory} from "react-router-dom";
-import {makeStyles} from "@material-ui/core/styles";
 import {categoryList, loadWordsByIndex} from "../data/Word";
 import {shuffle} from "lodash";
+import {usePracticeViewStyles} from "./PracticeViewStyle";
 
-const useStyles = makeStyles({
-  startPractice: {
-    border: "1px black solid",
-    borderRadius: "5px / 5px",
-    width: "100%"
-  }
-})
 
 const StartPracticeByIndex: React.FC = () => {
-  const classes = useStyles();
+  const classes = usePracticeViewStyles();
   const [startIndex, setStartIndex] = useState("0");
   const onChangeStartIndex = (event: ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
     setStartIndex(event.currentTarget.value)
@@ -44,7 +37,7 @@ const StartPracticeByIndex: React.FC = () => {
       wordsToPractice: wordsToPractice
     });
   }
-  return <Box className={classes.startPractice} mt={2} p={1}>
+  return <Box className={classes.startPractice} mx={1} mt={2} p={1}>
     <Typography variant={"h6"}>Words by index</Typography>
     <Typography variant={"subtitle2"}>Consult with the list <a href={"https://jlptstudy.net/N5/?vocab-list"}>here</a></Typography>
     <Box mt={2} >
@@ -59,7 +52,7 @@ const StartPracticeByIndex: React.FC = () => {
 };
 
 const StartPracticeByCategory: React.FC = () => {
-  const classes = useStyles();
+  const classes = usePracticeViewStyles();
   const [category, setCategory] = useState("");
   const handleChangeOnSelect = (event: any) => {
     const selected = event.target.value;
@@ -68,7 +61,7 @@ const StartPracticeByCategory: React.FC = () => {
   };
   const onClickStart = () => {
   }
-  return <Box className={classes.startPractice} mt={2} p={1}>
+  return <Box className={classes.startPractice} mt={2} mx={1} p={1}>
     <Typography variant={"h6"}>Words by category</Typography>
     <div>
       <Typography variant={"subtitle2"}>Available categories are:  {categoryList.join(", ")}</Typography>

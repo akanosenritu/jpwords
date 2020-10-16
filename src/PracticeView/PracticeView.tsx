@@ -5,7 +5,7 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import {PracticeViewEntrance} from "./PracticeViewEntrance";
-import {PracticeViewByIndex} from "./PracticeViewByIndex";
+import {PracticeViewByIndex, PracticeViewByIndexWithReversedSelection} from "./PracticeViewByIndex";
 import {PracticeViewResult} from "./PracticeViewResult";
 import {PracticeTypeSelectionView} from "./PracticeTypeSelectionView";
 
@@ -14,6 +14,9 @@ export const PracticeView: React.FC = () => {
   return <Switch>
     <Route path={`${match.path}/byIndex/select`}>
       <PracticeViewByIndex />
+    </Route>
+    <Route path={`${match.path}/byIndex/reverseSelect`}>
+      <PracticeViewByIndexWithReversedSelection />
     </Route>
     <Route path={`${match.path}/byIndex`}>
       <PracticeTypeSelectionView />
