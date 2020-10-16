@@ -1,6 +1,6 @@
 import React from "react";
 import {PracticeViewBase} from "./PracticeViewBase";
-import {Word} from "../data/Word";
+import {Word} from "../../data/Word";
 import {useLocation} from "react-router-dom";
 
 type PracticeViewByIndexLocationState ={

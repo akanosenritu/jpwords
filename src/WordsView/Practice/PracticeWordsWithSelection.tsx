@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Box, Button, makeStyles, Typography} from "@material-ui/core";
-import {Word} from "../data/Word";
+import {Word} from "../../data/Word";
 import {CorrectOption, CorrectOptionReversed, WrongOption, WrongOptionReversed} from "./Option";
 
 

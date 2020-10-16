@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Box, Button, Container, LinearProgress, Typography} from "@material-ui/core";
 import {PracticeWordsWithSelection} from "./PracticeWordsWithSelection";
-import {Word, getSimilarWords} from "../data/Word";
+import {Word, getSimilarWords} from "../../data/Word";
 import {useHistory} from "react-router-dom";
 import {sample} from "lodash";
 

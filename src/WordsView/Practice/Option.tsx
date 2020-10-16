@@ -1,6 +1,6 @@
 import React from "react";
 import {Typography, Button} from "@material-ui/core";
-import {Word} from "../data/Word";
+import {Word} from "../../data/Word";
 
 type OptionProps = {
   word: Word,

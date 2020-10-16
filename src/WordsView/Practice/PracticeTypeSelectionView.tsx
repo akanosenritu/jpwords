@@ -1,7 +1,7 @@
 import React from "react";
 import {useLocation, useHistory, useRouteMatch} from "react-router-dom";
 import {Box, Button, Typography} from "@material-ui/core";
-import {Word} from "../data/Word";
+import {Word} from "../../data/Word";
 import {usePracticeViewStyles} from "./PracticeViewStyle";
 
 

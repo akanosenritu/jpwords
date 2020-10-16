@@ -10,7 +10,7 @@ import {
   MenuItem
 } from "@material-ui/core";
 import {useHistory} from "react-router-dom";
-import {categoryList, loadWordsByIndex} from "../data/Word";
+import {categoryList, loadWordsByIndex} from "../../data/Word";
 import {shuffle} from "lodash";
 import {usePracticeViewStyles} from "./PracticeViewStyle";
 
@@ -41,7 +41,7 @@ const StartPracticeByIndex: React.FC = () => {
     <Typography variant={"h6"}>Words by index</Typography>
     <Typography variant={"subtitle2"}>Consult with the list <a href={"https://jlptstudy.net/N5/?vocab-list"}>here</a></Typography>
     <Box mt={2} >
-      <TextField value={startIndex} onChange={onChangeStartIndex}/> -
+      <TextField style={{textAlign: "center"}} value={startIndex} onChange={onChangeStartIndex}/> -
       <TextField value={endIndex} onChange={onChangeEndIndex}/>
     </Box>
     <Box mt={2}>

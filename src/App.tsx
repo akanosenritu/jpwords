@@ -5,15 +5,15 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import {PracticeView} from "./PracticeView/PracticeView";
+import {WordsView} from "./WordsView/WordsView";
 
 function App() {
   return (
     <div style={{minWidth: 320, maxWidth: 500, margin: "auto"}}>
       <Router>
         <Switch>
-          <Route path={"/practice"}>
-            <PracticeView />
+          <Route path={"/words"}>
+            <WordsView />
           </Route>
         </Switch>
       </Router>
