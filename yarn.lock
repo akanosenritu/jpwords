@@ -1781,6 +1781,11 @@
     "@types/testing-library__dom" "*"
     pretty-format "^25.1.0"
 
+"@types/wanakana@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/wanakana/-/wanakana-4.0.0.tgz#8e8601c2380388512272e2e00b4e985c6e4b0726"
+  integrity sha512-UiPHsIbTz0hIGiv1eQzxNKJOYVRS1UzC/cZOuhhKyQZQsYo05kZzx1Ok7tnefD/eoUHmL9J+CdmwgOngMGA60g==
+
 "@types/yargs-parser@*":
   version "15.0.0"
   resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-15.0.0.tgz#cb3f9f741869e20cce330ffbeb9271590483882d"
@@ -10923,6 +10928,11 @@ walker@^1.0.7, walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
+
+wanakana@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/wanakana/-/wanakana-4.0.2.tgz#a7d60186724a56fd50e6e9c224628c09294901d8"
+  integrity sha512-lBFtnLJhTpp5wQBdH7TrOHhLxqmUabAfL86plNN8+iffyhosjZyx+kkO8KEBGR8zWH5nxSQ67oyx3W/lcEC8sg==
 
 watchpack@^1.6.0:
   version "1.6.0"
