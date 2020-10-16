@@ -63,10 +63,6 @@ const StartPracticeByCategory: React.FC = () => {
   }
   return <Box className={classes.startPractice} mt={2} mx={1} p={1}>
     <Typography variant={"h6"}>Words by category</Typography>
-    <div>
-      <Typography variant={"subtitle2"}>Available categories are:  {categoryList.join(", ")}</Typography>
-      <Typography variant={"subtitle1"} style={{color: "red"}}>NOT IMPLEMENTED</Typography>
-    </div>
     <Box mt={2} >
       <Select value={category} style={{width: "80%"}} onChange={handleChangeOnSelect}>
         {categoryList.map(category => {
