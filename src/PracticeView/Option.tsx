@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {Box, Container, LinearProgress, Paper, Typography, makeStyles, IconButton, Button} from "@material-ui/core";
-import {useSpring, animated} from "react-spring";
+import React from "react";
+import {Typography, Button} from "@material-ui/core";
 import {Word} from "../data/Word";
 
 type OptionProps = {

@@ -1,8 +1,6 @@
-import React, {useState, useEffect} from "react";
-import {Box, Container, LinearProgress, Paper, Typography, makeStyles, IconButton, Button} from "@material-ui/core";
-import {useSpring, animated} from "react-spring";
+import React, {useState} from "react";
+import {Box, Typography, makeStyles, Button} from "@material-ui/core";
 import {Word} from "../data/Word";
-import {shuffle} from "lodash";
 import {CorrectOption, WrongOption} from "./Option";
 
 
