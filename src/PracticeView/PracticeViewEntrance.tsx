@@ -7,12 +7,12 @@ import {
   Checkbox,
   FormControlLabel,
   Select,
-  MenuItem,
-  Grid
+  MenuItem
 } from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
-import {Category, categoryList, isCategory} from "../data/Word";
+import {categoryList, loadWordsByIndex} from "../data/Word";
+import {shuffle} from "lodash";
 
 const useStyles = makeStyles({
   startPractice: {
@@ -38,12 +38,11 @@ const StartPracticeByIndex: React.FC = () => {
   }
   const history = useHistory();
   const onClickStart = () => {
-    if (!isRandom) {
-      history.push(`/practice/byIndex/${startIndex}/${endIndex}`);
-    } else {
-      history.push(`/practice/byIndexRandom/${startIndex}/${endIndex}`)
-    }
-
+    let wordsToPractice = loadWordsByIndex(parseInt(startIndex), parseInt(endIndex)+1)
+    if (isRandom) wordsToPractice = shuffle(wordsToPractice);
+    history.push(`/practice/byIndex`, {
+      wordsToPractice: wordsToPractice
+    });
   }
   return <Box className={classes.startPractice} mt={2} p={1}>
     <Typography variant={"h6"}>Words by index</Typography>
@@ -53,7 +52,7 @@ const StartPracticeByIndex: React.FC = () => {
       <TextField value={endIndex} onChange={onChangeEndIndex}/>
     </Box>
     <Box mt={2}>
-      <FormControlLabel control={<Checkbox checked={isRandom} onChange={handleCheckRandom} />} label={"Random"} />
+      <FormControlLabel control={<Checkbox checked={isRandom} onChange={handleCheckRandom} />} label={"Randomize"} />
       <Button variant={"contained"} size={"small"} color={"primary"} onClick={onClickStart}>Start</Button>
     </Box>
   </Box>
@@ -73,7 +72,7 @@ const StartPracticeByCategory: React.FC = () => {
     <Typography variant={"h6"}>Words by category</Typography>
     <div>
       <Typography variant={"subtitle2"}>Available categories are:  {categoryList.join(", ")}</Typography>
-      <Typography variant={"subtitle1"} style={{color: "red"}}>(not implemented)</Typography>
+      <Typography variant={"subtitle1"} style={{color: "red"}}>NOT IMPLEMENTED</Typography>
     </div>
     <Box mt={2} >
       <Select value={category} style={{width: "80%"}} onChange={handleChangeOnSelect}>
@@ -91,7 +90,6 @@ const StartPracticeByCategory: React.FC = () => {
 export const PracticeViewEntrance: React.FC = () => {
   return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} position={"center"}>
     <Typography variant={"h5"}>Select words to practice</Typography>
-    <Typography variant={"subtitle1"}>Specify the start and end index</Typography>
     <StartPracticeByIndex />
     <StartPracticeByCategory />
   </Box>

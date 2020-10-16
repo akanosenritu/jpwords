@@ -1,17 +1,16 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {useParams} from "react-router-dom";
 import {PracticeViewBase} from "./PracticeViewBase";
-import {loadWordsByIndex, useWords} from "../data/Word";
+import {loadWordsByIndex, Word} from "../data/Word";
 import {shuffle} from "lodash";
+import {useLocation} from "react-router-dom";
+
+type PracticeViewByIndexLocationState ={
+  wordsToPractice: Word[]
+}
 
 export const PracticeViewByIndex: React.FC = () => {
-  const {start, end} = useParams();
-  const words = loadWordsByIndex(parseInt(start), parseInt(end)+1);
+  const location = useLocation<PracticeViewByIndexLocationState>();
+  const words = location.state?.wordsToPractice;
   return <PracticeViewBase words={words}/>
 };
-
-export const PracticeViewByIndexRandom: React.FC = () => {
-  const {start, end} = useParams();
-  const words = shuffle(loadWordsByIndex(parseInt(start), parseInt(end)+1));
-  return <PracticeViewBase words={words} />
-}
