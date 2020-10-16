@@ -1,0 +1,40 @@
+1 	私は　よく　いもうとと　あそびました。 	I often played with my sister.
+2 	バスに　のって、うみへ　行きました。 	I got on the bus and went to the beach.
+3 	さいふは　どこにも　ありませんでした。 	My wallet was nowhere to be found.
+4 	タクシーを　よんで　ください。 	Please call a taxi.
+5 	どちらが　あなたの　本ですか。 	Which is your book?
+6 	母は　せいが　高いですが、父は　ひくいです。 	My mother is tall, but my father is short.
+7 	だれか　まどを　しめて　ください。 	Could someone please close the window?
+8 	バナナを　 半 分 にして　いっしょに　食べましょう。 	Chop the banana in half and we'll eat it together.
+9 	おさらは　１０枚ぐらい　あります。 	There are about ten plates.
+10 	りょうりは　じぶんで　つくります。 	I do my own cooking.
+11 	あの　店は　何という　名前ですか。 	What is the name of that store.
+12 	その　テープは　５本で　６００円です。 	That tape is 600 yen for 5.
+13 	その　こうさてんを　左に　まがって　ください。 	Please turn left at that intersection.
+14 	どこから　来ましたか。 	Where did you come from?
+15 	月曜日か　火曜日に　テストが　あります。 	There's a test on Monday or Tuesday.
+16 	きょうは　あまり　いそがしく　ありません。 	I won't be very busy today.
+17 	あの　たてものは　エレベーターが　あって、べんりです。 	That building has an elevator so it's quite convenient.
+18 	テストを　していますから　しずかに　して　ください。 	I'm doing a test right now, so could you please be quiet.
+19 	あには　今　３０さいで、けっこんしています。 	My older brother is 30 years old, and married.
+20 	まいあさ　うちで　せんたくを　してから、学校に　行きます。 	Every morning, before I go to school, I do the laundry.
+21 	こどもの時　やさいが　すきではありませんでした。 	When I was a child, I didn't like vegetables.
+22 	来 週 　休む人は　だれですか。 	Who is the person going on holiday next week?
+23 	土 曜 日 は　さんぽしたり　ギターを　れんしゅう　したり　します。 	On Saturday, I went for a walk and played guitar and things like that.
+24 	この　えいがは　おもしろくなかったよ。 	That movie wasn't interesting.
+25 	きのうは　だれも　来ませんでした。 	Nobody came yesterday.
+26 	あしたは　かぜが　つよいでしょう。 	It will probably be very windy tomorrow.
+27 	山は　ぼうしを　かぶって　行きましょう。 	Put on your hat and let's go to the mountain.
+28 	かおが　あかくなりました。 	Your face (is going) has gotten red.
+29 	いもうとが　生まれた時、父は　外国に　いました。 	When my younger sister was born, my father was overseas.
+30 	たいせつな　かみですから、なくさないで　ください。 	This is an important paper, so please don't lose it.
+31 	きのうは　どうして　早く　かえりましたか。 	Why did you come home early yesterday?
+32 	としょかんの　本は　まだ　かえしていません。 	I haven't returned the library's book yet.
+33 	コーヒーを　いっぱい　いかがですか。 	Would you like some more coffee?
+34 	毎日　どれぐらい　ねますか。 	How long do you sleep for every day?
+35 	みんなが　たくさん　飲みましたから、もう　おさけは　ありません。 	Everybody drank lots so there is no sake left.
+36 	あの　山には　一年中　ゆきが　あります。 	It snows throughout the year on that mountain.
+37 	「この　えは　だれが　書きましたか」「私が　書きました。」 	Who drew that picture? I drew it.
+38 	「田中さん、その　新聞を　とって　ください。」「はい、わかりました。」 	Mr. Tanaka, can you get the paper for me? Yes, no problem.
+39 	「えいがが　見たいですね。」「じゃ、あした　見に行きませんか。」 	I would like to see that movie. OK, why don't we go and watch it tomorrow.
+40 	「この　へんに　ポストは　ありますか。」「あそこに　あります。」 	Is there a post box around here? There's one over there.
