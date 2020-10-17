@@ -27,6 +27,7 @@
   },
   "scripts": {
     "start": "node_modules/.bin/react-scripts start",
+    "heroku-postbuild": "npm run build",
     "build": "node_modules/.bin/react-scripts build",
     "test": "node_modules/.bin/react-scripts test",
     "eject": "node_modules/.bin/react-scripts eject"
@@ -45,6 +46,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "homepage": "."
+  }
 }
