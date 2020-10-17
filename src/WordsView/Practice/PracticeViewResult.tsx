@@ -1,8 +1,8 @@
 import React from "react";
 import {PieChart, Pie, ResponsiveContainer, Cell} from "recharts";
 import {Word} from "../../data/Word";
-import {useHistory, useLocation, RouteComponentProps} from "react-router-dom";
-import {Box, Card, CardContent, Grid, List, ListItem, Paper, Typography} from "@material-ui/core";
+import {useLocation} from "react-router-dom";
+import {Box, Card, CardContent, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({

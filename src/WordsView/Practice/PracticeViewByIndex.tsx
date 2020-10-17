@@ -4,7 +4,8 @@ import {Word} from "../../data/Word";
 import {useLocation} from "react-router-dom";
 
 type PracticeViewByIndexLocationState ={
-  wordsToPractice: Word[]
+  wordsToPractice: Word[],
+  toResultScreen(words: Word[], wordsCorrectlyAnswered:[], wordsWronglyAnswered: Word[]): void
 }
 
 export const PracticeViewByIndex: React.FC = () => {

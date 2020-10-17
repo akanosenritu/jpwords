@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Box, Button, Container, LinearProgress, Typography} from "@material-ui/core";
 import {PracticeWordsWithSelection} from "./PracticeWordsWithSelection";
 import {Word, getSimilarWords} from "../../data/Word";
-import {useHistory} from "react-router-dom";
+import {useHistory, useRouteMatch} from "react-router-dom";
 import {sample} from "lodash";
 
 type PracticeViewBaseProps = {
@@ -12,16 +12,24 @@ type PracticeViewBaseProps = {
 
 export const PracticeViewBase: React.FC<PracticeViewBaseProps> = (props) => {
   const history = useHistory();
+  const match = useRouteMatch();
   const [currentPosition, setCurrentPosition] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState<Word[]>([]);
   const [wrongAnswers, setWrongAnswers] = useState<Word[]>([]);
   const finishPractice = () => {
-    console.log("finished?")
-    history.push("/practice/result", {
-      wordsPracticed: props.words,
-      wordsCorrectlyAnswered: correctAnswers,
-      wordsWronglyAnswered: wrongAnswers
-    })
+    const splitPath = match.path.split("/");
+    const newBasePathIndex = splitPath.findIndex((elem => elem === "practice"));
+    if (newBasePathIndex >= 0) {
+      const newBasePath = splitPath.slice(0, newBasePathIndex+1).join("/")
+      history.push(`${newBasePath}/result`, {
+        wordsPracticed: props.words,
+        wordsCorrectlyAnswered: correctAnswers,
+        wordsWronglyAnswered: wrongAnswers
+      })
+    } else {
+      console.log(splitPath);
+      throw new Error()
+    }
   }
   const onNext = (wasCorrect: boolean) => {
     if (wasCorrect) {

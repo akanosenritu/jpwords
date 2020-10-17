@@ -9,7 +9,7 @@ import {
   Select,
   MenuItem
 } from "@material-ui/core";
-import {useHistory} from "react-router-dom";
+import {useHistory, useRouteMatch} from "react-router-dom";
 import {categoryList, loadWordsByIndex} from "../../data/Word";
 import {shuffle} from "lodash";
 import {usePracticeViewStyles} from "./PracticeViewStyle";
@@ -30,10 +30,11 @@ const StartPracticeByIndex: React.FC = () => {
     setIsRandom(event.currentTarget.checked)
   }
   const history = useHistory();
+  const match = useRouteMatch();
   const onClickStart = () => {
     let wordsToPractice = loadWordsByIndex(parseInt(startIndex), parseInt(endIndex)+1)
     if (isRandom) wordsToPractice = shuffle(wordsToPractice);
-    history.push(`/practice/byIndex`, {
+    history.push(`${match.path}/byIndex`, {
       wordsToPractice: wordsToPractice
     });
   }
