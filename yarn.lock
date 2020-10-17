@@ -5035,6 +5035,13 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
+furigana@^0.19.1:
+  version "0.19.1"
+  resolved "https://registry.yarnpkg.com/furigana/-/furigana-0.19.1.tgz#a234fb8e09726b7e6fed973162f1c3bfa11fc361"
+  integrity sha512-on91SX3hrJuSO/OJ7XT/m3wdVJDQtspI5o+F0V/8T10cPHqv8GPGMztlBXo9TbB9UtUOOgxMvEW5fzxVviDymQ==
+  dependencies:
+    kyarakuta "^0.19.0"
+
 gensync@^1.0.0-beta.1:
   version "1.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
@@ -6737,6 +6744,11 @@ kleur@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
+
+kyarakuta@^0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/kyarakuta/-/kyarakuta-0.19.0.tgz#3f1eaa9ac98c38d55a90a6c0d0747689780e83d7"
+  integrity sha512-JsDfhnL7iVhqL4WJwjW0hC90oICjpP4HAeLVnBg+yosT6RLGVK0gaix1B7Y52Zxwx5ziPejDroEwLNkkv3m2Yw==
 
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"

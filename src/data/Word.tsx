@@ -1,5 +1,8 @@
 import data from "../words.json";
 import {sample, shuffle} from "lodash";
+import React from "react";
+import {isHiragana} from "wanakana";
+import {fit} from "furigana";
 
 export const categoryList = ['adj-pn', 'u-v-i', 'adj', 'vt', 'vk', 'number', 'n-temp', 'conj', 'n-adv',
                               'n-t', 'adj-no', 'u-v', 'vs', 'int', 'n col', 'pref', 'vs-i', 'exp', 'expr', 'gn',
@@ -26,7 +29,6 @@ export type Word = {
 const prepareWords = (arr: string[][]): [Word[], Map<Category, Array<Word>>] => {
   const wordsByCategory = new Map<Category, Array<Word>>();
   categoryList.map(cat => wordsByCategory.set(cat, []));
-  console.log(wordsByCategory);
   const words = arr.map(arr => {
     const word =  {
       num: parseInt(arr[0]),
@@ -96,3 +98,75 @@ export const getSimilarWords = (word: Word, quantity: number) => {
   }
   return result;
 }
+
+type DisplayWordWithFuriganaProps = {
+  word: Word
+}
+
+const isAlphabet = (letter: string) => {
+  const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+    "abcdefghijklmnopqrstuvwxyz"
+  return Array.from(alphabets).includes(letter)
+}
+
+const isSymbol = (letter: string) => {
+  const symbols = "!\"#$%&'()`|^-=~\\@[{]}:*;+,.<>/?" +
+    "！”＃＄％＆’（）￥＾｜～ー＝＠｀「｛；＋：＊」｝、＜。＞・？"
+  return Array.from(symbols).includes(letter)
+}
+
+const isLetterNoFurigana = (letter: string) => {
+  return isHiragana(letter) || isSymbol(letter) || isAlphabet(letter)
+}
+
+type Part = {
+  main: string
+  furigana: string | null
+}
+
+export const detectParts = (kanji: string, kana: string) => {
+  if (kanji.length < 1) throw new Error();
+  const kanjiLetters = Array.from(kanji);
+  let res: Part[] = [];
+  if (kanji){
+    let posKana = 0;
+    let kanjiLetter = kanjiLetters.shift();
+    if (kanjiLetter === undefined) throw new Error("the argument kanji must not be an empty string");
+    let partMain = "";
+    while (true) {
+      if (kanjiLetter && partMain && isLetterNoFurigana(kanjiLetter)) {
+        let posKanaPartEnd = kana.indexOf(kanjiLetter, posKana)
+        res.push({
+          // @ts-ignore
+          main: partMain,
+          furigana: kana.slice(posKana, posKanaPartEnd)
+        })
+        partMain = "";
+        posKana = posKanaPartEnd;
+      } else {
+        // @ts-ignore
+        partMain += kanjiLetter;
+      }
+      if (kanjiLetter && kanjiLetter === kana[posKana]) {
+        res.push({
+          main: kanjiLetter,
+          furigana: null
+        })
+        posKana += 1;
+        partMain = "";
+      }
+      kanjiLetter = kanjiLetters.shift();
+      if (kanjiLetter === undefined) {
+        if (partMain) {
+          res.push({
+            main: partMain,
+            furigana: kana.slice(posKana)
+          })
+        }
+        break
+      }
+    }
+    return res;
+  }
+}
+
