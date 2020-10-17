@@ -17,29 +17,23 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-type MeaningSelectionProps = {
+type PracticeWordsWithSelectionChildProps = {
   word: Word,
   optionWords: Word[],
   onNext: (wasCorrect: boolean) => void,
-  position: number
+  position: number,
+  onClickCorrectOption: () => void,
+  onClickWrongOption: () => void,
+  isAnswered: boolean,
+  didAnswerCorrectly: boolean
 }
 
 // JtE stands for "Japanese to English"
-const PracticeWordsWithSelectionJtE: React.FC<MeaningSelectionProps> = (props) => {
-  const [isAnswered, setIsAnswered] = useState(false);
-  const [didAnswerCorrectly, setDidAnswerCorrectly] = useState(false);
+const PracticeWordsWithSelectionJtE: React.FC<PracticeWordsWithSelectionChildProps> = (props) => {
   const word = props.word;
-  const onCorrectlyAnswered = () => {
-    setIsAnswered(true);
-    setDidAnswerCorrectly(true);
-    setTimeout(props.onNext, 1000, [true]);
-  };
-  const onWronglyAnswered = () => {
-    setIsAnswered(true);
-  }
-  const correctOption = <CorrectOption word={props.word} isCorrect={true} onAnswered={onCorrectlyAnswered} isAnswered={isAnswered} />
+  const correctOption = <CorrectOption word={props.word} isCorrect={true} onAnswered={props.onClickCorrectOption} isAnswered={props.isAnswered} />
   let options = props.optionWords.map(option => {
-    return <WrongOption word={option} isCorrect={false} onAnswered={onWronglyAnswered} isAnswered={isAnswered}/>
+    return <WrongOption word={option} isCorrect={false} onAnswered={props.onClickWrongOption} isAnswered={props.isAnswered}/>
   })
   options.splice(props.position, 0, correctOption);
   const onNextWrong = () => {
@@ -57,27 +51,17 @@ const PracticeWordsWithSelectionJtE: React.FC<MeaningSelectionProps> = (props) =
       {options}
     </Box>
     <Box mt={2}>
-      {!didAnswerCorrectly && isAnswered && <Button variant={"contained"} color={"primary"} onClick={onNextWrong} fullWidth>Next</Button> }
+      {!props.didAnswerCorrectly && props.isAnswered && <Button variant={"contained"} color={"primary"} onClick={onNextWrong} fullWidth>Next</Button> }
     </Box>
   </div>
 }
 
 // EtJ stands for "English to Japanese"
-const PracticeWordsWithSelectionEtJ: React.FC<MeaningSelectionProps> = (props) => {
-  const [isAnswered, setIsAnswered] = useState(false);
-  const [didAnswerCorrectly, setDidAnswerCorrectly] = useState(false);
+const PracticeWordsWithSelectionEtJ: React.FC<PracticeWordsWithSelectionChildProps> = (props) => {
   const word = props.word;
-  const onCorrectlyAnswered = () => {
-    setIsAnswered(true);
-    setDidAnswerCorrectly(true);
-    setTimeout(props.onNext, 1000, [true]);
-  };
-  const onWronglyAnswered = () => {
-    setIsAnswered(true);
-  }
-  const correctOption = <CorrectOptionReversed word={props.word} isCorrect={true} onAnswered={onCorrectlyAnswered} isAnswered={isAnswered} />
+  const correctOption = <CorrectOptionReversed word={props.word} isCorrect={true} onAnswered={props.onClickCorrectOption} isAnswered={props.isAnswered} />
   let options = props.optionWords.map(option => {
-    return <WrongOptionReversed word={option} isCorrect={false} onAnswered={onWronglyAnswered} isAnswered={isAnswered}/>
+    return <WrongOptionReversed word={option} isCorrect={false} onAnswered={props.onClickWrongOption} isAnswered={props.isAnswered}/>
   })
   options.splice(props.position, 0, correctOption);
   const onNextWrong = () => {
@@ -92,19 +76,41 @@ const PracticeWordsWithSelectionEtJ: React.FC<MeaningSelectionProps> = (props) =
       {options}
     </Box>
     <Box mt={2}>
-      {!didAnswerCorrectly && isAnswered && <Button variant={"contained"} color={"primary"} onClick={onNextWrong} fullWidth>Next</Button> }
+      {!props.didAnswerCorrectly && props.isAnswered && <Button variant={"contained"} color={"primary"} onClick={onNextWrong} fullWidth>Next</Button> }
     </Box>
   </div>
 }
 
-type PracticeWordsWithSelectionProps = MeaningSelectionProps & {
+type PracticeWordsWithSelectionProps = PracticeWordsWithSelectionChildProps & {
   type: "JtE" | "EtJ"
 }
 
 export const PracticeWordsWithSelection: React.FC<PracticeWordsWithSelectionProps> = props => {
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [didAnswerCorrectly, setDidAnswerCorrectly] = useState(false);
+  const onClickCorrectOption = () => {
+    if (isAnswered) {
+      setDidAnswerCorrectly(false);
+      setTimeout(props.onNext, 1000, false);
+    } else {
+      setIsAnswered(true);
+      setDidAnswerCorrectly(true);
+      setTimeout(props.onNext, 1000, true);
+    }
+
+  };
+  const onClickWrongOption = () => {
+    setIsAnswered(true);
+  }
   return props.type === "JtE" ?
     <PracticeWordsWithSelectionJtE word={props.word} optionWords={props.optionWords} onNext={props.onNext}
-                                   position={props.position}/> :
+                                   position={props.position} onClickCorrectOption={onClickCorrectOption}
+                                   onClickWrongOption={onClickWrongOption} didAnswerCorrectly={didAnswerCorrectly}
+                                   isAnswered={isAnswered}
+    /> :
     <PracticeWordsWithSelectionEtJ word={props.word} optionWords={props.optionWords} onNext={props.onNext}
-                                   position={props.position}/>
+                                   position={props.position} onClickCorrectOption={onClickCorrectOption}
+                                   onClickWrongOption={onClickWrongOption} didAnswerCorrectly={didAnswerCorrectly}
+                                   isAnswered={isAnswered}
+    />
 }
