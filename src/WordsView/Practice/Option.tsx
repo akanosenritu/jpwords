@@ -1,6 +1,16 @@
 import React from "react";
 import {Typography, Button} from "@material-ui/core";
 import {DisplayWordWithFurigana, Word} from "../../data/Word";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  correctButtonBox: {
+    borderRadius: "10px / 10px"
+  },
+  correctOptionBoxAnswered: {
+    backgroundColor: "rgb(144, 238, 144, 50%)"
+  }
+})
 
 type OptionProps = {
   word: Word,
@@ -11,11 +21,15 @@ type OptionProps = {
 
 // given a Japanese word, select the correct meaning.
 export const CorrectOption: React.FC<OptionProps> = (props) => {
-  return <Button onClick={props.onAnswered} style={{textTransform: "none"}}>
-    <Typography variant={"h6"}>{props.word.meaning}
-      {props.isAnswered &&  " ○"}
-    </Typography>
-  </Button>
+  const classes = useStyles();
+  const className = props.isAnswered? classes.correctOptionBoxAnswered: undefined;
+  return <div className={className + " " + classes.correctButtonBox}>
+    <Button onClick={props.onAnswered} style={{textTransform: "none"}}>
+      <Typography variant={"h6"}>{props.word.meaning}
+        {props.isAnswered &&  " ○"}
+      </Typography>
+    </Button>
+  </div>
 };
 
 export const WrongOption: React.FC<OptionProps> = (props) => {
@@ -25,7 +39,7 @@ export const WrongOption: React.FC<OptionProps> = (props) => {
         {props.isAnswered &&  " ×"}
       </Typography>
     </Button>
-    {props.isAnswered && <Typography variant={"subtitle1"}>{props.word.kanji} ({props.word.kana})</Typography>}
+    {props.isAnswered && <Typography variant={"subtitle1"}><DisplayWordWithFurigana word={props.word} /></Typography>}
   </div>
 }
 
