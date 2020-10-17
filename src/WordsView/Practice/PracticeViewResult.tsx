@@ -103,7 +103,7 @@ export const PracticeViewResult: React.FC = (props) => {
           </Grid>
         </Grid>
       </Box>
-      <ResultChart total={wordsPracticed.length} correctAnswers={wordsCorrectlyAnswered.length} />
+      // <ResultChart total={wordsPracticed.length} correctAnswers={wordsCorrectlyAnswered.length} />
     </div>
     <ReviewWords words={wordsWronglyAnswered} />
   </Box>
