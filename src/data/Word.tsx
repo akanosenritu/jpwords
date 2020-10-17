@@ -99,10 +99,6 @@ export const getSimilarWords = (word: Word, quantity: number) => {
   return result;
 }
 
-type DisplayWordWithFuriganaProps = {
-  word: Word
-}
-
 const isAlphabet = (letter: string) => {
   const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
     "abcdefghijklmnopqrstuvwxyz"
@@ -170,3 +166,25 @@ export const detectParts = (kanji: string, kana: string) => {
   }
 }
 
+type DisplayWordWithFuriganaProps = {
+  word: Word
+}
+export const DisplayWordWithFurigana: React.FC<DisplayWordWithFuriganaProps> = props => {
+  let displayed = [<span>{props.word.kana}</span>];
+  if (props.word.kanji) {
+    const tokens = fit(props.word.kanji, props.word.kana, {type: "object"})
+    if (tokens) {
+      displayed = tokens.map(token => {
+        const {w, r} = token;
+        if (w === r) return <span>{w}</span>
+        else {
+          return <ruby>
+            {w}
+            <rt>{r}</rt>
+          </ruby>
+        }
+      });
+    }
+  }
+  return <span>{displayed}</span>
+}
