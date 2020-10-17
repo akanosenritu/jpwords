@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Box, Button, makeStyles, Typography} from "@material-ui/core";
-import {Word} from "../../data/Word";
+import {DisplayWordWithFurigana, Word} from "../../data/Word";
 import {CorrectOption, CorrectOptionReversed, WrongOption, WrongOptionReversed} from "./Option";
 
 
@@ -42,11 +42,13 @@ const PracticeWordsWithSelectionJtE: React.FC<PracticeWordsWithSelectionChildPro
   const classes = useStyles();
   return <div style={{textAlign: "center"}}>
     <Box mt={2}>
-      <Typography variant={"h3"}>{word.kanji}</Typography>
+      <Typography variant={"h3"}><DisplayWordWithFurigana word={word} /></Typography>
     </Box>
+    {/*
     <Box mt={2}>
       <Typography variant={"h4"}>{word.kana}</Typography>
     </Box>
+    */}
     <Box className={classes.root} mt={4}>
       {options}
     </Box>
