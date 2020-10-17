@@ -22,6 +22,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "recharts": "^1.8.5",
+    "serve": "^11.3.2",
     "typescript": "~3.7.2",
     "wanakana": "^4.0.2"
   },
