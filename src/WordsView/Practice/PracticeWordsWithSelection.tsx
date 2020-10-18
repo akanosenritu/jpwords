@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
       textAlign: "center"
     }
   }
-}))
+}));
 
 type PracticeWordsWithSelectionChildProps = {
   word: Word,
@@ -31,14 +31,14 @@ type PracticeWordsWithSelectionChildProps = {
 // JtE stands for "Japanese to English"
 const PracticeWordsWithSelectionJtE: React.FC<PracticeWordsWithSelectionChildProps> = (props) => {
   const word = props.word;
-  const correctOption = <CorrectOption word={props.word} isCorrect={true} onAnswered={props.onClickCorrectOption} isAnswered={props.isAnswered} />
+  const correctOption = <CorrectOption word={props.word} isCorrect={true} onAnswered={props.onClickCorrectOption} isAnswered={props.isAnswered} />;
   let options = props.optionWords.map(option => {
     return <WrongOption word={option} isCorrect={false} onAnswered={props.onClickWrongOption} isAnswered={props.isAnswered}/>
-  })
+  });
   options.splice(props.position, 0, correctOption);
   const onNextWrong = () => {
     props.onNext(false);
-  }
+  };
   const classes = useStyles();
   return <div style={{textAlign: "center"}}>
     <Box mt={2}>
@@ -56,19 +56,19 @@ const PracticeWordsWithSelectionJtE: React.FC<PracticeWordsWithSelectionChildPro
       {!props.didAnswerCorrectly && props.isAnswered && <Button variant={"contained"} color={"primary"} onClick={onNextWrong} fullWidth>Next</Button> }
     </Box>
   </div>
-}
+};
 
 // EtJ stands for "English to Japanese"
 const PracticeWordsWithSelectionEtJ: React.FC<PracticeWordsWithSelectionChildProps> = (props) => {
   const word = props.word;
-  const correctOption = <CorrectOptionReversed word={props.word} isCorrect={true} onAnswered={props.onClickCorrectOption} isAnswered={props.isAnswered} />
+  const correctOption = <CorrectOptionReversed word={props.word} isCorrect={true} onAnswered={props.onClickCorrectOption} isAnswered={props.isAnswered} />;
   let options = props.optionWords.map(option => {
     return <WrongOptionReversed word={option} isCorrect={false} onAnswered={props.onClickWrongOption} isAnswered={props.isAnswered}/>
-  })
+  });
   options.splice(props.position, 0, correctOption);
   const onNextWrong = () => {
     props.onNext(false);
-  }
+  };
   const classes = useStyles();
   return <div style={{textAlign: "center"}}>
     <Box mt={2}>
@@ -81,7 +81,7 @@ const PracticeWordsWithSelectionEtJ: React.FC<PracticeWordsWithSelectionChildPro
       {!props.didAnswerCorrectly && props.isAnswered && <Button variant={"contained"} color={"primary"} onClick={onNextWrong} fullWidth>Next</Button> }
     </Box>
   </div>
-}
+};
 
 type PracticeWordsWithSelectionProps = PracticeWordsWithSelectionChildProps & {
   type: "JtE" | "EtJ"
@@ -103,7 +103,7 @@ export const PracticeWordsWithSelection: React.FC<PracticeWordsWithSelectionProp
   };
   const onClickWrongOption = () => {
     setIsAnswered(true);
-  }
+  };
   return props.type === "JtE" ?
     <PracticeWordsWithSelectionJtE word={props.word} optionWords={props.optionWords} onNext={props.onNext}
                                    position={props.position} onClickCorrectOption={onClickCorrectOption}
@@ -115,4 +115,4 @@ export const PracticeWordsWithSelection: React.FC<PracticeWordsWithSelectionProp
                                    onClickWrongOption={onClickWrongOption} didAnswerCorrectly={didAnswerCorrectly}
                                    isAnswered={isAnswered}
     />
-}
+};

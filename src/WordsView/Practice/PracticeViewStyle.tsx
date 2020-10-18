@@ -12,4 +12,4 @@ export const usePracticeViewStyles = makeStyles({
     textAlign: "left",
     backgroundColor: "#f2f2f2"
   }
-})
+});

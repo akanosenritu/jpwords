@@ -20,4 +20,4 @@ test("test of furigana creation", () => {
     // expect(detectParts2(...datum[0])).toStrictEqual(datum[1]);
   });
   expect(() => {detectParts("", "")}).toThrow();
-})
+});

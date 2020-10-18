@@ -8,7 +8,6 @@ import {PracticeViewEntrance} from "./PracticeViewEntrance";
 import {PracticeViewByIndex, PracticeViewByIndexWithReversedSelection} from "./PracticeViewByIndex";
 import {PracticeViewResult} from "./PracticeViewResult";
 import {PracticeTypeSelectionView} from "./PracticeTypeSelectionView";
-import {PracticeViewWordList} from "./PracticeViewWordList";
 
 export const PracticeView: React.FC = () => {
   const match = useRouteMatch();
@@ -21,15 +20,11 @@ export const PracticeView: React.FC = () => {
     </Route>
     <Route path={`${match.path}/byIndex`}>
       <PracticeTypeSelectionView />
-    </Route>
-    <Route path={`${match.path}/wordList`}>
-      <PracticeViewWordList />
-    </Route>
-    <Route path={`${match.path}/result`}>
+    </Route>    <Route path={`${match.path}/result`}>
       <PracticeViewResult />
     </Route>
     <Route path={match.path}>
       <PracticeViewEntrance />
     </Route>
   </Switch>
-}
+};

@@ -29,16 +29,16 @@ const StartPracticeByIndex: React.FC = () => {
   const [isRandom, setIsRandom] = useState(false);
   const handleCheckRandom = (event: ChangeEvent<HTMLInputElement>) => {
     setIsRandom(event.currentTarget.checked)
-  }
+  };
   const history = useHistory();
   const match = useRouteMatch();
   const onClickStart = () => {
-    let wordsToPractice = loadWordsByIndex(parseInt(startIndex), parseInt(endIndex)+1)
+    let wordsToPractice = loadWordsByIndex(parseInt(startIndex), parseInt(endIndex)+1);
     if (isRandom) wordsToPractice = shuffle(wordsToPractice);
     history.push(`${match.path}/byIndex`, {
       wordsToPractice: wordsToPractice
     });
-  }
+  };
   return <Box className={classes.startPractice} mx={1} mt={2} p={1}>
     <Typography variant={"h6"}>Words by index</Typography>
     <Typography variant={"subtitle2"}>Consult with the list <a href={"https://jlptstudy.net/N5/?vocab-list"}>here</a></Typography>
@@ -62,7 +62,7 @@ const StartPracticeByCategory: React.FC = () => {
     setCategory(selected);
   };
   const onClickStart = () => {
-  }
+  };
   return <Box className={classes.startPractice} mt={2} mx={1} p={1}>
     <Typography variant={"h6"}>Words by category</Typography>
     <Box mt={2} >
@@ -76,7 +76,7 @@ const StartPracticeByCategory: React.FC = () => {
       <Button variant={"contained"} size={"small"} color={"primary"} onClick={onClickStart} disabled>Start</Button>
     </Box>
   </Box>
-}
+};
 
 type StartPracticeByWordListCardProps = {
   wordList: WordList
@@ -90,7 +90,7 @@ const StartPracticeByWordListCard: React.FC<StartPracticeByWordListCardProps> = 
     history.push(`${match.path}/wordList`, {
       wordListToPractice: props.wordList
     })
-  }
+  };
   return <Card className={classes.startPracticeWordListCard} variant={"outlined"}>
     <CardContent>
       <Typography variant={"h6"}>{props.wordList.name} ({props.wordList.wordCount} words)</Typography>
@@ -100,7 +100,7 @@ const StartPracticeByWordListCard: React.FC<StartPracticeByWordListCardProps> = 
       <Button variant={"contained"} size={"small"} color={"primary"} onClick={onClickStart}>Start</Button>
     </CardActions>
   </Card>
-}
+};
 
 const StartPracticeByWordList: React.FC = () => {
   const classes = usePracticeViewStyles();
@@ -112,7 +112,7 @@ const StartPracticeByWordList: React.FC = () => {
       })}
     </Box>
   </Box>
-}
+};
 
 export const PracticeViewEntrance: React.FC = () => {
   return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} position={"center"}>
@@ -121,4 +121,4 @@ export const PracticeViewEntrance: React.FC = () => {
     <StartPracticeByCategory />
     <StartPracticeByWordList />
   </Box>
-}
+};

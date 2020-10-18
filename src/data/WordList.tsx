@@ -1,4 +1,4 @@
-import {Word} from "./Word";
+import {prepareWord2, Word} from "./Word";
 import wordListN5 from "./wordlist-N5[0].json";
 
 export type WordList = {
@@ -10,8 +10,14 @@ export type WordList = {
 }
 
 const loadWordListVersion1 = () => {
-  // @ts-ignore
-  return wordListN5 as WordList;
-}
+  const wordList = {
+    name: wordListN5.name,
+    version: wordListN5.version,
+    description: wordListN5.description,
+    wordCount: wordListN5.wordCount,
+    words: prepareWord2(wordListN5.words)
+  } as WordList;
+  return wordList
+};
 
-export const availableWordLists = [loadWordListVersion1()]
+export const availableWordLists = [loadWordListVersion1()];
