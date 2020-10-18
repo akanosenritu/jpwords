@@ -7,12 +7,13 @@ import {
   Checkbox,
   FormControlLabel,
   Select,
-  MenuItem
+  MenuItem, Card, CardContent, CardActions
 } from "@material-ui/core";
 import {useHistory, useRouteMatch} from "react-router-dom";
 import {categoryList, loadWordsByIndex} from "../../data/Word";
 import {shuffle} from "lodash";
 import {usePracticeViewStyles} from "./PracticeViewStyle";
+import {availableWordLists, WordList} from "../../data/WordList";
 
 
 const StartPracticeByIndex: React.FC = () => {
@@ -77,11 +78,47 @@ const StartPracticeByCategory: React.FC = () => {
   </Box>
 }
 
+type StartPracticeByWordListCardProps = {
+  wordList: WordList
+}
+
+const StartPracticeByWordListCard: React.FC<StartPracticeByWordListCardProps> = (props) => {
+  const classes = usePracticeViewStyles();
+  const history = useHistory();
+  const match = useRouteMatch();
+  const onClickStart = () => {
+    history.push(`${match.path}/wordList`, {
+      wordListToPractice: props.wordList
+    })
+  }
+  return <Card className={classes.startPracticeWordListCard} variant={"outlined"}>
+    <CardContent>
+      <Typography variant={"h6"}>{props.wordList.name} ({props.wordList.wordCount} words)</Typography>
+      <Typography variant={"body1"}>{props.wordList.description}</Typography>
+    </CardContent>
+    <CardActions style={{justifyContent: "center"}}>
+      <Button variant={"contained"} size={"small"} color={"primary"} onClick={onClickStart}>Start</Button>
+    </CardActions>
+  </Card>
+}
+
+const StartPracticeByWordList: React.FC = () => {
+  const classes = usePracticeViewStyles();
+  return <Box className={classes.startPractice} mt={2} mx={1} p={1}>
+    <Typography variant={"h6"}>Word Lists</Typography>
+    <Box mt={2} >
+      {availableWordLists.map(wordList => {
+        return <StartPracticeByWordListCard wordList={wordList} />
+      })}
+    </Box>
+  </Box>
+}
+
 export const PracticeViewEntrance: React.FC = () => {
   return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} position={"center"}>
     <Typography variant={"h5"}>Select words to practice</Typography>
     <StartPracticeByIndex />
     <StartPracticeByCategory />
+    <StartPracticeByWordList />
   </Box>
-
 }
