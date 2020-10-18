@@ -64,5 +64,5 @@ export const chooseWordsToPractice = (wordList: WordList, practiceHistory: Pract
     if (res.length >= quantity) return res.slice(0, quantity);
   }
   res = res.concat(wordsByMemoryStrength[0]);
-  return res;
+  return res.slice(0, quantity);
 };
