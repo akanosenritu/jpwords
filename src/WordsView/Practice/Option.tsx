@@ -27,7 +27,7 @@ export const WrongOption: React.FC<OptionProps> = (props) => {
     </Button>
     {props.isAnswered && <Typography variant={"subtitle1"}>{props.word.kanji} ({props.word.kana})</Typography>}
   </div>
-}
+};
 
 // given a meaning, select the correct Japanese word.
 
@@ -36,7 +36,7 @@ export const CorrectOptionReversed: React.FC<OptionProps> = props => {
   return <Button onClick={props.onAnswered} style={{textTransform: "none"}}>
     <Typography variant={"h6"}><DisplayWordWithFurigana word={props.word} /> {props.isAnswered &&  " ○"}</Typography>
   </Button>
-}
+};
 
 export const WrongOptionReversed: React.FC<OptionProps> = props => {
   // const displayed = props.word.kanji? `${props.word.kanji} (${props.word.kana})`: props.word.kana
@@ -46,4 +46,4 @@ export const WrongOptionReversed: React.FC<OptionProps> = props => {
     </Button>
     {props.isAnswered && <Typography variant={"subtitle1"}>{props.word.meaning}</Typography>}
   </div>
-}
+};

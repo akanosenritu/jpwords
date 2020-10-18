@@ -6,5 +6,10 @@ export const usePracticeViewStyles = makeStyles({
     borderRadius: "5px / 5px",
     textAlign: "center",
     width: "90%"
+  },
+  startPracticeWordListCard: {
+    minWidth: 275,
+    textAlign: "left",
+    backgroundColor: "#f2f2f2"
   }
-})
+});

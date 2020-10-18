@@ -17,13 +17,13 @@ const StartPracticeOfSelection: React.FC<StartPracticeProps> = (props) => {
     history.push(`${match.path}/select`, {
       wordsToPractice: props.wordsToPractice
     })
-  }
+  };
   return <Box className={classes.startPractice} mt={2} mx={1} p={1}>
     <Typography variant={"h6"}>Selection</Typography>
     <Typography variant={"body1"}>Given a Japanese word, select its meaning.</Typography>
     <Button color={"primary"} variant={"contained"} onClick={onClickStart}>Start</Button>
   </Box>
-}
+};
 
 const StartPracticeOfSelectionReversed: React.FC<StartPracticeProps> = props => {
   const classes = usePracticeViewStyles();
@@ -33,13 +33,13 @@ const StartPracticeOfSelectionReversed: React.FC<StartPracticeProps> = props => 
     history.push(`${match.path}/reverseSelect`, {
       wordsToPractice: props.wordsToPractice
     })
-  }
+  };
   return <Box className={classes.startPractice} mt={2} mx={1} p={1}>
     <Typography variant={"h6"}>Selection Reversed</Typography>
     <Typography variant={"body1"}>Given a meaning(s), select the Japanese word of that meaning.</Typography>
     <Button color={"primary"} variant={"contained"} onClick={onClickStart}>Start</Button>
   </Box>
-}
+};
 
 type PracticeTypeSelectionViewLocationState = {
   wordsToPractice: Word[]
@@ -53,4 +53,4 @@ export const PracticeTypeSelectionView: React.FC = () => {
     <StartPracticeOfSelection wordsToPractice={wordsToPractice} />
     <StartPracticeOfSelectionReversed wordsToPractice={wordsToPractice} />
   </Box>
-}
+};
