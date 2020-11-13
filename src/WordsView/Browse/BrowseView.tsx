@@ -11,4 +11,4 @@ export const BrowseView: React.FC = props => {
     <Route path={`${match.path}/byIndex/select`}>
     </Route>
   </Switch>
-}
+};

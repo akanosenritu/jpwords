@@ -29,7 +29,7 @@ const ResultChart: React.FC<ResultChartProps> = (props) => {
   const data = [
     {name: "Correct", count: props.correctAnswers, color: "#48D1CC"},
     {name: "Wrong", count: props.total - props.correctAnswers, color: "lightgrey"}
-  ]
+  ];
   return <Box pb={2}>
       <PieChart width={400} height={200}>
         <Pie dataKey={"count"} nameKey={"name"} startAngle={180} endAngle={0} data={data} cx={200} cy={200} outerRadius={80} fill={"$8884d8"} label>
@@ -39,7 +39,7 @@ const ResultChart: React.FC<ResultChartProps> = (props) => {
         </Pie>
       </PieChart>
   </Box>
-}
+};
 type ReviewWordsProps = {
   words: Word[]
 }
@@ -67,7 +67,7 @@ const ReviewWords: React.FC<ReviewWordsProps> = props => {
       </div>
     }
   </Box>
-}
+};
 
 type PracticeViewResultLocationState = {
   wordsPracticed: Word[],
@@ -107,4 +107,4 @@ export const PracticeViewResult: React.FC = (props) => {
     </div>
     <ReviewWords words={wordsWronglyAnswered} />
   </Box>
-}
+};

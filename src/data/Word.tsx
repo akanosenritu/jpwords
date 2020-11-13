@@ -9,14 +9,14 @@ export const categoryList = ['adj-pn', 'u-v-i', 'adj', 'vt', 'vk', 'number', 'n-
                               'kana only', 'adv', 'suf', 'no-adj', 'p-suru', 'vi', 'n', 'ru-v', 'na-adj', 'num',
                               'uk', 'n-suf', 'v5n', 'gn-adv', 'prt', 'pren-adj', 'prefix', ''] as const;
 
-export const HiraganaList = []
+export const HiraganaList = [];
 
 type CategoryTuple = typeof categoryList;
 export type Category = CategoryTuple[number];
 
 export const isCategory = (obj: any): obj is Category => {
   return categoryList.includes(obj);
-}
+};
 
 export type Word = {
   num: number,
@@ -42,7 +42,7 @@ const prepareWords = (arr: string[][]): [Word[], Map<Category, Array<Word>>] => 
         // @ts-ignore
         wordsByCategory.get(cat).push(word)
       }
-    })
+    });
     return word
   });
   return [words, wordsByCategory];
@@ -52,26 +52,26 @@ const [words, wordsByCategory] = prepareWords(data);
 
 export const loadAllWords = () => {
   return words
-}
+};
 
 export const useWords = (): [Word[], (category: Category)=>Word] => {
   const [words, wordsByCategory] = prepareWords(data);
   const getRandomWordsByCategory2 = (category: Category) => {
     // @ts-ignore
     return words[wordsByCategory.get(category)[Math.floor(Math.random() * wordsByCategory.get(category).length)]-1]
-    }
+    };
   return [words, getRandomWordsByCategory2];
-}
+};
 
 export const loadWordsByIndex = (start: number, end: number) => {
   if (start < 0) start = 0;
   if (end > words.length) end = words.length;
   return words.slice(start, end)
-}
+};
 
 export const loadWordsByHiragana = (startHiragana: string, endHiragana: string) => {
 
-}
+};
 
 export const getSimilarWords = (word: Word, quantity: number) => {
   const category = word.category.length > 0? word.category[0] : "";
@@ -97,23 +97,23 @@ export const getSimilarWords = (word: Word, quantity: number) => {
     }
   }
   return result;
-}
+};
 
 const isAlphabet = (letter: string) => {
   const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-    "abcdefghijklmnopqrstuvwxyz"
+    "abcdefghijklmnopqrstuvwxyz";
   return Array.from(alphabets).includes(letter)
-}
+};
 
 const isSymbol = (letter: string) => {
   const symbols = "!\"#$%&'()`|^-=~\\@[{]}:*;+,.<>/?" +
-    "！”＃＄％＆’（）￥＾｜～ー＝＠｀「｛；＋：＊」｝、＜。＞・？"
+    "！”＃＄％＆’（）￥＾｜～ー＝＠｀「｛；＋：＊」｝、＜。＞・？";
   return Array.from(symbols).includes(letter)
-}
+};
 
 const isLetterNoFurigana = (letter: string) => {
   return isHiragana(letter) || isSymbol(letter) || isAlphabet(letter)
-}
+};
 
 type Part = {
   main: string
@@ -131,12 +131,12 @@ export const detectParts = (kanji: string, kana: string) => {
     let partMain = "";
     while (true) {
       if (kanjiLetter && partMain && isLetterNoFurigana(kanjiLetter)) {
-        let posKanaPartEnd = kana.indexOf(kanjiLetter, posKana)
+        let posKanaPartEnd = kana.indexOf(kanjiLetter, posKana);
         res.push({
           // @ts-ignore
           main: partMain,
           furigana: kana.slice(posKana, posKanaPartEnd)
-        })
+        });
         partMain = "";
         posKana = posKanaPartEnd;
       } else {
@@ -147,7 +147,7 @@ export const detectParts = (kanji: string, kana: string) => {
         res.push({
           main: kanjiLetter,
           furigana: null
-        })
+        });
         posKana += 1;
         partMain = "";
       }
@@ -164,7 +164,7 @@ export const detectParts = (kanji: string, kana: string) => {
     }
     return res;
   }
-}
+};
 
 type DisplayWordWithFuriganaProps = {
   word: Word
@@ -172,11 +172,11 @@ type DisplayWordWithFuriganaProps = {
 export const DisplayWordWithFurigana: React.FC<DisplayWordWithFuriganaProps> = props => {
   let displayed = [<span>{props.word.kana}</span>];
   if (props.word.kanji) {
-    const tokens = fit(props.word.kanji, props.word.kana, {type: "object"})
+    const tokens = fit(props.word.kanji, props.word.kana, {type: "object"});
     if (tokens) {
       displayed = tokens.map(token => {
         const {w, r} = token;
-        if (w === r) return <span>{w}</span>
+        if (w === r) return <span>{w}</span>;
         else {
           return <ruby>
             {w}
@@ -187,4 +187,18 @@ export const DisplayWordWithFurigana: React.FC<DisplayWordWithFuriganaProps> = p
     }
   }
   return <span>{displayed}</span>
-}
+};
+
+export const prepareWord2: (arr: string[][]) => Word[] = arr => {
+  const words = arr.map(arr => {
+    const word = {
+      num: parseInt(arr[0]),
+      kana: arr[1],
+      kanji: arr[2],
+      category: arr[3].split(",").map(cat => cat.trim() as Category),
+      meaning: arr[4]
+    };
+    return word as Word;
+  });
+  return words
+};

@@ -7,7 +7,8 @@ import {sample} from "lodash";
 
 type PracticeViewBaseProps = {
   words: Word[],
-  reversed: boolean
+  reversed: boolean,
+  finishPractice?(): void
 }
 
 export const PracticeViewBase: React.FC<PracticeViewBaseProps> = (props) => {
@@ -20,7 +21,7 @@ export const PracticeViewBase: React.FC<PracticeViewBaseProps> = (props) => {
     const splitPath = match.path.split("/");
     const newBasePathIndex = splitPath.findIndex((elem => elem === "practice"));
     if (newBasePathIndex >= 0) {
-      const newBasePath = splitPath.slice(0, newBasePathIndex+1).join("/")
+      const newBasePath = splitPath.slice(0, newBasePathIndex+1).join("/");
       history.push(`${newBasePath}/result`, {
         wordsPracticed: props.words,
         wordsCorrectlyAnswered: correctAnswers,
@@ -30,7 +31,7 @@ export const PracticeViewBase: React.FC<PracticeViewBaseProps> = (props) => {
       console.log(splitPath);
       throw new Error()
     }
-  }
+  };
   const onNext = (wasCorrect: boolean) => {
     if (wasCorrect) {
       setCorrectAnswers(arr => arr.concat(props.words[currentPosition]))
@@ -70,4 +71,4 @@ export const PracticeViewBase: React.FC<PracticeViewBaseProps> = (props) => {
       </Box>
       }
     </Box>
-}
+};

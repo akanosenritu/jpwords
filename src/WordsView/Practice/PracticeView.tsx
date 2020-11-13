@@ -20,12 +20,11 @@ export const PracticeView: React.FC = () => {
     </Route>
     <Route path={`${match.path}/byIndex`}>
       <PracticeTypeSelectionView />
-    </Route>
-    <Route path={`${match.path}/result`}>
+    </Route>    <Route path={`${match.path}/result`}>
       <PracticeViewResult />
     </Route>
     <Route path={match.path}>
       <PracticeViewEntrance />
     </Route>
   </Switch>
-}
+};
