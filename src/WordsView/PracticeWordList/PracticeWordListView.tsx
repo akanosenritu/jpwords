@@ -19,13 +19,13 @@ export const PracticeWordListView: React.FC = () => {
       setCurrentState("practice");
     };
   const saveProgress = (practiceResult: TrainerResult) => {
-    savePracticeHistory(wordListToPractice, updatePracticeHistory(practiceHistory, practiceResult.correctAnswers, practiceResult.wrongAnswers))
+    savePracticeHistory(wordListToPractice, updatePracticeHistory(practiceHistory, practiceResult.correctAnswers))
   };
     const [practiceResult, setPracticeResult] = useState();
     const finishPractice = (practiceResult: TrainerResult) => {
       saveProgress(practiceResult);
-      setCurrentState("end");
       setPracticeResult(practiceResult);
+      setCurrentState("end");
     };
     const continuePractice = () => {
       setCurrentState("practice");

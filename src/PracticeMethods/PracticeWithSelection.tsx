@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Box, Button, makeStyles, Typography} from "@material-ui/core";
-import {DisplayWordWithFurigana, Word} from "../../data/Word";
-import {CorrectOption, CorrectOptionReversed, WrongOption, WrongOptionReversed} from "./Option";
+import {DisplayWordWithFurigana, Word} from "../data/Word";
+import {CorrectOption, CorrectOptionReversed, WrongOption, WrongOptionReversed} from "../WordsView/Practice/Option";
 
 
 const useStyles = makeStyles(theme => ({
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-type PracticeWordsWithSelectionChildProps = {
+type PracticeWithSelectionChildProps = {
   word: Word,
   optionWords: Word[],
   onNext: (wasCorrect: boolean) => void,
@@ -29,7 +29,7 @@ type PracticeWordsWithSelectionChildProps = {
 }
 
 // JtE stands for "Japanese to English"
-const PracticeWordsWithSelectionJtE: React.FC<PracticeWordsWithSelectionChildProps> = (props) => {
+const PracticeWithSelectionJtE: React.FC<PracticeWithSelectionChildProps> = (props) => {
   const word = props.word;
   const correctOption = <CorrectOption word={props.word} isCorrect={true} onAnswered={props.onClickCorrectOption} isAnswered={props.isAnswered} />;
   let options = props.optionWords.map(option => {
@@ -59,7 +59,7 @@ const PracticeWordsWithSelectionJtE: React.FC<PracticeWordsWithSelectionChildPro
 };
 
 // EtJ stands for "English to Japanese"
-const PracticeWordsWithSelectionEtJ: React.FC<PracticeWordsWithSelectionChildProps> = (props) => {
+const PracticeWithSelectionEtJ: React.FC<PracticeWithSelectionChildProps> = (props) => {
   const word = props.word;
   const correctOption = <CorrectOptionReversed word={props.word} isCorrect={true} onAnswered={props.onClickCorrectOption} isAnswered={props.isAnswered} />;
   let options = props.optionWords.map(option => {
@@ -83,11 +83,11 @@ const PracticeWordsWithSelectionEtJ: React.FC<PracticeWordsWithSelectionChildPro
   </div>
 };
 
-type PracticeWordsWithSelectionProps = PracticeWordsWithSelectionChildProps & {
+type PracticeWordsWithSelectionProps = PracticeWithSelectionChildProps & {
   type: "JtE" | "EtJ"
 }
 
-export const PracticeWordsWithSelection: React.FC<PracticeWordsWithSelectionProps> = props => {
+export const PracticeWithSelection: React.FC<PracticeWordsWithSelectionProps> = props => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [didAnswerCorrectly, setDidAnswerCorrectly] = useState(false);
   const onClickCorrectOption = () => {
@@ -105,12 +105,12 @@ export const PracticeWordsWithSelection: React.FC<PracticeWordsWithSelectionProp
     setIsAnswered(true);
   };
   return props.type === "JtE" ?
-    <PracticeWordsWithSelectionJtE word={props.word} optionWords={props.optionWords} onNext={props.onNext}
+    <PracticeWithSelectionJtE word={props.word} optionWords={props.optionWords} onNext={props.onNext}
                                    position={props.position} onClickCorrectOption={onClickCorrectOption}
                                    onClickWrongOption={onClickWrongOption} didAnswerCorrectly={didAnswerCorrectly}
                                    isAnswered={isAnswered}
     /> :
-    <PracticeWordsWithSelectionEtJ word={props.word} optionWords={props.optionWords} onNext={props.onNext}
+    <PracticeWithSelectionEtJ word={props.word} optionWords={props.optionWords} onNext={props.onNext}
                                    position={props.position} onClickCorrectOption={onClickCorrectOption}
                                    onClickWrongOption={onClickWrongOption} didAnswerCorrectly={didAnswerCorrectly}
                                    isAnswered={isAnswered}

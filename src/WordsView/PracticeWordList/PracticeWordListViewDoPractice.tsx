@@ -1,7 +1,7 @@
 import React from "react";
 import {PracticeViewBase} from "../Practice/PracticeViewBase";
 import {Word} from "../../data/Word";
-import {TrainerBase} from "./Trainer/Trainer";
+import {Trainer2} from "./Trainer/Trainer";
 import {WordList} from "../../data/WordList";
 import {TrainerResult} from "./Trainer/TrainerResult";
 import {chooseWordsToPractice, loadPracticeHistory} from "../../data/PracticeHistory";
@@ -23,5 +23,5 @@ export const PracticeWordListViewDoPractice: React.FC<PracticeWordListViewDoPrac
     };
     props.finishPractice(practiceResult);
   };
-  return <TrainerBase words={words} reversed={false} finishPractice={finishPractice}/>
+  return <Trainer2 words={words} reversed={false} finishPractice={finishPractice}/>
 };

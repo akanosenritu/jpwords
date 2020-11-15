@@ -3,6 +3,7 @@ import {sample, shuffle} from "lodash";
 import React from "react";
 import {isHiragana} from "wanakana";
 import {fit} from "furigana";
+import * as wanakana from "wanakana";
 
 export const categoryList = ['adj-pn', 'u-v-i', 'adj', 'vt', 'vk', 'number', 'n-temp', 'conj', 'n-adv',
                               'n-t', 'adj-no', 'u-v', 'vs', 'int', 'n col', 'pref', 'vs-i', 'exp', 'expr', 'gn',
@@ -171,7 +172,7 @@ type DisplayWordWithFuriganaProps = {
 }
 export const DisplayWordWithFurigana: React.FC<DisplayWordWithFuriganaProps> = props => {
   let displayed = [<span>{props.word.kana}</span>];
-  if (props.word.kanji) {
+  if (props.word.kanji && wanakana.isHiragana(props.word.kana)) {
     const tokens = fit(props.word.kanji, props.word.kana, {type: "object"});
     if (tokens) {
       displayed = tokens.map(token => {

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Box, Button, Container, LinearProgress, Typography} from "@material-ui/core";
-import {PracticeWordsWithSelection} from "./PracticeWordsWithSelection";
+import {PracticeWithSelection} from "../../PracticeMethods/PracticeWithSelection";
 import {Word, getSimilarWords} from "../../data/Word";
 import {useHistory, useRouteMatch} from "react-router-dom";
 import {sample} from "lodash";
@@ -62,10 +62,10 @@ export const PracticeViewBase: React.FC<PracticeViewBaseProps> = (props) => {
         <Typography variant={"subtitle2"} align={"center"}>{props.words.length > currentPosition? "Given a word, select the correct meaning." : "Click the button to view the result"}</Typography>
       </Container>
       {props.words.length > currentPosition?
-      <PracticeWordsWithSelection type={props.reversed? "EtJ": "JtE"}
-        key={currentPosition} word={props.words[currentPosition]} onNext={onNext}
+      <PracticeWithSelection type={props.reversed? "EtJ": "JtE"}
+                             key={currentPosition} word={props.words[currentPosition]} onNext={onNext}
         // @ts-ignore
-        optionWords={getSimilarWords(props.words[currentPosition], 3)} position={sample([0, 1, 2, 3])}
+                             optionWords={getSimilarWords(props.words[currentPosition], 3)} position={sample([0, 1, 2, 3])}
       />: <Box mt={2}>
         <Button onClick={finishPractice}>View Result</Button>
       </Box>

@@ -36,43 +36,24 @@ export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProp
     let countMastered = 0;
     let countNeedsPractice = 0;
     let countUntouched = 0;
-    for (let i=0; i<props.wordList.wordCount; i++) {
-        switch (practiceHistory.memorizationStrength[i]) {
-            case 0:
-                countUntouched += 1;
-                break;
-            case 5:
-                countMastered += 1;
-                break;
-            default:
-                countNeedsPractice += 1;
+    for (let word of props.wordList.words) {
+        let wordNum = word.num;
+        const wordHistory = practiceHistory.wordsHistory[wordNum];
+        if (wordHistory.nPractices === 0) {
+            countUntouched += 1
+        } else {
+            const nextPracticeDate = new Date(wordHistory.nextPracticeDate);
+            if (nextPracticeDate.getTime() - Date.now()) {
+                countMastered += 1
+            } else {
+                countNeedsPractice += 1
+            }
         }
     }
-    const progress = practiceHistory.memorizationStrength.reduce((acc, cur) => acc+ cur) * 20 / props.wordList.wordCount;
+    const progress = 100 * (countNeedsPractice + countMastered) / props.wordList.wordCount;
     return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
         <Typography variant={"h5"}>Practice Result</Typography>
         <div className={classes.box}>
-            <Typography variant={"h6"}>This iteration</Typography>
-            <Box mt={2}>
-                <Grid container spacing={4}>
-                    <Grid item xs={6}>
-                        <div style={{textAlign: "center"}}>
-                            Correct:
-                            <div>
-                                <Typography variant={"h4"} style={{color: "#48D1CC"}}>{props.practiceResult.correctAnswers.length}</Typography>
-                            </div>
-                        </div>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <div style={{textAlign: "center"}}>
-                            Wrong:
-                            <div>
-                                <Typography variant={"h4"} style={{color: "lightgrey"}}>{props.practiceResult.wrongAnswers.length}</Typography>
-                            </div>
-                        </div>
-                    </Grid>
-                </Grid>
-            </Box>
             <Typography variant={"h6"}>Overall progress</Typography>
             <Box mt={2}>
                 <Grid container spacing={3}>
@@ -80,7 +61,7 @@ export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProp
                         <div style={{textAlign: "center"}}>
                             Mastered:
                             <div>
-                                <Typography variant={"h4"} style={{color: "#48D1CC"}}>{countMastered}</Typography>
+                                <Typography variant={"h4"} style={{color: "#91ee91"}}>{countMastered}</Typography>
                             </div>
                         </div>
                     </Grid>
@@ -88,7 +69,7 @@ export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProp
                         <div style={{textAlign: "center"}}>
                             Needs Practice:
                             <div>
-                                <Typography variant={"h4"} style={{color: "lightgrey"}}>{countNeedsPractice}</Typography>
+                                <Typography variant={"h4"} style={{color: "#ffd899"}}>{countNeedsPractice}</Typography>
                             </div>
                         </div>
                     </Grid>
@@ -112,6 +93,5 @@ export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProp
             </Box>
         </div>
         <Button onClick={props.continuePractice}>Continue</Button>
-        <ReviewWords words={props.practiceResult.wrongAnswers} />
     </Box>
 };
