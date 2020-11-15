@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useRef, useState, useMemo, useEffect} from "react";
-import {DisplayWordWithFurigana, Word} from "../data/Word";
+import {DisplayWordWithFurigana, isPossibleToMakeVerbWithSuru, Word} from "../data/Word";
 import {Box, Checkbox, FormControlLabel, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
@@ -54,16 +54,19 @@ export const PracticeWithInput: React.FC<PracticeWithInputProps> = (props) => {
     }
     setAnswer(newAnswer);
   }
-  const onKeyboardEvent = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const onKeyboardEvent2 = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && !event.nativeEvent.isComposing) {
       event.preventDefault();
       if (status === "WRONG") {
-        onNext(false);
-      } else if (!isAnswerCorrect(answer)) {
-        onWronglyAnswered();
+        onNext(false)
+      } else if (status === "CORRECT") {
+        onNext(true)
       } else {
-        // @ts-ignore
-        onCorrectlyAnswered(false);
+        if (isAnswerCorrect(answer)) {
+          onCorrectlyAnswered(true)
+        } else {
+          onWronglyAnswered();
+        }
       }
     }
   }
@@ -90,9 +93,6 @@ export const PracticeWithInput: React.FC<PracticeWithInputProps> = (props) => {
   }
   const onCorrectlyAnswered = (isSecondTry: boolean) => {
     setStatus("CORRECT");
-    setTimeout(() => {
-      onNext(!isSecondTry);
-    }, 1000);
   }
   const onWronglyAnswered = () => {
     setStatus("WRONG");
@@ -122,6 +122,7 @@ export const PracticeWithInput: React.FC<PracticeWithInputProps> = (props) => {
         return ""
     }
   }
+  console.log(isPossibleToMakeVerbWithSuru(props.word))
   return <div style={{textAlign: "center", width:"100%"}}>
     <Box mt={4}>
       <Typography variant={"h4"}>{props.word.meaning}</Typography>
@@ -133,13 +134,16 @@ export const PracticeWithInput: React.FC<PracticeWithInputProps> = (props) => {
       <div className={styles.answerInputBox} style={{backgroundColor: getBackGroundColor(), borderColor: getBorderColor()}} key={props.word.meaning}>
         <input
           className={styles.answerInput} value={answer} onChange={onChangeEvent} placeholder={`translate ${props.word.meaning}`}
-          autoFocus={true} onKeyPress={onKeyboardEvent}
+          autoFocus={true} onKeyPress={onKeyboardEvent2}
           onCompositionStart={()=>setIsComposing(true)} onCompositionEnd={onCompositionEnd}
           key={props.word.meaning}
         />
         {status === "CORRECT" && <CheckIcon className={styles.answerInputIcon} />}
         {status === "WRONG" && <ErrorOutlineIcon className={styles.answerInputIcon} />}
       </div>
+    </Box>
+    <Box>
+      {isPossibleToMakeVerbWithSuru(props.word) && <p>* this word can be made into a verb with -する.</p>}
     </Box>
   </div>
 }

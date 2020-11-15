@@ -203,3 +203,13 @@ export const prepareWord2: (arr: string[][]) => Word[] = arr => {
   });
   return words
 };
+
+export const isPossibleToMakeVerbWithSuru = (word: Word) => {
+  const categories = word.category;
+  for (let category of categories) {
+    if (category === "vs") {
+      return true
+    }
+  }
+  return false
+}
