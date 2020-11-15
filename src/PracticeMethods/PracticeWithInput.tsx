@@ -1,6 +1,6 @@
-import React, {ChangeEvent, FormEvent, useRef, useState} from "react";
+import React, {ChangeEvent, useRef, useState, useMemo, useEffect} from "react";
 import {DisplayWordWithFurigana, Word} from "../data/Word";
-import {Box, Typography} from "@material-ui/core";
+import {Box, Checkbox, FormControlLabel, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
@@ -45,10 +45,10 @@ export const PracticeWithInput: React.FC<PracticeWithInputProps> = (props) => {
   const [answer, setAnswer] = useState("");
   const [status, setStatus] = useState<PracticeWithInputStatusType>("");
   const styles = useStyles();
-  const inputElement = useRef(null);
   const [isComposing, setIsComposing] = useState(false);
+  const isKatakana = useMemo(() => wanakana.isKatakana(props.word.kana), [props.word.kana]);
   const onChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
-    const newAnswer = wanakana.toHiragana(event.currentTarget.value);
+    const newAnswer = isKatakana? wanakana.toKatakana(event.currentTarget.value, {IMEMode: true}): wanakana.toHiragana(event.currentTarget.value, {IMEMode: true});
     if (isAnswerCorrect(newAnswer) && !isComposing) {
       onCorrectlyAnswered(status === "WRONG");
     }
@@ -63,17 +63,21 @@ export const PracticeWithInput: React.FC<PracticeWithInputProps> = (props) => {
         onWronglyAnswered();
       } else {
         // @ts-ignore
-        onCorrectlyAnswered(!(status === ""));
+        onCorrectlyAnswered(false);
       }
     }
   }
   const isAnswerCorrect = (answer: string): boolean => {
-    if (props.word.kana && answer === props.word.kana) {
-      console.log("Correct answer for kana")
-      return true
-    } else if (props.word.kanji && answer === props.word.kanji) {
-      console.log("Correct answer for kanji")
-      return true
+    if (props.word.kana) {
+      if (props.word.kana.replace("～", "") === answer) {
+        return true
+      }
+      return props.word.kana === answer
+    } else if (props.word.kanji) {
+      if (props.word.kanji.replace("～", "") === answer) {
+        return true
+      }
+      return props.word.kanji === answer
     } else {
       return false
     }
@@ -129,8 +133,9 @@ export const PracticeWithInput: React.FC<PracticeWithInputProps> = (props) => {
       <div className={styles.answerInputBox} style={{backgroundColor: getBackGroundColor(), borderColor: getBorderColor()}} key={props.word.meaning}>
         <input
           className={styles.answerInput} value={answer} onChange={onChangeEvent} placeholder={`translate ${props.word.meaning}`}
-          autoFocus={true} onKeyPress={onKeyboardEvent} ref={inputElement}
+          autoFocus={true} onKeyPress={onKeyboardEvent}
           onCompositionStart={()=>setIsComposing(true)} onCompositionEnd={onCompositionEnd}
+          key={props.word.meaning}
         />
         {status === "CORRECT" && <CheckIcon className={styles.answerInputIcon} />}
         {status === "WRONG" && <ErrorOutlineIcon className={styles.answerInputIcon} />}

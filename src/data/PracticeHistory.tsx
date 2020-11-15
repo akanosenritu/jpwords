@@ -42,7 +42,7 @@ export const loadPracticeHistory: (wordList: WordList) => PracticeHistory = (wor
   if (possibleHistory) {
     try {
       const history = JSON.parse(possibleHistory) as PracticeHistory;
-      if (history.version !== 0.1) return history;
+      if (history.version === 0.1) return history;
     } catch {}
   }
   let newHistory = createBlankHistory(wordList);
@@ -58,7 +58,6 @@ export const savePracticeHistory = (wordList: WordList, practiceHistory: Practic
 
 export const chooseWordsToPractice = (wordList: WordList, practiceHistory: PracticeHistory, quantity: number): Word[] => {
   const words = shuffle(wordList.words);
-  const today = Date.now();
   const untouchedWords = [] as Word[];
   const result = [] as Word[];
   for (let word of words) {
@@ -68,7 +67,7 @@ export const chooseWordsToPractice = (wordList: WordList, practiceHistory: Pract
     if (wordHistory.nPractices === 0) {
       untouchedWords.push(word);
       continue;
-    } else if ((nextPracticeDate.getTime() - Date.now()) > 0) {
+    } else if ((nextPracticeDate.getTime() - Date.now()) < 0) {
       result.push(word);
     }
 

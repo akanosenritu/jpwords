@@ -15,11 +15,10 @@ type PracticeWordListViewDoPracticeProps = {
 export const PracticeWordListViewDoPractice: React.FC<PracticeWordListViewDoPracticeProps> = (props) => {
   const practiceHistory = loadPracticeHistory(props.wordListToPractice);
   const words = shuffle(chooseWordsToPractice(props.wordListToPractice, practiceHistory, 20));
-  const finishPractice = (wordsCorrectlyAnswered: Word[], wordsWronglyAnswered: Word[]) => {
+  const finishPractice = (wordsDone: Word[]) => {
     const practiceResult = {
       wordList: props.wordListToPractice,
-      correctAnswers: wordsCorrectlyAnswered,
-      wrongAnswers: wordsWronglyAnswered
+      wordsDone: wordsDone
     };
     props.finishPractice(practiceResult);
   };

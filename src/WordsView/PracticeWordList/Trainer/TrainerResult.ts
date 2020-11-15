@@ -3,6 +3,5 @@ import {Word} from "../../../data/Word";
 
 export type TrainerResult = {
     wordList: WordList,
-    correctAnswers: Word[]
-    wrongAnswers: Word[],
+    wordsDone: Word[]
 }
