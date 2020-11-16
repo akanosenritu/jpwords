@@ -50,9 +50,11 @@ export const PracticeWithInput: React.FC<PracticeWithInputProps> = (props) => {
   const onChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
     const newAnswer = isKatakana? wanakana.toKatakana(event.currentTarget.value, {IMEMode: true}): wanakana.toHiragana(event.currentTarget.value, {IMEMode: true});
     if (isAnswerCorrect(newAnswer) && !isComposing) {
-      onCorrectlyAnswered(status === "WRONG");
+      onCorrectlyAnswered();
     }
-    setAnswer(newAnswer);
+    if (status !== "CORRECT") {
+      setAnswer(newAnswer);
+    }
   }
   const onKeyboardEvent2 = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && !event.nativeEvent.isComposing) {
@@ -63,7 +65,7 @@ export const PracticeWithInput: React.FC<PracticeWithInputProps> = (props) => {
         onNext(true)
       } else {
         if (isAnswerCorrect(answer)) {
-          onCorrectlyAnswered(true)
+          onCorrectlyAnswered()
         } else {
           onWronglyAnswered();
         }
@@ -88,10 +90,10 @@ export const PracticeWithInput: React.FC<PracticeWithInputProps> = (props) => {
   const onCompositionEnd = () => {
     setIsComposing(false);
     if (isAnswerCorrect(answer)) {
-      onCorrectlyAnswered(status === "WRONG");
+      onCorrectlyAnswered();
     }
   }
-  const onCorrectlyAnswered = (isSecondTry: boolean) => {
+  const onCorrectlyAnswered = () => {
     setStatus("CORRECT");
   }
   const onWronglyAnswered = () => {

@@ -1,4 +1,5 @@
 import {prepareWord2, Word} from "./Word";
+import wordListN4 from "./wordlist-N4[0].json";
 import wordListN5 from "./wordlist-N5[0].json";
 
 export type WordList = {
@@ -9,15 +10,15 @@ export type WordList = {
   wordCount: number
 }
 
-const loadWordListVersion1 = () => {
+const loadWordListVersion1 = (target: any) => {
   const wordList = {
-    name: wordListN5.name,
-    version: wordListN5.version,
-    description: wordListN5.description,
-    wordCount: wordListN5.wordCount,
-    words: prepareWord2(wordListN5.words)
+    name: target.name,
+    version: target.version,
+    description: target.description,
+    wordCount: target.wordCount,
+    words: prepareWord2(target.words)
   } as WordList;
   return wordList
 };
 
-export const availableWordLists = [loadWordListVersion1()];
+export const availableWordLists = [loadWordListVersion1(wordListN5), loadWordListVersion1(wordListN4)];
