@@ -1,11 +1,7 @@
-import React, {useEffect} from "react";
-import {PieChart, Pie, Cell} from "recharts";
-import {Word} from "../../data/Word";
-import {useLocation} from "react-router-dom";
-import {Box, Button, Card, CardContent, Grid, Typography} from "@material-ui/core";
+import React from "react";
+import {Box, Button, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import {ReviewWords} from "../Practice/Result/Result";
-import {loadPracticeHistory, savePracticeHistory, updatePracticeHistory} from "../../data/PracticeHistory";
+import {loadPracticeHistory} from "../../data/PracticeHistory";
 import {TrainerResult} from "./Trainer/TrainerResult";
 import {WordList} from "../../data/WordList";
 

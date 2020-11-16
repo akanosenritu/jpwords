@@ -128,7 +128,7 @@ export const PracticeWithInput: React.FC<PracticeWithInputProps> = (props) => {
       <Typography variant={"h4"}>{props.word.meaning}</Typography>
     </Box>
     <Box>
-      {status === "WRONG" && <Typography variant={"h5"}><DisplayWordWithFurigana word={props.word} /></Typography>}
+      {status !== "" && <Typography variant={"h5"}><DisplayWordWithFurigana word={props.word} /></Typography>}
     </Box>
     <Box mt={4}>
       <div className={styles.answerInputBox} style={{backgroundColor: getBackGroundColor(), borderColor: getBorderColor()}} key={props.word.meaning}>
