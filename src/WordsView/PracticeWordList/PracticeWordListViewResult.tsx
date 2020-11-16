@@ -85,7 +85,7 @@ export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProp
                         <div style={{textAlign: "center"}}>
                             Total Progress:
                             <div>
-                                <Typography variant={"h4"} style={{color: "lightgrey"}}>{progress.toFixed(1)} %</Typography>
+                                <Typography variant={"h4"} style={{color: "#91ee91"}}>{progress.toFixed(1)} %</Typography>
                             </div>
                         </div>
                     </Grid>
