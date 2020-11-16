@@ -1,6 +1,6 @@
-import React, {ChangeEvent, useRef, useState, useMemo, useEffect} from "react";
+import React, {ChangeEvent,  useState, useMemo} from "react";
 import {DisplayWordWithFurigana, isPossibleToMakeVerbWithSuru, Word} from "../data/Word";
-import {Box, Checkbox, FormControlLabel, Typography} from "@material-ui/core";
+import {Box, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
@@ -41,7 +41,7 @@ type PracticeWithInputProps = {
 
 type PracticeWithInputStatusType = "CORRECT" | "WRONG" | ""
 
-export const PracticeWithInput: React.FC<PracticeWithInputProps> = (props) => {
+export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) => {
   const [answer, setAnswer] = useState("");
   const [status, setStatus] = useState<PracticeWithInputStatusType>("");
   const styles = useStyles();

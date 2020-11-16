@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import {useLocation} from "react-router-dom";
 import {getSimilarWords, Word} from "../../../data/Word";
 import {Box, Button, Container, LinearProgress, Typography} from "@material-ui/core";
-import {PracticeWithSelection} from "../../../PracticeMethods/PracticeWithSelection";
+import {PracticeWordWithSelection} from "../../../PracticeMethods/PracticeWordWithSelection";
 import {sample} from "lodash";
-import {PracticeWithInput} from "../../../PracticeMethods/PracticeWithInput";
+import {PracticeWordWithInput} from "../../../PracticeMethods/PracticeWordWithInput";
 
 type PracticeViewBaseProps = {
     words: Word[],
@@ -45,7 +45,7 @@ export const Trainer2: React.FC<PracticeViewBaseProps> = props => {
     const word = props.words[wordQueue[0]];
     return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
         <LinearProgress variant={"determinate"} style={{width: "100%"}} value={numberDoneWords * 100 / props.words.length}/>
-        <PracticeWithInput word={word} onNext={onNext} />
+        <PracticeWordWithInput word={word} onNext={onNext} />
         {isDebugging && <div>
             <p>DEBUG INFORMATION: Word Queue</p>
             {wordQueue.map((wordNum, index) => {

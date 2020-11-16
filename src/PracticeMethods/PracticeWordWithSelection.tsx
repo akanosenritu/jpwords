@@ -87,7 +87,7 @@ type PracticeWordsWithSelectionProps = PracticeWithSelectionChildProps & {
   type: "JtE" | "EtJ"
 }
 
-export const PracticeWithSelection: React.FC<PracticeWordsWithSelectionProps> = props => {
+export const PracticeWordWithSelection: React.FC<PracticeWordsWithSelectionProps> = props => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [didAnswerCorrectly, setDidAnswerCorrectly] = useState(false);
   const onClickCorrectOption = () => {
