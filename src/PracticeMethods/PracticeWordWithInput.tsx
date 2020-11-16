@@ -77,18 +77,23 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
       if (props.word.kana.replace("～", "") === answer) {
         return true
       }
-      return props.word.kana === answer
-    } else if (props.word.kanji) {
+      if (props.word.kana === answer) {
+        return true
+      }
+    }
+    if (props.word.kanji) {
       if (props.word.kanji.replace("～", "") === answer) {
         return true
       }
-      return props.word.kanji === answer
-    } else {
-      return false
+      if (props.word.kanji === answer) {
+        return true
+      }
     }
+    return false
   }
   const onCompositionEnd = () => {
     setIsComposing(false);
+    console.log(props.word.meaning, answer, props.word.kanji, answer===props.word.kanji, isAnswerCorrect(answer));
     if (isAnswerCorrect(answer)) {
       onCorrectlyAnswered();
     }
@@ -129,7 +134,7 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
     <Box mt={4}>
       <Typography variant={"h4"}>{props.word.meaning}</Typography>
     </Box>
-    <Box>
+    <Box mt={4}>
       {status !== "" && <Typography variant={"h5"}><DisplayWordWithFurigana word={props.word} /></Typography>}
     </Box>
     <Box mt={4}>
