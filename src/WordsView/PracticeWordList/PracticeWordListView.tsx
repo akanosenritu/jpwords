@@ -11,7 +11,7 @@ import {availableWords} from "../../data/Word";
 type PracticeWordListViewState = "start" | "practice" | "end"
 
 export const PracticeWordListView: React.FC = () => {
-  const [currentState, setCurrentState] = useState("start");
+  const [currentState, setCurrentState] = useState<PracticeWordListViewState>("start");
   const [wordListToPractice, setWordListToPractice] = useState<WordList>(availableWordLists[0]);
   const [practiceHistory, setPracticeHistory] = useState(loadPracticeHistory());
   const startPractice = (wordList: WordList) => {

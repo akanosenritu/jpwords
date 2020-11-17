@@ -1,14 +1,7 @@
-import React, {useState} from "react";
-import {useHistory, useLocation, useRouteMatch} from "react-router-dom";
+import React from "react";
 import {Box, Button, Card, CardActions, CardContent, Typography} from "@material-ui/core";
-import {Word} from "../../data/Word";
 import {availableWordLists, WordList} from "../../data/WordList";
 import {usePracticeViewStyles} from "./PracticeViewStyle";
-import {createBlankHistory, PracticeHistory} from "../../data/PracticeHistory";
-
-type PracticeViewWordListLocationState = {
-  wordListToPractice: WordList
-}
 
 type StartPracticeByWordListCardProps = {
   wordList: WordList,

@@ -1,5 +1,5 @@
 import React, {ChangeEvent,  useState, useMemo} from "react";
-import {DisplayWordWithFurigana, isPossibleToMakeVerbWithSuru, Word, WordTypeV2} from "../data/Word";
+import {DisplayWordWithFurigana, isPossibleToMakeVerbWithSuru, WordTypeV2} from "../data/Word";
 import {Box, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';

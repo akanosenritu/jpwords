@@ -1,5 +1,3 @@
-import data from "../words.json";
-import {sample, shuffle} from "lodash";
 import React from "react";
 import * as wanakana from "wanakana";
 import {isHiragana} from "wanakana";
@@ -21,14 +19,8 @@ export const categoryList = ['adj-pn', 'u-v-i', 'adj', 'vt', 'vk', 'number', 'n-
                               'kana only', 'adv', 'suf', 'no-adj', 'p-suru', 'vi', 'n', 'ru-v', 'na-adj', 'num',
                               'uk', 'n-suf', 'v5n', 'gn-adv', 'prt', 'pren-adj', 'prefix', ''] as const;
 
-export const HiraganaList = [];
-
 type CategoryTuple = typeof categoryList;
 export type Category = CategoryTuple[number];
-
-export const isCategory = (obj: any): obj is Category => {
-  return categoryList.includes(obj);
-};
 
 export type Word = {
   num: number,
@@ -45,66 +37,6 @@ export type WordTypeV2 = {
   category: Category[],
   meaning: string
 }
-
-const prepareWords = (arr: string[][]): [Word[], Map<Category, Array<Word>>] => {
-  const wordsByCategory = new Map<Category, Array<Word>>();
-  categoryList.map(cat => wordsByCategory.set(cat, []));
-  const words = arr.map(arr => {
-    const word =  {
-      num: parseInt(arr[0]),
-      kana: arr[1],
-      kanji: arr[2],
-      category: arr[3].split(",").map(cat => cat.trim() as Category),
-      meaning: arr[4]
-    };
-    word.category.forEach(cat => {
-      if (wordsByCategory.has(cat)) {
-        // @ts-ignore
-        wordsByCategory.get(cat).push(word)
-      }
-    });
-    return word
-  });
-  return [words, wordsByCategory];
-};
-
-const [words, wordsByCategory] = prepareWords(data);
-
-export const loadAllWords = () => {
-  return words
-};
-
-export const loadWordsByIndex = (start: number, end: number) => {
-  if (start < 0) start = 0;
-  if (end > words.length) end = words.length;
-  return words.slice(start, end)
-};
-
-export const getSimilarWords = (word: Word, quantity: number) => {
-  const category = word.category.length > 0? word.category[0] : "";
-  const availableWords = shuffle(wordsByCategory.get(category));
-  if (availableWords === undefined || availableWords.length === 0) {
-    throw new Error("No similar words")
-  }
-  let result: Word[] = [];
-  while (result.length < quantity && availableWords.length > 0) {
-    const candidate = availableWords.pop();
-    if (candidate === undefined) continue;
-    if (candidate.meaning === word.meaning) continue;
-    result.push(candidate);
-  }
-  // if got less number of words, fill it randomly with all words
-  if (result.length < quantity) {
-    while (result.length < quantity) {
-       const randomWord = sample(words);
-       if (randomWord === undefined) continue;
-       if (randomWord.meaning === word.meaning) continue;
-       if (result.includes(randomWord)) continue;
-       result.push(randomWord);
-    }
-  }
-  return result;
-};
 
 const isAlphabet = (letter: string) => {
   const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
@@ -195,20 +127,6 @@ export const DisplayWordWithFurigana: React.FC<DisplayWordWithFuriganaProps> = p
     }
   }
   return <span>{displayed}</span>
-};
-
-export const prepareWord2: (arr: string[][]) => Word[] = arr => {
-  const words = arr.map(arr => {
-    const word = {
-      num: parseInt(arr[0]),
-      kana: arr[1],
-      kanji: arr[2],
-      category: arr[3].split(",").map(cat => cat.trim() as Category),
-      meaning: arr[4]
-    };
-    return word as Word;
-  });
-  return words
 };
 
 export const prepareWordV2: (arr: string[]) => WordTypeV2[] = arr => {
