@@ -3,7 +3,7 @@ import {useHistory, useLocation, useRouteMatch} from "react-router-dom";
 import {Box, Button, Card, CardActions, CardContent, Typography} from "@material-ui/core";
 import {Word} from "../../data/Word";
 import {availableWordLists, WordList} from "../../data/WordList";
-import {usePracticeViewStyles} from "../Practice/PracticeViewStyle";
+import {usePracticeViewStyles} from "./PracticeViewStyle";
 import {createBlankHistory, PracticeHistory} from "../../data/PracticeHistory";
 
 type PracticeViewWordListLocationState = {
@@ -41,7 +41,7 @@ const StartPracticeByWordList: React.FC<StartPracticeByWordListProps> = (props) 
     <Typography variant={"h6"}>Word Lists</Typography>
     <Box mt={2} >
       {availableWordLists.map(wordList => {
-        return <StartPracticeByWordListCard wordList={wordList} onClickStart={props.startPractice} />
+        return <StartPracticeByWordListCard wordList={wordList} onClickStart={props.startPractice} key={wordList.name} />
       })}
     </Box>
   </Box>

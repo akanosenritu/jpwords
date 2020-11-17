@@ -1,6 +1,5 @@
 import React from "react";
-import {PracticeViewBase} from "../Practice/PracticeViewBase";
-import {Word} from "../../data/Word";
+import {WordTypeV2} from "../../data/Word";
 import {Trainer2} from "./Trainer/Trainer";
 import {WordList} from "../../data/WordList";
 import {TrainerResult} from "./Trainer/TrainerResult";
@@ -13,12 +12,13 @@ type PracticeWordListViewDoPracticeProps = {
 }
 
 export const PracticeWordListViewDoPractice: React.FC<PracticeWordListViewDoPracticeProps> = (props) => {
-  const practiceHistory = loadPracticeHistory(props.wordListToPractice);
+  const practiceHistory = loadPracticeHistory();
   const words = shuffle(chooseWordsToPractice(props.wordListToPractice, practiceHistory, 20));
-  const finishPractice = (wordsDone: Word[]) => {
+  const finishPractice = (wordsDone: WordTypeV2[], practiceQualities: number[]) => {
     const practiceResult = {
       wordList: props.wordListToPractice,
-      wordsDone: wordsDone
+      wordsDone: wordsDone,
+      practiceQualities: practiceQualities
     };
     props.finishPractice(practiceResult);
   };

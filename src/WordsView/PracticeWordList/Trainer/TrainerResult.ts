@@ -1,7 +1,8 @@
 import {WordList} from "../../../data/WordList";
-import {Word} from "../../../data/Word";
+import {Word, WordTypeV2} from "../../../data/Word";
 
 export type TrainerResult = {
     wordList: WordList,
-    wordsDone: Word[]
+    wordsDone: WordTypeV2[],
+    practiceQualities: number[]
 }

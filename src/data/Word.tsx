@@ -1,9 +1,20 @@
 import data from "../words.json";
 import {sample, shuffle} from "lodash";
 import React from "react";
+import * as wanakana from "wanakana";
 import {isHiragana} from "wanakana";
 import {fit} from "furigana";
-import * as wanakana from "wanakana";
+import wordData from "./words.json";
+
+const prepareAvailableWords = () => {
+  let availableWords: {[key:string]: any} = {};
+  for (let word of wordData.words) {
+    availableWords[word.uuid] = word
+  }
+  return availableWords;
+}
+
+export const availableWords = prepareAvailableWords();
 
 export const categoryList = ['adj-pn', 'u-v-i', 'adj', 'vt', 'vk', 'number', 'n-temp', 'conj', 'n-adv',
                               'n-t', 'adj-no', 'u-v', 'vs', 'int', 'n col', 'pref', 'vs-i', 'exp', 'expr', 'gn',
@@ -21,6 +32,14 @@ export const isCategory = (obj: any): obj is Category => {
 
 export type Word = {
   num: number,
+  kanji: string,
+  kana: string,
+  category: Category[],
+  meaning: string
+}
+
+export type WordTypeV2 = {
+  uuid: string,
   kanji: string,
   kana: string,
   category: Category[],
@@ -55,23 +74,10 @@ export const loadAllWords = () => {
   return words
 };
 
-export const useWords = (): [Word[], (category: Category)=>Word] => {
-  const [words, wordsByCategory] = prepareWords(data);
-  const getRandomWordsByCategory2 = (category: Category) => {
-    // @ts-ignore
-    return words[wordsByCategory.get(category)[Math.floor(Math.random() * wordsByCategory.get(category).length)]-1]
-    };
-  return [words, getRandomWordsByCategory2];
-};
-
 export const loadWordsByIndex = (start: number, end: number) => {
   if (start < 0) start = 0;
   if (end > words.length) end = words.length;
   return words.slice(start, end)
-};
-
-export const loadWordsByHiragana = (startHiragana: string, endHiragana: string) => {
-
 };
 
 export const getSimilarWords = (word: Word, quantity: number) => {
@@ -168,18 +174,19 @@ export const detectParts = (kanji: string, kana: string) => {
 };
 
 type DisplayWordWithFuriganaProps = {
-  word: Word
+  word: WordTypeV2
 }
+
 export const DisplayWordWithFurigana: React.FC<DisplayWordWithFuriganaProps> = props => {
-  let displayed = [<span>{props.word.kana}</span>];
+  let displayed = [<span key={props.word.kana}>{props.word.kana}</span>];
   if (props.word.kanji && wanakana.isHiragana(props.word.kana)) {
     const tokens = fit(props.word.kanji, props.word.kana, {type: "object"});
     if (tokens) {
       displayed = tokens.map(token => {
         const {w, r} = token;
-        if (w === r) return <span>{w}</span>;
+        if (w === r) return <span key={w}>{w}</span>;
         else {
-          return <ruby>
+          return <ruby key={w}>
             {w}
             <rt>{r}</rt>
           </ruby>
@@ -204,7 +211,13 @@ export const prepareWord2: (arr: string[][]) => Word[] = arr => {
   return words
 };
 
-export const isPossibleToMakeVerbWithSuru = (word: Word) => {
+export const prepareWordV2: (arr: string[]) => WordTypeV2[] = arr => {
+  return arr.map(id => {
+    return availableWords[id];
+  }) as WordTypeV2[]
+}
+
+export const isPossibleToMakeVerbWithSuru = (word: WordTypeV2) => {
   const categories = word.category;
   for (let category of categories) {
     if (category === "vs") {

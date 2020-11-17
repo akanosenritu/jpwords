@@ -1,68 +1,107 @@
-import {Word} from "./Word";
+import {Word, WordTypeV2} from "./Word";
 import {WordList} from "./WordList";
 import {shuffle} from "lodash";
+
+const TIME_FACTOR = 24 * 60 * 60 * 1000;
 
 type WordHistory = {
   nextPracticeDate: string,
   nPractices: number
 }
-export type PracticeHistory = {
-  lastPracticeDate : string,
-  wordListName: string,
-  version: number
-  wordsHistory: WordHistory[]
+
+type WordHistoryV2 = {
+  nextPracticeDate: string,
+  nPractices: number,
+  strength: number
 }
 
-export const createBlankHistory: (wordList: WordList) => PracticeHistory = (wordList) => {
+export type PracticeHistory = {
+  lastPracticeDate: string,
+  wordsHistory: {[key: string]: WordHistoryV2},
+  version: number
+}
+
+export const createBlankHistory: () => PracticeHistory = () => {
   return {
     lastPracticeDate: new Date().toISOString(),
-    wordListName: "N5",
-    version: 0.1,
-    wordsHistory: wordList.words.map(word=> ({nextPracticeDate: new Date().toISOString(), nPractices: 0}))
+    version: 0.2,
+    wordsHistory: {}
   }
 };
 
-export const updatePracticeHistory = (practiceHistory: PracticeHistory, correctlyAnsweredWords: Word[]) => {
-  const correctWords = correctlyAnsweredWords.map(word => word.num);
+export const updatePracticeHistory = (practiceHistory: PracticeHistory, wordIdsPracticed: string[], practiceQualities: number[]) => {
+  const calculateNextPracticeDate = (strength: number, nPractices: number, timeFactor: number): Date => {
+    const l = [] as number[];
+    l[1] = 1;
+    l[2] = 6;
+    for (let i=3; i<=nPractices; i++) {
+        l[i] = l[i-1] * strength;
+    }
+    return new Date(Date.now() + timeFactor * l[nPractices]);
+  };
+  const calculateStrength = (strengthBefore: number, practiceQuality: number) => {
+    let newStrength = strengthBefore + (0.1  - (5 - practiceQuality) * (0.08 + (5 - practiceQuality) * 0.02));
+    if (newStrength < 1.3) newStrength = 1.3;
+    if (newStrength > 2.5) newStrength = 2.5;
+    return newStrength;
+  }
   let updatedWordsHistory = practiceHistory.wordsHistory;
-  correctWords.forEach(wordNum => {
-    updatedWordsHistory[wordNum].nPractices += 1;
-    updatedWordsHistory[wordNum].nextPracticeDate = new Date(Date.now() + 3600 * 1000 * updatedWordsHistory[wordNum].nPractices).toISOString();
-  });
+  wordIdsPracticed.forEach((wordIdPracticed, index) => {
+    const practiceQuality = practiceQualities[index];
+    if (updatedWordsHistory[wordIdPracticed] !== undefined) {
+      updatedWordsHistory[wordIdPracticed].nPractices += 1
+      let newStrength = calculateStrength(updatedWordsHistory[wordIdPracticed].strength, practiceQuality);
+      if (newStrength < 0) newStrength = 0;
+      updatedWordsHistory[wordIdPracticed].strength = newStrength;
+      updatedWordsHistory[wordIdPracticed].nextPracticeDate = calculateNextPracticeDate(newStrength, updatedWordsHistory[wordIdPracticed].nPractices, TIME_FACTOR).toISOString();
+    } else {
+      const strength = calculateStrength(2.5, practiceQuality);
+      const wordHistory: WordHistoryV2 = {
+        strength: strength,
+        nPractices: 1,
+        nextPracticeDate: calculateNextPracticeDate(strength, 1, TIME_FACTOR).toISOString()
+      };
+      updatedWordsHistory[wordIdPracticed] = wordHistory;
+    }
+  })
   const newHistory = practiceHistory;
   newHistory.wordsHistory = updatedWordsHistory;
   return newHistory;
 };
 
 
-export const loadPracticeHistory: (wordList: WordList) => PracticeHistory = (wordList) => {
+export const loadPracticeHistory: () => PracticeHistory = () => {
   const localStorage = window.localStorage;
-  const keyName = wordList.name + "-practiceHistory";
+  const keyName = "practiceHistory";
   const possibleHistory = localStorage.getItem(keyName);
   if (possibleHistory) {
     try {
       const history = JSON.parse(possibleHistory) as PracticeHistory;
-      if (history.version === 0.1) return history;
+      if (history.version === 0.2) return history;
     } catch {}
   }
-  let newHistory = createBlankHistory(wordList);
+  let newHistory = createBlankHistory();
   localStorage.setItem(keyName, JSON.stringify(newHistory));
   return newHistory;
 };
 
-export const savePracticeHistory = (wordList: WordList, practiceHistory: PracticeHistory) => {
+export const savePracticeHistory = (practiceHistory: PracticeHistory) => {
   const localStorage = window.localStorage;
-  const keyName = wordList.name + "-practiceHistory";
+  const keyName ="practiceHistory";
   localStorage.setItem(keyName, JSON.stringify(practiceHistory));
 };
 
-export const chooseWordsToPractice = (wordList: WordList, practiceHistory: PracticeHistory, quantity: number): Word[] => {
+export const chooseWordsToPractice = (wordList: WordList, practiceHistory: PracticeHistory, quantity: number): WordTypeV2[] => {
   const words = shuffle(wordList.words);
-  const untouchedWords = [] as Word[];
-  const result = [] as Word[];
+  const untouchedWords = [] as WordTypeV2[];
+  const result = [] as WordTypeV2[];
   for (let word of words) {
-    const wordNum = word.num;
-    const wordHistory = practiceHistory.wordsHistory[wordNum];
+    const wordId = word.uuid;
+    const wordHistory = practiceHistory.wordsHistory[wordId];
+    if (wordHistory === undefined) {
+      untouchedWords.push(word);
+      continue
+    }
     const nextPracticeDate = new Date(wordHistory.nextPracticeDate);
     if (wordHistory.nPractices === 0) {
       untouchedWords.push(word);
@@ -75,9 +114,5 @@ export const chooseWordsToPractice = (wordList: WordList, practiceHistory: Pract
       break
     }
   }
-  if (result.length === (quantity - 4)) {
-    return result.concat(untouchedWords.slice(0, 4))
-  } else {
-    return untouchedWords.slice(0, 20)
-  }
+  return result.concat(untouchedWords.slice(0, 20)).slice(0, 20);
 };

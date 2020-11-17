@@ -1,5 +1,5 @@
 import React, {ChangeEvent,  useState, useMemo} from "react";
-import {DisplayWordWithFurigana, isPossibleToMakeVerbWithSuru, Word} from "../data/Word";
+import {DisplayWordWithFurigana, isPossibleToMakeVerbWithSuru, Word, WordTypeV2} from "../data/Word";
 import {Box, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
 });
 
 type PracticeWithInputProps = {
-  word: Word,
+  word: WordTypeV2,
   onNext: (wasCorrect: boolean) => void,
 }
 
@@ -129,7 +129,6 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
         return ""
     }
   }
-  console.log(isPossibleToMakeVerbWithSuru(props.word))
   return <div style={{textAlign: "center", width:"100%"}}>
     <Box mt={4}>
       <Typography variant={"h4"}>{props.word.meaning}</Typography>
@@ -146,7 +145,7 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
           key={props.word.meaning}
         />
         {status === "CORRECT" && <CheckIcon className={styles.answerInputIcon} />}
-        {status === "WRONG" && <ErrorOutlineIcon className={styles.answerInputIcon} />}
+        {status === "WRONG" && <ErrorOutlineIcon className={styles.answerInputIcon} style={{color: getBorderColor()}} />}
       </div>
     </Box>
     <Box>

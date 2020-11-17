@@ -1,30 +1,36 @@
-import React, {useState} from "react";
-import {useLocation} from "react-router-dom";
-import {getSimilarWords, Word} from "../../../data/Word";
-import {Box, Button, Container, LinearProgress, Typography} from "@material-ui/core";
-import {PracticeWordWithSelection} from "../../../PracticeMethods/PracticeWordWithSelection";
+import React, {useContext, useState} from "react";
+import {WordTypeV2} from "../../../data/Word";
+import {Box, LinearProgress} from "@material-ui/core";
 import {sample} from "lodash";
 import {PracticeWordWithInput} from "../../../PracticeMethods/PracticeWordWithInput";
+import {DebugContext} from "../../Contexts";
 
 type PracticeViewBaseProps = {
-    words: Word[],
+    words: WordTypeV2[],
     reversed: boolean,
-    finishPractice: (wordsDone: Word[]) => void
+    finishPractice: (wordsDone: WordTypeV2[], practiceQualities: number[]) => void
 }
 
 export const Trainer2: React.FC<PracticeViewBaseProps> = props => {
-    const location = useLocation();
-    const params = new URLSearchParams(location.search.substring(1));
-    const debug = params.get("debug");
-    const isDebugging = !!debug;
     const [wordQueue, setWordQueue] = useState<number[]>(Array.from(Array(props.words.length).keys()));
     const [wordsStatus, setWordsStatus] = useState<number[]>(Array(props.words.length).fill(0));
+    const [practiceQualities, setPracticeQualities] = useState<number[]>(Array(props.words.length).fill(7))
     const numberDoneWords = wordsStatus.filter(wordStatus => wordStatus === 1).length;
+    const isDebugging = useContext(DebugContext);
     const onNext = (wasCorrect: boolean) => {
         if (wasCorrect && wordQueue.length === 1) {
-            props.finishPractice(props.words);
+            props.finishPractice(props.words, practiceQualities);
             return;
         }
+        setPracticeQualities(practiceQualities => {
+            const newPracticeQualities = [...practiceQualities];
+            let newPracticeQuality = newPracticeQualities[wordQueue[0]] - 2;
+            if (newPracticeQuality < 0) {
+                newPracticeQuality = 0
+            }
+            newPracticeQualities[wordQueue[0]] = newPracticeQuality
+            return newPracticeQualities;
+        })
         setWordsStatus(wordsStatus => {
             const newWordsStatus = [...wordsStatus];
             if (wasCorrect) {
@@ -36,7 +42,9 @@ export const Trainer2: React.FC<PracticeViewBaseProps> = props => {
             const currentWord = wordQueue[0];
             const newWordQueue = [...wordQueue.slice(1)];
             if (!wasCorrect) {
+                console.log("inserting");
                 const pos = sample([2, 3, 4]) as number;
+                console.log(pos, currentWord);
                 newWordQueue.splice(pos, 0, currentWord);
             }
             return newWordQueue;

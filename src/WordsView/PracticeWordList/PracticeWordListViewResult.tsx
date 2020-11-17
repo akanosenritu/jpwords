@@ -28,25 +28,28 @@ type PracticeWordListViewResultProps = {
 
 export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProps> = (props) => {
     const classes = useStyles();
-    const practiceHistory = loadPracticeHistory(props.wordList);
-    let countMastered = 0;
-    let countNeedsPractice = 0;
+    const practiceHistory = loadPracticeHistory();
+    let countReviewed = 0;
+    let countNeedsReview = 0;
     let countUntouched = 0;
     for (let word of props.wordList.words) {
-        let wordNum = word.num;
-        const wordHistory = practiceHistory.wordsHistory[wordNum];
+        const wordHistory = practiceHistory.wordsHistory[word.uuid];
+        if (wordHistory === undefined) {
+            countUntouched += 1
+            continue
+        }
         if (wordHistory.nPractices === 0) {
             countUntouched += 1
+            continue
+        }
+        const nextPracticeDate = new Date(wordHistory.nextPracticeDate);
+        if (nextPracticeDate.getTime() - Date.now()) {
+            countReviewed += 1
         } else {
-            const nextPracticeDate = new Date(wordHistory.nextPracticeDate);
-            if (nextPracticeDate.getTime() - Date.now()) {
-                countMastered += 1
-            } else {
-                countNeedsPractice += 1
-            }
+            countNeedsReview += 1
         }
     }
-    const progress = 100 * (countNeedsPractice + countMastered) / props.wordList.wordCount;
+    const progress = 100 * (countNeedsReview + countReviewed) / props.wordList.wordCount;
     return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
         <Typography variant={"h5"}>Practice Result</Typography>
         <div className={classes.box}>
@@ -55,17 +58,17 @@ export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProp
                 <Grid container spacing={3}>
                     <Grid item xs={4}>
                         <div style={{textAlign: "center"}}>
-                            Mastered:
+                            Reviewed:
                             <div>
-                                <Typography variant={"h4"} style={{color: "#91ee91"}}>{countMastered}</Typography>
+                                <Typography variant={"h4"} style={{color: "#91ee91"}}>{countReviewed}</Typography>
                             </div>
                         </div>
                     </Grid>
                     <Grid item xs={4}>
                         <div style={{textAlign: "center"}}>
-                            Needs Practice:
+                            Needs review:
                             <div>
-                                <Typography variant={"h4"} style={{color: "#ffd899"}}>{countNeedsPractice}</Typography>
+                                <Typography variant={"h4"} style={{color: "#ffd899"}}>{countNeedsReview}</Typography>
                             </div>
                         </div>
                     </Grid>
