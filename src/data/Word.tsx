@@ -6,7 +6,14 @@ import wordData from "./words.json";
 
 const prepareAvailableWords = () => {
   let availableWords: {[key:string]: any} = {};
-  for (let word of wordData.words) {
+  for (let wordDatum of wordData.words) {
+    const word: WordType = {
+      uuid: wordDatum.uuid,
+      kana: wordDatum.kana,
+      kanji: wordDatum.kanji,
+      meaning: wordDatum.meaning,
+      category: wordDatum.category.split(",") as Category[]
+    };
     availableWords[word.uuid] = word
   }
   return availableWords;
@@ -22,15 +29,7 @@ export const categoryList = ['adj-pn', 'u-v-i', 'adj', 'vt', 'vk', 'number', 'n-
 type CategoryTuple = typeof categoryList;
 export type Category = CategoryTuple[number];
 
-export type Word = {
-  num: number,
-  kanji: string,
-  kana: string,
-  category: Category[],
-  meaning: string
-}
-
-export type WordTypeV2 = {
+export type WordType = {
   uuid: string,
   kanji: string,
   kana: string,
@@ -106,7 +105,7 @@ export const detectParts = (kanji: string, kana: string) => {
 };
 
 type DisplayWordWithFuriganaProps = {
-  word: WordTypeV2
+  word: WordType
 }
 
 export const DisplayWordWithFurigana: React.FC<DisplayWordWithFuriganaProps> = props => {
@@ -129,13 +128,13 @@ export const DisplayWordWithFurigana: React.FC<DisplayWordWithFuriganaProps> = p
   return <span>{displayed}</span>
 };
 
-export const prepareWordV2: (arr: string[]) => WordTypeV2[] = arr => {
+export const prepareWordV2: (arr: string[]) => WordType[] = arr => {
   return arr.map(id => {
     return availableWords[id];
-  }) as WordTypeV2[]
+  }) as WordType[]
 }
 
-export const isPossibleToMakeVerbWithSuru = (word: WordTypeV2) => {
+export const isPossibleToMakeVerbWithSuru = (word: WordType) => {
   const categories = word.category;
   for (let category of categories) {
     if (category === "vs") {

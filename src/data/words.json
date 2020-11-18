@@ -8144,8 +8144,8 @@
     {
       "uuid": "bb5f33e4-80fc-454a-87ae-7cb53b979cdc",
       "meaning": "famous",
-      "kana": "ゆうめい",
-      "kanji": "有名",
+      "kana": "ゆうめいな",
+      "kanji": "有名な",
       "category": "na-adj,n"
     },
     {
@@ -8937,7 +8937,7 @@
       "meaning": "sport",
       "kana": "スポーツ",
       "kanji": "",
-      "category": "n"
+      "category": "n,vs"
     },
     {
       "uuid": "48d2f7e8-9b9e-4e84-8268-8ac85b5deb56",

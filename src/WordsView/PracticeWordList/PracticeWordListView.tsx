@@ -4,7 +4,7 @@ import {PracticeWordListViewResult} from "./PracticeWordListViewResult";
 import {PracticeWordListViewOverview} from "./PracticeWordListViewOverview";
 import {availableWordLists, WordList} from "../../data/WordList";
 import {TrainerResult} from "./Trainer/TrainerResult";
-import {loadPracticeHistory, savePracticeHistory, updatePracticeHistory} from "../../data/PracticeHistory";
+import {loadPracticeHistory, savePracticeHistory, updatePracticeHistory} from "../../data/Storage/PracticeHistory";
 import {DebugContext} from "../Contexts";
 import {availableWords} from "../../data/Word";
 

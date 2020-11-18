@@ -1,13 +1,8 @@
-import {Word, WordTypeV2} from "./Word";
-import {WordList} from "./WordList";
+import {WordType} from "../Word";
+import {WordList} from "../WordList";
 import {shuffle} from "lodash";
 
 const TIME_FACTOR = 24 * 60 * 60 * 1000;
-
-type WordHistory = {
-  nextPracticeDate: string,
-  nPractices: number
-}
 
 type WordHistoryV2 = {
   nextPracticeDate: string,
@@ -91,10 +86,10 @@ export const savePracticeHistory = (practiceHistory: PracticeHistory) => {
   localStorage.setItem(keyName, JSON.stringify(practiceHistory));
 };
 
-export const chooseWordsToPractice = (wordList: WordList, practiceHistory: PracticeHistory, quantity: number): WordTypeV2[] => {
+export const chooseWordsToPractice = (wordList: WordList, practiceHistory: PracticeHistory, quantity: number): WordType[] => {
   const words = shuffle(wordList.words);
-  const untouchedWords = [] as WordTypeV2[];
-  const result = [] as WordTypeV2[];
+  const untouchedWords = [] as WordType[];
+  const result = [] as WordType[];
   for (let word of words) {
     const wordId = word.uuid;
     const wordHistory = practiceHistory.wordsHistory[wordId];

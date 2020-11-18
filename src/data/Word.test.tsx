@@ -1,5 +1,5 @@
 import React from 'react';
-import {detectParts, Word} from "./Word";
+import {detectParts} from "./Word";
 
 test("test of furigana creation", () => {
   const data = [

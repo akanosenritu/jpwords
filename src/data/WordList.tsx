@@ -1,10 +1,10 @@
-import {prepareWordV2, WordTypeV2} from "./Word";
+import {prepareWordV2, WordType} from "./Word";
 import wordListN4 from "./wordlist-N4[1].json";
 import wordListN5 from "./wordlist-N5[1].json";
 
 export type WordList = {
   name: string,
-  words: WordTypeV2[],
+  words: WordType[],
   version: number,
   description: string,
   wordCount: number

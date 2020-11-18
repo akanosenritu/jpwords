@@ -1,14 +1,15 @@
 import React, {useContext, useState} from "react";
-import {WordTypeV2} from "../../../data/Word";
+import {WordType} from "../../../data/Word";
 import {Box, LinearProgress} from "@material-ui/core";
 import {sample} from "lodash";
 import {PracticeWordWithInput} from "../../../PracticeMethods/PracticeWordWithInput";
 import {DebugContext} from "../../Contexts";
+import {WordNotes} from "../../../data/WordNotes/WordNote";
 
 type PracticeViewBaseProps = {
-    words: WordTypeV2[],
+    words: WordType[],
     reversed: boolean,
-    finishPractice: (wordsDone: WordTypeV2[], practiceQualities: number[]) => void
+    finishPractice: (wordsDone: WordType[], practiceQualities: number[]) => void
 }
 
 export const Trainer2: React.FC<PracticeViewBaseProps> = props => {
@@ -54,6 +55,7 @@ export const Trainer2: React.FC<PracticeViewBaseProps> = props => {
     return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
         <LinearProgress variant={"determinate"} style={{width: "100%"}} value={numberDoneWords * 100 / props.words.length}/>
         <PracticeWordWithInput word={word} onNext={onNext} />
+        <WordNotes word={word}/>
         {isDebugging && <div>
             <p>DEBUG INFORMATION: Word Queue</p>
             {wordQueue.map((wordNum, index) => {
