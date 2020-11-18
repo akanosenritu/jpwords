@@ -51,12 +51,11 @@ export const updatePracticeHistory = (practiceHistory: PracticeHistory, wordIdsP
       updatedWordsHistory[wordIdPracticed].nextPracticeDate = calculateNextPracticeDate(newStrength, updatedWordsHistory[wordIdPracticed].nPractices, TIME_FACTOR).toISOString();
     } else {
       const strength = calculateStrength(2.5, practiceQuality);
-      const wordHistory: WordHistoryV2 = {
+      updatedWordsHistory[wordIdPracticed] = {
         strength: strength,
         nPractices: 1,
         nextPracticeDate: calculateNextPracticeDate(strength, 1, TIME_FACTOR).toISOString()
       };
-      updatedWordsHistory[wordIdPracticed] = wordHistory;
     }
   })
   const newHistory = practiceHistory;

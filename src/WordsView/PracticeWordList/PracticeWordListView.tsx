@@ -13,7 +13,7 @@ type PracticeWordListViewState = "start" | "practice" | "end"
 export const PracticeWordListView: React.FC = () => {
   const [currentState, setCurrentState] = useState<PracticeWordListViewState>("start");
   const [wordListToPractice, setWordListToPractice] = useState<WordList>(availableWordLists[0]);
-  const [practiceHistory, setPracticeHistory] = useState(loadPracticeHistory());
+  const [practiceHistory] = useState(loadPracticeHistory());
   const startPractice = (wordList: WordList) => {
     setWordListToPractice(wordList);
     setCurrentState("practice");

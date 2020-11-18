@@ -1,9 +1,8 @@
 import wordNotesContentURL from "./wordNotesContent.md";
 import ReactMarkDown from "react-markdown";
 import React, {useContext, useEffect, useState} from "react";
-import {Box, Button, FormControlLabel, Typography} from "@material-ui/core";
+import {Box, Button, Typography} from "@material-ui/core";
 import wordNotesData from "./wordNotes.json";
-import {Checkbox} from "@material-ui/core";
 import {WordType} from "../Word";
 import {UserPreferenceContext} from "../../WordsView/Contexts";
 import {saveUserPreference} from "../Storage/UserPreference";
@@ -89,7 +88,7 @@ const WordNote: React.FC<WordNoteProps> = (props) => {
   }
   useEffect(() => {
     getWordNoteContent(props.wordNote.id).then(content => setContent(content));
-  }, []);
+  }, [content, props.wordNote.id, setContent]);
   return <Box m={1}>
     <p style={{borderLeft: "3px solid lightgray", paddingLeft: 10}} onClick={()=>updateWordNoteHiddenStatus(!wordNoteHiddenStatus)}>
       <Typography variant={"subtitle1"}>{props.wordNote.title.toUpperCase()}</Typography>

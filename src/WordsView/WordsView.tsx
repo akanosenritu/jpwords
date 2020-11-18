@@ -8,7 +8,7 @@ import {
 import {PracticeWordListView} from "./PracticeWordList/PracticeWordListView";
 import {DebugContext} from "./Contexts";
 
-export const WordsView: React.FC = props => {
+export const WordsView: React.FC = () => {
   const match = useRouteMatch();
   const location = useLocation();
   const params = new URLSearchParams(location.search.substring(1));

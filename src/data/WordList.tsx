@@ -11,14 +11,13 @@ export type WordList = {
 }
 
 const loadWordListVersion1 = (target: any) => {
-  const wordList = {
+  return {
     name: target.name,
     version: target.version,
     description: target.description,
     wordCount: target.wordCount,
     words: prepareWordV2(target.words)
-  } as WordList;
-  return wordList
+  } as WordList
 };
 
 export const availableWordLists = [loadWordListVersion1(wordListN5), loadWordListVersion1(wordListN4)];
