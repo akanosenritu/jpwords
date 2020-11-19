@@ -37,6 +37,23 @@ export type WordType = {
   meaning: string
 }
 
+export const wordTypeExamples = [
+  {
+    uuid: "6a9b3e61-1eeb-47a2-82ce-31879476770f",
+    kanji: "例",
+    kana: "れい",
+    category: ["n"] as Category[],
+    meaning: "example"
+  },
+  {
+    uuid: "22d662b7-98a9-4ef6-b8b7-1763d33f2e2d",
+    kanji: "意味",
+    kana: "いみ",
+    category: ["vs"] as Category[],
+    meaning: "meaning"
+  }
+]
+
 const isAlphabet = (letter: string) => {
   const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
     "abcdefghijklmnopqrstuvwxyz";
