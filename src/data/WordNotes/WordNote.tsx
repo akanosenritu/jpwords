@@ -64,6 +64,7 @@ const getWordNoteContent = async (wordNoteId: string) => {
   if (!wordNotesContentsData) {
      wordNotesContentsData = await getWordNotesContentData();
   }
+  console.log("wordnotescontentdata", wordNotesContentsData)
   return wordNotesContentsData[wordNoteId];
 }
 
