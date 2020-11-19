@@ -1,4 +1,4 @@
-!!!:8633b8c3-5130-4ac7-b866-cd2f50974bdc
+!!!:8633b8c3-5130-4ac7-b866-cd2f50974bdc:!!!
 
 There are many train types in Japanese railway. The order given below is just a general guideline since it may vary depending on the train company.
 
@@ -7,7 +7,7 @@ There are many train types in Japanese railway. The order given below is just a 
 * 急行 (きゅうこう, "express") will skip many stations. Whether they require a special ticket depends on the train company. For JR trains, it is required.
 * 特急 (とっきゅう, "special express") will skip most stations. Usually they require a special ticket.
 
-!!!:fb5ab47a-10cf-4c31-9435-fbe1a4442145
+!!!:fb5ab47a-10cf-4c31-9435-fbe1a4442145:!!!
 
 する (to do) is the most basic verb in Japanese and it has many its own meanings. In addition to them, する can be used to make a compound verb from nouns of action. For example:
 * 勉強 (べんきょう, study) + する => 勉強する (to study)

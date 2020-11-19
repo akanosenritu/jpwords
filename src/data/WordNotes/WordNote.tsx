@@ -53,9 +53,9 @@ const getWordNotesContentData = async () => {
   const contentsData = await fetch(wordNotesContentURL).then(res => res.text());
   const result: {[key: string]: string} = {};
   contentsData.split("!!!:").forEach(contentData => {
-    const split = contentData.split("\r\n");
+    const split = contentData.split(":!!!");
     const id = split[0]
-    result[id] = split.slice(1).join("\n");
+    result[id] = split[1];
   })
   return result;
 }
