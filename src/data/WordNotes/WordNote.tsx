@@ -64,12 +64,6 @@ const getWordNoteContent = async (wordNoteId: string) => {
   if (!wordNotesContentsData) {
      wordNotesContentsData = await getWordNotesContentData();
   }
-  console.log(wordNotesContentsData);
-  console.log(wordNoteId);
-  console.log(wordNotesContentsData[wordNoteId]);
-  for (let i in wordNotesContentsData) {
-    console.log(i, i === wordNoteId);
-  }
   return wordNotesContentsData[wordNoteId];
 }
 
@@ -87,7 +81,10 @@ const WordNote: React.FC<WordNoteProps> = (props) => {
     saveUserPreference(userPreference);
   }
   useEffect(() => {
-    getWordNoteContent(props.wordNote.id).then(content => setContent(content));
+    getWordNoteContent(props.wordNote.id).then(content => {
+      console.log(content);
+      setContent(content)
+    });
   }, [content, props.wordNote.id, setContent]);
   return <Box m={1}>
     <p style={{borderLeft: "3px solid lightgray", paddingLeft: 10}} onClick={()=>updateWordNoteHiddenStatus(!wordNoteHiddenStatus)}>

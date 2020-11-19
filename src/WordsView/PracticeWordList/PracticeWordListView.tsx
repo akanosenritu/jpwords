@@ -21,7 +21,7 @@ export const PracticeWordListView: React.FC = () => {
   const saveProgress = (practiceResult: TrainerResult) => {
     savePracticeHistory(updatePracticeHistory(practiceHistory, practiceResult.wordsDone.map(word => word.uuid), practiceResult.practiceQualities))
   };
-  const [practiceResult, setPracticeResult] = useState();
+  const [practiceResult, setPracticeResult] = useState<TrainerResult|null>(null);
   const finishPractice = (practiceResult: TrainerResult) => {
     saveProgress(practiceResult);
     setPracticeResult(practiceResult);
@@ -41,6 +41,6 @@ export const PracticeWordListView: React.FC = () => {
   return <div>
     {currentState === "start" && <PracticeWordListViewOverview startPractice={startPractice}/>}
     {currentState === "practice" && <PracticeWordListViewDoPractice wordListToPractice={wordListToPractice} finishPractice={finishPractice}/>}
-    {currentState === "end" && <PracticeWordListViewResult practiceResult={practiceResult} wordList={wordListToPractice} continuePractice={continuePractice}/>}
+    {currentState === "end" && practiceResult && <PracticeWordListViewResult practiceResult={practiceResult} wordList={wordListToPractice} continuePractice={continuePractice}/>}
   </div>
 };
