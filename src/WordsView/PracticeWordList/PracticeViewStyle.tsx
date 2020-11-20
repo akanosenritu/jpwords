@@ -11,5 +11,5 @@ export const usePracticeViewStyles = makeStyles({
     minWidth: 275,
     textAlign: "left",
     backgroundColor: "#f2f2f2"
-  }
+  },
 });

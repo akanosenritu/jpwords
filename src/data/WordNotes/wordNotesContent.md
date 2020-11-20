@@ -18,3 +18,23 @@ Most of the time these nouns can be used as the direct object of する.
 * 勉強をする = 勉強する
 * 案内をする = 案内する
 * サッカーをする = サッカーする
+
+!!!:3afe3d68-7075-409b-9948-425f7a05e27f:!!!
+
+Japanese date expressions are like this:
+
+* 一昨々日 (さきおととい): 3 days ago, seldom used.
+* 一昨日 (おととい): the day before yesterday, 2 days ago.
+* 昨日 (きのう): yesterday.
+* 今日 (きょう、こんにち): today. The expression of "こんにちは" (hello) comes from the abbreviation of "今日はご機嫌いががですか" (how are you today?). 
+* 明日 (あした): tomorrow.
+* 明後日 (あさって): the day after tomorrow, 2 days later.
+* 明々後日 (しあさって): 3 days later.
+
+You can also use "～日前" (～にちまえ, "~days ago") and "～日後" (~にちご, "~days after").
+* 15日前 (じゅうご-にちまえ, "15 days ago")
+* 30日後 (さんじゅう-にちご, "30 days later)
+
+Numbers 2 to 10 need special care reading them however, since for example "2日" is "ふつか", not "ににち".
+* 2日前 (ふつかまえ, "2 days ago")
+* 10日後 (とおかご, "10 days later") 

@@ -11,9 +11,15 @@
       "id": "fb5ab47a-10cf-4c31-9435-fbe1a4442145"
     },
     {
-      "associatedCategories": ["n"],
-      "title": "TEST DUMMY",
-      "id": "fb5ab47a-10cf-4c31-9435-fbe1a4442145"
+      "associatedWords": [
+        "0617ad18-1ed1-426e-812a-94a6e8574f29",
+        "c9ae256f-1f1c-4dc0-964d-9bcb33ccf912",
+        "fc4918db-4c74-4e27-9240-1674004a19fe",
+        "f0916aae-9810-4201-8b05-13f5efd1f043",
+        "78afaed4-875e-4394-ba8d-f7294ed8f827"
+      ],
+      "title": "Yesterday, today, tomorrow",
+      "id": "3afe3d68-7075-409b-9948-425f7a05e27f"
     }
   ]
 }

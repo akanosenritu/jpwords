@@ -51,28 +51,28 @@
     },
     {
       "uuid": "75c143ba-86bb-48da-a006-e4870934ce02",
-      "meaning": "blue",
+      "meaning": "blue (noun)",
       "kana": "あお",
       "kanji": "青",
       "category": "n"
     },
     {
       "uuid": "b3138f63-b2f8-475a-9cae-d042b154ea80",
-      "meaning": "blue",
+      "meaning": "blue (adjective)",
       "kana": "あおい",
       "kanji": "青い",
       "category": "adj"
     },
     {
       "uuid": "73ec6476-28c5-4797-b4e7-e4de8d211518",
-      "meaning": "red",
+      "meaning": "red (noun)",
       "kana": "あか",
       "kanji": "赤",
       "category": "n"
     },
     {
       "uuid": "9044cb53-0cb9-48c0-8b1e-a132be330cb5",
-      "meaning": "red",
+      "meaning": "red (adjective)",
       "kana": "あかい",
       "kanji": "赤い",
       "category": "adj"
@@ -81,7 +81,7 @@
       "uuid": "5bc3dde3-194b-451c-a12f-2c337e93c601",
       "meaning": "baby, infant",
       "kana": "あかちゃん",
-      "kanji": "",
+      "kanji": "赤ちゃん",
       "category": "n"
     },
     {
@@ -172,7 +172,7 @@
       "uuid": "78afaed4-875e-4394-ba8d-f7294ed8f827",
       "meaning": "day after tomorrow",
       "kana": "あさって",
-      "kanji": "",
+      "kanji": "明後日",
       "category": "n-adv,n-t"
     },
     {
@@ -6589,7 +6589,7 @@
     },
     {
       "uuid": "a5f3e301-303c-424e-a0e7-ebadbbc546bc",
-      "meaning": "(one's own) mother",
+      "meaning": "mother",
       "kana": "はは",
       "kanji": "母",
       "category": "n"

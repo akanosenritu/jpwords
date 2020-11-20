@@ -29,10 +29,11 @@ type StartPracticeByWordListProps = {
 }
 
 const StartPracticeByWordList: React.FC<StartPracticeByWordListProps> = (props) => {
-  const classes = usePracticeViewStyles();
-  return <Box className={classes.startPractice} mt={2} mx={1} p={1}>
-    <Typography variant={"h6"}>Word Lists</Typography>
-    <Box mt={2} >
+  return <Box mt={2} mx={1} p={1}>
+    <Box style={{borderLeft: "2px solid lightgray", paddingLeft: 10}}>
+      <Typography variant={"h6"}>General Word Lists</Typography>
+    </Box>
+    <Box mt={2} ml={2}>
       {availableWordLists.map(wordList => {
         return <StartPracticeByWordListCard wordList={wordList} onClickStart={props.startPractice} key={wordList.name} />
       })}
@@ -45,9 +46,7 @@ type PracticeWordListViewOverviewProps = {
 }
 
 export const PracticeWordListViewOverview: React.FC<PracticeWordListViewOverviewProps> = (props) => {
-  const classes = usePracticeViewStyles();
-  return <Box className={classes.startPractice} mx={1} mt={2} p={1}>
-    <Typography variant={"h5"}>Welcome</Typography>
+  return <Box mx={1} mt={2} p={1}>
     <StartPracticeByWordList startPractice={props.startPractice}/>
   </Box>
 };
