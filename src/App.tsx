@@ -5,7 +5,6 @@ import {
   Switch,
   Route,
   Redirect,
-  useLocation
 } from "react-router-dom";
 import {WordsView} from "./WordsView/WordsView";
 import {UserPreferenceContext} from "./WordsView/Contexts";

@@ -1,7 +1,7 @@
 {
   "name": "N5",
   "version": 1,
-  "description": "N5 word list retrieved from https://jlptstudy.net/N5/?vocab-list",
+  "description": "Based on N5 word list retrieved from https://jlptstudy.net/N5/?vocab-list",
   "wordCount": 727,
   "words": [
     "87fc785c-7ceb-453c-8b0a-2a12afeccf1d",

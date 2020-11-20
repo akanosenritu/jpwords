@@ -160,3 +160,9 @@ export const isPossibleToMakeVerbWithSuru = (word: WordType) => {
   }
   return false
 }
+
+export const searchWords = (searchString: string) => {
+  return Object.values(availableWords).filter(word => {
+    return word.kana === searchString || word.kanji === searchString
+  });
+};
