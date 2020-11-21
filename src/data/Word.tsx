@@ -38,101 +38,6 @@ export type WordType = {
   similarWordUUIDs?: string[]
 }
 
-export const wordTypeExamples = [
-  {
-    uuid: "6a9b3e61-1eeb-47a2-82ce-31879476770f",
-    kanji: "例",
-    kana: "れい",
-    category: ["n"] as Category[],
-    meaning: "example"
-  },
-  {
-    uuid: "22d662b7-98a9-4ef6-b8b7-1763d33f2e2d",
-    kanji: "意味",
-    kana: "いみ",
-    category: ["vs"] as Category[],
-    meaning: "meaning",
-    similarWordUUIDs: ["6a9b3e61-1eeb-47a2-82ce-31879476770f"]
-  },
-  {
-    uuid: "8e41dff0-81ca-4e70-b2dd-9116b8679642",
-    meaning: "ten",
-    kana: "じゅう",
-    kanji: "十",
-    category: ["num"] as Category[],
-    similarWordUUIDs: [
-      "dcd0fca7-6c70-4cc1-9998-2df8b7977b11"
-    ]
-  }
-]
-
-const isAlphabet = (letter: string) => {
-  const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-    "abcdefghijklmnopqrstuvwxyz";
-  return Array.from(alphabets).includes(letter)
-};
-
-const isSymbol = (letter: string) => {
-  const symbols = "!\"#$%&'()`|^-=~\\@[{]}:*;+,.<>/?" +
-    "！”＃＄％＆’（）￥＾｜～ー＝＠｀「｛；＋：＊」｝、＜。＞・？";
-  return Array.from(symbols).includes(letter)
-};
-
-const isLetterNoFurigana = (letter: string) => {
-  return isHiragana(letter) || isSymbol(letter) || isAlphabet(letter)
-};
-
-type Part = {
-  main: string
-  furigana: string | null
-}
-
-export const detectParts = (kanji: string, kana: string) => {
-  if (kanji.length < 1) throw new Error();
-  const kanjiLetters = Array.from(kanji);
-  let res: Part[] = [];
-  if (kanji){
-    let posKana = 0;
-    let kanjiLetter = kanjiLetters.shift();
-    if (kanjiLetter === undefined) throw new Error("the argument kanji must not be an empty string");
-    let partMain = "";
-    while (true) {
-      if (kanjiLetter && partMain && isLetterNoFurigana(kanjiLetter)) {
-        let posKanaPartEnd = kana.indexOf(kanjiLetter, posKana);
-        res.push({
-          // @ts-ignore
-          main: partMain,
-          furigana: kana.slice(posKana, posKanaPartEnd)
-        });
-        partMain = "";
-        posKana = posKanaPartEnd;
-      } else {
-        // @ts-ignore
-        partMain += kanjiLetter;
-      }
-      if (kanjiLetter && kanjiLetter === kana[posKana]) {
-        res.push({
-          main: kanjiLetter,
-          furigana: null
-        });
-        posKana += 1;
-        partMain = "";
-      }
-      kanjiLetter = kanjiLetters.shift();
-      if (kanjiLetter === undefined) {
-        if (partMain) {
-          res.push({
-            main: partMain,
-            furigana: kana.slice(posKana)
-          })
-        }
-        break
-      }
-    }
-    return res;
-  }
-};
-
 type DisplayWordWithFuriganaProps = {
   word: WordType
 }
@@ -167,7 +72,7 @@ export const isPossibleToMakeVerbWithSuru = (word: WordType) => {
   return word.category.includes("vs")
 }
 
-const isAnswerCorrect = (word: WordType, answer: string): boolean => {
+export const isAnswerCorrect = (word: WordType, answer: string): boolean => {
   if (word.kana) {
     if (word.kana.replace("～", "") === answer) {
       return true

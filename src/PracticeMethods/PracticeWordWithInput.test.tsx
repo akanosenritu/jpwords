@@ -2,7 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import {PracticeWordWithInput} from "./PracticeWordWithInput";
-import {availableWords, isPossibleToMakeVerbWithSuru, wordTypeExamples} from "../data/Word";
+import {availableWords} from "../data/Word";
+import {wordTypeExamples} from "../data/Word.test";
 
 describe("test inputs", () => {
   let word = wordTypeExamples[0];
@@ -76,8 +77,6 @@ describe("test inputs", () => {
         userEvent.type(screen.getByRole("textbox"), "{enter}");
         expect(mockOnNext.mock.calls.length).toBe(1);
         expect(mockOnNext.mock.calls[0][0]).toBe(true);
-      } else {
-        console.log(word, word.similarWordUUIDs);
       }
     })
 
