@@ -1,11 +1,10 @@
 import React from "react";
 import * as wanakana from "wanakana";
-import {isHiragana} from "wanakana";
 import {fit} from "furigana";
 import wordData from "./words.json";
 
 const prepareAvailableWords = () => {
-  let availableWords: {[key:string]: any} = {};
+  let availableWords: { [key: string]: WordType } = {};
   for (let wordDatum of wordData.words) {
     const word: WordType = {
       uuid: wordDatum.uuid,
@@ -21,10 +20,12 @@ const prepareAvailableWords = () => {
 
 export const availableWords = prepareAvailableWords();
 
-export const categoryList = ['adj-pn', 'u-v-i', 'adj', 'vt', 'vk', 'number', 'n-temp', 'conj', 'n-adv',
-                              'n-t', 'adj-no', 'u-v', 'vs', 'int', 'n col', 'pref', 'vs-i', 'exp', 'expr', 'gn',
-                              'kana only', 'adv', 'suf', 'no-adj', 'p-suru', 'vi', 'n', 'ru-v', 'na-adj', 'num',
-                              'uk', 'n-suf', 'v5n', 'gn-adv', 'prt', 'pren-adj', 'prefix', ''] as const;
+export const categoryList = [
+  '', ' intrans-verb', ' na-adj', ' vs', 'adj', 'adj-na', 'adj-no', 'adj-pn', 'adjn', 'adv', 'aru-v', 'conj', 'exp', 'expr',
+  'giku n', 'gn', 'gn-adv', 'int', 'int-n', 'kana only', 'n', 'n col', 'n-adv', 'n-suf', 'n-t', 'n-temp', 'na-adj', 'no--adj',
+  'no-adj', 'num', 'number', 'p-suru', 'pref', 'prefix', 'pren-adj', 'prt', 'ru-v', 'suf', 'u-v', 'u-v-i', 'uk', 'v5b', 'v5n',
+  'vi', 'vk', 'vs', 'vs-i', 'vt'
+] as const;
 
 type CategoryTuple = typeof categoryList;
 export type Category = CategoryTuple[number];

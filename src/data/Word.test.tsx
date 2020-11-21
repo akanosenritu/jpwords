@@ -1,5 +1,6 @@
-import {Category, evaluateAnswer, isAnswerCorrect} from "./Word";
-
+import {availableWords, Category, categoryList, evaluateAnswer, isAnswerCorrect} from "./Word";
+import {availableWordLists, WordList} from "./WordList";
+import wordData from "./words.json";
 
 export const wordTypeExamples = [
   {
@@ -14,18 +15,14 @@ export const wordTypeExamples = [
     kanji: "意味",
     kana: "いみ",
     category: ["vs"] as Category[],
-    meaning: "meaning",
-    similarWordUUIDs: ["6a9b3e61-1eeb-47a2-82ce-31879476770f"]
+    meaning: "meaning"
   },
   {
     uuid: "8e41dff0-81ca-4e70-b2dd-9116b8679642",
     meaning: "ten",
     kana: "じゅう",
     kanji: "十",
-    category: ["num"] as Category[],
-    similarWordUUIDs: [
-      "dcd0fca7-6c70-4cc1-9998-2df8b7977b11"
-    ]
+    category: ["num"] as Category[]
   },
   {
     uuid: "6a45ac20-d511-4931-9c75-eabd682a5ef5",
@@ -58,7 +55,43 @@ describe("test WordType related functions", () => {
     expect(evaluateAnswer(word2, "じゅう")).toBe("CORRECT");
     expect(evaluateAnswer(word2, "十")).toBe("CORRECT");
     expect(evaluateAnswer(word2, "まちがい")).toBe("WRONG");
-    expect(evaluateAnswer(word2, "とう")).toBe("CORRECT, BUT NOT WHAT I EXPECTED");
   })
 })
 
+describe("test integrity of word.json", () => {
+  test("confirm the uuid of a word is unique", () => {
+    let counts: {[wordUUID: string]: number} = {};
+    for (let wordDatum of wordData.words) {
+      if (counts[wordDatum.uuid]) counts[wordDatum.uuid] += 1
+      else counts[wordDatum.uuid] = 1
+    }
+    for (let wordUUID in counts) {
+      expect(counts[wordUUID]).toBe(1);
+    }
+  })
+
+  test.each(availableWordLists)("confirm every word in the word list is present in words.json", (wordList: WordList) => {
+    for (let word of wordList.words) {
+      expect(word).toBeDefined();
+    }
+  })
+
+  test("confirm the category of a word is included in the category list", () => {
+    for (let wordUUID in availableWords) {
+      const word = availableWords[wordUUID];
+      for (let category of word.category) {
+        expect(categoryList.includes(category)).toBe(true);
+      }
+    }
+  })
+
+  test("confirm the similarWordUUIDs of a word is a valid reference", () => {
+    for (let wordUUID in availableWords) {
+      const word = availableWords[wordUUID];
+      if (!word.similarWordUUIDs) return
+      for (let similarWordUUID of word.similarWordUUIDs) {
+        expect(availableWords.hasOwnProperty(similarWordUUID)).toBe(true);
+      }
+    }
+  })
+})
