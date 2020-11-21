@@ -1,5 +1,5 @@
 import React from 'react';
-import {detectParts} from "./Word";
+import {detectParts, evaluateAnswer, wordTypeExamples} from "./Word";
 
 test("test of furigana creation", () => {
   const data = [
@@ -21,3 +21,15 @@ test("test of furigana creation", () => {
   });
   expect(() => {detectParts("", "")}).toThrow();
 });
+
+test("test evaluateAnswer()", () => {
+  const word = wordTypeExamples[0];
+  expect(evaluateAnswer(word, "れい")).toBe("CORRECT");
+  expect(evaluateAnswer(word, "例")).toBe("CORRECT");
+  expect(evaluateAnswer(word, "まちがい")).toBe("WRONG");
+  const word2 = wordTypeExamples[2];
+  expect(evaluateAnswer(word2, "じゅう")).toBe("CORRECT");
+  expect(evaluateAnswer(word2, "十")).toBe("CORRECT");
+  expect(evaluateAnswer(word2, "まちがい")).toBe("WRONG");
+  expect(evaluateAnswer(word2, "とう")).toBe("CORRECT, BUT NOT WHAT I EXPECTED");
+})

@@ -34,7 +34,8 @@ export type WordType = {
   kanji: string,
   kana: string,
   category: Category[],
-  meaning: string
+  meaning: string,
+  similarWordUUIDs?: string[]
 }
 
 export const wordTypeExamples = [
@@ -50,7 +51,18 @@ export const wordTypeExamples = [
     kanji: "意味",
     kana: "いみ",
     category: ["vs"] as Category[],
-    meaning: "meaning"
+    meaning: "meaning",
+    similarWordUUIDs: ["6a9b3e61-1eeb-47a2-82ce-31879476770f"]
+  },
+  {
+    uuid: "8e41dff0-81ca-4e70-b2dd-9116b8679642",
+    meaning: "ten",
+    kana: "じゅう",
+    kanji: "十",
+    category: ["num"] as Category[],
+    similarWordUUIDs: [
+      "dcd0fca7-6c70-4cc1-9998-2df8b7977b11"
+    ]
   }
 ]
 
@@ -152,9 +164,23 @@ export const prepareWordV2: (arr: string[]) => WordType[] = arr => {
 }
 
 export const isPossibleToMakeVerbWithSuru = (word: WordType) => {
-  const categories = word.category;
-  for (let category of categories) {
-    if (category === "vs") {
+  return word.category.includes("vs")
+}
+
+const isAnswerCorrect = (word: WordType, answer: string): boolean => {
+  if (word.kana) {
+    if (word.kana.replace("～", "") === answer) {
+      return true
+    }
+    if (word.kana === answer) {
+      return true
+    }
+  }
+  if (word.kanji) {
+    if (word.kanji.replace("～", "") === answer) {
+      return true
+    }
+    if (word.kanji === answer) {
       return true
     }
   }
@@ -166,3 +192,23 @@ export const searchWords = (searchString: string) => {
     return word.kana === searchString || word.kanji === searchString
   });
 };
+
+type answerEvaluationResultType = "CORRECT" | "CORRECT, BUT NOT WHAT I EXPECTED" | "WRONG"
+
+export const evaluateAnswer = (word: WordType, answer: string): answerEvaluationResultType => {
+  if (isAnswerCorrect(word, answer)) {
+    return "CORRECT";
+  }
+  let words = [];
+  if (word.similarWordUUIDs) {
+    for (let similarWordUUID of word.similarWordUUIDs) {
+      words.push(availableWords[similarWordUUID]);
+    }
+  }
+  for (let wordCandidate of words) {
+    if (isAnswerCorrect(wordCandidate, answer)) {
+      return "CORRECT, BUT NOT WHAT I EXPECTED"
+    }
+  }
+  return "WRONG"
+}

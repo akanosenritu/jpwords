@@ -1,5 +1,5 @@
 import React, {ChangeEvent,  useState, useMemo} from "react";
-import {DisplayWordWithFurigana, isPossibleToMakeVerbWithSuru, WordType} from "../data/Word";
+import {DisplayWordWithFurigana, evaluateAnswer, isPossibleToMakeVerbWithSuru, WordType} from "../data/Word";
 import {Box, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
@@ -40,7 +40,7 @@ type PracticeWithInputProps = {
   onNext: (wasCorrect: boolean) => void,
 }
 
-type PracticeWithInputStatusType = "CORRECT" | "WRONG" | ""
+type PracticeWithInputStatusType = "CORRECT INPUT" | "SIMILAR INPUT" | "WRONG INPUT" | ""
 
 export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) => {
   const [answer, setAnswer] = useState("");
@@ -51,60 +51,51 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
   const isKatakana = useMemo(() => wanakana.isKatakana(props.word.kana), [props.word.kana]);
   const onChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
     const newAnswer = isKatakana? wanakana.toKatakana(event.currentTarget.value, {IMEMode: true}): wanakana.toHiragana(event.currentTarget.value, {IMEMode: true});
-    if (isAnswerCorrect(newAnswer) && !isComposing) {
+    const evaluation = evaluateAnswer(props.word, newAnswer);
+    if (evaluation === "CORRECT" && !isComposing) {
       onCorrectlyAnswered();
     }
-    if (status !== "CORRECT") {
+    if (status !== "CORRECT INPUT") {
       setAnswer(newAnswer);
     }
   }
   const onKeyboardEvent2 = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && !event.nativeEvent.isComposing) {
       event.preventDefault();
-      if (status === "WRONG") {
+      if (status === "WRONG INPUT" || status === "SIMILAR INPUT") {
         onNext(false)
-      } else if (status === "CORRECT") {
+      } else if (status === "CORRECT INPUT") {
         onNext(!didAnswerWrongly)
       } else {
-        if (isAnswerCorrect(answer)) {
+        const evaluation = evaluateAnswer(props.word, answer);
+        if (evaluation === "CORRECT") {
           onCorrectlyAnswered()
+        } else if (evaluation === "CORRECT, BUT NOT WHAT I EXPECTED") {
+          onSimilarlyAnswered();
         } else {
           onWronglyAnswered();
         }
       }
     }
   }
-  const isAnswerCorrect = (answer: string): boolean => {
-    if (props.word.kana) {
-      if (props.word.kana.replace("～", "") === answer) {
-        return true
-      }
-      if (props.word.kana === answer) {
-        return true
-      }
-    }
-    if (props.word.kanji) {
-      if (props.word.kanji.replace("～", "") === answer) {
-        return true
-      }
-      if (props.word.kanji === answer) {
-        return true
-      }
-    }
-    return false
-  }
   const onCompositionEnd = () => {
     setIsComposing(false);
-    if (isAnswerCorrect(answer)) {
+    const evaluation = evaluateAnswer(props.word, answer);
+    if (evaluation === "CORRECT") {
       onCorrectlyAnswered();
+    } else if (evaluation === "CORRECT, BUT NOT WHAT I EXPECTED") {
+      onSimilarlyAnswered();
     }
   }
   const onCorrectlyAnswered = () => {
-    setStatus("CORRECT");
+    setStatus("CORRECT INPUT");
+  }
+  const onSimilarlyAnswered = () => {
+    setStatus("SIMILAR INPUT");
   }
   const onWronglyAnswered = () => {
     setDidAnswerWrongly(true);
-    setStatus("WRONG");
+    setStatus("WRONG INPUT");
   }
   const onNext = (wasCorrect: boolean) => {
     setAnswer("");
@@ -113,20 +104,24 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
   };
   const getBackGroundColor = () => {
     switch (status) {
-      case "WRONG":
+      case "WRONG INPUT":
         return "#fffaf2"
-      case "CORRECT":
+      case "CORRECT INPUT":
         return "#e9fce9"
+      case "SIMILAR INPUT":
+        return "#ccffff"
       case "":
         return ""
     }
   }
   const getBorderColor = () => {
     switch (status) {
-      case "WRONG":
+      case "WRONG INPUT":
         return "#ffd899"
-      case "CORRECT":
+      case "CORRECT INPUT":
         return "#91ee91"
+      case "SIMILAR INPUT":
+        return "#99ffff"
       case "":
         return ""
     }
@@ -139,15 +134,15 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
       {status !== "" && <Typography variant={"h5"}><DisplayWordWithFurigana word={props.word} /></Typography>}
     </Box>
     <Box mt={4}>
-      <div className={styles.answerInputBox} style={{backgroundColor: getBackGroundColor(), borderColor: getBorderColor()}} key={props.word.meaning}>
+      <div className={styles.answerInputBox} style={{backgroundColor: getBackGroundColor(), borderColor: getBorderColor()}} key={`${props.word.meaning}-${status}`}>
         <input
           className={styles.answerInput} value={answer} onChange={onChangeEvent} placeholder={`translate ${props.word.meaning}`}
           autoFocus={true} onKeyPress={onKeyboardEvent2}
           onCompositionStart={()=>setIsComposing(true)} onCompositionEnd={onCompositionEnd}
           key={props.word.meaning}
         />
-        {status === "CORRECT" && <CheckIcon className={styles.answerInputIcon} />}
-        {status === "WRONG" && <ErrorOutlineIcon className={styles.answerInputIcon} style={{color: getBorderColor()}} />}
+        {status === "CORRECT INPUT" && <CheckIcon className={styles.answerInputIcon} />}
+        {status === "WRONG INPUT" && <ErrorOutlineIcon className={styles.answerInputIcon} style={{color: getBorderColor()}} />}
       </div>
     </Box>
     <Box>

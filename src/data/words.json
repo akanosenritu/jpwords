@@ -4058,7 +4058,10 @@
       "meaning": "ten",
       "kana": "じゅう",
       "kanji": "十",
-      "category": "num"
+      "category": "num",
+      "similarWordUUIDs": [
+        "dcd0fca7-6c70-4cc1-9998-2df8b7977b11"
+      ]
     },
     {
       "uuid": "18e00026-f727-4238-bd2a-6acd484b0f8f",
@@ -5584,7 +5587,10 @@
       "meaning": "ten",
       "kana": "とう",
       "kanji": "十",
-      "category": "num"
+      "category": "num",
+      "similarWordUUIDs": [
+        "8e41dff0-81ca-4e70-b2dd-9116b8679642"
+      ]
     },
     {
       "uuid": "0aeac782-1dd4-42a7-812b-d2748a08e241",
