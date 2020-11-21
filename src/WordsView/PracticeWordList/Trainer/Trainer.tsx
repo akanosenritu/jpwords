@@ -56,7 +56,7 @@ export const Trainer2: React.FC<PracticeViewBaseProps> = props => {
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
   return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
     <LinearProgress variant={"determinate"} style={{width: "100%"}} value={numberDoneWords * 100 / props.words.length}/>
-    <PracticeWordWithInput word={word} onNext={onNext}/>
+    <PracticeWordWithInput word={word} onNext={onNext} key={`${word.kanji}-${word.kana}-${word.meaning}`}/>
     <WordNotes word={word}/>
     <div>
       <Button size={"small"} onClick={()=>setIsDialogueOpen(!isDialogueOpen)}>
