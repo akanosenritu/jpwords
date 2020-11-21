@@ -16,31 +16,21 @@ export const PracticeWordListView: React.FC = () => {
   const [practiceHistory] = useState(loadPracticeHistory());
   const startPractice = (wordList: WordList) => {
     setWordListToPractice(wordList);
-    setCurrentState("practice");
+    setCurrentState("end");
   };
   const saveProgress = (practiceResult: TrainerResult) => {
     savePracticeHistory(updatePracticeHistory(practiceHistory, practiceResult.wordsDone.map(word => word.uuid), practiceResult.practiceQualities))
   };
-  const [practiceResult, setPracticeResult] = useState<TrainerResult|null>(null);
   const finishPractice = (practiceResult: TrainerResult) => {
     saveProgress(practiceResult);
-    setPracticeResult(practiceResult);
     setCurrentState("end");
   };
   const continuePractice = () => {
     setCurrentState("practice");
   };
-  const isDebugging = useContext(DebugContext);
-  if (isDebugging) {
-    console.log("showing wordsHistory");
-    for (let wordId in practiceHistory.wordsHistory) {
-      const word = availableWords[wordId];
-      console.log(word, practiceHistory.wordsHistory[wordId]);
-    }
-  }
   return <div>
     {currentState === "start" && <PracticeWordListViewOverview startPractice={startPractice}/>}
     {currentState === "practice" && <PracticeWordListViewDoPractice wordListToPractice={wordListToPractice} finishPractice={finishPractice}/>}
-    {currentState === "end" && practiceResult && <PracticeWordListViewResult practiceResult={practiceResult} wordList={wordListToPractice} continuePractice={continuePractice}/>}
+    {currentState === "end" && <PracticeWordListViewResult wordList={wordListToPractice} continuePractice={continuePractice}/>}
   </div>
 };

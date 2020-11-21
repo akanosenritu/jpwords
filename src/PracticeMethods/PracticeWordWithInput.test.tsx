@@ -28,6 +28,21 @@ describe("test inputs", () => {
       expect(parentElement).toHaveStyle(`background-color: #fffaf2`)
       userEvent.type(screen.getByRole("textbox"), "{enter}");
       expect(mockOnNext.mock.calls.length).toBe(1);
+      expect(mockOnNext.mock.calls[0][0]).toBe(false);
+    })
+
+    test("wrong answer input, enter pressed once, answer correctly, enter pressed.", () => {
+      userEvent.type(screen.getByRole("textbox"), "WRONG ANSWER");
+      userEvent.type(screen.getByRole("textbox"), "{enter}");
+      const parentElement = screen.getByRole("textbox").parentElement;
+      if (!parentElement) throw new Error("the parent of the input is null.")
+      expect(parentElement).toHaveStyle(`background-color: #fffaf2`)
+      userEvent.clear(screen.getByRole("textbox"));
+      userEvent.type(screen.getByRole("textbox"), word.kana);
+      expect(parentElement).toHaveStyle(`background-color: #e9fce9`)
+      userEvent.type(screen.getByRole("textbox"), "{enter}");
+      expect(mockOnNext.mock.calls.length).toBe(1);
+      expect(mockOnNext.mock.calls[0][0]).toBe(false);
     })
 
     test("correct answer with kana, enter pressed once", () => {
@@ -37,6 +52,7 @@ describe("test inputs", () => {
       expect(parentElement).toHaveStyle(`background-color: #e9fce9`)
       userEvent.type(screen.getByRole("textbox"), "{enter}");
       expect(mockOnNext.mock.calls.length).toBe(1);
+      expect(mockOnNext.mock.calls[0][0]).toBe(true);
     })
 
     test("correct answer with kanji, enter pressed once", () => {
@@ -46,6 +62,7 @@ describe("test inputs", () => {
       expect(parentElement).toHaveStyle(`background-color: #e9fce9`)
       userEvent.type(screen.getByRole("textbox"), "{enter}");
       expect(mockOnNext.mock.calls.length).toBe(1);
+      expect(mockOnNext.mock.calls[0][0]).toBe(true);
     })
 
     if (word.category.includes("vs")) {

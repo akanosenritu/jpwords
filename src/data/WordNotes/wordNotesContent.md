@@ -38,3 +38,10 @@ You can also use "～日前" (～にちまえ, "~days ago") and "～日後" (~�
 Numbers 2 to 10 need special care reading them however, since for example "2日" is "ふつか", not "ににち".
 * 2日前 (ふつかまえ, "2 days ago")
 * 10日後 (とおかご, "10 days later") 
+
+!!!:a58682a1-1f33-42cd-a3d3-11936ebe50c4:!!!
+
+どう and いかが have the almost same meaning of "how, in what way". The difference lies in the formality of the word. どう is more casual, and いかが is more formal. 
+
+* 天気はどうですか。(てんき-, "how is the weather?")
+* お天気はいかがですか。(おてんき-, the same meaning as above but in a more formal way. Note the honorary お before 天気.)

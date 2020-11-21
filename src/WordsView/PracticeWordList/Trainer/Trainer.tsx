@@ -45,10 +45,9 @@ export const Trainer2: React.FC<PracticeViewBaseProps> = props => {
       const currentWord = wordQueue[0];
       const newWordQueue = [...wordQueue.slice(1)];
       if (!wasCorrect) {
-        console.log("inserting");
         const pos = sample([2, 3, 4]) as number;
-        console.log(pos, currentWord);
         newWordQueue.splice(pos, 0, currentWord);
+        console.log(`the answer was not correct, therefore inserted ${props.words[currentWord].kanji} ${pos} words later. Current word queue is:`, newWordQueue);
       }
       return newWordQueue;
     })

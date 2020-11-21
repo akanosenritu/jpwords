@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type PracticeWordListViewResultProps = {
-    practiceResult: TrainerResult,
     wordList: WordList,
     continuePractice: () => void
 }
@@ -43,7 +42,7 @@ export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProp
             continue
         }
         const nextPracticeDate = new Date(wordHistory.nextPracticeDate);
-        if (nextPracticeDate.getTime() - Date.now()) {
+        if (nextPracticeDate.getTime() - Date.now() > 0) {
             countReviewed += 1
         } else {
             countNeedsReview += 1

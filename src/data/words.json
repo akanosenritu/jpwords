@@ -4601,7 +4601,7 @@
     },
     {
       "uuid": "7db5c818-8d04-407d-a554-39a70fe3f3e2",
-      "meaning": "that",
+      "meaning": "that (adj.)",
       "kana": "その",
       "kanji": "",
       "category": "adj-pn"
@@ -4636,7 +4636,7 @@
     },
     {
       "uuid": "d4d39acb-ccf1-49c8-b5de-7903842b0c58",
-      "meaning": "it, that",
+      "meaning": "it, that (thing)",
       "kana": "それ",
       "kanji": "",
       "category": "n"
@@ -6785,7 +6785,7 @@
     },
     {
       "uuid": "0cb4aa15-d10c-4ca6-8ba7-32077c6cfd59",
-      "meaning": "short, low",
+      "meaning": "low, short",
       "kana": "ひくい",
       "kanji": "低い",
       "category": "adj"
@@ -7178,8 +7178,8 @@
     {
       "uuid": "c5c99b5f-e34c-4022-a724-8b89e354daec",
       "meaning": "unskillful, poor",
-      "kana": "へた",
-      "kanji": "下手",
+      "kana": "へたな",
+      "kanji": "下手な",
       "category": "na-adj,n"
     },
     {
@@ -9298,7 +9298,7 @@
     },
     {
       "uuid": "b7b0261b-de95-4863-ae6f-fd4a385873ee",
-      "meaning": "match",
+      "meaning": "match (the thing that ignites fire)",
       "kana": "マッチ",
       "kanji": "",
       "category": "n"

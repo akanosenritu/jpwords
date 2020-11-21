@@ -60,6 +60,7 @@ export const updatePracticeHistory = (practiceHistory: PracticeHistory, wordIdsP
   })
   const newHistory = practiceHistory;
   newHistory.wordsHistory = updatedWordsHistory;
+  newHistory.lastPracticeDate = new Date().toISOString();
   return newHistory;
 };
 
@@ -71,11 +72,17 @@ export const loadPracticeHistory: () => PracticeHistory = () => {
   if (possibleHistory) {
     try {
       const history = JSON.parse(possibleHistory) as PracticeHistory;
-      if (history.version === 0.2) return history;
-    } catch {}
+      if (history.version === 0.2){
+        console.log("saved practice history loaded.", history);
+        return history;
+      }
+    } catch {
+      console.log("detected practice history, but it is not compatible with this version of app.", JSON.parse(possibleHistory))
+    }
   }
   let newHistory = createBlankHistory();
   localStorage.setItem(keyName, JSON.stringify(newHistory));
+  console.log("created a new practice history.")
   return newHistory;
 };
 

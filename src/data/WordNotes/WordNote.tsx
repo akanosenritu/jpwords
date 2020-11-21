@@ -83,7 +83,7 @@ const WordNote: React.FC<WordNoteProps> = (props) => {
   }
   useEffect(() => {
     getWordNoteContent(props.wordNote.id).then(content => {
-      console.log(content);
+      console.log("loaded word note contents", content);
       setContent(content)
     });
   }, [content, props.wordNote.id, setContent]);
