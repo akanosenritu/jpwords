@@ -44,6 +44,7 @@ type PracticeWithInputStatusType = "CORRECT" | "WRONG" | ""
 export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) => {
   const [answer, setAnswer] = useState("");
   const [status, setStatus] = useState<PracticeWithInputStatusType>("");
+  const [didAnswerWrongly, setDidAnswerWrongly] = useState(false);
   const styles = useStyles();
   const [isComposing, setIsComposing] = useState(false);
   const isKatakana = useMemo(() => wanakana.isKatakana(props.word.kana), [props.word.kana]);
@@ -62,7 +63,7 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
       if (status === "WRONG") {
         onNext(false)
       } else if (status === "CORRECT") {
-        onNext(true)
+        onNext(!didAnswerWrongly)
       } else {
         if (isAnswerCorrect(answer)) {
           onCorrectlyAnswered()
@@ -93,7 +94,6 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
   }
   const onCompositionEnd = () => {
     setIsComposing(false);
-    console.log(props.word.meaning, answer, props.word.kanji, answer===props.word.kanji, isAnswerCorrect(answer));
     if (isAnswerCorrect(answer)) {
       onCorrectlyAnswered();
     }
@@ -102,6 +102,7 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
     setStatus("CORRECT");
   }
   const onWronglyAnswered = () => {
+    setDidAnswerWrongly(true);
     setStatus("WRONG");
   }
   const onNext = (wasCorrect: boolean) => {
@@ -133,7 +134,7 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
     <Box mt={4}>
       <Typography variant={"h4"}>{props.word.meaning}</Typography>
     </Box>
-    <Box mt={4}>
+    <Box mt={4} style={{minHeight: 50}}>
       {status !== "" && <Typography variant={"h5"}><DisplayWordWithFurigana word={props.word} /></Typography>}
     </Box>
     <Box mt={4}>
