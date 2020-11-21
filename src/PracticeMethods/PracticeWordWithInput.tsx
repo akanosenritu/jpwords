@@ -15,6 +15,7 @@ const useStyles = makeStyles({
     outline: "none",
     boxSizing: "border-box",
     background: "none",
+    padding: 0
   },
   answerInputBox: {
     width: "80%",
