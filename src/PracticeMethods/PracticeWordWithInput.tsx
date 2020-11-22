@@ -5,6 +5,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import * as wanakana from "wanakana";
+import {getColors} from "../WordsView/Styles";
 
 const useStyles = makeStyles({
   answerInput: {
@@ -102,30 +103,18 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
     setStatus("");
     props.onNext(wasCorrect);
   };
-  const getBackGroundColor = () => {
-    switch (status) {
-      case "WRONG INPUT":
-        return "#fffaf2"
+  const {backGround, main} = (() => {
+    switch(status) {
       case "CORRECT INPUT":
-        return "#e9fce9"
+        return getColors("CORRECT")
       case "SIMILAR INPUT":
-        return "#ccffff"
-      case "":
-        return ""
-    }
-  }
-  const getBorderColor = () => {
-    switch (status) {
+        return getColors("COLOR A")
       case "WRONG INPUT":
-        return "#ffd899"
-      case "CORRECT INPUT":
-        return "#91ee91"
-      case "SIMILAR INPUT":
-        return "#99ffff"
-      case "":
-        return ""
+        return getColors("WRONG")
+      default:
+        return getColors("")
     }
-  }
+  })();
   return <div style={{textAlign: "center", width:"100%"}}>
     <Box mt={4}>
       <Typography variant={"h4"}>{props.word.meaning}</Typography>
@@ -134,7 +123,7 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
       {status !== "" && <Typography variant={"h5"}><DisplayWordWithFurigana word={props.word} /></Typography>}
     </Box>
     <Box mt={4}>
-      <div className={styles.answerInputBox} style={{backgroundColor: getBackGroundColor(), borderColor: getBorderColor()}} key={`${props.word.meaning}-${status}`}>
+      <div className={styles.answerInputBox} style={{backgroundColor: backGround, borderColor: main}} key={`${props.word.meaning}-${status}`}>
         <input
           className={styles.answerInput} value={answer} onChange={onChangeEvent} placeholder={`translate ${props.word.meaning}`}
           autoFocus={true} onKeyPress={onKeyboardEvent2}
@@ -142,7 +131,7 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
           key={props.word.meaning}
         />
         {status === "CORRECT INPUT" && <CheckIcon className={styles.answerInputIcon} />}
-        {status === "WRONG INPUT" && <ErrorOutlineIcon className={styles.answerInputIcon} style={{color: getBorderColor()}} />}
+        {status === "WRONG INPUT" && <ErrorOutlineIcon className={styles.answerInputIcon} style={{color: main}} />}
       </div>
     </Box>
     <Box>
