@@ -11,7 +11,7 @@ import {ConfigurationsEntry} from "./General/ConfigurationsScreen";
 
 function App() {
   return (
-    <div style={{minWidth: 320, maxWidth: 500, margin: "auto", position:"relative"}}>
+    <div>
       <ConfigurationsEntry />
       <Router>
         <Switch>
