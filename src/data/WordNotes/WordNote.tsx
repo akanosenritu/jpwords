@@ -4,8 +4,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {Box, Button, Typography} from "@material-ui/core";
 import wordNotesData from "./wordNotes.json";
 import {WordType} from "../Word";
-import {UserPreferenceContext} from "../../WordsView/Contexts";
-import {saveUserPreference} from "../Storage/UserPreference";
+import {initialConfigurations, useConfigurations} from "../Storage/Configurations";
 
 const prepareWordNotes = () => {
   const wordNotes =  wordNotesData["wordNotes"] as WordNoteType[];
@@ -74,13 +73,8 @@ type WordNoteProps = {
 
 const WordNote: React.FC<WordNoteProps> = (props) => {
   const [content, setContent] = useState<string>("");
-  const userPreference = useContext(UserPreferenceContext);
-  const [wordNoteHiddenStatus, setWordNoteHiddenStatus] = useState<boolean>(userPreference.wordNotesHiddenStatus[props.wordNote.id]);
-  const updateWordNoteHiddenStatus = (isHidden: boolean) => {
-    userPreference.wordNotesHiddenStatus[props.wordNote.id] = isHidden;
-    setWordNoteHiddenStatus(isHidden);
-    saveUserPreference(userPreference);
-  }
+  const {configurations} = useConfigurations(initialConfigurations);
+  const [wordNoteHiddenStatus, setWordNoteHiddenStatus] = useState<boolean>(configurations.hideWordNotes);
   useEffect(() => {
     getWordNoteContent(props.wordNote.id).then(content => {
       console.log("loaded word note contents", content);
@@ -88,7 +82,7 @@ const WordNote: React.FC<WordNoteProps> = (props) => {
     });
   }, [content, props.wordNote.id, setContent]);
   return <Box m={1}>
-    <p style={{borderLeft: "3px solid lightgray", paddingLeft: 10}} onClick={()=>updateWordNoteHiddenStatus(!wordNoteHiddenStatus)}>
+    <p style={{borderLeft: "3px solid lightgray", paddingLeft: 10}} onClick={()=>setWordNoteHiddenStatus(false)}>
       <Typography variant={"subtitle1"}>{props.wordNote.title.toUpperCase()}</Typography>
     </p>
     {!wordNoteHiddenStatus && <>
@@ -96,7 +90,7 @@ const WordNote: React.FC<WordNoteProps> = (props) => {
         <ReactMarkDown>{content}</ReactMarkDown>
       </Box>
       <div style={{display: "flex", justifyContent: "center"}}>
-        <Button color={"secondary"} onClick={() => updateWordNoteHiddenStatus(true)}>Hide</Button>
+        <Button color={"secondary"} variant={"outlined"} onClick={() => setWordNoteHiddenStatus(true)}>Hide</Button>
       </div>
     </>
     }
@@ -113,7 +107,7 @@ export const WordNotes: React.FC<WordNotesProps> = (props) => {
     {wordNotes.length > 0 && <div style={{width: "80%", margin: "auto", border: "1px solid lightgray", borderRadius: 25}}>
       <Box>
         {wordNotes.map(wordNote => {
-          return <WordNote wordNote={wordNote} />
+          return <WordNote wordNote={wordNote} key={wordNote.id} />
         })}
       </Box>
     </div>}

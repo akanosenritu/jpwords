@@ -1,25 +1,9 @@
 import React from "react";
 import {Box, Button, Grid, Typography} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
 import {loadPracticeHistory} from "../../data/Storage/PracticeHistory";
 import {WordList} from "../../data/WordList";
-import { PieChart } from 'react-minimal-pie-chart';
+import {PieChart} from 'react-minimal-pie-chart';
 import {getColors} from "../Styles";
-
-const useStyles = makeStyles((theme) => ({
-  box: {
-    border: "1px black solid",
-    borderRadius: "5px / 5px",
-    width: "100%"
-  },
-  wordsTable: {
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
-      margin: theme.spacing(1)
-    }
-  },
-}));
 
 type ChartProps = {
   reviewed: number,
@@ -34,9 +18,9 @@ const Chart: React.FC<ChartProps> = props => {
     "lightgray"
   ]
   const data = [
-    { title: 'Reviewed', value: props.reviewed, color: colors[0]},
-    { title: 'NeedsReview', value: props.needsReview, color: colors[1]},
-    { title: 'Untouched', value: props.untouched, color: colors[2]},
+    {title: 'Reviewed', value: props.reviewed, color: colors[0]},
+    {title: 'NeedsReview', value: props.needsReview, color: colors[1]},
+    {title: 'Untouched', value: props.untouched, color: colors[2]},
   ]
   return <PieChart
     data={data}
@@ -44,12 +28,12 @@ const Chart: React.FC<ChartProps> = props => {
     startAngle={180}
     paddingAngle={5}
     animate={true}
-    label={({dataEntry})=>{
-      const percent = 100 * dataEntry.value / data.map(datum => datum.value).reduce((a, b)=>a+b);
+    label={({dataEntry}) => {
+      const percent = 100 * dataEntry.value / data.map(datum => datum.value).reduce((a, b) => a + b);
       if (percent < 1) {
         return ""
       } else {
-        return `${(100 * dataEntry.value / data.map(datum => datum.value).reduce((a, b)=>a+b)).toFixed(0)}%`
+        return `${(100 * dataEntry.value / data.map(datum => datum.value).reduce((a, b) => a + b)).toFixed(0)}%`
       }
 
     }}
@@ -93,7 +77,7 @@ export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProp
       <Typography variant={"h5"}>Progress Overview</Typography>
     </Box>
     <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} mt={2}>
-      <Typography variant={"body2"}>Total {countReviewed+countNeedsReview+countUntouched} words</Typography>
+      <Typography variant={"body2"}>Total {countReviewed + countNeedsReview + countUntouched} words</Typography>
       <div style={{width: 250, height: 250, padding: 10}}>
         <Chart reviewed={countReviewed} needsReview={countNeedsReview} untouched={countUntouched}/>
       </div>
