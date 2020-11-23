@@ -117,3 +117,8 @@ export const chooseWordsToPractice = (wordList: WordList, practiceHistory: Pract
   }
   return result.concat(untouchedWords.slice(0, 20)).slice(0, 20);
 };
+
+export const getWordHistory = (word: WordType): WordHistoryV2|null => {
+  const wordsHistory = loadPracticeHistory().wordsHistory;
+  return wordsHistory[word.uuid]? wordsHistory[word.uuid]: null;
+}

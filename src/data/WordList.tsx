@@ -21,3 +21,12 @@ const loadWordListVersion1 = (target: any) => {
 };
 
 export const availableWordLists = [loadWordListVersion1(wordListN5), loadWordListVersion1(wordListN4)];
+
+const isWordUsed = (wordList: WordList, word: WordType) => {
+  const wordUUIDsUsedInWordList = wordList.words.map(word => word.uuid);
+  return wordUUIDsUsedInWordList.includes(word.uuid);
+}
+
+export const searchWordInAvailableWordLists = (word: WordType): WordList[] => {
+  return availableWordLists.filter(wordList => isWordUsed(wordList, word))
+}

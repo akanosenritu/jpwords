@@ -1,12 +1,11 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import {PracticeWordListViewDoPractice} from "./PracticeWordListViewDoPractice";
 import {PracticeWordListViewResult} from "./PracticeWordListViewResult";
 import {PracticeWordListViewOverview} from "./PracticeWordListViewOverview";
 import {availableWordLists, WordList} from "../../data/WordList";
 import {TrainerResult} from "./Trainer/TrainerResult";
 import {loadPracticeHistory, savePracticeHistory, updatePracticeHistory} from "../../data/Storage/PracticeHistory";
-import {DebugContext} from "../Contexts";
-import {availableWords} from "../../data/Word";
+import {ConfigurationsEntry} from "../../General/ConfigurationsScreen";
 
 type PracticeWordListViewState = "start" | "practice" | "end"
 
@@ -29,6 +28,7 @@ export const PracticeWordListView: React.FC = () => {
     setCurrentState("practice");
   };
   return <div style={{minWidth: 320, maxWidth: 500, margin: "auto", position:"relative"}}>
+    <ConfigurationsEntry />
     {currentState === "start" && <PracticeWordListViewOverview startPractice={startPractice}/>}
     {currentState === "practice" && <PracticeWordListViewDoPractice wordListToPractice={wordListToPractice} finishPractice={finishPractice}/>}
     {currentState === "end" && <PracticeWordListViewResult wordList={wordListToPractice} continuePractice={continuePractice}/>}

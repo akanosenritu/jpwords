@@ -11,7 +11,7 @@ const prepareAvailableWords = () => {
       kana: wordDatum.kana,
       kanji: wordDatum.kanji,
       meaning: wordDatum.meaning,
-      category: wordDatum.category.split(",") as Category[]
+      category: wordDatum.category as Category[]
     };
     availableWords[word.uuid] = word
   }
@@ -19,6 +19,7 @@ const prepareAvailableWords = () => {
 }
 
 export const availableWords = prepareAvailableWords();
+export const wordsDataLastEditDate = wordData.lastEdit;
 
 export const categoryList = [
   '', ' intrans-verb', ' na-adj', ' vs', 'adj', 'adj-na', 'adj-no', 'adj-pn', 'adjn', 'adv', 'aru-v', 'conj', 'exp', 'expr',
