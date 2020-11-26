@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 type EditorProps = {
   word: WordType
   createOrModifyWord: (word: WordType) => void,
+  onClose: () => void
 }
 
 const Editor: React.FC<EditorProps> = props => {
@@ -43,6 +44,7 @@ const Editor: React.FC<EditorProps> = props => {
     },
     onSubmit: ()=>{
       props.createOrModifyWord(formik.values);
+      props.onClose()
     }
   });
   const categoryOptions = categoryList.map(category => ({value: category as string, label: category as string}));
@@ -84,5 +86,8 @@ type EditWordDrawerProps = {
 }
 
 export const EditWordDrawer: React.FC<EditWordDrawerProps> = props => {
-  return <DrawerBase isOpen={props.isOpen} onClose={props.onClose} inside={<Editor word={props.word} createOrModifyWord={props.createOrModifyWord} />} />
+  return <DrawerBase
+    isOpen={props.isOpen} onClose={props.onClose}
+    inside={<Editor word={props.word} createOrModifyWord={props.createOrModifyWord} onClose={props.onClose} />}
+  />
 }

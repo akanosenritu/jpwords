@@ -25,7 +25,7 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
   const [wordsShown, setWordsShown] = useState<{[wordUUID: string]: boolean}>(props.words.reduce((obj, word) => Object.assign(obj, {[word.uuid]: true}), {}));
   const [page, setPage] = React.useState(0);
   const [query, setQuery] = useState("");
-  const [searchBy, setSearchBy] = useState("meaning");
+  const [searchBy, setSearchBy] = useState("kana");
   const rowsPerPage = 25;
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);

@@ -2,6 +2,7 @@ import React from "react";
 import * as wanakana from "wanakana";
 import {fit} from "furigana";
 import wordData from "./words.json";
+import * as uuid from "uuid"
 
 const prepareAvailableWords = (): {[key: string]: WordType}  => {
   let availableWords: { [key: string]: WordType } = {};
@@ -22,10 +23,46 @@ export const availableWords = prepareAvailableWords();
 export const wordsDataLastEditDate = wordData.lastEdit;
 
 export const categoryList = [
-  '', ' intrans-verb', ' na-adj', 'vs', 'adj', 'adj-na', 'adj-no', 'adj-pn', 'adjn', 'adv', 'aru-v', 'conj', 'exp', 'expr',
-  'giku n', 'gn', 'gn-adv', 'int', 'int-n', 'kana only', 'n', 'n col', 'n-adv', 'n-suf', 'n-t', 'n-temp', 'na-adj', 'no--adj',
-  'no-adj', 'num', 'number', 'p-suru', 'pref', 'prefix', 'pren-adj', 'prt', 'ru-v', 'suf', 'u-v', 'u-v-i', 'uk', 'v5b', 'v5n',
-  'vi', 'vk', 'vs-i', 'vt'
+  '',
+  // nouns
+  'n',
+  'n-t',  // nouns related to time
+  'n-vs',  // nouns that can be derived into a verb with -suru.
+  'n-adj-na',  // nouns that can be derived into an adjective with -na.
+  'num',  // numbers
+  'n col',  // ??????
+  'n-adv',  // nouns that can be used adverbially
+  'n-suf',  // nouns that can be used as a suffix
+  // adjectives
+  'adj',
+  'na-adj',  // adjectives that ends with -na.
+  'no-adj',  // adjectives that ends with -no.
+  'adj-pn',  // demonstrative adjective
+  // verbs
+  'kuru-v',   // verbs that ends with -kuru. Class 3 verbs.
+  'suru-v',  // verbs that ends with -suru.  Class 3 Verbs.
+  'aru-v',  // verbs that ends with -aru.
+  'ru-v',  // verbs that ends with -ru.  Class 2 Verbs.
+  'u-v',  // verbs that ends with -u. Class 1 Verbs.
+  'vt',  // transitive verbs
+  'vi',  // intransitive verbs
+  // adverb
+  'adv',
+  // conjunctive
+  'conj',
+  // expression
+  'exp', 'expr',
+  // interrogative
+  'intr',
+  // interjection
+  'int',
+  // suffix
+  'suf',
+  // prefix
+  'pref',
+  // particle
+  'prt',
+  'v5b', 'v5n',
 ] as const;
 
 type CategoryTuple = typeof categoryList;
@@ -71,7 +108,40 @@ export const prepareWordV2: (arr: string[]) => WordType[] = arr => {
 }
 
 export const isPossibleToMakeVerbWithSuru = (word: WordType) => {
-  return word.category.includes("vs")
+  return word.category.includes("n-vs")
+}
+
+export const getDerivatives = (word: WordType) => {
+  type Derivative = {
+    type: string,
+    word: WordType
+  }
+  const result: Derivative[] = [];
+  if (word.category.includes("n-vs")) {
+    result.push({
+      type : "Verb",
+      word: {
+        uuid: uuid.v4(),
+          kana: word.kana + "する",
+        kanji: word.kanji + "する",
+        category: ["suru-v"],
+        meaning: "(this word is auto-generated)"
+      }
+    })
+  }
+  if (word.category.includes("n-adj-na")) {
+    result.push({
+      type : "Adjective",
+      word: {
+        uuid: uuid.v4(),
+        kana: word.kana + "な",
+        kanji: word.kanji + "な",
+        category: ["na-adj"],
+        meaning: "(this word is auto-generated)"
+      }
+    })
+  }
+  return result
 }
 
 export const isAnswerCorrect = (word: WordType, answer: string): boolean => {

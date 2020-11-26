@@ -7,6 +7,7 @@ import {DebugContext} from "../../Contexts";
 import {WordNotes} from "../../../data/WordNotes/WordNote";
 import ReportIcon from '@material-ui/icons/Report';
 import {ReportProblem} from "../ReportProblem";
+import {ShowDerivatives} from "./ShowDerivatives";
 
 type PracticeViewBaseProps = {
   words: WordType[],
@@ -56,7 +57,7 @@ export const Trainer2: React.FC<PracticeViewBaseProps> = props => {
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
   return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
     <LinearProgress variant={"determinate"} style={{width: "100%"}} value={numberDoneWords * 100 / props.words.length}/>
-    <PracticeWordWithInput word={word} onNext={onNext} key={`${word.kanji}-${word.kana}-${word.meaning}`}/>
+    <PracticeWordWithInput word={word} onNext={onNext} key={`${word.kanji}-${word.kana}-${word.meaning}-${practiceQualities[wordQueue[0]]}`}/>
     <WordNotes word={word}/>
     <div>
       <Button size={"small"} onClick={()=>setIsDialogueOpen(!isDialogueOpen)}>

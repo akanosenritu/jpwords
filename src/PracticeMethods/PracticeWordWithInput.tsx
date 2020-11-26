@@ -6,6 +6,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import * as wanakana from "wanakana";
 import {getColors} from "../WordsView/Styles";
+import {ShowDerivatives} from "../WordsView/PracticeWordList/Trainer/ShowDerivatives";
 
 const useStyles = makeStyles({
   answerInput: {
@@ -134,8 +135,6 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
         {status === "WRONG INPUT" && <ErrorOutlineIcon className={styles.answerInputIcon} style={{color: main}} />}
       </div>
     </Box>
-    <Box>
-      {isPossibleToMakeVerbWithSuru(props.word) && <p>* this word can be made into a verb with -する.</p>}
-    </Box>
+    {status === "CORRECT INPUT" && <Box mt={2}><ShowDerivatives word={props.word} /></Box>}
   </div>
 }
