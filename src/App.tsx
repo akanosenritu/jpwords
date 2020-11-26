@@ -7,7 +7,8 @@ import {
   Redirect,
 } from "react-router-dom";
 import {WordsView} from "./WordsView/WordsView";
-import {ManageWordsView} from "./ManageWordsView/ManageWordsView";
+import {ManageWordsView} from "./Manage/ManageWordsView/ManageWordsView";
+import {ManageWordNotesView} from "./Manage/ManageWordNotesView/ManageWordNotesView";
 
 function App() {
   return (
@@ -17,8 +18,11 @@ function App() {
           <Route path={"/words"}>
             <WordsView />
           </Route>
-          <Route path={"/manage"}>
+          <Route path={"/manageWords"}>
             <ManageWordsView />
+          </Route>
+          <Route path={"/manageWordNotes"}>
+            <ManageWordNotesView />
           </Route>
           <Route exact path={"/"}>
             <Redirect to={"words/practiceWordList"} />

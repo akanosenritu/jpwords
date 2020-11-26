@@ -1,14 +1,17 @@
 {
+  "lastEdit": "2020-11-24T07:24:18.337Z",
   "wordNotes":  [
     {
       "associatedWords": ["be78bc79-6f04-4eec-a86d-b4b4ec1de680"],
       "title": "Train types in Japan",
-      "id": "8633b8c3-5130-4ac7-b866-cd2f50974bdc"
+      "id": "8633b8c3-5130-4ac7-b866-cd2f50974bdc",
+      "content": "There are many train types in Japanese railway. The order given below is just a general guideline since it may vary depending on the train company.\n\n* 普通 (ふつう, \"ordinary\")、各駅停車 (各駅停車, means \"stops at every station\") will stop at every station. \n* 快速 (かいそく, \"rapid\") will skip some stations, but less frequently than 急行 (きゅうこう) trains. Usually 快速 (かいそく) trains do not require a special ticket.\n* 急行 (きゅうこう, \"express\") will skip many stations. Whether they require a special ticket depends on the train company. For JR trains, it is required.\n* 特急 (とっきゅう, \"special express\") will skip most stations. Usually they require a special ticket."
     },
     {
       "associatedCategories": ["vs"],
       "title": "Auxiliary Suru",
-      "id": "fb5ab47a-10cf-4c31-9435-fbe1a4442145"
+      "id": "fb5ab47a-10cf-4c31-9435-fbe1a4442145",
+      "content": "する (to do) is the most basic verb in Japanese and it has many its own meanings. In addition to them, する can be used to make a compound verb from nouns of action. For example:\n* 勉強 (べんきょう, study) + する => 勉強する (to study)\n* 案内 (あんない, guide) + する => 案内する (to guide)\n* サッカー (さっかー, football) + する => サッカーする (to play football)\nMost of the time these nouns can be used as the direct object of する.\n* 勉強をする = 勉強する\n* 案内をする = 案内する\n* サッカーをする = サッカーする\n"
     },
     {
       "associatedWords": [
@@ -19,7 +22,8 @@
         "78afaed4-875e-4394-ba8d-f7294ed8f827"
       ],
       "title": "Yesterday, today, tomorrow",
-      "id": "3afe3d68-7075-409b-9948-425f7a05e27f"
+      "id": "3afe3d68-7075-409b-9948-425f7a05e27f",
+      "content": "\nJapanese date expressions are like this:\n\n* 一昨々日 (さきおととい): 3 days ago, seldom used.\n* 一昨日 (おととい): the day before yesterday, 2 days ago.\n* 昨日 (きのう): yesterday.\n* 今日 (きょう、こんにち): today. The expression of \"こんにちは\" (hello) comes from the abbreviation of \"今日はご機嫌いががですか\" (how are you today?). \n* 明日 (あした): tomorrow.\n* 明後日 (あさって): the day after tomorrow, 2 days later.\n* 明々後日 (しあさって): 3 days later.\n\nYou can also use \"～日前\" (～にちまえ, \"~days ago\") and \"～日後\" (~にちご, \"~days after\").\n* 15日前 (じゅうご-にちまえ, \"15 days ago\")\n* 30日後 (さんじゅう-にちご, \"30 days later)\n\nNumbers 2 to 10 need special care reading them however, since for example \"2日\" is \"ふつか\", not \"ににち\".\n* 2日前 (ふつかまえ, \"2 days ago\")\n* 10日後 (とおかご, \"10 days later\") \n"
     },
     {
       "associatedWords": [
@@ -27,7 +31,8 @@
         "c1464cbb-d217-432a-882b-a46f91511b87"
       ],
       "title": "how",
-      "id": "a58682a1-1f33-42cd-a3d3-11936ebe50c4"
+      "id": "a58682a1-1f33-42cd-a3d3-11936ebe50c4",
+      "content": "\nどう and いかが have the almost same meaning of \"how, in what way\". The difference lies in the formality of the word. どう is more casual, and いかが is more formal. \n\n* 天気はどうですか。(てんき-, \"how is the weather?\")\n* お天気はいかがですか。(おてんき-, the same meaning as above but in a more formal way. Note the honorary お before 天気.)\n"
     }
   ]
 }

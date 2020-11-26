@@ -7,11 +7,10 @@ import {
   Paper, Typography,
 } from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
-import {availableWords, wordsDataLastEditDate, WordType} from "../data/Word";
-import "./ManageWordsView.css";
+import {availableWords, wordsDataLastEditDate, WordType} from "../../data/Word";
 import {EditWordDrawer} from "./EditWordDrawer";
 import {WordsTable} from "./WordsTable";
-import {initialEditingWordsData, useEditingWordsData} from "../data/Storage/EditingWordsData";
+import {initialEditingWordsData, useEditingWordsData} from "../../data/Storage/EditingWordsData";
 import {v4 as uuid4} from "uuid";
 import {InspectWordDrawer} from "./InspectWordDrawer";
 
@@ -57,10 +56,14 @@ export const ManageWordsView: React.FC = () => {
   const {editingWordsData, setEditingWordsData} = useEditingWordsData(initialEditingWordsData);
   const [drawer, setDrawer] = useState("");
   const createOrModifyWord = (word: WordType) => {
-    const newWords = {...editingWordsData};
-    newWords.words[word.uuid] = word;
-    newWords.lastEdit = new Date().toISOString();
-    setEditingWordsData(newWords);
+    console.log(word);
+    const newWordsData = {...editingWordsData};
+    const newWords = {...newWordsData.words}
+    newWords[word.uuid] = word;
+    newWordsData.words = newWords
+    newWordsData.lastEdit = new Date().toISOString();
+
+    setEditingWordsData(newWordsData);
   };
   const reloadWords = () => {
     setEditingWordsData({
@@ -88,7 +91,8 @@ export const ManageWordsView: React.FC = () => {
     const aElement = document.createElement("a");
     aElement.download = "words.json";
     aElement.href = window.URL.createObjectURL(blob);
-    aElement.click()
+    aElement.click();
+    aElement.remove()
   }
   const onClickAddNewWord = () => {
     const blankWord: WordType = {
@@ -114,7 +118,7 @@ export const ManageWordsView: React.FC = () => {
   }
   return <div className={classes.manageWordsView}>
     <Grid container>
-      <Grid item xs={4}>
+      <Grid item xs={6}>
         <Box className={classes.toolButtonsContainer}>
           <Button variant={"outlined"} color={"primary"} onClick={downloadWordsData}>Download</Button>
           <Button variant={"outlined"} color={"secondary"} onClick={reloadWords}>Reload</Button>
@@ -123,19 +127,20 @@ export const ManageWordsView: React.FC = () => {
           </Typography>}
         </Box>
       </Grid>
-      <Grid item xs={4}>
-        <Box display={"flex"} justifyContent={"center"}>
-          <SearchBox />
-        </Box>
-      </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={6}>
         <Box display={"flex"} justifyContent={"center"}>
           <Button variant={"outlined"} onClick={onClickAddNewWord}>Add new word</Button>
         </Box>
       </Grid>
     </Grid>
     <Box mt={2} style={{maxHeight: "100%"}}>
-      <WordsTable words={formatWordsData(editingWordsData.words)} onClickOpenEditor={onClickOpenEditor} onClickOpenInspector={onClickOpenInspector}/>
+      <WordsTable
+        words={formatWordsData(editingWordsData.words)}
+        actionButtons={[
+          {buttonName: "EDIT", action: onClickOpenEditor},
+          {buttonName: "INSPECT", action: onClickOpenInspector}
+        ]}
+      />
       {drawer === "editor" && wordConcerning && <EditWordDrawer
         key={wordConcerning.uuid} isOpen={isDrawerOpen} onClose={()=>{setIsDrawerOpen(false); setDrawer("")}}
         word={wordConcerning} createOrModifyWord={createOrModifyWord}

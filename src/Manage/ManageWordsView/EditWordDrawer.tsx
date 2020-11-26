@@ -1,11 +1,11 @@
 import React from "react";
 import {Box, Button, TextField, Typography} from "@material-ui/core";
-import {categoryList, WordType} from "../data/Word";
+import {categoryList, WordType} from "../../data/Word";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {FormikErrors, useFormik} from "formik";
 import * as wanakana from "wanakana";
 import Select from "react-select-material-ui";
-import {DrawerBase} from "./DrawerBase";
+import {DrawerBase} from "../DrawerBase";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,7 +27,6 @@ const Editor: React.FC<EditorProps> = props => {
   const formik = useFormik({
     initialValues: props.word,
     validate: (values) => {
-      console.log("validating...")
       const errors: FormikErrors<WordType> = {};
       if (values.kana === "") {
         errors.kana = "Kana must not be empty."
@@ -48,7 +47,7 @@ const Editor: React.FC<EditorProps> = props => {
   });
   const categoryOptions = categoryList.map(category => ({value: category as string, label: category as string}));
   const handleCategoryChange = (values: any[]) => {
-    formik.setFieldValue("category", values)
+    formik.setFieldValue("category", values? values: [])
   }
   return <form onSubmit={formik.handleSubmit} className={classes.editor}>
     <Box style={{borderLeft: "5px solid lightgray", paddingLeft: 10}} ml={1}>

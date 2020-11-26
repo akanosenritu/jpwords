@@ -1,5 +1,5 @@
 {
-  "lastEdit": "2020-11-23T02:19:13.595Z",
+  "lastEdit": "2020-11-26T14:03:20.247Z",
   "words": [
     {
       "uuid": "b9fae1d0-916e-4dfe-a044-17fa99b6de70",
@@ -11,19 +11,19 @@
       ]
     },
     {
-      "uuid": "87fc785c-7ceb-453c-8b0a-2a12afeccf1d",
+      "uuid": "2b700b33-8a7e-4cf9-b49c-a0305251f117",
       "kana": "ああ",
       "kanji": "",
-      "meaning": "Ah!, Oh!",
+      "meaning": "like that, that way",
       "category": [
         "int"
       ]
     },
     {
-      "uuid": "2b700b33-8a7e-4cf9-b49c-a0305251f117",
+      "uuid": "87fc785c-7ceb-453c-8b0a-2a12afeccf1d",
       "kana": "ああ",
       "kanji": "",
-      "meaning": "like that, that way",
+      "meaning": "Ah!, Oh!",
       "category": [
         "int"
       ]
@@ -185,15 +185,6 @@
       ]
     },
     {
-      "uuid": "ca63ec7c-1ffd-4d9e-9ac5-adc34b5ca877",
-      "kana": "あげる",
-      "kanji": "",
-      "meaning": "to give",
-      "category": [
-        "ru-v"
-      ]
-    },
-    {
       "uuid": "510eb545-aee2-4c76-883d-92de0c903507",
       "kana": "あさ",
       "kanji": "朝",
@@ -243,7 +234,7 @@
     {
       "uuid": "f0916aae-9810-4201-8b05-13f5efd1f043",
       "kana": "あした",
-      "kanji": "",
+      "kanji": "明日",
       "meaning": "tomorrow",
       "category": [
         "n-t"
@@ -342,6 +333,15 @@
       ]
     },
     {
+      "uuid": "5da21933-1817-4e7c-bef6-3c583b98b482",
+      "kana": "あつい",
+      "kanji": "厚い",
+      "meaning": "kind, warm(hearted), thick, deep",
+      "category": [
+        "adj"
+      ]
+    },
+    {
       "uuid": "73beee86-5b13-44fa-b211-fbf12ad6aa2f",
       "kana": "あつい",
       "kanji": "暑い",
@@ -355,15 +355,6 @@
       "kana": "あつい",
       "kanji": "熱い",
       "meaning": "hot (thing)",
-      "category": [
-        "adj"
-      ]
-    },
-    {
-      "uuid": "5da21933-1817-4e7c-bef6-3c583b98b482",
-      "kana": "あつい",
-      "kanji": "厚い",
-      "meaning": "kind, warm(hearted), thick, deep",
       "category": [
         "adj"
       ]
@@ -425,15 +416,6 @@
       ]
     },
     {
-      "uuid": "49d9db0b-4463-4343-8f14-c037de9b87b4",
-      "kana": "あの",
-      "kanji": "",
-      "meaning": "that over there",
-      "category": [
-        "pren-adj"
-      ]
-    },
-    {
       "uuid": "403eae65-5cb0-455c-ba40-cdfc60b39422",
       "kana": "あの",
       "kanji": "",
@@ -443,9 +425,18 @@
       ]
     },
     {
+      "uuid": "49d9db0b-4463-4343-8f14-c037de9b87b4",
+      "kana": "あの",
+      "kanji": "",
+      "meaning": "that over there",
+      "category": [
+        "pren-adj"
+      ]
+    },
+    {
       "uuid": "0e8198ac-a1a6-4f69-a052-2c5c33b0b7bc",
       "kana": "あびる",
-      "kanji": "",
+      "kanji": "浴びる",
       "meaning": "to bathe, to shower",
       "category": [
         "ru-v"
@@ -483,19 +474,19 @@
       ]
     },
     {
-      "uuid": "c9d442eb-0f07-479c-96b1-cb979032de7d",
+      "uuid": "b6708739-3803-4171-a892-7aff227d0f55",
       "kana": "あめ",
-      "kanji": "雨",
-      "meaning": "rain",
+      "kanji": "飴",
+      "meaning": "(hard) candy, toffee",
       "category": [
         "n"
       ]
     },
     {
-      "uuid": "b6708739-3803-4171-a892-7aff227d0f55",
+      "uuid": "c9d442eb-0f07-479c-96b1-cb979032de7d",
       "kana": "あめ",
-      "kanji": "飴",
-      "meaning": "(hard) candy, toffee",
+      "kanji": "雨",
+      "meaning": "rain",
       "category": [
         "n"
       ]
@@ -519,19 +510,19 @@
       ]
     },
     {
-      "uuid": "d3e5b5d9-f7cb-41b8-b882-d4b321040fe8",
+      "uuid": "8de7c2b5-f573-4e1e-8ea9-b4b1a38764d8",
       "kana": "ある",
       "kanji": "",
-      "meaning": "to be",
+      "meaning": "to have",
       "category": [
         "u-v-i"
       ]
     },
     {
-      "uuid": "8de7c2b5-f573-4e1e-8ea9-b4b1a38764d8",
+      "uuid": "d3e5b5d9-f7cb-41b8-b882-d4b321040fe8",
       "kana": "ある",
       "kanji": "",
-      "meaning": "to have",
+      "meaning": "to be",
       "category": [
         "u-v-i"
       ]
@@ -563,7 +554,7 @@
       "category": [
         "adj-na",
         "n",
-        " vs"
+        "vs"
       ]
     },
     {
@@ -766,7 +757,7 @@
     {
       "uuid": "0d5b487c-b38b-4910-a407-5769cf364880",
       "kana": "いす",
-      "kanji": "",
+      "kanji": "椅子",
       "meaning": "chair",
       "category": [
         "n"
@@ -811,7 +802,7 @@
     {
       "uuid": "d10a3605-cdee-4c3b-9006-6cacc1fdd9bf",
       "kana": "いただく",
-      "kanji": "",
+      "kanji": "頂く",
       "meaning": "to receive, to take food or drink (hum)",
       "category": [
         "u-v"
@@ -847,7 +838,7 @@
     {
       "uuid": "65f4a73e-f4dc-4fce-b0c8-2b2ebf64eb21",
       "kana": "いちばん",
-      "kanji": "",
+      "kanji": "一番",
       "meaning": "best, first, number one",
       "category": [
         "n-adv"
@@ -877,8 +868,8 @@
     {
       "uuid": "efb048f1-c6a6-4956-88f5-7d2b16578a71",
       "kana": "いっぱい",
-      "kanji": "",
-      "meaning": "full, to the utmost",
+      "kanji": "一杯",
+      "meaning": "fully",
       "category": [
         "adv"
       ]
@@ -946,7 +937,7 @@
       "kanji": "田舎",
       "meaning": "rural, countryside",
       "category": [
-        "giku n"
+        "n"
       ]
     },
     {
@@ -955,7 +946,7 @@
       "kanji": "犬",
       "meaning": "dog",
       "category": [
-        ""
+        "n"
       ]
     },
     {
@@ -974,7 +965,7 @@
       "kanji": "今",
       "meaning": "now",
       "category": [
-        ""
+        "n-t"
       ]
     },
     {
@@ -1025,19 +1016,19 @@
       ]
     },
     {
-      "uuid": "c8795738-f702-4ff8-b4c0-69804ea8878c",
+      "uuid": "758429f9-6f4f-4ac8-85d3-2309c94c0dda",
       "kana": "いる",
-      "kanji": "居る",
-      "meaning": "(hum) to be (animate), to exist",
+      "kanji": "要る",
+      "meaning": "to need",
       "category": [
         "u-v"
       ]
     },
     {
-      "uuid": "758429f9-6f4f-4ac8-85d3-2309c94c0dda",
+      "uuid": "c8795738-f702-4ff8-b4c0-69804ea8878c",
       "kana": "いる",
-      "kanji": "要る",
-      "meaning": "to need",
+      "kanji": "居る",
+      "meaning": "(hum) to be (animate), to exist",
       "category": [
         "u-v"
       ]
@@ -1063,7 +1054,7 @@
     {
       "uuid": "cd3ad049-4df2-4567-bbbf-96b87d9eac5c",
       "kana": "いろいろ",
-      "kanji": "",
+      "kanji": "色々",
       "meaning": "various",
       "category": [
         "na-adj",
@@ -1094,10 +1085,10 @@
       ]
     },
     {
-      "uuid": "8ae24e95-40d8-4081-97e9-6347c8b66935",
+      "uuid": "575ed66a-55d4-4f37-a071-5c3d6543249f",
       "kana": "うかがう",
-      "kanji": "",
-      "meaning": "to visit",
+      "kanji": "伺う",
+      "meaning": "to ask",
       "category": [
         "u-v",
         "vi",
@@ -1105,10 +1096,10 @@
       ]
     },
     {
-      "uuid": "575ed66a-55d4-4f37-a071-5c3d6543249f",
+      "uuid": "8ae24e95-40d8-4081-97e9-6347c8b66935",
       "kana": "うかがう",
-      "kanji": "",
-      "meaning": "to ask",
+      "kanji": "伺う",
+      "meaning": "to visit",
       "category": [
         "u-v",
         "vi",
@@ -1119,9 +1110,10 @@
       "uuid": "19373ee0-bc7e-4fdd-95e4-4781c1190a4a",
       "kana": "うけつけ",
       "kanji": "受付",
-      "meaning": "reception (desk), information ガス",
+      "meaning": "reception (desk)",
       "category": [
-        "n"
+        "n",
+        "vs"
       ]
     },
     {
@@ -1164,7 +1156,7 @@
     {
       "uuid": "70a5d082-50af-40d0-b5bb-d831aa0c6c17",
       "kana": "うそ",
-      "kanji": "",
+      "kanji": "嘘",
       "meaning": "lie",
       "category": [
         "n"
@@ -1254,7 +1246,7 @@
     {
       "uuid": "4d86ccc4-fd83-40d5-ac1a-498d64617900",
       "kana": "うまい",
-      "kanji": "",
+      "kanji": "美味い",
       "meaning": "delicious",
       "category": [
         "adj"
@@ -1309,7 +1301,7 @@
     {
       "uuid": "468445c1-20d7-4ba6-b633-770f106ea0f6",
       "kana": "うるさい",
-      "kanji": "",
+      "kanji": "煩い",
       "meaning": "noisy, loud, annoying",
       "category": [
         "adj"
@@ -1318,7 +1310,7 @@
     {
       "uuid": "cc9d5141-026d-4cd4-927d-f3e0c65b33d9",
       "kana": "うれしい",
-      "kanji": "",
+      "kanji": "嬉しい",
       "meaning": "happy, glad",
       "category": [
         "adj"
@@ -1356,7 +1348,7 @@
       "uuid": "ae9cd608-fc74-4139-81d3-013c4fd0a1ca",
       "kana": "うんてんしゅ",
       "kanji": "運転手",
-      "meaning": "driver, chauffeur",
+      "meaning": "driver",
       "category": [
         "n"
       ]
@@ -1394,7 +1386,7 @@
       "uuid": "83decf62-e821-4fad-9320-c74686d96bcf",
       "kana": "えいがかん",
       "kanji": "映画館",
-      "meaning": "movie theatre (theater), cinema",
+      "meaning": "movie theatre",
       "category": [
         "n"
       ]
@@ -1469,7 +1461,7 @@
     {
       "uuid": "9e1192fd-135a-45c1-b6cf-aa6db8f47cbf",
       "kana": "おいしい",
-      "kanji": "",
+      "kanji": "美味しい",
       "meaning": "delicious, tasty",
       "category": [
         "adj"
@@ -1542,7 +1534,7 @@
       "uuid": "c897d63b-dc66-4a58-adf3-2d191c60612c",
       "kana": "おかげ",
       "kanji": "",
-      "meaning": "thanks or owing to",
+      "meaning": "thanks to, owing to",
       "category": [
         "n"
       ]
@@ -1593,21 +1585,21 @@
       ]
     },
     {
-      "uuid": "d873b860-a453-443a-ae3d-b7bc4a7b2a26",
-      "kana": "おく",
-      "kanji": "置く",
-      "meaning": "to put, to place",
-      "category": [
-        "u-v"
-      ]
-    },
-    {
       "uuid": "44b1a4bf-218f-4f6e-83fb-59b5bffa7f41",
       "kana": "おく",
       "kanji": "億",
       "meaning": "100,000,000, hundred million",
       "category": [
         "num"
+      ]
+    },
+    {
+      "uuid": "d873b860-a453-443a-ae3d-b7bc4a7b2a26",
+      "kana": "おく",
+      "kanji": "置く",
+      "meaning": "to put, to place",
+      "category": [
+        "u-v"
       ]
     },
     {
@@ -1634,7 +1626,8 @@
       "kanji": "贈り物",
       "meaning": "present, gift",
       "category": [
-        "n"
+        "n",
+        "vs"
       ]
     },
     {
@@ -1749,7 +1742,7 @@
       "uuid": "2a4a1a0d-646f-42aa-95e6-f7bb352ba502",
       "kana": "おじょうさん",
       "kanji": "お嬢さん",
-      "meaning": "(1) (hon) daughter, (2) young lady",
+      "meaning": "(hon) young lady",
       "category": [
         "n"
       ]
@@ -1821,8 +1814,8 @@
     {
       "uuid": "d6154dfc-afef-4c4d-9af4-4b327b4a0b3c",
       "kana": "おつり",
-      "kanji": "",
-      "meaning": "change (money), balance",
+      "kanji": "お釣り",
+      "meaning": "change (money)",
       "category": [
         "n"
       ]
@@ -1894,7 +1887,7 @@
     {
       "uuid": "c9ae256f-1f1c-4dc0-964d-9bcb33ccf912",
       "kana": "おととい",
-      "kanji": "",
+      "kanji": "一昨日",
       "meaning": "day before yesterday",
       "category": [
         "n-adv",
@@ -1904,7 +1897,7 @@
     {
       "uuid": "ceb408bd-ac64-4585-88d6-b0fba540354d",
       "kana": "おととし",
-      "kanji": "",
+      "kanji": "一昨年",
       "meaning": "year before last",
       "category": [
         "n-adv",
@@ -1950,7 +1943,7 @@
     {
       "uuid": "546e932e-3ef1-4835-bc8a-f8a7cc826cb4",
       "kana": "おなか",
-      "kanji": "",
+      "kanji": "お腹",
       "meaning": "stomach",
       "category": [
         "n"
@@ -2051,7 +2044,7 @@
       "uuid": "f488445d-93dd-48f5-af19-973c04239341",
       "kana": "おみまい",
       "kanji": "お見舞い",
-      "meaning": "calling on someone who is ill, enquiry",
+      "meaning": "visits to express sympathy",
       "category": [
         "n"
       ]
@@ -2095,7 +2088,7 @@
     {
       "uuid": "7681203d-c5f4-41f4-9dcd-c76c5fa099ae",
       "kana": "おもしろい",
-      "kanji": "",
+      "kanji": "面白い",
       "meaning": "interesting, amusing",
       "category": [
         "adj"
@@ -2124,7 +2117,7 @@
       "uuid": "26423e0b-72e0-4870-b866-08a90f08df37",
       "kana": "おや",
       "kanji": "親",
-      "meaning": "parents",
+      "meaning": "parent",
       "category": [
         "n"
       ]
@@ -2157,19 +2150,19 @@
       ]
     },
     {
-      "uuid": "ef2e15ad-354a-424a-a89e-ba73a27daa93",
+      "uuid": "480b8c6d-8992-4902-ab25-af04a75bdc73",
       "kana": "おる",
-      "kanji": "",
-      "meaning": "to be (polite version of いる)",
+      "kanji": "折る",
+      "meaning": "to break, to fold, to pick a flower",
       "category": [
         "u-v"
       ]
     },
     {
-      "uuid": "480b8c6d-8992-4902-ab25-af04a75bdc73",
+      "uuid": "ef2e15ad-354a-424a-a89e-ba73a27daa93",
       "kana": "おる",
-      "kanji": "折る",
-      "meaning": "to break, to fold, to pick a flower",
+      "kanji": "",
+      "meaning": "to be (polite version of いる)",
       "category": [
         "u-v"
       ]
@@ -2263,7 +2256,8 @@
       "kanji": "会議",
       "meaning": "meeting, conference",
       "category": [
-        "n"
+        "n",
+        "vs"
       ]
     },
     {
@@ -2308,7 +2302,8 @@
       "kanji": "買い物",
       "meaning": "shopping",
       "category": [
-        "n"
+        "n",
+        "vs"
       ]
     },
     {
@@ -2317,7 +2312,8 @@
       "kanji": "会話",
       "meaning": "conversation",
       "category": [
-        "n"
+        "n",
+        "vs"
       ]
     },
     {
@@ -2349,15 +2345,6 @@
       ]
     },
     {
-      "uuid": "d87fd0f9-7ad8-4630-8406-d8266f895658",
-      "kana": "かえる",
-      "kanji": "帰る",
-      "meaning": "to go home, to return",
-      "category": [
-        "u-v"
-      ]
-    },
-    {
       "uuid": "883aad85-eadc-47f8-9298-9091139ef83c",
       "kana": "かえる",
       "kanji": "変える",
@@ -2365,6 +2352,15 @@
       "category": [
         "ru-v",
         "vt"
+      ]
+    },
+    {
+      "uuid": "d87fd0f9-7ad8-4630-8406-d8266f895658",
+      "kana": "かえる",
+      "kanji": "帰る",
+      "meaning": "to go home, to return",
+      "category": [
+        "u-v"
       ]
     },
     {
@@ -2407,8 +2403,8 @@
     {
       "uuid": "a52047c5-57eb-47ad-baa9-be772603e932",
       "kana": "かぎ",
-      "kanji": "",
-      "meaning": "key/s",
+      "kanji": "鍵",
+      "meaning": "key",
       "category": [
         "n"
       ]
@@ -2450,19 +2446,19 @@
       ]
     },
     {
-      "uuid": "af22261f-e41d-47b7-92c2-dd3a839287bb",
+      "uuid": "5dc18c83-ad8d-4281-a88a-ddc1405cf912",
       "kana": "かける",
       "kanji": "",
-      "meaning": "to sit down",
+      "meaning": "to begin to",
       "category": [
         ""
       ]
     },
     {
-      "uuid": "5dc18c83-ad8d-4281-a88a-ddc1405cf912",
+      "uuid": "af22261f-e41d-47b7-92c2-dd3a839287bb",
       "kana": "かける",
       "kanji": "",
-      "meaning": "to begin to",
+      "meaning": "to sit down",
       "category": [
         ""
       ]
@@ -2480,7 +2476,7 @@
       "uuid": "b07bcb58-34f0-4875-b24d-75c012b95532",
       "kana": "かざる",
       "kanji": "飾る",
-      "meaning": "to decorate, to ornament, to adorn",
+      "meaning": "to decorate",
       "category": [
         "u-v"
       ]
@@ -2504,19 +2500,19 @@
       ]
     },
     {
-      "uuid": "641d02d0-d788-4324-8966-69ec502b701f",
+      "uuid": "4e98475a-b2d2-40f8-8ee9-142b7fa9debe",
       "kana": "かぜ",
-      "kanji": "風",
-      "meaning": "wind, breeze",
+      "kanji": "風邪",
+      "meaning": "cold, illness",
       "category": [
         "n"
       ]
     },
     {
-      "uuid": "4e98475a-b2d2-40f8-8ee9-142b7fa9debe",
+      "uuid": "641d02d0-d788-4324-8966-69ec502b701f",
       "kana": "かぜ",
-      "kanji": "風邪",
-      "meaning": "cold, illness",
+      "kanji": "風",
+      "meaning": "wind, breeze",
       "category": [
         "n"
       ]
@@ -2531,21 +2527,21 @@
       ]
     },
     {
-      "uuid": "f51b8bd7-a1a5-43aa-9e9b-24f14cd1b5ef",
-      "kana": "かた",
-      "kanji": "方",
-      "meaning": "person",
-      "category": [
-        "n"
-      ]
-    },
-    {
       "uuid": "27a66f84-1a96-4390-b6d8-164b252cb2eb",
       "kana": "かた",
       "kanji": "方",
       "meaning": "way of doing",
       "category": [
         "n-suf"
+      ]
+    },
+    {
+      "uuid": "f51b8bd7-a1a5-43aa-9e9b-24f14cd1b5ef",
+      "kana": "かた",
+      "kanji": "方",
+      "meaning": "person",
+      "category": [
+        "n"
       ]
     },
     {
@@ -2596,11 +2592,10 @@
     {
       "uuid": "38b7c13c-e57d-4936-9fe0-85293033750b",
       "kana": "かっこう",
-      "kanji": "",
+      "kanji": "格好",
       "meaning": "appearance, manner",
       "category": [
-        "no--adj",
-        " na-adj"
+        "n"
       ]
     },
     {
@@ -2669,7 +2664,7 @@
     {
       "uuid": "73336840-2ead-4dcc-a3e4-18aa23b2463a",
       "kana": "かばん",
-      "kanji": "",
+      "kanji": "鞄",
       "meaning": "bag, basket",
       "category": [
         "n"
@@ -2712,19 +2707,19 @@
       ]
     },
     {
-      "uuid": "a6fafaac-fd58-464d-9e6f-3ca7073fbf82",
+      "uuid": "956592ba-7eaa-4d96-8b94-01b652c80903",
       "kana": "かみ",
-      "kanji": "紙",
-      "meaning": "paper",
+      "kanji": "髪",
+      "meaning": "hair",
       "category": [
         "n"
       ]
     },
     {
-      "uuid": "956592ba-7eaa-4d96-8b94-01b652c80903",
+      "uuid": "a6fafaac-fd58-464d-9e6f-3ca7073fbf82",
       "kana": "かみ",
-      "kanji": "髪",
-      "meaning": "hair",
+      "kanji": "紙",
+      "meaning": "paper",
       "category": [
         "n"
       ]
@@ -2742,7 +2737,7 @@
       "uuid": "bc9ef4bc-af29-4867-9384-612626ecd0ac",
       "kana": "かよう",
       "kanji": "通う",
-      "meaning": "(1) to go back and forth, (2) to commute",
+      "meaning": "to commute",
       "category": [
         "u-v"
       ]
@@ -2823,7 +2818,7 @@
     {
       "uuid": "9b27cec7-1da1-4e76-9eac-5bc2f802cec7",
       "kana": "かわいい",
-      "kanji": "",
+      "kanji": "可愛い",
       "meaning": "cute, charming",
       "category": [
         "adj"
@@ -2879,9 +2874,9 @@
     },
     {
       "uuid": "272b05cc-e5ba-4b8d-b19f-7fc7b93f9aa8",
-      "kana": "かんごふ",
-      "kanji": "看護婦",
-      "meaning": "(female) nurse",
+      "kana": "かんごし",
+      "kanji": "看護師",
+      "meaning": "nurse",
       "category": [
         "n"
       ]
@@ -2971,8 +2966,8 @@
     {
       "uuid": "08cbb7cd-559e-4462-805e-8452d08ad893",
       "kana": "きいろ",
-      "kanji": "黄色",
-      "meaning": "yellow",
+      "kanji": "黄色 ",
+      "meaning": "yellow (noun)",
       "category": [
         "n"
       ]
@@ -2981,7 +2976,7 @@
       "uuid": "f7d0c50b-b278-4b85-99c0-7589241e9365",
       "kana": "きいろい",
       "kanji": "黄色い",
-      "meaning": "yellow",
+      "meaning": "yellow (adjective)",
       "category": [
         "adj"
       ]
@@ -3065,7 +3060,7 @@
       "kanji": "北",
       "meaning": "north",
       "category": [
-        ""
+        "n"
       ]
     },
     {
@@ -3154,7 +3149,7 @@
     {
       "uuid": "a610901c-9a51-471f-bb46-3dd26b863c49",
       "kana": "きまる",
-      "kanji": "決る",
+      "kanji": "決まる",
       "meaning": "to be decided, to be settled",
       "category": [
         "u-v"
@@ -3219,7 +3214,7 @@
       "uuid": "7e2b204f-733c-4cd6-a9dc-e6eb595b0479",
       "kana": "きゅう",
       "kanji": "急",
-      "meaning": "(1) urgent, sudden, (2) steep",
+      "meaning": "sudden, steep",
       "category": [
         "adj-na",
         "n"
@@ -3238,7 +3233,7 @@
       "uuid": "fc4918db-4c74-4e27-9240-1674004a19fe",
       "kana": "きょう",
       "kanji": "今日",
-      "meaning": "today, this day",
+      "meaning": "today",
       "category": [
         "n-t"
       ]
@@ -3321,6 +3316,15 @@
       ]
     },
     {
+      "uuid": "19b98a08-ff95-4ed7-998c-d36cd3e4608b",
+      "kana": "きる",
+      "kanji": "着る",
+      "meaning": "to wear, to put on (from shoulders down)",
+      "category": [
+        "ru-v"
+      ]
+    },
+    {
       "uuid": "cb2c3ae2-5fd8-4e7d-a735-47fec9950519",
       "kana": "きる",
       "kanji": "切る",
@@ -3331,18 +3335,9 @@
       ]
     },
     {
-      "uuid": "19b98a08-ff95-4ed7-998c-d36cd3e4608b",
-      "kana": "きる",
-      "kanji": "着る",
-      "meaning": "to wear, to put on (from shoulders down)",
-      "category": [
-        "ru-v"
-      ]
-    },
-    {
       "uuid": "daf03bba-c6a9-4638-935f-cb47fda1c203",
-      "kana": "きれい",
-      "kanji": "",
+      "kana": "きれいな",
+      "kanji": "綺麗な",
       "meaning": "pretty, clean, nice, tidy",
       "category": [
         "na-adj"
@@ -3451,10 +3446,10 @@
     {
       "uuid": "049e9600-ca3b-406d-a5c3-035a53e5fe53",
       "kana": "ください",
-      "kanji": "",
+      "kanji": "下さい",
       "meaning": "(with te-form verb) please do for me",
       "category": [
-        "kana only"
+        "exp"
       ]
     },
     {
@@ -3584,15 +3579,6 @@
       ]
     },
     {
-      "uuid": "f61b5a23-cd35-46ab-a4ee-3976fa6e42f3",
-      "kana": "くれる",
-      "kanji": "",
-      "meaning": "to give, to do for",
-      "category": [
-        "ru-v"
-      ]
-    },
-    {
       "uuid": "1bcbfc46-77e8-41b0-ae49-ded20e0703b8",
       "kana": "くれる",
       "kanji": "暮れる",
@@ -3602,10 +3588,19 @@
       ]
     },
     {
+      "uuid": "f61b5a23-cd35-46ab-a4ee-3976fa6e42f3",
+      "kana": "くれる",
+      "kanji": "",
+      "meaning": "to give, to do for",
+      "category": [
+        "ru-v"
+      ]
+    },
+    {
       "uuid": "8c01fe6a-6993-4f44-bb6b-c344edabf995",
       "kana": "くろ",
       "kanji": "黒",
-      "meaning": "black",
+      "meaning": "black (noun)",
       "category": [
         "n"
       ]
@@ -3614,7 +3609,7 @@
       "uuid": "08ae6d58-a527-4e75-97a6-adadad7d24a1",
       "kana": "くろい",
       "kanji": "黒い",
-      "meaning": "black",
+      "meaning": "black (adjective)",
       "category": [
         "adj"
       ]
@@ -3696,7 +3691,7 @@
     {
       "uuid": "e0dbbe19-2198-4825-bee5-4c503a469e09",
       "kana": "けが",
-      "kanji": "",
+      "kanji": "怪我",
       "meaning": "injury (to animate object), hurt",
       "category": [
         "n",
@@ -3783,10 +3778,11 @@
     {
       "uuid": "6ff29a7c-0d6b-4f81-b2ca-07eddd50e59a",
       "kana": "けんか",
-      "kanji": "",
+      "kanji": "喧嘩",
       "meaning": "quarrel",
       "category": [
-        "n"
+        "n",
+        "vs"
       ]
     },
     {
@@ -3814,7 +3810,8 @@
       "kanji": "見物",
       "meaning": "a sight, an attraction",
       "category": [
-        "n"
+        "n",
+        "vs"
       ]
     },
     {
@@ -3847,19 +3844,19 @@
       ]
     },
     {
-      "uuid": "f41c9b9e-c6e5-44f1-976d-7c9c1317d2d2",
+      "uuid": "59ab65a0-91db-4cf7-8b44-c57c35285bbc",
       "kana": "げんかん",
       "kanji": "玄関",
-      "meaning": "entrance-way, entry hall",
+      "meaning": "entrance way (in Japanese house)",
       "category": [
         "n"
       ]
     },
     {
-      "uuid": "59ab65a0-91db-4cf7-8b44-c57c35285bbc",
+      "uuid": "f41c9b9e-c6e5-44f1-976d-7c9c1317d2d2",
       "kana": "げんかん",
       "kanji": "玄関",
-      "meaning": "entrance way (in Japanese house)",
+      "meaning": "entrance-way, entry hall",
       "category": [
         "n"
       ]
@@ -3979,7 +3976,7 @@
       "uuid": "25f82b9b-9da8-4370-8d1c-0aaa640070d0",
       "kana": "こうちょう",
       "kanji": "校長",
-      "meaning": "principal, headmaster",
+      "meaning": "principal, president (of school)",
       "category": [
         "n"
       ]
@@ -4215,7 +4212,7 @@
     {
       "uuid": "8b8306f2-6f2f-411a-a1f1-dd66dff65277",
       "kana": "こむ",
-      "kanji": "込む",
+      "kanji": "混む",
       "meaning": "to be crowded",
       "category": [
         "u-v"
@@ -4390,7 +4387,7 @@
     {
       "uuid": "5ea1a58a-d714-4a88-b32e-1090707ea194",
       "kana": "ごちそう",
-      "kanji": "",
+      "kanji": "ご馳走",
       "meaning": "feast, treating (someone)",
       "category": [
         "n",
@@ -4418,10 +4415,10 @@
     {
       "uuid": "aa74ad01-01d5-4421-8f85-e5d8e39b06ab",
       "kana": "ごらんになる",
-      "kanji": "",
+      "kanji": "ご覧になる",
       "meaning": "(hon) to see",
       "category": [
-        ""
+        "vt"
       ]
     },
     {
@@ -4947,6 +4944,15 @@
       ]
     },
     {
+      "uuid": "47956730-3a94-4aa7-a338-0af260a20696",
+      "kana": "しめる",
+      "kanji": "締める",
+      "meaning": "to tie, to fasten",
+      "category": [
+        "ru-v"
+      ]
+    },
+    {
       "uuid": "adb53a98-9313-4130-a907-84a1cff008e2",
       "kana": "しめる",
       "kanji": "閉める",
@@ -4954,15 +4960,6 @@
       "category": [
         "ru-v",
         "vt"
-      ]
-    },
-    {
-      "uuid": "47956730-3a94-4aa7-a338-0af260a20696",
-      "kana": "しめる",
-      "kanji": "締める",
-      "meaning": "to tie, to fasten",
-      "category": [
-        "ru-v"
       ]
     },
     {
@@ -5539,20 +5536,20 @@
       ]
     },
     {
-      "uuid": "b2dd4955-434a-4660-8091-7ea59c3be75e",
+      "uuid": "21078a33-5cdc-461c-911c-ab8e00376bdd",
       "kana": "すく",
       "kanji": "",
-      "meaning": "to become empty",
+      "meaning": "to be less crowded",
       "category": [
         "u-v",
         "vi"
       ]
     },
     {
-      "uuid": "21078a33-5cdc-461c-911c-ab8e00376bdd",
+      "uuid": "b2dd4955-434a-4660-8091-7ea59c3be75e",
       "kana": "すく",
       "kanji": "",
-      "meaning": "to be less crowded",
+      "meaning": "to become empty",
       "category": [
         "u-v",
         "vi"
@@ -5988,21 +5985,21 @@
       ]
     },
     {
-      "uuid": "5f20c365-5285-4de1-84a5-abe6871007f7",
-      "kana": "そう",
-      "kanji": "",
-      "meaning": "appears, to be the case",
-      "category": [
-        ""
-      ]
-    },
-    {
       "uuid": "44fedc5e-f2bf-4fe0-8b67-01e3cf08b59d",
       "kana": "そう",
       "kanji": "",
       "meaning": "really",
       "category": [
         "adv"
+      ]
+    },
+    {
+      "uuid": "5f20c365-5285-4de1-84a5-abe6871007f7",
+      "kana": "そう",
+      "kanji": "",
+      "meaning": "appears, to be the case",
+      "category": [
+        ""
       ]
     },
     {
@@ -6269,10 +6266,10 @@
       ]
     },
     {
-      "uuid": "6d89dd4b-ed9d-4406-b841-e7d07db55b75",
+      "uuid": "6bea18aa-5450-4cc7-8bc1-7094fb34e935",
       "kana": "たいへん",
       "kanji": "",
-      "meaning": "very",
+      "meaning": "difficult situation, tough situation",
       "category": [
         "na-adj",
         "adv",
@@ -6280,10 +6277,10 @@
       ]
     },
     {
-      "uuid": "6bea18aa-5450-4cc7-8bc1-7094fb34e935",
+      "uuid": "6d89dd4b-ed9d-4406-b841-e7d07db55b75",
       "kana": "たいへん",
       "kanji": "",
-      "meaning": "difficult situation, tough situation",
+      "meaning": "very",
       "category": [
         "na-adj",
         "adv",
@@ -7006,19 +7003,19 @@
       ]
     },
     {
-      "uuid": "9ceafd65-aaf3-482f-810c-755248d74586",
+      "uuid": "1f97f75f-e0f4-4a30-b94a-ea3d5af7cf65",
       "kana": "つける",
-      "kanji": "",
-      "meaning": "to take",
+      "kanji": "漬ける",
+      "meaning": "to soak, to moisten, to pickle",
       "category": [
         "ru-v"
       ]
     },
     {
-      "uuid": "1f97f75f-e0f4-4a30-b94a-ea3d5af7cf65",
+      "uuid": "9ceafd65-aaf3-482f-810c-755248d74586",
       "kana": "つける",
-      "kanji": "漬ける",
-      "meaning": "to soak, to moisten, to pickle",
+      "kanji": "",
+      "meaning": "to take",
       "category": [
         "ru-v"
       ]
@@ -7374,19 +7371,19 @@
       ]
     },
     {
-      "uuid": "b423faee-d1e2-448e-a598-655fe2417d3a",
+      "uuid": "406cfc8d-39a0-474a-97a3-43634dc400b9",
       "kana": "と",
-      "kanji": "戸",
-      "meaning": "door (Japanese style)",
+      "kanji": "都",
+      "meaning": "metropolitan city",
       "category": [
         "n"
       ]
     },
     {
-      "uuid": "406cfc8d-39a0-474a-97a3-43634dc400b9",
+      "uuid": "b423faee-d1e2-448e-a598-655fe2417d3a",
       "kana": "と",
-      "kanji": "都",
-      "meaning": "metropolitan city",
+      "kanji": "戸",
+      "meaning": "door (Japanese style)",
       "category": [
         "n"
       ]
@@ -7580,19 +7577,19 @@
       ]
     },
     {
-      "uuid": "da548dc6-3911-4374-8082-a43f2c94c6a4",
+      "uuid": "c93244d1-e28b-400b-9511-ac9142fc31ad",
       "kana": "とまる",
-      "kanji": "止まる",
-      "meaning": "to come to a halt",
+      "kanji": "泊まる",
+      "meaning": "to stay at (eg. hotel)",
       "category": [
         "u-v"
       ]
     },
     {
-      "uuid": "c93244d1-e28b-400b-9511-ac9142fc31ad",
+      "uuid": "da548dc6-3911-4374-8082-a43f2c94c6a4",
       "kana": "とまる",
-      "kanji": "泊まる",
-      "meaning": "to stay at (eg. hotel)",
+      "kanji": "止まる",
+      "meaning": "to come to a halt",
       "category": [
         "u-v"
       ]
@@ -7644,19 +7641,19 @@
       ]
     },
     {
-      "uuid": "3411b4e9-7177-46b5-a26d-01ac9884429f",
+      "uuid": "0097befb-a6e7-4d77-90cd-28d356be53d0",
       "kana": "とる",
-      "kanji": "取る",
-      "meaning": "to take",
+      "kanji": "撮る",
+      "meaning": "to take (a photo)",
       "category": [
         "u-v"
       ]
     },
     {
-      "uuid": "0097befb-a6e7-4d77-90cd-28d356be53d0",
+      "uuid": "3411b4e9-7177-46b5-a26d-01ac9884429f",
       "kana": "とる",
-      "kanji": "撮る",
-      "meaning": "to take (a photo)",
+      "kanji": "取る",
+      "meaning": "to take",
       "category": [
         "u-v"
       ]
@@ -7889,19 +7886,19 @@
       ]
     },
     {
-      "uuid": "c2d99e83-d1c4-4586-9f3c-797368a446a4",
+      "uuid": "259dda26-6de6-4ac6-abe8-d9710a61edf4",
       "kana": "なく",
-      "kanji": "鳴く",
-      "meaning": "to sing (bird), to make sound (animal)",
+      "kanji": "泣く",
+      "meaning": "to cry, to weep",
       "category": [
         "u-v"
       ]
     },
     {
-      "uuid": "259dda26-6de6-4ac6-abe8-d9710a61edf4",
+      "uuid": "c2d99e83-d1c4-4586-9f3c-797368a446a4",
       "kana": "なく",
-      "kanji": "泣く",
-      "meaning": "to cry, to weep",
+      "kanji": "鳴く",
+      "meaning": "to sing (bird), to make sound (animal)",
       "category": [
         "u-v"
       ]
@@ -7916,19 +7913,19 @@
       ]
     },
     {
-      "uuid": "da9a5cdb-d24b-4bec-ae6c-24b3f8aa90ca",
+      "uuid": "71a935e6-180a-4d92-8853-dcd4ab585e3b",
       "kana": "なくなる",
-      "kanji": "無くなる",
-      "meaning": "to disappear, to get lost",
+      "kanji": "亡くなる",
+      "meaning": "to die",
       "category": [
         "u-v"
       ]
     },
     {
-      "uuid": "71a935e6-180a-4d92-8853-dcd4ab585e3b",
+      "uuid": "da9a5cdb-d24b-4bec-ae6c-24b3f8aa90ca",
       "kana": "なくなる",
-      "kanji": "亡くなる",
-      "meaning": "to die",
+      "kanji": "無くなる",
+      "meaning": "to disappear, to get lost",
       "category": [
         "u-v"
       ]
@@ -8046,19 +8043,19 @@
       ]
     },
     {
-      "uuid": "613183c6-09ab-4aaf-a245-945af1d69a96",
+      "uuid": "078eff95-b8d4-42bd-a3dc-6c8e0b4add29",
       "kana": "なる",
-      "kanji": "",
-      "meaning": "to become",
+      "kanji": "鳴る",
+      "meaning": "to sound, to ring, to resound",
       "category": [
         "u-v"
       ]
     },
     {
-      "uuid": "078eff95-b8d4-42bd-a3dc-6c8e0b4add29",
+      "uuid": "613183c6-09ab-4aaf-a245-945af1d69a96",
       "kana": "なる",
-      "kanji": "鳴る",
-      "meaning": "to sound, to ring, to resound",
+      "kanji": "",
+      "meaning": "to become",
       "category": [
         "u-v"
       ]
@@ -8728,19 +8725,19 @@
       ]
     },
     {
-      "uuid": "5ba04bb1-64a9-4f0f-ac91-e8cf70c80e7b",
+      "uuid": "5494b430-58e7-40ec-b80f-853406c1b3f6",
       "kana": "はやい",
-      "kanji": "早い",
-      "meaning": "early",
+      "kanji": "速い",
+      "meaning": "quick, fast",
       "category": [
         "adj"
       ]
     },
     {
-      "uuid": "5494b430-58e7-40ec-b80f-853406c1b3f6",
+      "uuid": "5ba04bb1-64a9-4f0f-ac91-e8cf70c80e7b",
       "kana": "はやい",
-      "kanji": "速い",
-      "meaning": "quick, fast",
+      "kanji": "早い",
+      "meaning": "early",
       "category": [
         "adj"
       ]
@@ -9270,15 +9267,6 @@
       ]
     },
     {
-      "uuid": "8fd070b2-edd7-4e01-8ff2-08db61902251",
-      "kana": "ふく",
-      "kanji": "吹く",
-      "meaning": "to blow (wind, etc)",
-      "category": [
-        "u-v"
-      ]
-    },
-    {
       "uuid": "0390fbf7-e2d6-4d5b-bb8a-5a1e732f2462",
       "kana": "ふく",
       "kanji": "服",
@@ -9286,6 +9274,15 @@
       "category": [
         "n",
         "n-suf"
+      ]
+    },
+    {
+      "uuid": "8fd070b2-edd7-4e01-8ff2-08db61902251",
+      "kana": "ふく",
+      "kanji": "吹く",
+      "meaning": "to blow (wind, etc)",
+      "category": [
+        "u-v"
       ]
     },
     {
@@ -10376,7 +10373,7 @@
       "uuid": "c8ffe23f-b5ac-407f-9bbf-8084acf520a1",
       "kana": "もう",
       "kanji": "",
-      "meaning": "again",
+      "meaning": "another",
       "category": [
         "adv",
         "int"
@@ -10882,15 +10879,6 @@
       ]
     },
     {
-      "uuid": "a539c11d-e302-43f6-a328-1b71fdfb1374",
-      "kana": "よう",
-      "kanji": "様",
-      "meaning": "way, manner, kind",
-      "category": [
-        "adj-na"
-      ]
-    },
-    {
       "uuid": "3709bf1e-7df1-4e06-b30d-c5698f33e6aa",
       "kana": "よう",
       "kanji": "用",
@@ -10898,6 +10886,15 @@
       "category": [
         "n",
         "n-suf"
+      ]
+    },
+    {
+      "uuid": "a539c11d-e302-43f6-a328-1b71fdfb1374",
+      "kana": "よう",
+      "kanji": "様",
+      "meaning": "way, manner, kind",
+      "category": [
+        "adj-na"
       ]
     },
     {
@@ -11040,21 +11037,21 @@
       ]
     },
     {
-      "uuid": "a60ec4a7-52c0-4611-abea-8b9ac26cdd20",
-      "kana": "よる",
-      "kanji": "夜",
-      "meaning": "evening, night",
-      "category": [
-        "n"
-      ]
-    },
-    {
       "uuid": "548569a0-7185-4129-9b2a-81cbb75f24dc",
       "kana": "よる",
       "kanji": "寄る",
       "meaning": "to visit, to drop in",
       "category": [
         "u-v"
+      ]
+    },
+    {
+      "uuid": "a60ec4a7-52c0-4611-abea-8b9ac26cdd20",
+      "kana": "よる",
+      "kanji": "夜",
+      "meaning": "evening, night",
+      "category": [
+        "n"
       ]
     },
     {
@@ -12458,21 +12455,21 @@
       ]
     },
     {
-      "uuid": "ee0851cb-a9f2-4597-86d2-d7c89d0db06a",
-      "kana": "～かい",
-      "kanji": "～階",
-      "meaning": "counter for storeys of a building",
-      "category": [
-        "n"
-      ]
-    },
-    {
       "uuid": "72884980-3308-40d5-8eb0-9d68dbf6a18c",
       "kana": "～かい",
       "kanji": "～会",
       "meaning": "～ meeting",
       "category": [
         ""
+      ]
+    },
+    {
+      "uuid": "ee0851cb-a9f2-4597-86d2-d7c89d0db06a",
+      "kana": "～かい",
+      "kanji": "～階",
+      "meaning": "counter for storeys of a building",
+      "category": [
+        "n"
       ]
     },
     {

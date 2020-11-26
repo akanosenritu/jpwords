@@ -26,7 +26,7 @@ export const DrawerBase: React.FC<DrawerBaseProps> = props => {
     variant={"persistent"} anchor={"right"} open={props.isOpen}
   >
     <Box className={classes.drawer} p={1}>
-      <Box display={"flex"} justifyContent={"right"} className={classes.drawerHeader}>
+      <Box display={"flex"} justifyContent={"left"} className={classes.drawerHeader}>
         <IconButton onClick={props.onClose}>
           <ChevronRightIcon/>
         </IconButton>

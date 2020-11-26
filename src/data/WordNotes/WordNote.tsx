@@ -5,11 +5,13 @@ import {Box, Button, Typography} from "@material-ui/core";
 import wordNotesData from "./wordNotes.json";
 import {WordType} from "../Word";
 import {initialConfigurations, useConfigurations} from "../Storage/Configurations";
+import {PrintMarkDown} from "../../General/Components/PrintMarkDown";
 
 const prepareWordNotes = () => {
   const wordNotes =  wordNotesData["wordNotes"] as WordNoteType[];
   let wordNotesByWord: {[key: string]: WordNoteType[]} = {};
   let wordNotesByCategory: {[key: string]: WordNoteType[]} = {};
+  let wordNotesByUUID: {[key: string]: WordNoteType} = {};
   for (let wordNote of wordNotes) {
     const associatedWords = wordNote.associatedWords;
     const associatedCategories = wordNote.associatedCategories;
@@ -31,67 +33,39 @@ const prepareWordNotes = () => {
         }
       }
     }
+    wordNotesByUUID[wordNote.id] = wordNote;
   }
-  return [wordNotesByWord, wordNotesByCategory]
+  return [wordNotesByWord, wordNotesByCategory, wordNotesByUUID] as const;
 }
 
-const [availableWordNotesByWord, availableWordNotesByCategory] = prepareWordNotes();
-console.log(availableWordNotesByWord, availableWordNotesByCategory);
+const [availableWordNotesByWord, availableWordNotesByCategory, availableWordNotesByUUID] = prepareWordNotes();
+export const wordNotesDataLastEditDate = wordNotesData.lastEdit;
+export {availableWordNotesByWord, availableWordNotesByCategory, availableWordNotesByUUID};
 
 export type WordNoteType = {
   id: string
   associatedWords?: string[]  // in the form of uuids
   associatedCategories?: string[]  // in the form of category names
   title: string,
-  description?: string
+  description?: string,
+  content: string
 };
-
-let wordNotesContentsData: {[key: string]: string}|null = null;
-
-const getWordNotesContentData = async () => {
-  const contentsData = await fetch(wordNotesContentURL).then(res => res.text());
-  const result: {[key: string]: string} = {};
-  contentsData.split("!!!:").forEach(contentData => {
-    const split = contentData.split(":!!!");
-    const id = split[0]
-    result[id] = split[1];
-  })
-  return result;
-}
-
-const getWordNoteContent = async (wordNoteId: string) => {
-  if (!wordNotesContentsData) {
-     wordNotesContentsData = await getWordNotesContentData();
-  }
-  console.log("wordnotescontentdata", wordNotesContentsData)
-  return wordNotesContentsData[wordNoteId];
-}
 
 type WordNoteProps = {
   wordNote: WordNoteType
 }
 
-const WordNote: React.FC<WordNoteProps> = (props) => {
-  const [content, setContent] = useState<string>("");
+export const WordNote: React.FC<WordNoteProps> = (props) => {
   const {configurations} = useConfigurations(initialConfigurations);
   const [wordNoteHiddenStatus, setWordNoteHiddenStatus] = useState<boolean>(configurations.hideWordNotes);
-  useEffect(() => {
-    getWordNoteContent(props.wordNote.id).then(content => {
-      console.log("loaded word note contents", content);
-      setContent(content)
-    });
-  }, [content, props.wordNote.id, setContent]);
   return <Box m={1}>
-    <p style={{borderLeft: "3px solid lightgray", paddingLeft: 10}} onClick={()=>setWordNoteHiddenStatus(false)}>
+    <p style={{borderLeft: "3px solid lightgray", paddingLeft: 10}} onClick={()=>setWordNoteHiddenStatus(!wordNoteHiddenStatus)}>
       <Typography variant={"subtitle1"}>{props.wordNote.title.toUpperCase()}</Typography>
     </p>
     {!wordNoteHiddenStatus && <>
       <Box style={{fontSize: 14}}>
-        <ReactMarkDown>{content}</ReactMarkDown>
+        <PrintMarkDown content={props.wordNote.content} />
       </Box>
-      <div style={{display: "flex", justifyContent: "center"}}>
-        <Button color={"secondary"} variant={"outlined"} onClick={() => setWordNoteHiddenStatus(true)}>Hide</Button>
-      </div>
     </>
     }
   </Box>

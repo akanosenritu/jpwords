@@ -1,5 +1,4 @@
 import React from "react";
-import {WordType} from "../data/Word";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,16 +7,16 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from "@material-ui/core/TablePagination";
 import {Button} from "@material-ui/core";
+import {WordNoteType} from "../../data/WordNotes/WordNote";
 
-const columns = ["UUID", "Kanji", "Kana", "Meaning", "Category", "Actions"]
+const columns = ["ID", "Title", "A. Words", "A. Categories", "Actions"]
 
-type WordsTableProps = {
-  words: WordType[],
-  onClickOpenEditor: (word: WordType) => void,
-  onClickOpenInspector: (word: WordType) => void,
+type WordNotesTableProps = {
+  wordNotes: WordNoteType[],
+  onClickOpenEditor: (wordNote: WordNoteType) => void
 }
 
-export const WordsTable: React.FC<WordsTableProps> = props => {
+export const WordNotesTable: React.FC<WordNotesTableProps> = props => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -36,16 +35,14 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {props.words.slice(page * rowsPerPage, page*rowsPerPage+rowsPerPage).map(word => (
-          <TableRow key={word.uuid}>
-            <TableCell>{word.uuid}</TableCell>
-            <TableCell>{word.kanji}</TableCell>
-            <TableCell>{word.kana}</TableCell>
-            <TableCell>{word.meaning}</TableCell>
-            <TableCell>{word.category.join(",")}</TableCell>
+        {props.wordNotes.slice(page * rowsPerPage, page*rowsPerPage+rowsPerPage).map(wordNote => (
+          <TableRow key={wordNote.id}>
+            <TableCell>{wordNote.id}</TableCell>
+            <TableCell>{wordNote.title}</TableCell>
+            <TableCell>{wordNote.associatedWords? wordNote.associatedWords.length: 0}</TableCell>
+            <TableCell>{wordNote.associatedCategories? wordNote.associatedCategories.length: 0}</TableCell>
             <TableCell>
-              <Button style={{padding: 0}} size={"small"} onClick={() => props.onClickOpenEditor(word)}>EDIT</Button>
-              <Button style={{padding: 0}} size={"small"} onClick={() => props.onClickOpenInspector(word)}>INSPECT</Button>
+              <Button style={{padding: 0}} size={"small"} onClick={() => props.onClickOpenEditor(wordNote)}>EDIT</Button>
             </TableCell>
           </TableRow>
         ))}
@@ -53,7 +50,7 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
       <TablePagination
         style={{width: 500}}
         component="div"
-        count={props.words.length}
+        count={props.wordNotes.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

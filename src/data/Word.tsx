@@ -3,7 +3,7 @@ import * as wanakana from "wanakana";
 import {fit} from "furigana";
 import wordData from "./words.json";
 
-const prepareAvailableWords = () => {
+const prepareAvailableWords = (): {[key: string]: WordType}  => {
   let availableWords: { [key: string]: WordType } = {};
   for (let wordDatum of wordData.words) {
     const word: WordType = {
@@ -22,10 +22,10 @@ export const availableWords = prepareAvailableWords();
 export const wordsDataLastEditDate = wordData.lastEdit;
 
 export const categoryList = [
-  '', ' intrans-verb', ' na-adj', ' vs', 'adj', 'adj-na', 'adj-no', 'adj-pn', 'adjn', 'adv', 'aru-v', 'conj', 'exp', 'expr',
+  '', ' intrans-verb', ' na-adj', 'vs', 'adj', 'adj-na', 'adj-no', 'adj-pn', 'adjn', 'adv', 'aru-v', 'conj', 'exp', 'expr',
   'giku n', 'gn', 'gn-adv', 'int', 'int-n', 'kana only', 'n', 'n col', 'n-adv', 'n-suf', 'n-t', 'n-temp', 'na-adj', 'no--adj',
   'no-adj', 'num', 'number', 'p-suru', 'pref', 'prefix', 'pren-adj', 'prt', 'ru-v', 'suf', 'u-v', 'u-v-i', 'uk', 'v5b', 'v5n',
-  'vi', 'vk', 'vs', 'vs-i', 'vt'
+  'vi', 'vk', 'vs-i', 'vt'
 ] as const;
 
 type CategoryTuple = typeof categoryList;

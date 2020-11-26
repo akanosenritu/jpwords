@@ -4,6 +4,7 @@ import {loadPracticeHistory} from "../../data/Storage/PracticeHistory";
 import {WordList} from "../../data/WordList";
 import {PieChart} from 'react-minimal-pie-chart';
 import {getColors} from "../Styles";
+import {useHistory} from "react-router-dom";
 
 type ChartProps = {
   reviewed: number,
@@ -51,6 +52,7 @@ type PracticeWordListViewResultProps = {
 
 export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProps> = (props) => {
   const practiceHistory = loadPracticeHistory();
+  const browserHistory = useHistory();
   let countReviewed = 0;
   let countNeedsReview = 0;
   let countUntouched = 0;
@@ -122,7 +124,10 @@ export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProp
     </div>
     <div>
       <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} mt={2}>
-        <Button variant={"outlined"} color={"primary"} onClick={props.continuePractice}>Continue</Button>
+        {countReviewed !== props.wordList.words.length ?
+          <Button variant={"outlined"} color={"primary"} onClick={props.continuePractice}>Continue</Button> :
+          <Button variant={"outlined"} color={"primary"} onClick={()=>browserHistory.go(0)}>Return to selection</Button>
+        }
       </Box>
     </div>
   </Box>
