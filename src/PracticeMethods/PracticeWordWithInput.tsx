@@ -1,12 +1,11 @@
 import React, {ChangeEvent,  useState, useMemo} from "react";
-import {DisplayWordWithFurigana, evaluateAnswer, isPossibleToMakeVerbWithSuru, WordType} from "../data/Word";
+import {DisplayWordWithFurigana, evaluateAnswer, WordType} from "../data/Word";
 import {Box, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import * as wanakana from "wanakana";
 import {getColors} from "../WordsView/Styles";
-import {ShowDerivatives} from "../WordsView/PracticeWordList/Trainer/ShowDerivatives";
 
 const useStyles = makeStyles({
   answerInput: {
@@ -135,6 +134,5 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
         {status === "WRONG INPUT" && <ErrorOutlineIcon className={styles.answerInputIcon} style={{color: main}} />}
       </div>
     </Box>
-    {status === "CORRECT INPUT" && <Box mt={2}><ShowDerivatives word={props.word} /></Box>}
-  </div>
+   </div>
 }

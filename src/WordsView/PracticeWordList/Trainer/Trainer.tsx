@@ -7,7 +7,6 @@ import {DebugContext} from "../../Contexts";
 import {WordNotes} from "../../../data/WordNotes/WordNote";
 import ReportIcon from '@material-ui/icons/Report';
 import {ReportProblem} from "../ReportProblem";
-import {ShowDerivatives} from "./ShowDerivatives";
 
 type PracticeViewBaseProps = {
   words: WordType[],
