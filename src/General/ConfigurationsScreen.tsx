@@ -1,16 +1,21 @@
 import React, {useState} from "react";
 import {
-  Box, Button,
+  Button,
   Checkbox,
   Dialog,
   DialogContent,
-  FormControlLabel,
   IconButton,
   Typography
 } from "@material-ui/core";
 import SettingsIcon from '@material-ui/icons/Settings';
 import {useFormik} from "formik";
 import {initialConfigurations, useConfigurations} from "../data/Storage/Configurations";
+import {Header} from "./Components/Header";
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 export const ConfigurationsEntry: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -44,9 +49,16 @@ const ConfigurationsScreen: React.FC<ConfigurationsScreenProps> = (props) => {
   return <Dialog onClose={props.onClose} open={props.isOpen}>
     <DialogContent>
       <form onSubmit={formik.handleSubmit}>
-        <Box style={{borderLeft: "5px solid lightgray", paddingLeft: 10}}>
-          <Typography variant={"h6"}>Word Practice Settings</Typography>
-        </Box>
+        <Header content={"Language"} />
+        <div style={{paddingLeft: 10}}>
+          <FormControl component="fieldset">
+            <RadioGroup row={true} name="language" value={formik.values.language} onChange={formik.handleChange}>
+              <FormControlLabel value="ESP" control={<Radio />} label="Español" />
+              <FormControlLabel value="ENG" control={<Radio />} label="English" />
+            </RadioGroup>
+          </FormControl>
+        </div>
+        <Header content={"Word Practice Settings"} />
         <div style={{paddingLeft: 10}}>
           <FormControlLabel
             control={<Checkbox

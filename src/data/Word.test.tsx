@@ -14,7 +14,7 @@ export const wordTypeExamples = [
     uuid: "22d662b7-98a9-4ef6-b8b7-1763d33f2e2d",
     kanji: "意味",
     kana: "いみ",
-    category: ["vs"] as Category[],
+    category: ["n-vs"] as Category[],
     meaning: "meaning"
   },
   {
@@ -70,7 +70,7 @@ describe("test integrity of word.json", () => {
     }
   })
 
-  test.each(availableWordLists)("confirm every word in the word list is present in words.json", (wordList: WordList) => {
+  test.each(availableWordLists["ENG"])("confirm every word in the word list is present in words.json", (wordList: WordList) => {
     for (let word of wordList.words) {
       expect(word).toBeDefined();
     }

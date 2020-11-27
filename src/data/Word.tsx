@@ -107,10 +107,6 @@ export const prepareWordV2: (arr: string[]) => WordType[] = arr => {
   }) as WordType[]
 }
 
-export const isPossibleToMakeVerbWithSuru = (word: WordType) => {
-  return word.category.includes("n-vs")
-}
-
 export const getDerivatives = (word: WordType) => {
   type Derivative = {
     type: string,

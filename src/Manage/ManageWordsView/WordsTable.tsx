@@ -67,7 +67,7 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
               <TableCell key={word.kana}>{word.kana}</TableCell>
               <TableCell key={word.meaning}>{word.meaning}</TableCell>
               <TableCell key={word.category.join(", ")}>{word.category.join(",")}</TableCell>
-              <TableCell key={"Word lists"}>{searchWordInAvailableWordLists(word).map(wordList => wordList.name).join(", ")}</TableCell>
+              <TableCell key={"Word lists"}>{searchWordInAvailableWordLists(word, "ENG").map(wordList => wordList.name).join(", ")}</TableCell>
               <TableCell>
                 {props.actionButtons.map(actionButton => {
                   return <Button style={{padding: 0}} size={"small"} onClick={()=>actionButton.action(word)}>{actionButton.buttonName}</Button>

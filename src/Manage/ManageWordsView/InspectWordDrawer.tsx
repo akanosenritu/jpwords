@@ -20,7 +20,7 @@ const Inspector: React.FC<InspectorProps> = (props) => {
       <Typography variant={"h6"}>Word lists using this word</Typography>
     </Box>
     <List>
-      {searchWordInAvailableWordLists(props.word).map(wordList => {
+      {searchWordInAvailableWordLists(props.word, "ENG").map(wordList => {
         return <ListItem button>
           <ListItemText>
             <Typography variant={"body1"} display={"inline"}>{wordList.name}</Typography>:

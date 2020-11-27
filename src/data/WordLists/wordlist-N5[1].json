@@ -1,5 +1,6 @@
 {
   "name": "N5",
+  "language": "ENG",
   "version": 1,
   "description": "Based on N5 word list retrieved from https://jlptstudy.net/N5/?vocab-list",
   "wordCount": 726,
