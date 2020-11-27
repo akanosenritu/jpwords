@@ -5,6 +5,7 @@ const CURRENT_VERSION = 0.2
 
 type Configurations = {
   autoContinueNextWord: boolean,
+  hardMode: boolean,
   hideWordNotes: boolean,
   language: Language,
   version: number
@@ -12,6 +13,7 @@ type Configurations = {
 
 export const initialConfigurations = {
   autoContinueNextWord: false,
+  hardMode: false,
   hideWordNotes: false,
   language: "ENG" as Language,
   version: 0.2
@@ -20,7 +22,7 @@ export const initialConfigurations = {
 export const useConfigurations = (initialConfiguration: Configurations) => {
   let [configurations, setConfigurations] = useConfigurationsState(initialConfiguration);
   if (configurations.version !== CURRENT_VERSION) {
-    configurations = initialConfiguration
+    configurations = Object.assign(initialConfigurations, configurations)
   }
   return {
     configurations,

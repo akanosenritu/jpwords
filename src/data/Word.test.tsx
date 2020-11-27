@@ -1,5 +1,5 @@
 import {availableWords, Category, categoryList, evaluateAnswer, isAnswerCorrect} from "./Word";
-import {availableWordLists, WordList} from "./WordList";
+import {getAvailableWordLists, WordList} from "./WordList";
 import wordData from "./words.json";
 
 export const wordTypeExamples = [
@@ -70,7 +70,7 @@ describe("test integrity of word.json", () => {
     }
   })
 
-  test.each(availableWordLists["ENG"])("confirm every word in the word list is present in words.json", (wordList: WordList) => {
+  test.each(getAvailableWordLists("ENG"))("confirm every word in the word list is present in words.json", (wordList: WordList) => {
     for (let word of wordList.words) {
       expect(word).toBeDefined();
     }

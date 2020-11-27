@@ -1,5 +1,5 @@
 {
-  "lastEdit": "2020-11-26T16:40:03.592Z",
+  "lastEdit": "2020-11-27T00:26:52.917Z",
   "words": [
     {
       "uuid": "b9fae1d0-916e-4dfe-a044-17fa99b6de70",
@@ -384,7 +384,6 @@
       "kanji": "後",
       "meaning": "afterwards, since then, in the future",
       "category": [
-        
         "n"
       ]
     },
@@ -1282,7 +1281,6 @@
       "kanji": "売り場",
       "meaning": "place where things are sold",
       "category": [
-        
         "n"
       ]
     },
@@ -3240,7 +3238,6 @@
       "kanji": "教育",
       "meaning": "training, education",
       "category": [
-        
         "n",
         "n-vs"
       ]
@@ -3747,7 +3744,6 @@
       "kanji": "結婚",
       "meaning": "marriage",
       "category": [
-        
         "n",
         "n-vs"
       ]
@@ -4442,7 +4438,6 @@
       "kanji": "最近",
       "meaning": "latest, most recent, nowadays",
       "category": [
-        
         "n-adv",
         "n-t"
       ]
@@ -4462,7 +4457,6 @@
       "kanji": "最初",
       "meaning": "beginning, first",
       "category": [
-        
         "n-adv",
         "n-t"
       ]
@@ -4786,7 +4780,6 @@
       "kanji": "仕事",
       "meaning": "work, occupation, employment",
       "category": [
-        
         "n"
       ]
     },
@@ -4853,7 +4846,6 @@
       "kanji": "失敗",
       "meaning": "failure, mistake, blunder",
       "category": [
-        
         "n",
         "n-vs"
       ]
@@ -5341,7 +5333,7 @@
     {
       "uuid": "89a42b16-9d15-4f2e-bad0-c32d24629493",
       "kana": "じゃま",
-      "kanji": "",
+      "kanji": "邪魔",
       "meaning": "hindrance, intrusion",
       "category": [
         "n-adj-na",
@@ -6389,7 +6381,7 @@
     {
       "uuid": "4d3d2051-b9ef-4a35-a6df-12845d3878ab",
       "kana": "たて",
-      "kanji": "",
+      "kanji": "縦",
       "meaning": "length, height",
       "category": [
         "n"
@@ -6461,7 +6453,7 @@
     {
       "uuid": "b16425dd-c52e-4e14-b2b6-b3083d59ffd7",
       "kana": "たのしむ",
-      "kanji": "楽む",
+      "kanji": "楽しむ",
       "meaning": "to enjoy oneself",
       "category": [
         "u-v"
@@ -6479,7 +6471,7 @@
     {
       "uuid": "4364c95f-3930-481f-bcee-e85ac6021291",
       "kana": "たばこ",
-      "kanji": "",
+      "kanji": "煙草",
       "meaning": "tobacco, cigarettes",
       "category": [
         "n"
@@ -6488,7 +6480,7 @@
     {
       "uuid": "bfc2ba69-d444-4302-8258-53a3c753070d",
       "kana": "たぶん",
-      "kanji": "",
+      "kanji": "多分",
       "meaning": "perhaps, probably",
       "category": [
         "adv",
@@ -6517,7 +6509,7 @@
       "uuid": "7e03e57c-93b2-4ca3-9759-d5a757519bf8",
       "kana": "たまご",
       "kanji": "卵",
-      "meaning": "egg(s)",
+      "meaning": "egg",
       "category": [
         "n"
       ]
@@ -6536,7 +6528,7 @@
       "uuid": "34c2541f-15cb-48fd-9c32-046d15e437a4",
       "kana": "ため",
       "kanji": "為",
-      "meaning": "good, advantage, in order to",
+      "meaning": "in order to",
       "category": [
         "n"
       ]
@@ -6581,7 +6573,7 @@
       "uuid": "b777b1bb-9d80-4091-a7d7-53f91eede9b1",
       "kana": "だいじ",
       "kanji": "大事",
-      "meaning": "important, valuable, serious matter",
+      "meaning": "important matter",
       "category": [
         "n-adj-na",
         "n"
@@ -6593,7 +6585,6 @@
       "kanji": "大丈夫",
       "meaning": "safe, all right, O.K.",
       "category": [
-        "na-adj",
         "adv",
         "n"
       ]
@@ -6604,8 +6595,8 @@
       "kanji": "大好き",
       "meaning": "very likeable, like very much",
       "category": [
-        "na-adj",
-        "n"
+        "n",
+        "n-adj-na"
       ]
     },
     {
@@ -6657,7 +6648,7 @@
     {
       "uuid": "d2312a5d-f69b-4c02-a850-50bcbafc3edc",
       "kana": "だめ",
-      "kanji": "",
+      "kanji": "駄目",
       "meaning": "useless, no good, hopeless",
       "category": [
         "n-adj-na",
@@ -6823,7 +6814,7 @@
     {
       "uuid": "541cb00a-f6c8-4d8f-8eee-872f36982ff0",
       "kana": "ちゃわん",
-      "kanji": "",
+      "kanji": "茶碗",
       "meaning": "rice bowl",
       "category": [
         "n"
@@ -6833,7 +6824,7 @@
       "uuid": "13f8ac89-0adf-40a5-b58c-f4a390f3872b",
       "kana": "ちゅうい",
       "kanji": "注意",
-      "meaning": "caution, being careful, attention (heed)",
+      "meaning": "caution, attention (heed)",
       "category": [
         "n",
         "n-vs"
@@ -6843,7 +6834,7 @@
       "uuid": "053c4e74-1102-4091-88c6-3c39081ad3f2",
       "kana": "ちゅうがっこう",
       "kanji": "中学校",
-      "meaning": "junior high school, middle school pupil",
+      "meaning": "junior high school",
       "category": [
         "n"
       ]
@@ -6934,7 +6925,7 @@
     {
       "uuid": "d9908112-cf2c-4a28-b5e7-64a0005aff5a",
       "kana": "つき",
-      "kanji": "",
+      "kanji": "月",
       "meaning": "moon",
       "category": [
         "n-suf"
@@ -6989,7 +6980,7 @@
     {
       "uuid": "10e79782-c619-40ec-9862-549b95b46ede",
       "kana": "つける",
-      "kanji": "",
+      "kanji": "点ける",
       "meaning": "to turn on (eg a light)",
       "category": [
         "ru-v",
@@ -7101,7 +7092,7 @@
     {
       "uuid": "a10124eb-a90c-403b-aa28-bb856b587296",
       "kana": "つもり",
-      "kanji": "",
+      "kanji": "積もり",
       "meaning": "intention, plan",
       "category": [
         "n"
@@ -7278,7 +7269,7 @@
       "kanji": "",
       "meaning": "if at all possible, as much as possible",
       "category": [
-        ""
+        "n-adv"
       ]
     },
     {
@@ -7415,7 +7406,6 @@
       "kanji": "遠く",
       "meaning": "far away, distant",
       "category": [
-        
         "n-adv",
         "n"
       ]
@@ -7480,7 +7470,7 @@
     {
       "uuid": "14723dd5-1c97-4f0c-a719-2065cae49be5",
       "kana": "とこや",
-      "kanji": "",
+      "kanji": "床屋",
       "meaning": "barber",
       "category": [
         "n"
@@ -7628,7 +7618,7 @@
     {
       "uuid": "cd6700d3-c33c-4eeb-9333-b64b52380ea7",
       "kana": "とりにく",
-      "kanji": "とり肉",
+      "kanji": "鶏肉",
       "meaning": "chicken meat",
       "category": [
         "n"
@@ -9324,7 +9314,6 @@
       "meaning": "(1) generally, ordinarily, usually, (2) train that stops at every station",
       "category": [
         "n-adj-na",
-        
         "adv",
         "n"
       ]
@@ -10238,7 +10227,6 @@
       "kanji": "昔",
       "meaning": "olden days, former",
       "category": [
-        
         "n-adv",
         "n-t"
       ]
@@ -11351,7 +11339,6 @@
       "kanji": "私",
       "meaning": "I, myself",
       "category": [
-        
         "n"
       ]
     },
@@ -11361,7 +11348,6 @@
       "kanji": "私",
       "meaning": "I, myself",
       "category": [
-        
         "n"
       ]
     },

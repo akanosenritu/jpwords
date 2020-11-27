@@ -62,6 +62,12 @@ const ConfigurationsScreen: React.FC<ConfigurationsScreenProps> = (props) => {
         <div style={{paddingLeft: 10}}>
           <FormControlLabel
             control={<Checkbox
+              checked={formik.values.hardMode} onChange={formik.handleChange} name={"hardMode"} color={"primary"}
+            />}
+            label={"Hard mode. Answers with proper kanjis will only be accepted. Automatic conversion of Roma-ji is disabled."}
+          />
+          <FormControlLabel
+            control={<Checkbox
               checked={formik.values.autoContinueNextWord} onChange={formik.handleChange} name={"autoContinueNextWord"} color={"primary"}
               disabled={true}
             />}

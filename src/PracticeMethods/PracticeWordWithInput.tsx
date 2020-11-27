@@ -6,6 +6,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import * as wanakana from "wanakana";
 import {getColors} from "../WordsView/Styles";
+import {initialConfigurations, useConfigurations} from "../data/Storage/Configurations";
 
 const useStyles = makeStyles({
   answerInput: {
@@ -44,6 +45,7 @@ type PracticeWithInputProps = {
 type PracticeWithInputStatusType = "CORRECT INPUT" | "SIMILAR INPUT" | "WRONG INPUT" | ""
 
 export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) => {
+  const {configurations} = useConfigurations(initialConfigurations);
   const [answer, setAnswer] = useState("");
   const [status, setStatus] = useState<PracticeWithInputStatusType>("");
   const [didAnswerWrongly, setDidAnswerWrongly] = useState(false);
@@ -51,7 +53,10 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
   const [isComposing, setIsComposing] = useState(false);
   const isKatakana = useMemo(() => wanakana.isKatakana(props.word.kana), [props.word.kana]);
   const onChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
-    const newAnswer = isKatakana? wanakana.toKatakana(event.currentTarget.value, {IMEMode: true}): wanakana.toHiragana(event.currentTarget.value, {IMEMode: true});
+    const convertAnswer = (answer: string, isKatakana: boolean) => {
+      return isKatakana? wanakana.toKatakana(event.currentTarget.value, {IMEMode: true}): wanakana.toHiragana(event.currentTarget.value, {IMEMode: true})
+    }
+    const newAnswer = configurations.hardMode? event.target.value: convertAnswer(event.target.value, isKatakana);
     const evaluation = evaluateAnswer(props.word, newAnswer);
     if (evaluation === "CORRECT" && !isComposing) {
       onCorrectlyAnswered();
