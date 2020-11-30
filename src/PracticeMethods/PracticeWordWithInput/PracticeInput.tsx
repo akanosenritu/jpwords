@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from "react";
 import {useStyles} from "./Styles";
 import * as wanakana from "wanakana";
-import {evaluateAnswer, WordType} from "../../data/Word";
+import {evaluateAnswer, WordType} from "../../data/Word/Word";
 
 type PracticeInputProps = {
   isHardMode: boolean,

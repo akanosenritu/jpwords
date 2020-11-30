@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, Button, Card, CardActions, CardContent, Typography} from "@material-ui/core";
-import {getAvailableWordLists, WordList} from "../../data/WordList";
+import {getAvailableWordLists, WordList} from "../../data/WordLists/WordList";
 import {usePracticeViewStyles} from "./PracticeViewStyle";
 import {initialConfigurations, useConfigurations} from "../../data/Storage/Configurations";
 

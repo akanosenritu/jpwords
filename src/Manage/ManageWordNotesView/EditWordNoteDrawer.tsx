@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import {Box, Button, Dialog, Grid, TextField, Typography} from "@material-ui/core";
-import {availableWords, categoryList, WordType} from "../../data/Word";
+import {availableWords, categoryList, WordType} from "../../data/Word/Word";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {FormikErrors, useFormik} from "formik";
 import Select from "react-select-material-ui";

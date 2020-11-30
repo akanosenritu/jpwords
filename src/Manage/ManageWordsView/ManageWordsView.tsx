@@ -1,13 +1,12 @@
 import React, {useState} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {
-  Box, Button, Grid,
-  IconButton,
-  InputBase,
-  Paper, Typography,
+  Box,
+  Button,
+  Grid,
+  Typography,
 } from "@material-ui/core";
-import SearchIcon from '@material-ui/icons/Search';
-import {availableWords, wordsDataLastEditDate, WordType} from "../../data/Word";
+import {availableWords, wordsDataLastEditDate, WordType} from "../../data/Word/Word";
 import {EditWordDrawer} from "./EditWordDrawer";
 import {WordsTable} from "./WordsTable";
 import {initialEditingWordsData, useEditingWordsData} from "../../data/Storage/EditingWordsData";
@@ -38,16 +37,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 )
-
-const SearchBox: React.FC = () => {
-  const classes = useStyles();
-  return <Paper component={"form"} className={classes.searchBox}>
-    <InputBase color={"primary"} fullWidth={true} className={classes.searchBoxInput} placeholder={"Search words"} disabled={true}/>
-    <IconButton disabled>
-      <SearchIcon />
-    </IconButton>
-  </Paper>
-}
 
 export const ManageWordsView: React.FC = () => {
   const classes = useStyles();

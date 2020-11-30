@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {WordType} from "../../data/Word";
+import {WordType} from "../../data/Word/Word";
 import {useFormik} from "formik";
 import {Button, InputLabel, MenuItem, Select, TextField, Typography} from "@material-ui/core";
 

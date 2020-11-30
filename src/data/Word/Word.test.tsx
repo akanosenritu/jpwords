@@ -1,6 +1,6 @@
 import {availableWords, Category, categoryList, evaluateAnswer, isAnswerCorrect} from "./Word";
-import {getAvailableWordLists, WordList} from "./WordList";
-import wordData from "./words.json";
+import {getAvailableWordLists, WordList} from "../WordLists/WordList";
+import wordData from "../words.json";
 
 export const wordTypeExamples = [
   {

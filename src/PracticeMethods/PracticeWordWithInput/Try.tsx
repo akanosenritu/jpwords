@@ -1,8 +1,7 @@
 import React from "react";
-import {DisplayWordWithFurigana, WordType} from "../../data/Word";
+import {WordType} from "../../data/Word/Word";
+import {DisplayWordWithFurigana} from "../../data/Word/DisplayWordWithFurigana";
 import {Box, Typography} from "@material-ui/core";
-import CheckIcon from "@material-ui/icons/Check";
-import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import {useStyles} from "./Styles";
 import {PracticeInput} from "./PracticeInput";
 import {getColors} from "../../WordsView/Styles";

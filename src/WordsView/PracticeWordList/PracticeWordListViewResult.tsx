@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, Button, Grid, Typography} from "@material-ui/core";
 import {loadPracticeHistory} from "../../data/Storage/PracticeHistory";
-import {WordList} from "../../data/WordList";
+import {WordList} from "../../data/WordLists/WordList";
 import {PieChart} from 'react-minimal-pie-chart';
 import {getColors} from "../Styles";
 import {useHistory} from "react-router-dom";

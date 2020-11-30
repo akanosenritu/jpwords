@@ -1,5 +1,5 @@
 import createPersistedState from 'use-persisted-state';
-import {availableWords, wordsDataLastEditDate, WordType} from "../Word";
+import {availableWords, wordsDataLastEditDate, WordType} from "../Word/Word";
 const useEditingWordsDataState = createPersistedState('editingWordsData');
 
 type EditingWordsData = {

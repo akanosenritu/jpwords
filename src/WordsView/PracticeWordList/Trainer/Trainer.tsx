@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import {WordType} from "../../../data/Word";
+import {WordType} from "../../../data/Word/Word";
 import {Box, Button, Dialog, LinearProgress} from "@material-ui/core";
 import {sample} from "lodash";
 import {PracticeWordWithInput} from "../../../PracticeMethods/PracticeWordWithInput/PracticeWordWithInput";

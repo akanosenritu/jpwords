@@ -6,7 +6,7 @@ import {
   wordNotesDataLastEditDate,
   WordNoteType
 } from "../../data/WordNotes/WordNote";
-import {availableWords, wordsDataLastEditDate, WordType} from "../../data/Word";
+import {availableWords, wordsDataLastEditDate, WordType} from "../../data/Word/Word";
 import {EditWordNoteDrawer} from "./EditWordNoteDrawer";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";

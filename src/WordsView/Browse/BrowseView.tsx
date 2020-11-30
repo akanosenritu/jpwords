@@ -1,6 +1,6 @@
 import React from "react";
 import {Box} from "@material-ui/core";
-import {availableWords} from "../../data/Word";
+import {availableWords} from "../../data/Word/Word";
 import {loadPracticeHistory} from "../../data/Storage/PracticeHistory";
 import {FixedSizeList} from "react-window";
 

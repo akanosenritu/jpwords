@@ -1,7 +1,5 @@
 import React from "react";
-import * as wanakana from "wanakana";
-import {fit} from "furigana";
-import wordData from "./words.json";
+import wordData from "../words.json";
 import * as uuid from "uuid"
 
 const prepareAvailableWords = (): {[key: string]: WordType}  => {
@@ -77,29 +75,6 @@ export type WordType = {
   similarWordUUIDs?: string[]
 }
 
-type DisplayWordWithFuriganaProps = {
-  word: WordType
-}
-
-export const DisplayWordWithFurigana: React.FC<DisplayWordWithFuriganaProps> = props => {
-  let displayed = [<span key={props.word.kana}>{props.word.kana}</span>];
-  if (props.word.kanji && wanakana.isHiragana(props.word.kana)) {
-    const tokens = fit(props.word.kanji, props.word.kana, {type: "object"});
-    if (tokens) {
-      displayed = tokens.map(token => {
-        const {w, r} = token;
-        if (w === r) return <span key={w}>{w}</span>;
-        else {
-          return <ruby key={w}>
-            {w}
-            <rt>{r}</rt>
-          </ruby>
-        }
-      });
-    }
-  }
-  return <span>{displayed}</span>
-};
 
 export const prepareWordV2: (arr: string[]) => WordType[] = arr => {
   return arr.map(id => {

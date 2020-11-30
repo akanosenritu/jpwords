@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Box, Typography} from "@material-ui/core";
 import wordNotesData from "./wordNotes.json";
-import {WordType} from "../Word";
+import {WordType} from "../Word/Word";
 import {initialConfigurations, useConfigurations} from "../Storage/Configurations";
 import {PrintMarkDown} from "../../General/Components/PrintMarkDown";
 import {WordNoteContent} from "./WordNoteContent";

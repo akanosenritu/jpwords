@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, Button, TextField, Typography} from "@material-ui/core";
-import {categoryList, WordType} from "../../data/Word";
+import {categoryList, WordType} from "../../data/Word/Word";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {FormikErrors, useFormik} from "formik";
 import * as wanakana from "wanakana";

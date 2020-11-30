@@ -1,5 +1,5 @@
-import {WordList} from "../../../data/WordList";
-import {WordType} from "../../../data/Word";
+import {WordList} from "../../../data/WordLists/WordList";
+import {WordType} from "../../../data/Word/Word";
 
 export type TrainerResult = {
     wordList: WordList,

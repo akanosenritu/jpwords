@@ -1,8 +1,8 @@
-import {WordType} from "../../data/Word";
+import {WordType} from "../../data/Word/Word";
 import React from "react";
 import {DrawerBase} from "../DrawerBase";
 import {Box, List, ListItem, ListItemText, Paper, TableBody, Typography} from "@material-ui/core";
-import {searchWordInAvailableWordLists} from "../../data/WordList";
+import {searchWordInAvailableWordLists} from "../../data/WordLists/WordList";
 import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';

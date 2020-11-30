@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {WordType} from "../../data/Word";
+import {WordType} from "../../data/Word/Word";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from "@material-ui/core/TablePagination";
 import {Button, Box} from "@material-ui/core";
 import {SearchBox} from "../../General/Components/SearchBox";
-import {searchWordInAvailableWordLists} from "../../data/WordList";
+import {searchWordInAvailableWordLists} from "../../data/WordLists/WordList";
 
 const columns = ["UUID", "Kanji", "Kana", "Meaning", "Category", "Word Lists", "Actions"]
 

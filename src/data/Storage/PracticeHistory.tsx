@@ -1,5 +1,5 @@
-import {WordType} from "../Word";
-import {WordList} from "../WordList";
+import {WordType} from "../Word/Word";
+import {WordList} from "../WordLists/WordList";
 import {shuffle} from "lodash";
 
 const TIME_FACTOR = 24 * 60 * 60 * 1000;

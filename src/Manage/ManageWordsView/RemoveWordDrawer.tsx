@@ -1,4 +1,4 @@
-import {WordType} from "../../data/Word";
+import {WordType} from "../../data/Word/Word";
 import React from "react";
 import {DrawerBase} from "../DrawerBase";
 

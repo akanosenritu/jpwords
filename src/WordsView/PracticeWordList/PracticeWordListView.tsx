@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {PracticeWordListViewDoPractice} from "./PracticeWordListViewDoPractice";
 import {PracticeWordListViewResult} from "./PracticeWordListViewResult";
 import {PracticeWordListViewOverview} from "./PracticeWordListViewOverview";
-import {getAvailableWordLists, WordList} from "../../data/WordList";
+import {getAvailableWordLists, WordList} from "../../data/WordLists/WordList";
 import {TrainerResult} from "./Trainer/TrainerResult";
 import {loadPracticeHistory, savePracticeHistory, updatePracticeHistory} from "../../data/Storage/PracticeHistory";
 import {ConfigurationsEntry} from "../../General/ConfigurationsScreen";

@@ -1,7 +1,7 @@
 import React from "react";
-import {WordType} from "../../data/Word";
+import {WordType} from "../../data/Word/Word";
 import {Trainer2} from "./Trainer/Trainer";
-import {WordList} from "../../data/WordList";
+import {WordList} from "../../data/WordLists/WordList";
 import {TrainerResult} from "./Trainer/TrainerResult";
 import {chooseWordsToPractice, loadPracticeHistory} from "../../data/Storage/PracticeHistory";
 import {shuffle} from "lodash";
