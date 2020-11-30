@@ -32,7 +32,7 @@
     "react-markdown": "^5.0.2",
     "react-minimal-pie-chart": "^8.1.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
+    "react-scripts-mdx": "3.0.3",
     "react-select": "^3.1.0",
     "react-select-material-ui": "^6.7.0",
     "react-split-pane": "^0.1.92",

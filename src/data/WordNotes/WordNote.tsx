@@ -1,11 +1,10 @@
-import wordNotesContentURL from "./wordNotesContent.md";
-import ReactMarkDown from "react-markdown";
-import React, {useContext, useEffect, useState} from "react";
-import {Box, Button, Typography} from "@material-ui/core";
+import React, {useState} from "react";
+import {Box, Typography} from "@material-ui/core";
 import wordNotesData from "./wordNotes.json";
 import {WordType} from "../Word";
 import {initialConfigurations, useConfigurations} from "../Storage/Configurations";
 import {PrintMarkDown} from "../../General/Components/PrintMarkDown";
+import {WordNoteContent} from "./WordNoteContent";
 
 const prepareWordNotes = () => {
   const wordNotes =  wordNotesData["wordNotes"] as WordNoteType[];
@@ -99,4 +98,19 @@ const chooseWordNotes = (word: WordType) => {
     }
   }
   return result
+}
+
+export const WordNote2: React.FC<WordNoteProps> = (props) => {
+  const {configurations} = useConfigurations(initialConfigurations);
+  return <Box m={1}>
+    <p style={{borderLeft: "3px solid lightgray", paddingLeft: 10}}>
+      <Typography variant={"subtitle1"}>{props.wordNote.title.toUpperCase()}</Typography>
+    </p>
+    {!configurations.hideWordNotes && <>
+      <Box style={{fontSize: 14}}>
+        <WordNoteContent uuid={props.wordNote.id} />
+      </Box>
+    </>
+    }
+  </Box>
 }

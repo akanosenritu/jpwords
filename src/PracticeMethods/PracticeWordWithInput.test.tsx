@@ -83,12 +83,4 @@ describe("test inputs2", () => {
       expect(mockOnNext.mock.calls[0][0]).toBe(true);
     }
   })
-
-  test.each(wordTypeExamples)("verify the note is shown", (word: WordType) => {
-    let mockOnNext = jest.fn();
-    render(<PracticeWordWithInput word={word} onNext={mockOnNext}/>);
-    if (word.category.includes("vs")) {
-      expect(screen.queryByText("* this word can be made into a verb with -する.")).toBeDefined();
-    }
-  })
 })
