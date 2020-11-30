@@ -114,25 +114,14 @@ export const getDerivatives = (word: WordType) => {
   }
   return result
 }
+const isAnswerCorrectWithKana = (word: WordType, answer: string): boolean => {
+  if (word.kana.replace("～", "") === answer) return true
+  return word.kana === answer
+}
 
-export const isAnswerCorrect = (word: WordType, answer: string): boolean => {
-  if (word.kana) {
-    if (word.kana.replace("～", "") === answer) {
-      return true
-    }
-    if (word.kana === answer) {
-      return true
-    }
-  }
-  if (word.kanji) {
-    if (word.kanji.replace("～", "") === answer) {
-      return true
-    }
-    if (word.kanji === answer) {
-      return true
-    }
-  }
-  return false
+const isAnswerCorrectWithKanji = (word: WordType, answer: string): boolean => {
+  if (word.kanji.replace("～", "") === answer) return true
+  return word.kanji === answer
 }
 
 export const searchWords = (searchString: string) => {
@@ -141,22 +130,9 @@ export const searchWords = (searchString: string) => {
   });
 };
 
-type answerEvaluationResultType = "CORRECT" | "CORRECT, BUT NOT WHAT I EXPECTED" | "WRONG"
+type answerEvaluationResultType = "CORRECT" | "WRONG"
 
-export const evaluateAnswer = (word: WordType, answer: string): answerEvaluationResultType => {
-  if (isAnswerCorrect(word, answer)) {
-    return "CORRECT";
-  }
-  let words = [];
-  if (word.similarWordUUIDs) {
-    for (let similarWordUUID of word.similarWordUUIDs) {
-      words.push(availableWords[similarWordUUID]);
-    }
-  }
-  for (let wordCandidate of words) {
-    if (isAnswerCorrect(wordCandidate, answer)) {
-      return "CORRECT, BUT NOT WHAT I EXPECTED"
-    }
-  }
-  return "WRONG"
+export const evaluateAnswer = (word: WordType, answer: string, rejectKana?: boolean): answerEvaluationResultType => {
+  if (!rejectKana && isAnswerCorrectWithKana(word, answer)) return "CORRECT"
+  return isAnswerCorrectWithKanji(word, answer)? "CORRECT": "WRONG"
 }

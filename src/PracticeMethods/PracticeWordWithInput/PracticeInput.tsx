@@ -5,6 +5,7 @@ import {evaluateAnswer, WordType} from "../../data/Word/Word";
 
 type PracticeInputProps = {
   isHardMode: boolean,
+  previousUserInput: string,
   word: WordType,
   onCorrectAnswer: (userInput: string) => void,
   onWrongAnswer: (userInput: string) => void,
@@ -12,16 +13,16 @@ type PracticeInputProps = {
 
 export const PracticeInput: React.FC<PracticeInputProps> = props => {
   const styles = useStyles()
-  const [answer, setAnswer] = useState("");
+  const [answer, setAnswer] = useState(props.previousUserInput);
   const [isComposing, setIsComposing] = useState(false);
   const onChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
     const convertAnswer = (answer: string, isKatakana: boolean) => {
       return isKatakana? wanakana.toKatakana(event.currentTarget.value, {IMEMode: true}): wanakana.toHiragana(event.currentTarget.value, {IMEMode: true})
     }
     const newAnswer = props.isHardMode? event.target.value: convertAnswer(event.target.value, wanakana.isKatakana(props.word.kana));
-    const evaluation = evaluateAnswer(props.word, newAnswer);
+    const evaluation = evaluateAnswer(props.word, newAnswer, props.isHardMode);
     if (evaluation === "CORRECT" && !isComposing) {
-      props.onCorrectAnswer(answer)
+      props.onCorrectAnswer(newAnswer)
     }
     setAnswer(newAnswer);
   }
@@ -33,7 +34,7 @@ export const PracticeInput: React.FC<PracticeInputProps> = props => {
   }
   const onCompositionEnd = () => {
     setIsComposing(false);
-    const evaluation = evaluateAnswer(props.word, answer);
+    const evaluation = evaluateAnswer(props.word, answer, props.isHardMode);
     if (evaluation === "CORRECT") {
       props.onCorrectAnswer(answer)
     }

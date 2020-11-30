@@ -34,25 +34,15 @@ export const wordTypeExamples = [
 ]
 
 describe("test WordType related functions", () => {
-  test("test isAnswerCorrect()", () => {
-    const word = wordTypeExamples[0];
-    expect(isAnswerCorrect(word, "れい")).toBe(true);
-    expect(isAnswerCorrect(word, "例")).toBe(true);
-    expect(isAnswerCorrect(word, "まちがい")).toBe(false);
-    const word3 = wordTypeExamples[3];
-    expect(isAnswerCorrect(word3, "ど")).toBe(true);
-    expect(isAnswerCorrect(word3, "～ど")).toBe(true);
-    expect(isAnswerCorrect(word3, "度")).toBe(true);
-    expect(isAnswerCorrect(word3, "～度")).toBe(true);
-    expect(isAnswerCorrect(word3, "まちがい")).toBe(false);
-  })
   test("test evaluateAnswer()", () => {
     const word = wordTypeExamples[0];
     expect(evaluateAnswer(word, "れい")).toBe("CORRECT");
+    expect(evaluateAnswer(word, "れい", true)).toBe("WRONG");
     expect(evaluateAnswer(word, "例")).toBe("CORRECT");
     expect(evaluateAnswer(word, "まちがい")).toBe("WRONG");
     const word2 = wordTypeExamples[2];
     expect(evaluateAnswer(word2, "じゅう")).toBe("CORRECT");
+    expect(evaluateAnswer(word2, "じゅう", true)).toBe("WRONG");
     expect(evaluateAnswer(word2, "十")).toBe("CORRECT");
     expect(evaluateAnswer(word2, "まちがい")).toBe("WRONG");
   })

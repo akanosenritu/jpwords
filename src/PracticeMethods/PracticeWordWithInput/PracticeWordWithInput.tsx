@@ -29,6 +29,7 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
         }}
         isHardMode={configurations.hardMode}
         isSecond={false}
+        previousUserInput={""}
       />
     }
     {status === "SECOND" &&
@@ -43,6 +44,7 @@ export const PracticeWordWithInput: React.FC<PracticeWithInputProps> = (props) =
       }}
       isHardMode={configurations.hardMode}
       isSecond={true}
+      previousUserInput={userInput}
     />
     }
     {status === "SUCCESS" &&

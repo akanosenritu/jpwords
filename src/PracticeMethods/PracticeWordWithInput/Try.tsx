@@ -8,6 +8,7 @@ import {getColors} from "../../WordsView/Styles";
 
 type TryProps = {
   word: WordType,
+  previousUserInput: string,
   onCorrectAnswer: (userInput: string) => void,
   onWrongAnswer: (userInput: string) => void,
   isHardMode: boolean,
@@ -29,7 +30,13 @@ export const Try: React.FC<TryProps> = props => {
         className={styles.answerInputBox} key={`${props.word.meaning}`}
         style={{backgroundColor: props.isSecond? backGround: "", borderColor: props.isSecond? main: ""}}
       >
-        <PracticeInput word={props.word} isHardMode={props.isHardMode} onCorrectAnswer={props.onCorrectAnswer} onWrongAnswer={props.onWrongAnswer} />
+        <PracticeInput
+          word={props.word}
+          isHardMode={props.isHardMode}
+          onCorrectAnswer={props.onCorrectAnswer}
+          onWrongAnswer={props.onWrongAnswer}
+          previousUserInput={props.previousUserInput}
+        />
       </div>
     </Box>
   </div>

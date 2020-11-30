@@ -7,7 +7,7 @@ const assignRuby = (base: string, ruby: string) => {
   if (!base) return ""
   const tokens = fit(base, ruby, {type: "object"});
   if (tokens) {
-    return <span>{tokens.map(token => {
+    return <span key={base}>{tokens.map(token => {
       const {w, r} = token;
       if (w === r) return <span key={w}>{w}</span>;
       else {
@@ -18,7 +18,7 @@ const assignRuby = (base: string, ruby: string) => {
       }
     })}</span>
   }
-  return <span>{base}</span>
+  return <span key={base}>{base}</span>
 }
 
 type DisplayWordWithFuriganaProps = {
