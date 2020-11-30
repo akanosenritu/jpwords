@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import {PracticeWordWithInput} from "./PracticeWordWithInput";
-import {availableWords, WordType} from "../data/Word";
-import {wordTypeExamples} from "../data/Word.test";
+import {availableWords, WordType} from "../../data/Word";
+import {wordTypeExamples} from "../../data/Word.test";
 
 describe("test inputs2", () => {
   test.each(wordTypeExamples)("no answer, enter pressed once", (word: WordType) => {

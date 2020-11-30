@@ -2,7 +2,7 @@ import React, {useContext, useState} from "react";
 import {WordType} from "../../../data/Word";
 import {Box, Button, Dialog, LinearProgress} from "@material-ui/core";
 import {sample} from "lodash";
-import {PracticeWordWithInput} from "../../../PracticeMethods/PracticeWordWithInput";
+import {PracticeWordWithInput} from "../../../PracticeMethods/PracticeWordWithInput/PracticeWordWithInput";
 import {DebugContext} from "../../Contexts";
 import {WordNotes} from "../../../data/WordNotes/WordNote";
 import ReportIcon from '@material-ui/icons/Report';
