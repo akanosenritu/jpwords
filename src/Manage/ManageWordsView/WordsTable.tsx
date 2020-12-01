@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import {WordType} from "../../data/Word/Word";
+import React, {useEffect, useState} from "react";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,20 +8,36 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from "@material-ui/core/TablePagination";
 import {Button, Box} from "@material-ui/core";
 import {SearchBox} from "../../General/Components/SearchBox";
-import {searchWordInAvailableWordLists} from "../../data/WordLists/WordList";
+import {APIWordType} from "../API/APIWord";
+import {APICategoryType, retrieveAPICategories} from "../API/APICategory";
 
-const columns = ["UUID", "Kanji", "Kana", "Meaning", "Category", "Word Lists", "Actions"]
+const columns = ["UUID", "Kanji", "Kana", "Meaning", "Category", "Actions"]
 
 type WordsTableProps = {
-  words: WordType[],
+  words: APIWordType[],
   actionButtons: {
     buttonName: string,
-    action: (word: WordType) => void
+    action: (word: APIWordType) => void
   }[]
 }
 
 export const WordsTable: React.FC<WordsTableProps> = props => {
   const [wordsShown, setWordsShown] = useState<{[wordUUID: string]: boolean}>(props.words.reduce((obj, word) => Object.assign(obj, {[word.uuid]: true}), {}));
+  const [categoriesDict, setCategoriesDict] = useState<{[uuid: string]: APICategoryType}|null>(null)
+  const loadCategoriesData = () => {
+    retrieveAPICategories()
+      .then(data => {
+        const categoriesDict: {[uuid: string]: APICategoryType} = {}
+        data.forEach(cat => {
+          categoriesDict[cat.uuid] = cat
+        })
+        setCategoriesDict(categoriesDict)
+      })
+      .catch(err => console.log(err))
+  }
+  useEffect(() => {
+    loadCategoriesData()
+  }, [])
   const [page, setPage] = React.useState(0);
   const [query, setQuery] = useState("");
   const [searchBy, setSearchBy] = useState("kana");
@@ -34,7 +49,7 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
     setQuery(query)
     setSearchBy(searchBy)
     const re = new RegExp(query);
-    let result: WordType[];
+    let result: APIWordType[];
     if (["kana", "kanji", "meaning", "uuid"].includes(searchBy)) {
       // @ts-ignore
       result = props.words.filter(word => word[searchBy].search(re) !== -1)
@@ -46,7 +61,6 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
     setWordsShown(result.reduce((obj, word) => Object.assign(obj, {[word.uuid]: true}), {}))
     setPage(0);
   }
-  console.log("table rendered.", new Date().toISOString(), wordsShown)
   return <Box>
     <Box display={"flex"} justifyContent={"center"} mb={2}>
       <SearchBox onSearch={onSearch} query={query} searchBy={searchBy}/>
@@ -62,12 +76,11 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
         <TableBody>
           {props.words.filter(word => wordsShown[word.uuid]).slice(page * rowsPerPage, page*rowsPerPage+rowsPerPage).map(word => (
             <TableRow key={word.uuid}>
-              <TableCell key={word.uuid}>{word.uuid}</TableCell>
-              <TableCell key={word.kanji}>{word.kanji}</TableCell>
-              <TableCell key={word.kana}>{word.kana}</TableCell>
-              <TableCell key={word.meaning}>{word.meaning}</TableCell>
-              <TableCell key={word.category.join(", ")}>{word.category.join(",")}</TableCell>
-              <TableCell key={"Word lists"}>{searchWordInAvailableWordLists(word, "ENG").map(wordList => wordList.name).join(", ")}</TableCell>
+              <TableCell key={"uuid"}>{word.uuid}</TableCell>
+              <TableCell key={"kanji"}>{word.kanji}</TableCell>
+              <TableCell key={"kana"}>{word.kana}</TableCell>
+              <TableCell key={"meaning"}>{word.meaning}</TableCell>
+              <TableCell key={"category"}>{categoriesDict && word.category.map(categoryUUID => categoriesDict[categoryUUID].name).join(", ")}</TableCell>
               <TableCell>
                 {props.actionButtons.map(actionButton => {
                   return <Button style={{padding: 0}} size={"small"} onClick={()=>actionButton.action(word)}>{actionButton.buttonName}</Button>

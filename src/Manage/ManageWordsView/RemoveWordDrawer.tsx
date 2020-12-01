@@ -1,10 +1,10 @@
-import {WordType} from "../../data/Word/Word";
 import React from "react";
 import {DrawerBase} from "../DrawerBase";
+import {APIWordType} from "../API/APIWord";
 
 type RemoverProps = {
-  word: WordType,
-  removeWord: (word: WordType) => void,
+  word: APIWordType,
+  removeWord: (word: APIWordType) => void,
 }
 
 const Remover: React.FC<RemoverProps> = props => {
@@ -14,8 +14,8 @@ const Remover: React.FC<RemoverProps> = props => {
 type RemoveWordDrawerProps = {
   onClose: () => void,
   isOpen: boolean,
-  word: WordType,
-  removeWord: (word: WordType) => void,
+  word: APIWordType,
+  removeWord: (word: APIWordType) => void,
 }
 
 export const RemoveWordDrawer: React.FC<RemoveWordDrawerProps> = props => {

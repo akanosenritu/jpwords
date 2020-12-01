@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Box, Button, TextField, Typography} from "@material-ui/core";
-import {categoryList, WordType} from "../../data/Word/Word";
+import {categoryList} from "../../data/Word/Word";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {FormikErrors, useFormik} from "formik";
 import * as wanakana from "wanakana";
 import Select from "react-select-material-ui";
 import {DrawerBase} from "../DrawerBase";
+import {APIWordType} from "../API/APIWord";
+import {APICategoryType, retrieveAPICategories} from "../API/APICategory";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,17 +20,28 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 type EditorProps = {
-  word: WordType
-  createOrModifyWord: (word: WordType) => void,
+  word: APIWordType
+  createOrModifyWord: (word: APIWordType) => void,
   onClose: () => void
 }
 
 const Editor: React.FC<EditorProps> = props => {
   const classes = useStyles();
+
+  const [categoriesData, setCategoriesData] = useState<APICategoryType[]>([])
+  const loadCategoriesData = () => {
+    retrieveAPICategories()
+      .then(data => setCategoriesData(data))
+      .catch(err => console.log(err))
+  }
+  useEffect(() => {
+    loadCategoriesData()
+  }, [])
+
   const formik = useFormik({
     initialValues: props.word,
     validate: (values) => {
-      const errors: FormikErrors<WordType> = {};
+      const errors: FormikErrors<APIWordType> = {};
       if (values.kana === "") {
         errors.kana = "Kana must not be empty."
       } else if (!wanakana.isHiragana(values.kana)) {
@@ -47,7 +60,7 @@ const Editor: React.FC<EditorProps> = props => {
       props.onClose()
     }
   });
-  const categoryOptions = categoryList.map(category => ({value: category as string, label: category as string}));
+  const categoryOptions = categoriesData.map(category => ({value: category.uuid, label: category.name}));
   const handleCategoryChange = (values: any[]) => {
     formik.setFieldValue("category", values? values: [])
   }
@@ -81,8 +94,8 @@ const Editor: React.FC<EditorProps> = props => {
 type EditWordDrawerProps = {
   onClose: () => void,
   isOpen: boolean,
-  word: WordType,
-  createOrModifyWord: (word: WordType) => void,
+  word: APIWordType,
+  createOrModifyWord: (word: APIWordType) => void,
 }
 
 export const EditWordDrawer: React.FC<EditWordDrawerProps> = props => {

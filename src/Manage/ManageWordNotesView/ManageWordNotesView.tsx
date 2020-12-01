@@ -63,13 +63,14 @@ export const ManageWordNotesView: React.FC = () => {
           loadWordNotes()
         })
         .catch(err => console.log(`Creation of a new word note failed.`, err))
+    } else {
+      updateAPIWordNote(wordNote)
+        .then(data => {
+          console.log(`Update of a new word note succeeded.`)
+          loadWordNotes()
+        })
+        .catch(err => console.log(`Update of a word note failed.`, err))
     }
-    updateAPIWordNote(wordNote)
-      .then(data => {
-        console.log(`Update of a new word note succeeded.`)
-        loadWordNotes()
-      })
-      .catch(err => console.log(`Update of a word note failed.`, err))
   };
   const loadWordNotes = () => {
     retrieveAPIWordNotes()

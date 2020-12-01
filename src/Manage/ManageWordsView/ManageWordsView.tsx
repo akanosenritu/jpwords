@@ -1,17 +1,14 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {
   Box,
   Button,
   Grid,
-  Typography,
 } from "@material-ui/core";
-import {availableWords, wordsDataLastEditDate, WordType} from "../../data/Word/Word";
 import {EditWordDrawer} from "./EditWordDrawer";
 import {WordsTable} from "./WordsTable";
-import {initialEditingWordsData, useEditingWordsData} from "../../data/Storage/EditingWordsData";
-import {v4 as uuid4} from "uuid";
 import {InspectWordDrawer} from "./InspectWordDrawer";
+import {APIWordType, createAPIWord, retrieveAPIWords, updateAPIWord} from "../API/APIWord";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,51 +38,46 @@ const useStyles = makeStyles((theme: Theme) =>
 export const ManageWordsView: React.FC = () => {
   const classes = useStyles();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [wordConcerning, setWordConcerning] = useState<WordType|null>(null);
-  const {editingWordsData, setEditingWordsData} = useEditingWordsData(initialEditingWordsData);
+  const [wordConcerning, setWordConcerning] = useState<APIWordType|null>(null);
+  const [wordsData, setWordsData] = useState<APIWordType[]>([])
   const [drawer, setDrawer] = useState("");
-  const createOrModifyWord = (word: WordType) => {
-    console.log(word);
-    const newWordsData = {...editingWordsData};
-    const newWords = {...newWordsData.words}
-    newWords[word.uuid] = word;
-    newWordsData.words = newWords
-    newWordsData.lastEdit = new Date().toISOString();
-
-    setEditingWordsData(newWordsData);
-  };
-  const reloadWords = () => {
-    setEditingWordsData({
-      words: availableWords,
-      lastEdit: new Date().toISOString(),
-      wordsDataBasedOnLastEdit: wordsDataLastEditDate
-    })
-  }
-  const formatWordsData = (wordsData: {[key: string]: WordType}) => {
-    return Object.values(wordsData).sort((wordA, wordB) => {
-      if (wordA.kana > wordB.kana) return 1
-      else if (wordA.kana < wordB.kana) return -1
-      if (wordA.uuid > wordB.uuid) return 1
-      else if (wordA.uuid < wordB.uuid) return -1
-      return 0
-    })
-  }
-  const downloadWordsData = () => {
-    const words = formatWordsData(editingWordsData.words);
-    const data = {
-      lastEdit: new Date().toISOString(),
-      words: words
+  const createOrModifyWord = (word: APIWordType) => {
+    if (word.uuid === "") {
+      createAPIWord(word)
+        .then(data => {
+          console.log("Creation of a new word succeeded.")
+          loadWords()
+        })
+        .catch(err => {
+          console.log("Creation of a new word failed.", err)
+        })
+    } else {
+      updateAPIWord(word)
+        .then(data => {
+          console.log("Update of a word succeeded.")
+          loadWords()
+        })
+        .catch(err => {
+          console.log("Update of a word failed.", err)
+        })
     }
-    const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
-    const aElement = document.createElement("a");
-    aElement.download = "words.json";
-    aElement.href = window.URL.createObjectURL(blob);
-    aElement.click();
-    aElement.remove()
+  };
+  const loadWords = () => {
+    retrieveAPIWords()
+      .then(data => {
+        console.log("Retrieval of words data succeeded.")
+        setWordsData(data)
+      })
+      .catch(err => {
+        console.log("Retrieval of words data failed.", err)
+      })
   }
+  useEffect(() => {
+    loadWords()
+  }, [])
   const onClickAddNewWord = () => {
-    const blankWord: WordType = {
-      uuid: uuid4(),
+    const blankWord: APIWordType = {
+      uuid: "",
       kanji: "",
       kana: "",
       meaning: "",
@@ -95,12 +87,12 @@ export const ManageWordsView: React.FC = () => {
     setWordConcerning(blankWord);
     setIsDrawerOpen(true);
   }
-  const onClickOpenEditor = (word: WordType) => {
+  const onClickOpenEditor = (word: APIWordType) => {
     setDrawer("editor");
     setWordConcerning(word);
     setIsDrawerOpen(true);
   }
-  const onClickOpenInspector = (word: WordType) => {
+  const onClickOpenInspector = (word: APIWordType) => {
     setDrawer("inspector");
     setWordConcerning(word);
     setIsDrawerOpen(true);
@@ -109,11 +101,6 @@ export const ManageWordsView: React.FC = () => {
     <Grid container>
       <Grid item xs={6}>
         <Box className={classes.toolButtonsContainer}>
-          <Button variant={"outlined"} color={"primary"} onClick={downloadWordsData}>Download</Button>
-          <Button variant={"outlined"} color={"secondary"} onClick={reloadWords}>Reload</Button>
-          {editingWordsData.wordsDataBasedOnLastEdit !== wordsDataLastEditDate && <Typography variant={"body2"} display={"inline"} color={"secondary"}>
-            The data basing on has been changed.
-          </Typography>}
         </Box>
       </Grid>
       <Grid item xs={6}>
@@ -124,7 +111,8 @@ export const ManageWordsView: React.FC = () => {
     </Grid>
     <Box mt={2} style={{maxHeight: "100%"}}>
       <WordsTable
-        words={formatWordsData(editingWordsData.words)}
+        key={wordsData.length}
+        words={wordsData}
         actionButtons={[
           {buttonName: "EDIT", action: onClickOpenEditor},
           {buttonName: "INSPECT", action: onClickOpenInspector}

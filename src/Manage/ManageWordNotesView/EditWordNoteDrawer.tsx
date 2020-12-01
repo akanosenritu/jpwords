@@ -1,6 +1,5 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {Box, Button, Dialog, Grid, TextField, Typography} from "@material-ui/core";
-import {availableWords, categoryList, WordType} from "../../data/Word/Word";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {FormikErrors, useFormik} from "formik";
 import Select from "react-select-material-ui";
@@ -8,6 +7,8 @@ import {DrawerBase} from "../DrawerBase"
 import {PrintMarkDown} from "../../General/Components/PrintMarkDown";
 import {WordsTable} from "../ManageWordsView/WordsTable";
 import {APIWordNoteType} from "../API/APIWordNote";
+import {APIWordType, retrieveAPIWords} from "../API/APIWord";
+import {APICategoryType, retrieveAPICategories} from "../API/APICategory";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,18 +21,28 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 type WordPickerProps = {
-  selectedWords: WordType[],
-  onClose: (words: WordType[]) => void
+  selectedWords: (APIWordType|undefined)[],
+  onClose: (words: APIWordType[]) => void
 }
 
 const WordPicker: React.FC<WordPickerProps> = props => {
-  const [wordsSelected, setWordsSelected] = useState<WordType[]>(props.selectedWords)
-  const onSelect = (word: WordType) => {
+  // @ts-ignore
+  const [wordsSelected, setWordsSelected] = useState<APIWordType[]>(props.selectedWords.filter(word => word !== undefined))
+  const [wordsData, setWordsData] = useState<APIWordType[]>([])
+  const loadWordsData = () => {
+    retrieveAPIWords()
+      .then(data => setWordsData(data))
+      .catch(err => console.log(err))
+  }
+  useEffect(() => {
+    loadWordsData()
+  }, [])
+  const onSelect = (word: APIWordType) => {
     if (!wordsSelected.includes(word)) {
       setWordsSelected([...wordsSelected, word]);
     }
   }
-  const onRemove = (word: WordType) => {
+  const onRemove = (word: APIWordType) => {
     const index = wordsSelected.indexOf(word);
     if (index !== -1) {
       const newWordsSelected = [...wordsSelected]
@@ -42,11 +53,9 @@ const WordPicker: React.FC<WordPickerProps> = props => {
   const onSave = () => {
     props.onClose(wordsSelected)
   }
-  const onReload = () => {
-    setWordsSelected(props.selectedWords)
-  }
   const onClose = () => {
-    props.onClose(props.selectedWords)
+    // @ts-ignore
+    props.onClose(props.selectedWords.filter(word => word))
   }
   return <Box>
     <Box mx={3} my={1} style={{border: "1px solid darkgray", borderRadius: 25, minHeight: 100, padding: 10}}>
@@ -58,10 +67,9 @@ const WordPicker: React.FC<WordPickerProps> = props => {
     </Box>
     <Box display={"flex"} justifyContent={"center"}>
       <Button variant={"outlined"} color={"primary"} onClick={onSave}>Save</Button>
-      <Button variant={"outlined"} color={"secondary"} onClick={onReload}>Reload</Button>
       <Button variant={"outlined"} onClick={onClose}>Close</Button>
     </Box>
-    <WordsTable words={Object.values(availableWords)} actionButtons={[
+    <WordsTable key={wordsData.length} words={wordsData} actionButtons={[
       {buttonName: "ADD", action: (word) => onSelect(word)}
     ]} />
   </Box>
@@ -113,25 +121,46 @@ const Editor: React.FC<EditorProps> = props => {
   const classes = useStyles();
   const [isContentEditorOpen, setIsContentEditorOpen] = useState(false);
   const [isWordPickerOpen, setIsWordPickerOpen] = useState(false)
+
+  const [categoriesData, setCategoriesData] = useState<APICategoryType[]>([])
+  const loadCategoriesData = () => {
+    retrieveAPICategories()
+      .then(data => setCategoriesData(data))
+      .catch(err => console.log(err))
+  }
+  useEffect(() => {
+    loadCategoriesData()
+  }, [])
+
+  const [wordsData, setWordsData] = useState<APIWordType[]>([])
+  const loadWordsData = () => {
+    retrieveAPIWords()
+      .then(data => setWordsData(data))
+      .catch(err => console.log(err))
+  }
+  useEffect(() => {
+    loadWordsData()
+  }, [])
   const formik = useFormik({
     initialValues: props.wordNote,
     validate: (values) => {
       console.log("validating...")
-      const errors: FormikErrors<WordType> = {};
+      const errors: FormikErrors<APIWordType> = {};
     },
     onSubmit: ()=>{
       props.createOrModifyWordNote(formik.values);
       props.onClose()
     }
   });
-  const categoryOptions = categoryList.map(category => ({value: category as string, label: category as string}));
+  const categoryOptions = categoriesData.map(category => ({value: category.uuid, label: category.name}));
   const handleCategoryChange = (values: any[]) => {
     formik.setFieldValue("associatedCategories", values? values: [])
   }
-  const handleWordPickerClose = (words: WordType[]) => {
+  const handleWordPickerClose = (words: APIWordType[]) => {
     formik.setFieldValue("associatedWords", words.map(word => word.uuid).sort())
     setIsWordPickerOpen(false);
   }
+  // @ts-ignore
   return <form onSubmit={formik.handleSubmit} className={classes.editor}>
     <Box style={{borderLeft: "5px solid lightgray", paddingLeft: 10}} ml={1}>
       <Typography variant={"h6"}>Edit a word note</Typography>
@@ -145,8 +174,8 @@ const Editor: React.FC<EditorProps> = props => {
       <Button style={{textTransform: "none"}} onClick={()=>setIsWordPickerOpen(true)}><Typography variant={"body1"} display={"inline"}>Associated words: {formik.values.associatedWords? formik.values.associatedWords.length: 0}</Typography></Button>
       <div>
         {formik.values.associatedWords && formik.values.associatedWords.map(wordUUID => {
-          if (availableWords[wordUUID]) {
-            const word = availableWords[wordUUID]
+          const word = wordsData.find(wordDatum => wordDatum.uuid === wordUUID)
+          if (word) {
             return <Typography variant={"body2"}>{`${word.kana} (${word.uuid})`}</Typography>
           } else {
             return <Typography variant={"body2"}>INVALID REFERENCE</Typography>
@@ -163,9 +192,9 @@ const Editor: React.FC<EditorProps> = props => {
     <Dialog open={isWordPickerOpen} fullScreen={true}>
       <WordPicker
         onClose={handleWordPickerClose}
-        selectedWords={formik.values.associatedWords? formik.values.associatedWords.map(associatedWord => {
-          return availableWords[associatedWord]
-        }).filter(word => word): []}
+        selectedWords={formik.values.associatedWords? formik.values.associatedWords.map(associatedWordUUID => {
+          return wordsData.find(wordDatum => wordDatum.uuid === associatedWordUUID)
+        }): []}
       />
     </Dialog>
     <Box display={"flex"} justifyContent={"center"} mt={2}>
