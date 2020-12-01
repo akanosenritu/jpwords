@@ -1,18 +1,13 @@
-import React, {useState} from "react";
-import {Box, Button, Card, Grid, IconButton, InputBase, Paper, Typography} from "@material-ui/core";
+import React, {useEffect, useState} from "react";
+import {Box, Button, Grid, IconButton, InputBase, Paper} from "@material-ui/core";
 import {
-  availableWordNotesByUUID,
-  WordNote,
-  wordNotesDataLastEditDate,
   WordNoteType
 } from "../../data/WordNotes/WordNote";
-import {availableWords, wordsDataLastEditDate, WordType} from "../../data/Word/Word";
 import {EditWordNoteDrawer} from "./EditWordNoteDrawer";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import {WordNotesTable} from "./WordNotesTable";
-import {initialEditingWordNotesData, useEditingWordNotesData} from "../../data/Storage/EditingWordNotesData";
-import {v4 as uuid4} from "uuid";
+import {APIWordNoteType, createAPIWordNote, retrieveAPIWordNotes, updateAPIWordNote} from "../API/APIWordNote";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,15 +52,34 @@ const SearchBox: React.FC = () => {
 
 export const ManageWordNotesView: React.FC = () => {
   const classes = useStyles();
-  const {editingWordNotesData, setEditingWordNotesData} = useEditingWordNotesData(initialEditingWordNotesData);
+  const [wordNotesData, setWordNotesData] = useState<APIWordNoteType[]>([])
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [wordNoteConcerning, setWordNoteConcerning] = useState<WordNoteType|null>(null);
-  const createOrModifyWordNote = (wordNote: WordNoteType) => {
-    const newWordNotesData = {...editingWordNotesData};
-    newWordNotesData.wordNotes[wordNote.id] = wordNote;
-    editingWordNotesData.lastEdit = new Date().toISOString();
-    setEditingWordNotesData(newWordNotesData);
+  const [wordNoteConcerning, setWordNoteConcerning] = useState<APIWordNoteType|null>(null);
+  const createOrModifyWordNote = (wordNote: APIWordNoteType) => {
+    if (wordNote.uuid === "") {
+      createAPIWordNote(wordNote)
+        .then(data => {
+          console.log(`Creation of a new word note succeeded.`)
+          loadWordNotes()
+        })
+        .catch(err => console.log(`Creation of a new word note failed.`, err))
+    }
+    updateAPIWordNote(wordNote)
+      .then(data => {
+        console.log(`Update of a new word note succeeded.`)
+        loadWordNotes()
+      })
+      .catch(err => console.log(`Update of a word note failed.`, err))
   };
+  const loadWordNotes = () => {
+    retrieveAPIWordNotes()
+      .then(data => setWordNotesData(data))
+      .catch(err => console.log(`The retrieval of word notes failed.`, err))
+  }
+  useEffect(() => {
+    loadWordNotes()
+    }, [])
+  /**
   const downloadWordNotesData = () => {
     const wordNotes = formatWordNotesData(editingWordNotesData.wordNotes);
     const data = {
@@ -79,47 +93,26 @@ export const ManageWordNotesView: React.FC = () => {
     aElement.click()
     aElement.remove()
   };
-  const reloadWordNotesData = () => {
-    setEditingWordNotesData({
-      wordNotes: availableWordNotesByUUID,
-      lastEdit: new Date().toISOString(),
-      wordNotesDataBasedOnLastEdit: wordNotesDataLastEditDate
-    })
-  };
-  const onClickOpenEditor = (wordNote: WordNoteType) => {
+   **/
+  const onClickOpenEditor = (wordNote: APIWordNoteType) => {
     setWordNoteConcerning(wordNote);
     setIsDrawerOpen(true);
   }
   const onClickAddNewWordNote = () => {
-    const blankWordNote: WordNoteType = {
-      id: uuid4(),
+    const blankWordNote: APIWordNoteType = {
+      uuid: "",
       title: "",
-      description: "",
-      content: "",
       associatedCategories: [] as string[],
       associatedWords: [] as string[],
+      is_published: false
     }
     setWordNoteConcerning(blankWordNote);
     setIsDrawerOpen(true);
   };
-  const formatWordNotesData = (wordNotesData: {[key: string]: WordNoteType}) => {
-    return Object.values(wordNotesData).sort((A, B) => {
-      if (A.title > B.title) return 1
-      else if (A.title < B.title) return -1
-      if (A.id > B.id) return 1
-      else if (A.id < B.id) return -1
-      return 0
-    })
-  }
   return <div className={classes.manageWordNotesView}>
     <Grid container>
       <Grid item xs={4}>
         <Box className={classes.toolButtonsContainer}>
-          <Button variant={"outlined"} color={"primary"} onClick={downloadWordNotesData}>Download</Button>
-          <Button variant={"outlined"} color={"secondary"} onClick={reloadWordNotesData}>Reload</Button>
-          {editingWordNotesData.wordNotesDataBasedOnLastEdit !== wordNotesDataLastEditDate && <Typography variant={"body2"} display={"inline"} color={"secondary"}>
-            The data basing on has been changed.
-          </Typography>}
         </Box>
       </Grid>
       <Grid item xs={4}>
@@ -134,9 +127,9 @@ export const ManageWordNotesView: React.FC = () => {
       </Grid>
     </Grid>
     <Box mt={2} style={{maxHeight: "100%"}}>
-      <WordNotesTable wordNotes={formatWordNotesData(editingWordNotesData.wordNotes)} onClickOpenEditor={onClickOpenEditor}/>
+      <WordNotesTable wordNotes={wordNotesData} onClickOpenEditor={onClickOpenEditor}/>
       {wordNoteConcerning && <EditWordNoteDrawer
-        key={wordNoteConcerning.id} isOpen={isDrawerOpen} onClose={()=>{setIsDrawerOpen(false);}}
+        key={wordNoteConcerning.uuid} isOpen={isDrawerOpen} onClose={()=>{setIsDrawerOpen(false);}}
         wordNote={wordNoteConcerning} createOrModifyWordNote={createOrModifyWordNote}
       />}
     </Box>

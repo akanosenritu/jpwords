@@ -8,12 +8,13 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from "@material-ui/core/TablePagination";
 import {Button} from "@material-ui/core";
 import {WordNoteType} from "../../data/WordNotes/WordNote";
+import {APIWordNoteType} from "../API/APIWordNote";
 
-const columns = ["ID", "Title", "A. Words", "A. Categories", "Actions"]
+const COLUMNS = ["UUID", "Title", "A. Words", "A. Categories", "Actions"]
 
 type WordNotesTableProps = {
-  wordNotes: WordNoteType[],
-  onClickOpenEditor: (wordNote: WordNoteType) => void
+  wordNotes: APIWordNoteType[],
+  onClickOpenEditor: (wordNote: APIWordNoteType) => void
 }
 
 export const WordNotesTable: React.FC<WordNotesTableProps> = props => {
@@ -30,14 +31,14 @@ export const WordNotesTable: React.FC<WordNotesTableProps> = props => {
     <Table size={"small"} stickyHeader={true}>
       <TableHead>
         <TableRow>
-          <TableCell key={columns[0]} style={{width: 350}}>{columns[0]}</TableCell>
-          {columns.slice(1).map(column => <TableCell key={column}>{column}</TableCell>)}
+          <TableCell key={COLUMNS[0]} style={{width: 350}}>{COLUMNS[0]}</TableCell>
+          {COLUMNS.slice(1).map(column => <TableCell key={column}>{column}</TableCell>)}
         </TableRow>
       </TableHead>
       <TableBody>
         {props.wordNotes.slice(page * rowsPerPage, page*rowsPerPage+rowsPerPage).map(wordNote => (
-          <TableRow key={wordNote.id}>
-            <TableCell>{wordNote.id}</TableCell>
+          <TableRow key={wordNote.uuid}>
+            <TableCell>{wordNote.uuid}</TableCell>
             <TableCell>{wordNote.title}</TableCell>
             <TableCell>{wordNote.associatedWords? wordNote.associatedWords.length: 0}</TableCell>
             <TableCell>{wordNote.associatedCategories? wordNote.associatedCategories.length: 0}</TableCell>

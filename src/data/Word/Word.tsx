@@ -1,6 +1,7 @@
 import React from "react";
 import wordData from "../words.json";
 import * as uuid from "uuid"
+import {WordNoteType} from "../WordNotes/WordNote";
 
 const prepareAvailableWords = (): {[key: string]: WordType}  => {
   let availableWords: { [key: string]: WordType } = {};
@@ -72,7 +73,7 @@ export type WordType = {
   kana: string,
   category: Category[],
   meaning: string,
-  similarWordUUIDs?: string[]
+  associatedWordNotes?: WordNoteType[]
 }
 
 
@@ -82,38 +83,6 @@ export const prepareWordV2: (arr: string[]) => WordType[] = arr => {
   }) as WordType[]
 }
 
-export const getDerivatives = (word: WordType) => {
-  type Derivative = {
-    type: string,
-    word: WordType
-  }
-  const result: Derivative[] = [];
-  if (word.category.includes("n-vs")) {
-    result.push({
-      type : "Verb",
-      word: {
-        uuid: uuid.v4(),
-          kana: word.kana + "する",
-        kanji: word.kanji + "する",
-        category: ["suru-v"],
-        meaning: "(this word is auto-generated)"
-      }
-    })
-  }
-  if (word.category.includes("n-adj-na")) {
-    result.push({
-      type : "Adjective",
-      word: {
-        uuid: uuid.v4(),
-        kana: word.kana + "な",
-        kanji: word.kanji + "な",
-        category: ["na-adj"],
-        meaning: "(this word is auto-generated)"
-      }
-    })
-  }
-  return result
-}
 const isAnswerCorrectWithKana = (word: WordType, answer: string): boolean => {
   if (word.kana.replace("～", "") === answer) return true
   return word.kana === answer
