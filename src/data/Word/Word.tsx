@@ -85,12 +85,12 @@ export const prepareWordV2: (arr: string[]) => WordType[] = arr => {
 
 const isAnswerCorrectWithKana = (word: WordType, answer: string): boolean => {
   if (word.kana.replace("～", "") === answer) return true
-  return word.kana === answer
+  return !!word.kana && word.kana === answer
 }
 
 const isAnswerCorrectWithKanji = (word: WordType, answer: string): boolean => {
   if (word.kanji.replace("～", "") === answer) return true
-  return word.kanji === answer
+  return !!word.kanji && word.kanji === answer
 }
 
 export const searchWords = (searchString: string) => {

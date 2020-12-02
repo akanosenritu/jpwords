@@ -80,7 +80,7 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
               <TableCell key={"kanji"}>{word.kanji}</TableCell>
               <TableCell key={"kana"}>{word.kana}</TableCell>
               <TableCell key={"meaning"}>{word.meaning}</TableCell>
-              <TableCell key={"category"}>{categoriesDict && word.category.map(categoryUUID => categoriesDict[categoryUUID].name).join(", ")}</TableCell>
+              <TableCell key={"category"}>{categoriesDict && word.category.map((categoryUUID: string | number) => categoriesDict[categoryUUID].name).join(", ")}</TableCell>
               <TableCell>
                 {props.actionButtons.map(actionButton => {
                   return <Button style={{padding: 0}} size={"small"} onClick={()=>actionButton.action(word)}>{actionButton.buttonName}</Button>
