@@ -9,7 +9,8 @@ import {
 import {WordsView} from "./WordsView/WordsView";
 import {ManageWordsView} from "./Manage/ManageWordsView/ManageWordsView";
 import {ManageWordNotesView} from "./Manage/ManageWordNotesView/ManageWordNotesView";
-import Test from "./Test/Test"
+import {GrammarView} from "./GrammarView/GrammarView";
+import {ParticleProblem} from "./data/Grammar/Particles/ParticleProblem";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           <Route path={"/words"}>
             <WordsView />
           </Route>
+          <Route path={"/grammar"}>
+            <GrammarView />
+          </Route>
           <Route path={"/manageWords"}>
             <ManageWordsView />
           </Route>
@@ -26,7 +30,7 @@ function App() {
             <ManageWordNotesView />
           </Route>
           <Route path={"/test"}>
-            <Test />
+            <ParticleProblem particle={"を"} index={1} />
           </Route>
           <Route exact path={"/"}>
             <Redirect to={"words/practiceWordList"} />

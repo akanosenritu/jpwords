@@ -1,0 +1,21 @@
+import {Hide} from "../../Hide"
+import {Ruby} from "../../../../General/Components/Ruby";
+import {Problem} from "../../Problem";
+
+<Problem
+  answer={"が"}
+  translation={"That blue vehicle is not mine. Mine is this red one."}
+  rationale={<p>
+    は and が are both used after the subject of a sentence. But their indications are not the same.
+    は indicates the topic of the sentence. When the topic is kept in the following sentences, は will not be used.
+    が, on the other hand, is simply a nominative case marker.
+    In the first sentence, は appears twice.  This can be explained as:<br />
+    <p style={{paddingLeft:10}}>
+      The statement[topic] that "That blue car[topic of this sub sentence] is mine" is not correct.<br />
+    </p>
+    Since the topic of "my car" is kept in the second sentence, は cannot be used, therefore you have to choose が.
+  </p>}
+>
+  あの　<Ruby t={"あお"}>青</Ruby>い　<Ruby t={"くるま"}>車</Ruby>は　わたしの　ものでは　ありません。
+  この　<Ruby t={"あか"}>赤</Ruby>い　車<Hide>が</Hide>　わたしのです。
+</Problem>

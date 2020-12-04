@@ -1,12 +1,12 @@
 import React from "react";
 
 type RubyProps = {
-  b: string,
+  b?: string,
   t: string
 }
 
 export const Ruby: React.FC<RubyProps> = props => {
   return <ruby>
-    {props.b} <rp>(</rp><rt>{props.t}</rt><rp>)</rp>
+    {props.b? props.b: props.children} <rp>(</rp><rt>{props.t}</rt><rp>)</rp>
   </ruby>
 }

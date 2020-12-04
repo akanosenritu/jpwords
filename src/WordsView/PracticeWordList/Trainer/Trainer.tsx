@@ -3,7 +3,7 @@ import {WordType} from "../../../data/Word/Word";
 import {Box, Button, Dialog, LinearProgress} from "@material-ui/core";
 import {sample} from "lodash";
 import {PracticeWordWithInput} from "../../../PracticeMethods/PracticeWordWithInput/PracticeWordWithInput";
-import {DebugContext} from "../../Contexts";
+import {DebugContext} from "../../../General/Contexts";
 import {WordNotes} from "../../../data/WordNotes/WordNote";
 import ReportIcon from '@material-ui/icons/Report';
 import {ReportProblem} from "../ReportProblem";

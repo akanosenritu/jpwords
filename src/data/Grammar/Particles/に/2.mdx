@@ -1,0 +1,15 @@
+import {Hide} from "../../Hide"
+import {Ruby} from "../../../../General/Components/Ruby";
+import {Problem} from "../../Problem";
+
+<Problem
+  answer={"に"}
+  dummies={["の", "は", "から"]}
+  translation={"Write your name here, please."}
+  rationale={`
+    Of the options given, only に indicates the location. Here へ is also usable in the same meaning.
+    で is also possible, but it will indicate the location of THE PERSON, e.g. a desk, instead of that of the pen, e.g. a space on a paper.
+  `}
+>
+  ここ<Hide>に</Hide>　<Ruby t={"なまえ"}>名前</Ruby>を　<Ruby t={"か"}>書</Ruby>いてください。
+</Problem>
