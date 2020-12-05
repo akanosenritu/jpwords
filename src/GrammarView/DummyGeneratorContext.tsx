@@ -1,6 +1,6 @@
 import React from "react";
 
-const defaultGenerator = (count: number, exclude: string) => {
+const defaultGenerator = (count: number, exclude: string[]) => {
   return new Array(count).fill("Dummy")
 }
 

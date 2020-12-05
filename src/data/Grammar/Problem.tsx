@@ -32,6 +32,7 @@ const AnswerButton: React.FC<AnswerButtonProps> = props => {
 
 type ProblemProps = {
   answer: string,
+  otherPossibleAnswers?: string[],
   dummies?: string[],
   translation?: string,
   rationale?: React.ReactElement
@@ -40,7 +41,7 @@ type ProblemProps = {
 export const Problem: React.FC<ProblemProps> = props => {
   const [isHidden, setIsHidden] = useState(true)
   const dummyGenerator = useContext(DummyGeneratorContext)
-  const [dummies] = useState(props.dummies? props.dummies: dummyGenerator(3, props.answer))
+  const [dummies] = useState(props.dummies? props.dummies: dummyGenerator(3, [props.answer].concat(props.otherPossibleAnswers? props.otherPossibleAnswers: [])))
   const [order] = useState(shuffle(Object.keys(new Array(dummies.length+1).fill(0))).map(v=>parseInt(v)))
   const buttons = dummies.map(dummy => {
     return <DummyButton isDisabled={!isHidden} key={dummy}>{dummy}</DummyButton>
