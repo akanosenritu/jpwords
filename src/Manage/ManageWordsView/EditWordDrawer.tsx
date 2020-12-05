@@ -6,8 +6,8 @@ import {FormikErrors, useFormik} from "formik";
 import * as wanakana from "wanakana";
 import Select from "react-select-material-ui";
 import {DrawerBase} from "../DrawerBase";
-import {APIWordType} from "../API/APIWord";
-import {APICategoryType, retrieveAPICategories} from "../API/APICategory";
+import {APIWordType} from "../../API/APIWord";
+import {APICategoryType, retrieveAPICategories} from "../../API/APICategory";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

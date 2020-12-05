@@ -8,7 +8,7 @@ import {
 import {EditWordDrawer} from "./EditWordDrawer";
 import {WordsTable} from "./WordsTable";
 import {InspectWordDrawer} from "./InspectWordDrawer";
-import {APIWordType, createAPIWord, retrieveAPIWords, updateAPIWord} from "../API/APIWord";
+import {APIWordType, createAPIWord, retrieveAPIWords, updateAPIWord} from "../../API/APIWord";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

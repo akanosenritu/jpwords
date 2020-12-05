@@ -10,7 +10,7 @@ import {WordsView} from "./WordsView/WordsView";
 import {ManageWordsView} from "./Manage/ManageWordsView/ManageWordsView";
 import {ManageWordNotesView} from "./Manage/ManageWordNotesView/ManageWordNotesView";
 import {GrammarView} from "./GrammarView/GrammarView";
-import {ParticleProblem} from "./data/Grammar/Particles/ParticleProblem";
+import {Login} from "./Login";
 
 function App() {
   return (
@@ -29,8 +29,8 @@ function App() {
           <Route path={"/manageWordNotes"}>
             <ManageWordNotesView />
           </Route>
-          <Route path={"/test"}>
-            <ParticleProblem particle={"を"} index={1} />
+          <Route path={"/login"}>
+            <Login />
           </Route>
           <Route exact path={"/"}>
             <Redirect to={"words/practiceWordList"} />

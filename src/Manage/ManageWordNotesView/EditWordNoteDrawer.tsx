@@ -6,9 +6,9 @@ import Select from "react-select-material-ui";
 import {DrawerBase} from "../DrawerBase"
 import {PrintMarkDown} from "../../General/Components/PrintMarkDown";
 import {WordsTable} from "../ManageWordsView/WordsTable";
-import {APIWordNoteType} from "../API/APIWordNote";
-import {APIWordType, retrieveAPIWords} from "../API/APIWord";
-import {APICategoryType, retrieveAPICategories} from "../API/APICategory";
+import {APIWordNoteType} from "../../API/APIWordNote";
+import {APIWordType, retrieveAPIWords} from "../../API/APIWord";
+import {APICategoryType, retrieveAPICategories} from "../../API/APICategory";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

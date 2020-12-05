@@ -1,6 +1,6 @@
 import React from "react";
 import {DrawerBase} from "../DrawerBase";
-import {APIWordType} from "../API/APIWord";
+import {APIWordType} from "../../API/APIWord";
 
 type RemoverProps = {
   word: APIWordType,

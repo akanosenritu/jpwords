@@ -1,7 +1,7 @@
 import React from "react";
 import {DrawerBase} from "../DrawerBase";
 import {Box, List, Typography} from "@material-ui/core";
-import {APIWordType} from "../API/APIWord";
+import {APIWordType} from "../../API/APIWord";
 
 type InspectorProps = {
   word: APIWordType

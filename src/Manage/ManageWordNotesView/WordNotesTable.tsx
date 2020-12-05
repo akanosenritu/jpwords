@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from "@material-ui/core/TablePagination";
 import {Button} from "@material-ui/core";
-import {APIWordNoteType} from "../API/APIWordNote";
+import {APIWordNoteType} from "../../API/APIWordNote";
 
 const COLUMNS = ["UUID", "Title", "A. Words", "A. Categories", "Actions"]
 

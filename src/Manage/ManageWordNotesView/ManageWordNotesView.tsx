@@ -7,7 +7,7 @@ import {EditWordNoteDrawer} from "./EditWordNoteDrawer";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import {WordNotesTable} from "./WordNotesTable";
-import {APIWordNoteType, createAPIWordNote, retrieveAPIWordNotes, updateAPIWordNote} from "../API/APIWordNote";
+import {APIWordNoteType, createAPIWordNote, retrieveAPIWordNotes, updateAPIWordNote} from "../../API/APIWordNote";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

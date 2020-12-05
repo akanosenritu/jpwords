@@ -8,8 +8,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from "@material-ui/core/TablePagination";
 import {Button, Box} from "@material-ui/core";
 import {SearchBox} from "../../General/Components/SearchBox";
-import {APIWordType} from "../API/APIWord";
-import {APICategoryType, retrieveAPICategories} from "../API/APICategory";
+import {APIWordType} from "../../API/APIWord";
+import {APICategoryType, retrieveAPICategories} from "../../API/APICategory";
 
 const columns = ["UUID", "Kanji", "Kana", "Meaning", "Category", "Actions"]
 
