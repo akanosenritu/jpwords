@@ -1,5 +1,5 @@
 // const serverURL = "http://localhost:8020/"
-const serverURL = "https://enigmatic-crag-66978.herokuapp.com/"
+const serverURL = "https://shrouded-thicket-03801.herokuapp.com/"
 const apiURL = serverURL + "api/"
 export let token: null|string = null
 
