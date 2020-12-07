@@ -3,11 +3,12 @@
     command = "CI= npm run build"
 
 [[redirects]]
+    from = "/api/*"
+    to = "https://shrouded-thicket-03801.herokuapp.com/"
+    status = 200
+
+[[redirects]]
     from = "/*"
     to = "/index.html"
     status = 200
 
-[[redirects]]
-    from = "/api/*"
-    to = "https://shrouded-thicket-03801.herokuapp.com/"
-    status = 200
