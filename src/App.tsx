@@ -10,12 +10,13 @@ import {WordsView} from "./WordsView/WordsView";
 import {ManageWordsView} from "./Manage/ManageWordsView/ManageWordsView";
 import {ManageWordNotesView} from "./Manage/ManageWordNotesView/ManageWordNotesView";
 import {GrammarView} from "./GrammarView/GrammarView";
-import {Login} from "./Login";
+import {Navigation} from "./General/Navigation";
 
 function App() {
   return (
     <div>
       <Router>
+        <Navigation />
         <Switch>
           <Route path={"/words"}>
             <WordsView />
@@ -28,9 +29,6 @@ function App() {
           </Route>
           <Route path={"/manageWordNotes"}>
             <ManageWordNotesView />
-          </Route>
-          <Route path={"/login"}>
-            <Login />
           </Route>
           <Route exact path={"/"}>
             <Redirect to={"words/practiceWordList"} />
