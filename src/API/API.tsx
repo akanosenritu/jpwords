@@ -10,7 +10,7 @@ const myFetch = (input: RequestInfo, init?: RequestInit) => {
 }
 
 export const get = (url: string, params?: Map<string, string>) => {
-  let actualURL = new URL("/api/" + url);
+  let actualURL = new URL("/api/" + url, window.location.origin);
   if (params) {
     params.forEach((value, key) => {
       actualURL.searchParams.append(key, value)
@@ -19,22 +19,13 @@ export const get = (url: string, params?: Map<string, string>) => {
   return myFetch(actualURL.toString());
 }
 
-export const post = (url: string, data: object) => {
+export const post = async (url: string, data: object) => {
+  const csrfToken = await getCsrfToken()
   return myFetch("/api/"+url, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-}
-
-export const postWithToken = (url: string, data: object, token: string) => {
-  return myFetch("/api/"+url, {
-    method: "POST",
-    headers: {
-      "Authorization": `Token ${token}`,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrfToken
     },
     body: JSON.stringify(data)
   })
@@ -59,48 +50,14 @@ export const setCsrfToken = async (): Promise<string> => {
 }
 
 export const getCsrfToken = async (): Promise<string> => {
-  const csrfToken = await setCsrfToken()
+  const csrfToken = Cookies.get("csrftoken")
   if (csrfToken) return csrfToken
   return setCsrfToken()
 }
 
-export const login = async (username: string, password: string) => {
-  const headers = new Headers()
-  const csrfToken = await getCsrfToken()
-  headers.append("X-CSRFToken", csrfToken)
-  headers.append("Content-Type", "application/json")
-  return myFetch('/api/login/', {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify({
-      username: username,
-      password: password
-    })
-  })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-    })
-}
 
-export const isLoggedIn = async (): Promise<boolean> => {
-  return fetch("/api/check-login/")
-    .then(res => {
-      console.log(res)
-      return res.ok
-    })
-}
 
-export const logout = async () => {
-  const headers = new Headers()
-  const csrfToken = await getCsrfToken()
-  headers.append("X-CSRFToken", csrfToken)
-  return myFetch('/api/logout/', {
-    method: "POST",
-    headers: headers
-  })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-    })
-}
+
+
+
+

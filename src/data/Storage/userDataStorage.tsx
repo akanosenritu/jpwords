@@ -1,11 +1,11 @@
 const STORAGE_NAME = "userData"
 
 export type UserData = {
-  username: string | null,
+  username: string ,
 }
 
 export const initialUserData: UserData = {
-  username: null
+  username: ""
 }
 
 export const setUserData = (userData: UserData) => {

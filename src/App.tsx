@@ -10,34 +10,33 @@ import {WordsView} from "./WordsView/WordsView";
 import {ManageWordsView} from "./Manage/ManageWordsView/ManageWordsView";
 import {ManageWordNotesView} from "./Manage/ManageWordNotesView/ManageWordNotesView";
 import {GrammarView} from "./GrammarView/GrammarView";
-import {Login} from "./Login";
 import {Navigation} from "./General/Navigation";
+import {UserProvider} from "./data/User";
 
 function App() {
   return (
     <div>
       <Router>
-        <Navigation />
-        <Switch>
-          <Route path={"/words"}>
-            <WordsView />
-          </Route>
-          <Route path={"/grammar"}>
-            <GrammarView />
-          </Route>
-          <Route path={"/manageWords"}>
-            <ManageWordsView />
-          </Route>
-          <Route path={"/manageWordNotes"}>
-            <ManageWordNotesView />
-          </Route>
-          <Route path={"/login"}>
-            <Login />
-          </Route>
-          <Route exact path={"/"}>
-            <Redirect to={"words/practiceWordList"} />
-          </Route>
-        </Switch>
+        <UserProvider>
+          <Navigation />
+          <Switch>
+            <Route path={"/words"}>
+              <WordsView />
+            </Route>
+            <Route path={"/grammar"}>
+              <GrammarView />
+            </Route>
+            <Route path={"/manageWords"}>
+              <ManageWordsView />
+            </Route>
+            <Route path={"/manageWordNotes"}>
+              <ManageWordNotesView />
+            </Route>
+            <Route exact path={"/"}>
+              <Redirect to={"words/practiceWordList"} />
+            </Route>
+          </Switch>
+        </UserProvider>
       </Router>
     </div>
   );

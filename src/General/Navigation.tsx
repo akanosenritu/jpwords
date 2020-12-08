@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,9 +11,9 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import {LoginDialog} from "./LoginDialog";
-import {user} from "../data/User";
-import Box from "@material-ui/core/Box";
-import * as api from "../API/API"
+import {UserContext} from "../data/User";
+import Box from "@material-ui/core/Box"
+import {SignUpDialog} from "./SignUpDialog";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,16 +37,11 @@ export const Navigation: React.FC = () => {
   const classes = useStyles()
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  useEffect(() => {
-    api.isLoggedIn()
-      .then(value => setIsLoggedIn(value))
-      .catch(err => console.log(err))
-  })
+  const [isSignUpDialogOpen, setIsSignUpDialogOpen] = useState(false)
+  const {user, logout} = useContext(UserContext)
   const onClickLogout = () => {
-    user.logOut()
+    logout()
   }
-  console.log(user)
   return <div className={classes.root}>
     <AppBar position="static" color={"default"}>
       <Toolbar variant={"dense"} style={{display:"flex", justifyContent: "space-between"}}>
@@ -64,18 +59,24 @@ export const Navigation: React.FC = () => {
           </List>
         </Drawer>
         <Box>
-          {!isLoggedIn ?
-            <Button color="inherit" onClick={()=>setIsLoginDialogOpen(true)}>Login</Button>:
+          {user.status === "Authenticated" ?
             <div>
               <Box mr={2} display={"inline-block"}>
                 Logged in as <span style={{color: "green", fontWeight: "bold"}}>{user.username}</span>
               </Box>
               <Button onClick={onClickLogout}>Logout</Button>
-            </div>
+            </div>:
+            <>
+              <Button color="inherit" onClick={()=>setIsLoginDialogOpen(true)}>Login</Button>
+              <Button color="inherit" onClick={()=>setIsSignUpDialogOpen(true)}>Sign up</Button>
+            </>
           }
         </Box>
         <Dialog open={isLoginDialogOpen} onClose={()=>setIsLoginDialogOpen(false)}>
           <LoginDialog close={()=>setIsLoginDialogOpen(false)}/>
+        </Dialog>
+        <Dialog open={isSignUpDialogOpen} onClose={()=>setIsSignUpDialogOpen(false)}>
+          <SignUpDialog close={()=>setIsSignUpDialogOpen(false)}/>
         </Dialog>
       </Toolbar>
     </AppBar>

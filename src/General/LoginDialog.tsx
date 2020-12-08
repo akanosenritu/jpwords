@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Box, Button, CircularProgress, DialogTitle} from "@material-ui/core";
 import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import {FormikErrors, useFormik} from "formik";
-import {user} from "../data/User";
+import {UserContext} from "../data/User";
 
 type LoginInfo = {
   userName: string,
@@ -14,8 +14,27 @@ type Props = {
   close: () => void
 }
 
+type InitialStatus = {
+  name: "initial"
+}
+type LoggingInStatus = {
+  name: "loggingIn"
+}
+type SuccessStatus = {
+  name: "success"
+}
+type ErrorStatus = {
+  name: "error",
+  reason: string
+}
+
+type Status = InitialStatus | LoggingInStatus | SuccessStatus | ErrorStatus
+
 export const LoginDialog: React.FC<Props> = (props) => {
-  const [statusText, setStatusText] = useState("")
+  const [status, setStatus] = useState<Status>({
+    name: "initial"
+  })
+  const {login} = useContext(UserContext)
   const formik = useFormik({
     initialValues: {
       userName: "",
@@ -26,14 +45,20 @@ export const LoginDialog: React.FC<Props> = (props) => {
       return errors
     },
     onSubmit: (values) => {
-      user.logIn(values.userName, values.password)
-        .then(() => {
-          setStatusText("Logged in successfully.")
-          setTimeout(()=>props.close(), 2000)
+      setStatus({
+        name: "loggingIn"
+      })
+      login(values.userName, values.password)
+        .then(result => {
+          if (result.status === "success") {
+            setStatus({name: "success"})
+            setTimeout(()=>props.close(), 2000)
+          } else {
+            setStatus({name: "error", reason: result.reason})
+          }
         })
-        .catch(err => {
-          console.log(err)
-          setStatusText("Unable to login.")
+        .catch(() => {
+          setStatus({name: "error", reason: "unknown reason"})
         })
     }
   })
@@ -52,12 +77,15 @@ export const LoginDialog: React.FC<Props> = (props) => {
           type={"password"}
         />
         <Box m={"auto"}>
-          <Button type={"submit"} disabled={user.isLoggedIn()}>Login</Button>
+          <Button type={"submit"}>Login</Button>
           <div style={{verticalAlign: "-20%", display: "inline-block"}}>
-            {user.status === "LoggingIn" && <CircularProgress size={20}/>}
+            {status.name === "loggingIn" && <CircularProgress size={20}/>}
           </div>
-          {statusText &&
-          <span style={{color: user.isLoggedIn()? "green": "red"}}>{statusText}</span>
+          {status.name === "error" &&
+            <span style={{color:"red"}}>{status.reason}</span>
+          }
+          {status.name === "success" &&
+            <span style={{color:"green"}}>Successfully logged in.</span>
           }
         </Box>
       </form>

@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import {PracticeWordListView} from "./PracticeWordList/PracticeWordListView";
 import {DebugContext} from "../General/Contexts";
-import {WordBrowserView} from "./Browse/BrowseView";
 
 export const WordsView: React.FC = () => {
   const match = useRouteMatch();
@@ -18,9 +17,6 @@ export const WordsView: React.FC = () => {
     <Switch>
       <Route path={`${match.path}/practiceWordList`}>
         <PracticeWordListView />
-      </Route>
-      <Route path={`${match.path}/browse`}>
-        <WordBrowserView />
       </Route>
     </Switch>
   </DebugContext.Provider>
