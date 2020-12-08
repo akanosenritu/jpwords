@@ -11,11 +11,13 @@ import {ManageWordsView} from "./Manage/ManageWordsView/ManageWordsView";
 import {ManageWordNotesView} from "./Manage/ManageWordNotesView/ManageWordNotesView";
 import {GrammarView} from "./GrammarView/GrammarView";
 import {Login} from "./Login";
+import {Navigation} from "./General/Navigation";
 
 function App() {
   return (
     <div>
       <Router>
+        <Navigation />
         <Switch>
           <Route path={"/words"}>
             <WordsView />

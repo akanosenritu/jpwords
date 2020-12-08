@@ -1,8 +1,4 @@
-// const serverURL = "http://localhost:8020/"
 import Cookies from "js-cookie";
-
-const serverURL = "https://shrouded-thicket-03801.herokuapp.com/"
-const apiURL = serverURL + "api/"
 export let token: null|string = null
 
 const myFetch = (input: RequestInfo, init?: RequestInit) => {
@@ -14,7 +10,7 @@ const myFetch = (input: RequestInfo, init?: RequestInit) => {
 }
 
 export const get = (url: string, params?: Map<string, string>) => {
-  let actualURL = new URL(apiURL+url);
+  let actualURL = new URL("/api/" + url);
   if (params) {
     params.forEach((value, key) => {
       actualURL.searchParams.append(key, value)
@@ -24,7 +20,7 @@ export const get = (url: string, params?: Map<string, string>) => {
 }
 
 export const post = (url: string, data: object) => {
-  return myFetch(apiURL+url, {
+  return myFetch("/api/"+url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -34,7 +30,7 @@ export const post = (url: string, data: object) => {
 }
 
 export const postWithToken = (url: string, data: object, token: string) => {
-  return myFetch(apiURL+url, {
+  return myFetch("/api/"+url, {
     method: "POST",
     headers: {
       "Authorization": `Token ${token}`,
@@ -45,7 +41,7 @@ export const postWithToken = (url: string, data: object, token: string) => {
 }
 
 export const put = (url: string, data: object) => {
-  return myFetch(apiURL + url, {
+  return myFetch("/api/" + url, {
     method: "PUT",
     headers:{
       "Content-Type": "application/json"
@@ -62,9 +58,15 @@ export const setCsrfToken = async (): Promise<string> => {
     })
 }
 
+export const getCsrfToken = async (): Promise<string> => {
+  const csrfToken = await setCsrfToken()
+  if (csrfToken) return csrfToken
+  return setCsrfToken()
+}
+
 export const login = async (username: string, password: string) => {
   const headers = new Headers()
-  const csrfToken = await setCsrfToken()
+  const csrfToken = await getCsrfToken()
   headers.append("X-CSRFToken", csrfToken)
   headers.append("Content-Type", "application/json")
   return myFetch('/api/login/', {
@@ -81,9 +83,17 @@ export const login = async (username: string, password: string) => {
     })
 }
 
+export const isLoggedIn = async (): Promise<boolean> => {
+  return fetch("/api/check-login/")
+    .then(res => {
+      console.log(res)
+      return res.ok
+    })
+}
+
 export const logout = async () => {
   const headers = new Headers()
-  const csrfToken = await setCsrfToken()
+  const csrfToken = await getCsrfToken()
   headers.append("X-CSRFToken", csrfToken)
   return myFetch('/api/logout/', {
     method: "POST",

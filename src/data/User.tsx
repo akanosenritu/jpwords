@@ -1,36 +1,44 @@
-import {login, logout} from "../API/API";
+import {isLoggedIn, login, logout} from "../API/API";
+import {getUserData, initialUserData, setUserData} from "./Storage/userDataStorage";
 
-type Status = "Anonymous" | "LoggingIn" | "User" | "Staff"
+type Status = "Anonymous" | "LoggingIn" | "LoggedIn"
 
 export class User {
+  username: string | null
   status: Status
-  userName: string
   constructor() {
-    this.status = "Anonymous"
-    this.userName = ""
+    const userData = getUserData(initialUserData)
+    this.username = userData.username
+    this.status = this.username? "LoggedIn": "Anonymous"
   }
   logIn(userName_: string, password: string) {
     this.status = "LoggingIn"
     return login(userName_, password)
       .then(() => {
-        this.userName = userName_
-        this.status = "User"
+        this.username = userName_
+        this.status = "LoggedIn"
+        setUserData({
+          username: userName_
+        })
       })
       .catch(err => {
         this.status = "Anonymous"
-        console.log(err)
+        throw err
       })
   }
   isLoggedIn() {
-    return this.status === "User" || this.status === "Staff"
+    return this.status === "LoggedIn"
   }
   logOut() {
     logout()
+      .then(() => {
+        this.status = "Anonymous"
+        this.username = null
+        setUserData(initialUserData)
+      })
       .catch(err => {
         console.log(err)
       })
-    this.status = "Anonymous"
-    this.userName = ""
   }
 }
 
