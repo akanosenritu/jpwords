@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Box, Button, TextField} from "@material-ui/core";
 import {login, token} from "./API/API";
 import {FormikErrors, useFormik} from "formik";
+import Cookies from "js-cookie";
+import {user} from "./data/User";
 
 type LoginInfo = {
   userName: string,
@@ -9,6 +11,11 @@ type LoginInfo = {
 }
 
 export const Login: React.FC = () => {
+  useEffect(() => {
+    fetch("/set-csrf-token/")
+      .then(res => res.json())
+      .then(data => console.log(data))
+  }, [])
   const formik = useFormik({
     initialValues: {
       userName: "",
@@ -24,11 +31,12 @@ export const Login: React.FC = () => {
       }
     },
     onSubmit: (values) => {
-      login(values.userName, values.password)
-        .then(()=>console.log(token))
-        .catch(err => console.log(err))
+      user.logIn(values.userName, values.password)
     }
   })
+  const onLogout = () => {
+    user.logOut()
+  }
   return <Box mx={3}>
     <form onSubmit={formik.handleSubmit}>
       <TextField
@@ -41,6 +49,7 @@ export const Login: React.FC = () => {
         type={"password"}
       />
       <Button type={"submit"}>Login</Button>
+      <Button onClick={onLogout}>Logout</Button>
     </form>
   </Box>
 }

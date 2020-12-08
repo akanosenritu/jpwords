@@ -1,4 +1,6 @@
 // const serverURL = "http://localhost:8020/"
+import Cookies from "js-cookie";
+
 const serverURL = "https://shrouded-thicket-03801.herokuapp.com/"
 const apiURL = serverURL + "api/"
 export let token: null|string = null
@@ -52,17 +54,43 @@ export const put = (url: string, data: object) => {
   })
 }
 
-export const login = (username: string, password: string) => {
-  const formData = new FormData()
-  formData.append("username", username)
-  formData.append("password", password)
-  return myFetch(serverURL+"dj-rest-auth/login/", {
+export const setCsrfToken = async (): Promise<string> => {
+  return fetch("/api/set-csrf-token/")
+    .then(res => res.json())
+    .then(data => {
+      return Cookies.get("csrftoken") as string
+    })
+}
+
+export const login = async (username: string, password: string) => {
+  const headers = new Headers()
+  const csrfToken = await setCsrfToken()
+  headers.append("X-CSRFToken", csrfToken)
+  headers.append("Content-Type", "application/json")
+  return myFetch('/api/login/', {
     method: "POST",
-    body: formData
+    headers: headers,
+    body: JSON.stringify({
+      username: username,
+      password: password
+    })
   })
     .then(res => res.json())
     .then(data => {
-      if (!data.key) throw data
-      token = data.key
+      console.log(data)
+    })
+}
+
+export const logout = async () => {
+  const headers = new Headers()
+  const csrfToken = await setCsrfToken()
+  headers.append("X-CSRFToken", csrfToken)
+  return myFetch('/api/logout/', {
+    method: "POST",
+    headers: headers
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
     })
 }
