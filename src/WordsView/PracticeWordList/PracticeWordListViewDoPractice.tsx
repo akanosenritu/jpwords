@@ -3,9 +3,9 @@ import {WordType} from "../../data/Word/Word";
 import {Trainer2} from "./Trainer/Trainer";
 import {WordList} from "../../data/WordLists/WordList";
 import {TrainerResult} from "./Trainer/TrainerResult";
-import {chooseWordsToPractice, loadPracticeHistory} from "../../data/PracticeHistory";
 import {shuffle} from "lodash";
-import {PracticeHistoryContext} from "./PracticeHistoryContext";
+import {PracticeHistoryContext} from "../../General/Contexts";
+import {chooseWordsToPractice} from "../../data/PracticeHistory";
 
 type PracticeWordListViewDoPracticeProps = {
     wordListToPractice: WordList,

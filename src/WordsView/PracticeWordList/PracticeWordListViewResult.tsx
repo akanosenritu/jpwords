@@ -1,12 +1,11 @@
 import React, {useContext, useState} from "react";
 import {Box, Button, Grid, Typography} from "@material-ui/core";
-import {loadPracticeHistory} from "../../data/PracticeHistory";
 import {WordList} from "../../data/WordLists/WordList";
 import {PieChart} from 'react-minimal-pie-chart';
 import {getColors} from "../Styles";
 import {useHistory} from "react-router-dom";
 import Backdrop from "@material-ui/core/Backdrop";
-import {PracticeHistoryContext} from "./PracticeHistoryContext";
+import {PracticeHistoryContext} from "../../General/Contexts";
 
 type ChartProps = {
   reviewed: number,
@@ -78,63 +77,63 @@ export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProp
   }
   const progress = 100 * (countNeedsReview + countReviewed) / props.wordList.wordCount;
   return <Box mt={2}>
-      <Backdrop open={false} />
-      <>
-        <Box style={{borderLeft: "5px solid darkgray", paddingLeft: 10}}>
-          <Typography variant={"h5"}>Progress Overview</Typography>
-        </Box>
-        <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} mt={2}>
-          <Typography variant={"body2"}>Total {countReviewed + countNeedsReview + countUntouched} words</Typography>
-          <div style={{width: 250, height: 250, padding: 10}}>
-            <Chart reviewed={countReviewed} needsReview={countNeedsReview} untouched={countUntouched}/>
-          </div>
-        </Box>
-        <div>
-          <Box mt={2}>
-            <Grid container spacing={1}>
-              <Grid item xs={4}>
-                <div style={{textAlign: "center"}}>
-                  Reviewed:
-                  <div>
-                    <Typography variant={"h4"} style={{color: getColors("CORRECT").main}}>{countReviewed}</Typography>
-                  </div>
+    <Backdrop open={false} />
+    <>
+      <Box style={{borderLeft: "5px solid darkgray", paddingLeft: 10}}>
+        <Typography variant={"h5"}>Progress Overview</Typography>
+      </Box>
+      <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} mt={2}>
+        <Typography variant={"body2"}>Total {countReviewed + countNeedsReview + countUntouched} words</Typography>
+        <div style={{width: 250, height: 250, padding: 10}}>
+          <Chart reviewed={countReviewed} needsReview={countNeedsReview} untouched={countUntouched}/>
+        </div>
+      </Box>
+      <div>
+        <Box mt={2}>
+          <Grid container spacing={1}>
+            <Grid item xs={4}>
+              <div style={{textAlign: "center"}}>
+                Reviewed:
+                <div>
+                  <Typography variant={"h4"} style={{color: getColors("CORRECT").main}}>{countReviewed}</Typography>
                 </div>
-              </Grid>
-              <Grid item xs={4}>
-                <div style={{textAlign: "center"}}>
-                  Needs review:
-                  <div>
-                    <Typography variant={"h4"} style={{color: getColors("WRONG").main}}>{countNeedsReview}</Typography>
-                  </div>
-                </div>
-              </Grid>
-              <Grid item xs={4}>
-                <div style={{textAlign: "center"}}>
-                  Untouched:
-                  <div>
-                    <Typography variant={"h4"} style={{color: "lightgray"}}>{countUntouched}</Typography>
-                  </div>
-                </div>
-              </Grid>
-              <Grid item xs={12}>
-                <div style={{textAlign: "center"}}>
-                  Total Progress:
-                  <div>
-                    <Typography variant={"h4"} style={{color: "#91ee91"}}>{progress.toFixed(1)} %</Typography>
-                  </div>
-                </div>
-              </Grid>
+              </div>
             </Grid>
-          </Box>
-        </div>
-        <div>
-          <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} mt={2}>
-            {countReviewed !== props.wordList.words.length ?
-              <Button variant={"outlined"} color={"primary"} onClick={props.continuePractice}>Continue</Button> :
-              <Button variant={"outlined"} color={"primary"} onClick={()=>browserHistory.go(0)}>Return to selection</Button>
-            }
-          </Box>
-        </div>
-      </>
+            <Grid item xs={4}>
+              <div style={{textAlign: "center"}}>
+                Needs review:
+                <div>
+                  <Typography variant={"h4"} style={{color: getColors("WRONG").main}}>{countNeedsReview}</Typography>
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={4}>
+              <div style={{textAlign: "center"}}>
+                Untouched:
+                <div>
+                  <Typography variant={"h4"} style={{color: "lightgray"}}>{countUntouched}</Typography>
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div style={{textAlign: "center"}}>
+                Total Progress:
+                <div>
+                  <Typography variant={"h4"} style={{color: "#91ee91"}}>{progress.toFixed(1)} %</Typography>
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+        </Box>
+      </div>
+      <div>
+        <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} mt={2}>
+          {countReviewed !== props.wordList.words.length ?
+            <Button variant={"outlined"} color={"primary"} onClick={props.continuePractice}>Continue</Button> :
+            <Button variant={"outlined"} color={"primary"} onClick={()=>browserHistory.go(0)}>Return to selection</Button>
+          }
+        </Box>
+      </div>
+    </>
   </Box>
 };

@@ -3,7 +3,7 @@ import {WordList} from "./WordLists/WordList";
 import {shuffle} from "lodash";
 import {loadPracticeHistoryFromLocalStorage, savePracticeHistoryLocally} from "./Storage/PracticeHistory";
 import {retrievePracticeHistory, savePracticeHistoryRemotely} from "../API/APIPracticeHistory";
-import {user} from "./User";
+import {User} from "./User";
 
 const TIME_FACTOR = 24 * 60 * 60 * 1000;
 
@@ -34,7 +34,7 @@ export const updatePracticeHistory = (practiceHistory: PracticeHistory, wordIdsP
     l[1] = 1;
     l[2] = 6;
     for (let i=3; i<=nPractices; i++) {
-        l[i] = l[i-1] * strength;
+      l[i] = l[i-1] * strength;
     }
     return new Date(Date.now() + timeFactor * l[nPractices]);
   };
@@ -68,7 +68,7 @@ export const updatePracticeHistory = (practiceHistory: PracticeHistory, wordIdsP
   return newHistory;
 };
 
-export const loadPracticeHistory: () => Promise<PracticeHistory> = async () => {
+export const loadPracticeHistory: (user: User) => Promise<PracticeHistory> = async (user: User) => {
   let localHistory: null | PracticeHistory = null
   let remoteHistory: null | PracticeHistory = null
   try {
@@ -76,9 +76,9 @@ export const loadPracticeHistory: () => Promise<PracticeHistory> = async () => {
   } catch (e) {
     localHistory = createBlankHistory()
   }
-  if (user.isLoggedIn()) {
+  if (user.status === "Authenticated") {
     try {
-      remoteHistory = await retrievePracticeHistory()
+      remoteHistory = await retrievePracticeHistory(user)
     } catch(e) {
       console.log(e)
     }
@@ -87,14 +87,14 @@ export const loadPracticeHistory: () => Promise<PracticeHistory> = async () => {
   if (localHistory === null && remoteHistory === null) return createBlankHistory()
   if (localHistory === null && remoteHistory !== null) return remoteHistory
   if (localHistory !== null && remoteHistory === null) return localHistory
-  // for the moment remote data gets the priority.
-  return remoteHistory as PracticeHistory
+  // for the moment local data gets the priority.
+  return localHistory as PracticeHistory
 };
 
-export const savePracticeHistory = (practiceHistory: PracticeHistory) => {
+export const savePracticeHistory = (practiceHistory: PracticeHistory, user: User) => {
   savePracticeHistoryLocally(practiceHistory)
-  if (user.isLoggedIn()) {
-    savePracticeHistoryRemotely(practiceHistory)
+  if (user.status === "Authenticated") {
+    savePracticeHistoryRemotely(practiceHistory, user)
   }
 };
 
