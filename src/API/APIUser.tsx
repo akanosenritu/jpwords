@@ -87,3 +87,32 @@ export const logout = async (): Promise<LogoutResult> => {
         }})
       })
 }
+
+export type ResetPasswordResult = Success | Failure
+
+export const resetPassword = async (username: string, oldPassword: string, newPassword1: string, newPassword2: string): Promise<ResetPasswordResult> => {
+  const headers = new Headers()
+  const csrfToken = await getCsrfToken()
+  headers.append("X-CSRFToken", csrfToken)
+  headers.append("Content-Type", "application/json")
+  const body = {
+    username: username,
+    oldPassword: oldPassword,
+    newPassword1: newPassword1,
+    newPassword2: newPassword2
+  }
+  return fetch("/api/reset-password/", {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(body)
+  })
+    .then(res => {
+      if (res.ok) return {status: "success"}
+      return res.json().then(data => {
+        return {
+          status: "failure",
+          reason: data["error"]
+        }
+      })
+    })
+}

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {getUserData, initialUserData, setUserData} from "./Storage/userDataStorage";
 import * as api from "../API/APIUser"
+import {ResetPasswordResult} from "../API/APIUser";
 
 export type AnonymousUser = {
   status: "Anonymous"
@@ -16,7 +17,8 @@ type UserContextValue = {
   user: User,
   login: (username: string, password: string) => Promise<api.LoginResult>,
   logout: () => Promise<api.LogoutResult>,
-  signUp: (username: string, password1: string, password2: string) => Promise<api.SignUpResult>
+  signUp: (username: string, password1: string, password2: string) => Promise<api.SignUpResult>,
+  resetPassword: (username: string, oldPassword: string, newPassword1: string, newPassword2: string) => Promise<api.ResetPasswordResult>
 }
 
 const defaultUserContextValue = {
@@ -38,6 +40,12 @@ const defaultUserContextValue = {
       status: "failure",
       reason: "(initial value)"
     } as api.SignUpResult
+  },
+  resetPassword: async (username: string, oldPassword: string, newPassword1: string, newPassword2: string) => {
+    return {
+      status: "failure",
+      reason: "(initial value)"
+    } as ResetPasswordResult
   }
 }
 
@@ -77,6 +85,17 @@ export const UserProvider: React.FC = (props) => {
         setUserData(initialUserData)
         return result
       })
+      .catch(err => {
+        setUser({
+          status: "Anonymous"
+        })
+        setUserData(initialUserData)
+        console.log(err)
+        return {
+          status: "failure",
+          reason: "unknown reason",
+        } as api.LogoutResult
+      })
   }
   const signUp = async (username: string, password1: string, password2: string) => {
     return api.signUp(username, password1, password2)
@@ -91,7 +110,13 @@ export const UserProvider: React.FC = (props) => {
         return result
       })
   }
-  return <UserContext.Provider value={{user, login, logout, signUp}}>
+  const resetPassword = async (username: string, oldPassword: string, newPassword1: string, newPassword2: string) => {
+    return api.resetPassword(username, oldPassword, newPassword1, newPassword2)
+      .then(result => {
+        return result
+      })
+  }
+  return <UserContext.Provider value={{user, login, logout, signUp, resetPassword}}>
     {props.children}
   </UserContext.Provider>
 }

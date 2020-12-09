@@ -4,7 +4,6 @@ import {PracticeWordListViewResult} from "./PracticeWordListViewResult";
 import {PracticeWordListViewOverview} from "./PracticeWordListViewOverview";
 import {getAvailableWordLists, WordList} from "../../data/WordLists/WordList";
 import {TrainerResult} from "./Trainer/TrainerResult";
-import {ConfigurationsEntry} from "../../General/ConfigurationsScreen";
 import {initialConfigurations, useConfigurations} from "../../data/Storage/Configurations";
 import {
   loadPracticeHistory,
@@ -46,9 +45,8 @@ export const PracticeWordListView: React.FC = () => {
   const continuePractice = () => {
     setCurrentState("practice");
   };
-  return <div style={{minWidth: 320, maxWidth: 500, margin: "auto", position:"relative"}}>
+  return <div style={{maxWidth: 500, margin: "auto"}}>
     <PracticeHistoryContext.Provider value={practiceHistory}>
-      <ConfigurationsEntry />
       {practiceHistory?
         <>
           {currentState === "start" && <PracticeWordListViewOverview startPractice={startPractice}/>}
