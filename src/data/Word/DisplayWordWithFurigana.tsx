@@ -5,19 +5,21 @@ import {WordType} from "./Word";
 
 const assignRuby = (base: string, ruby: string) => {
   if (!base) return ""
-  const tokens = fit(base, ruby, {type: "object"});
-  if (tokens) {
-    return <span key={base}>{tokens.map(token => {
-      const {w, r} = token;
-      if (w === r) return <span key={w}>{w}</span>;
-      else {
-        return <ruby key={w}>
-          {w}
-          <rt>{r}</rt>
-        </ruby>
-      }
-    })}</span>
-  }
+  try {
+    const tokens = fit(base, ruby, {type: "object"});
+    if (tokens) {
+      return <span key={base}>{tokens.map(token => {
+        const {w, r} = token;
+        if (w === r) return <span key={w}>{w}</span>;
+        else {
+          return <ruby key={w}>
+            {w}
+            <rt>{r}</rt>
+          </ruby>
+        }
+      })}</span>
+    }
+  } catch(e) {}
   return <span key={base}>{base}</span>
 }
 
