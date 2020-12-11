@@ -4,8 +4,8 @@ import {Trainer2} from "./Trainer/Trainer";
 import {WordList} from "../../data/WordLists/WordList";
 import {TrainerResult} from "./Trainer/TrainerResult";
 import {shuffle} from "lodash";
-import {PracticeHistoryContext} from "../../General/Contexts";
-import {chooseWordsToPractice} from "../../data/PracticeHistory";
+import {PracticeHistoryContext} from "../../data/PracticeHistory/PracticeHistoryProvider";
+import {chooseWordsToPractice} from "../../data/PracticeHistory/PracticeHistoryUtils";
 
 type PracticeWordListViewDoPracticeProps = {
     wordListToPractice: WordList,
@@ -13,7 +13,7 @@ type PracticeWordListViewDoPracticeProps = {
 }
 
 export const PracticeWordListViewDoPractice: React.FC<PracticeWordListViewDoPracticeProps> = (props) => {
-  const practiceHistory = useContext(PracticeHistoryContext)
+  const {practiceHistory} = useContext(PracticeHistoryContext)
   // @ts-ignore
   const words = shuffle(chooseWordsToPractice(props.wordListToPractice, practiceHistory, 20));
   const finishPractice = (wordsDone: WordType[], practiceQualities: number[]) => {

@@ -13,35 +13,42 @@ import {GrammarView} from "./GrammarView/GrammarView";
 import {Navigation} from "./General/Navigation";
 import {UserProvider} from "./data/User";
 import {Settings} from "./SettingsView/Settings";
+import {Test} from "./Test/Test";
+import {PracticeHistoryProvider} from "./data/PracticeHistory/PracticeHistoryProvider";
 
 function App() {
   return (
     <div>
       <Router>
         <UserProvider>
-          <Navigation />
-          <div style={{minWidth: 320, maxWidth: 700, margin: "auto", position:"relative"}}>
-            <Switch>
-              <Route path={"/words"}>
-                <WordsView />
-              </Route>
-              <Route path={"/grammar"}>
-                <GrammarView />
-              </Route>
-              <Route path={"/settings"}>
-                <Settings />
-              </Route>
-              <Route path={"/manageWords"}>
-                <ManageWordsView />
-              </Route>
-              <Route path={"/manageWordNotes"}>
-                <ManageWordNotesView />
-              </Route>
-              <Route exact path={"/"}>
-                <Redirect to={"words/practiceWordList"} />
-              </Route>
-            </Switch>
-          </div>
+          <PracticeHistoryProvider>
+            <Navigation />
+            <div style={{minWidth: 320, maxWidth: 700, margin: "auto", position:"relative"}}>
+              <Switch>
+                <Route path={"/words"}>
+                  <WordsView />
+                </Route>
+                <Route path={"/grammar"}>
+                  <GrammarView />
+                </Route>
+                <Route path={"/settings"}>
+                  <Settings />
+                </Route>
+                <Route path={"/test"}>
+                  <Test />
+                </Route>
+                <Route path={"/manageWords"}>
+                  <ManageWordsView />
+                </Route>
+                <Route path={"/manageWordNotes"}>
+                  <ManageWordNotesView />
+                </Route>
+                <Route exact path={"/"}>
+                  <Redirect to={"words/practiceWordList"} />
+                </Route>
+              </Switch>
+            </div>
+          </PracticeHistoryProvider>
         </UserProvider>
       </Router>
     </div>

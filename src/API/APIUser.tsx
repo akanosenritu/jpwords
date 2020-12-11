@@ -1,12 +1,4 @@
-import {getCsrfToken} from "./API";
-
-type Success = {
-  status: "success"
-}
-type Failure = {
-  status: "failure",
-  reason: string
-}
+import {getCsrfToken, Success, Failure} from "./API";
 export type SignUpResult = Success | Failure
 
 export const signUp = async (username: string, password1: string, password2: string): Promise<SignUpResult> => {

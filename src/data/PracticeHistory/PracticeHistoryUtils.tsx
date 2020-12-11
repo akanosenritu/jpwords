@@ -1,34 +1,11 @@
-import {WordType} from "./Word/Word";
-import {WordList} from "./WordLists/WordList";
+import {PracticeHistoryVLatest} from "./PracticeHistory";
+import {WordList} from "../WordLists/WordList";
+import {WordType} from "../Word/Word";
 import {shuffle} from "lodash";
-import {loadPracticeHistoryFromLocalStorage, savePracticeHistoryLocally} from "./Storage/PracticeHistory";
-import {retrievePracticeHistory, savePracticeHistoryRemotely} from "../API/APIPracticeHistory";
-import {User} from "./User";
 
 const TIME_FACTOR = 24 * 60 * 60 * 1000;
 
-export type WordHistoryV2 = {
-  nextPracticeDate: string,
-  nPractices: number,
-  strength: number
-}
-
-export type PracticeHistory = {
-  lastPracticeDate: string,
-  wordsHistory: {[key: string]: WordHistoryV2},
-  userName?: string,
-  version: number
-}
-
-export const createBlankHistory: () => PracticeHistory = () => {
-  return {
-    lastPracticeDate: new Date().toISOString(),
-    version: 0.3,
-    wordsHistory: {}
-  } as PracticeHistory
-};
-
-export const updatePracticeHistory = (practiceHistory: PracticeHistory, wordIdsPracticed: string[], practiceQualities: number[]) => {
+export const updatePracticeHistoryWithPracticeResult = (practiceHistory: PracticeHistoryVLatest, wordIdsPracticed: string[], practiceQualities: number[]) => {
   const calculateNextPracticeDate = (strength: number, nPractices: number, timeFactor: number): Date => {
     const l = [] as number[];
     l[1] = 1;
@@ -68,37 +45,7 @@ export const updatePracticeHistory = (practiceHistory: PracticeHistory, wordIdsP
   return newHistory;
 };
 
-export const loadPracticeHistory: (user: User) => Promise<PracticeHistory> = async (user: User) => {
-  let localHistory: null | PracticeHistory = null
-  let remoteHistory: null | PracticeHistory = null
-  try {
-    localHistory = loadPracticeHistoryFromLocalStorage()
-  } catch (e) {
-    localHistory = createBlankHistory()
-  }
-  if (user.status === "Authenticated") {
-    try {
-      remoteHistory = await retrievePracticeHistory(user)
-    } catch(e) {
-      console.log(e)
-    }
-  }
-  console.log(localHistory, remoteHistory)
-  if (localHistory === null && remoteHistory === null) return createBlankHistory()
-  if (localHistory === null && remoteHistory !== null) return remoteHistory
-  if (localHistory !== null && remoteHistory === null) return localHistory
-  // for the moment local data gets the priority.
-  return localHistory as PracticeHistory
-};
-
-export const savePracticeHistory = (practiceHistory: PracticeHistory, user: User) => {
-  savePracticeHistoryLocally(practiceHistory)
-  if (user.status === "Authenticated") {
-    savePracticeHistoryRemotely(practiceHistory, user)
-  }
-};
-
-export const chooseWordsToPractice = (wordList: WordList, practiceHistory: PracticeHistory, quantity: number): WordType[] => {
+export const chooseWordsToPractice = (wordList: WordList, practiceHistory: PracticeHistoryVLatest, quantity: number): WordType[] => {
   const words = shuffle(wordList.words);
   const untouchedWords = [] as WordType[];
   const result = [] as WordType[];
@@ -123,3 +70,41 @@ export const chooseWordsToPractice = (wordList: WordList, practiceHistory: Pract
   }
   return result.concat(untouchedWords.slice(0, 20)).slice(0, 20);
 };
+
+type CalculateProgressForWordListResult = {
+  countReviewed: number,
+  countNeedsReview: number,
+  countUntouched: number,
+  progress: number
+}
+
+export const calculateProgressForWordList = (practiceHistory: PracticeHistoryVLatest, wordList: WordList): CalculateProgressForWordListResult => {
+  let countReviewed = 0;
+  let countNeedsReview = 0;
+  let countUntouched = 0;
+  for (let word of wordList.words) {
+    // @ts-ignore
+    const wordHistory = practiceHistory.wordsHistory[word.uuid];
+    if (wordHistory === undefined) {
+      countUntouched += 1
+      continue
+    }
+    if (wordHistory.nPractices === 0) {
+      countUntouched += 1
+      continue
+    }
+    const nextPracticeDate = new Date(wordHistory.nextPracticeDate);
+    if (nextPracticeDate.getTime() - Date.now() > 0) {
+      countReviewed += 1
+    } else {
+      countNeedsReview += 1
+    }
+  }
+  const progress = 100 * (countNeedsReview + countReviewed) / wordList.wordCount;
+  return {
+    countReviewed,
+    countNeedsReview,
+    countUntouched,
+    progress
+  }
+}

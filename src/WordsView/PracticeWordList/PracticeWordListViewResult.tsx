@@ -1,11 +1,12 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import {Box, Button, Grid, Typography} from "@material-ui/core";
 import {WordList} from "../../data/WordLists/WordList";
 import {PieChart} from 'react-minimal-pie-chart';
 import {getColors} from "../Styles";
 import {useHistory} from "react-router-dom";
 import Backdrop from "@material-ui/core/Backdrop";
-import {PracticeHistoryContext} from "../../General/Contexts";
+import {PracticeHistoryContext} from "../../data/PracticeHistory/PracticeHistoryProvider";
+import {calculateProgressForWordList} from "../../data/PracticeHistory/PracticeHistoryUtils";
 
 type ChartProps = {
   reviewed: number,
@@ -53,29 +54,8 @@ type PracticeWordListViewResultProps = {
 
 export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProps> = (props) => {
   const browserHistory = useHistory();
-  const practiceHistory = useContext(PracticeHistoryContext)
-  let countReviewed = 0;
-  let countNeedsReview = 0;
-  let countUntouched = 0;
-  for (let word of props.wordList.words) {
-    // @ts-ignore
-    const wordHistory = practiceHistory.wordsHistory[word.uuid];
-    if (wordHistory === undefined) {
-      countUntouched += 1
-      continue
-    }
-    if (wordHistory.nPractices === 0) {
-      countUntouched += 1
-      continue
-    }
-    const nextPracticeDate = new Date(wordHistory.nextPracticeDate);
-    if (nextPracticeDate.getTime() - Date.now() > 0) {
-      countReviewed += 1
-    } else {
-      countNeedsReview += 1
-    }
-  }
-  const progress = 100 * (countNeedsReview + countReviewed) / props.wordList.wordCount;
+  const {practiceHistory} = useContext(PracticeHistoryContext)
+  const {countReviewed, countNeedsReview, countUntouched, progress} = calculateProgressForWordList(practiceHistory, props.wordList)
   return <Box mt={2}>
     <Backdrop open={false} />
     <>

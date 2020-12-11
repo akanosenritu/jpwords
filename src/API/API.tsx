@@ -1,6 +1,14 @@
 import Cookies from "js-cookie";
 export let token: null|string = null
 
+export type Success = {
+  status: "success"
+}
+export type Failure = {
+  status: "failure",
+  reason: string
+}
+
 const myFetch = (input: RequestInfo, init?: RequestInit) => {
   return fetch(input, init)
     .then(res => {
@@ -44,7 +52,7 @@ export const put = (url: string, data: object) => {
 export const setCsrfToken = async (): Promise<string> => {
   return fetch("/api/set-csrf-token/")
     .then(res => res.json())
-    .then(data => {
+    .then(() => {
       return Cookies.get("csrftoken") as string
     })
 }
