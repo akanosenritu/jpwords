@@ -2,12 +2,7 @@ import {loadPracticeHistoryFromLocalStorage, savePracticeHistoryLocally} from ".
 import {retrievePracticeHistory, savePracticeHistoryRemotely} from "../../API/APIPracticeHistory";
 import {User} from "../User";
 import * as uuid from "uuid"
-
-export type WordHistoryV2 = {
-  nextPracticeDate: string,
-  nPractices: number,
-  strength: number
-}
+import {WordHistoryV2, WordHistoryV3} from "./WordHistory";
 
 export type PracticeHistoryV0 = {
   lastPracticeDate: string,
@@ -22,16 +17,23 @@ export type PracticeHistoryV1 = {
   version: "1.0",
   hash: string
 }
-export type PracticeHistory = PracticeHistoryV0 | PracticeHistoryV1
-export type PracticeHistoryVLatest = PracticeHistoryV1
+export type PracticeHistoryV2 = {
+  lastPracticeDate: string,
+  wordsHistory: {[key: string]: WordHistoryV3},
+  userName?: string,
+  version: "2.0",
+  hash: string
+}
+export type PracticeHistory = PracticeHistoryV0 | PracticeHistoryV1 | PracticeHistoryV2
+export type PracticeHistoryVLatest = PracticeHistoryV2
 
 export const createBlankHistory: () => PracticeHistoryVLatest = () => {
   return {
     lastPracticeDate: new Date().toISOString(),
-    version: "1.0",
+    version: "2.0",
     wordsHistory: {},
     hash: uuid.v4()
-  } as PracticeHistoryV1
+  } as PracticeHistoryV2
 };
 
 type LoadPracticeHistoryNew = {
@@ -108,8 +110,23 @@ export const savePracticeHistory = (practiceHistory: PracticeHistoryVLatest, use
 export const updatePracticeHistoryVersionFromV0toV1 = (oldPracticeHistory: PracticeHistoryV0): PracticeHistoryV1 => {
    return Object.assign({hash: uuid.v4()}, oldPracticeHistory, {version: "1.0" as const})
 }
+export const updatePracticeHistoryVersionFromV1toV2 = (oldPracticeHistory: PracticeHistoryV1): PracticeHistoryV2 => {
+  const newWordsHistory: {[key: string]: WordHistoryV3} = {}
+  for (const [wordUUID, wordHistory] of Object.entries(oldPracticeHistory.wordsHistory)) {
+    newWordsHistory[wordUUID] = [wordHistory.nextPracticeDate, wordHistory.nPractices, wordHistory.strength]
+  }
+  return Object.assign(oldPracticeHistory, {wordsHistory: newWordsHistory, version: "2.0" as const})
+}
 
-export const updatePracticeHistoryVersion = (oldPracticeHistory: PracticeHistory): PracticeHistoryVLatest => {
-  if (oldPracticeHistory.version === "1.0") return oldPracticeHistory
-  return updatePracticeHistoryVersionFromV0toV1(oldPracticeHistory)
+export const updatePracticeHistoryVersion = (practiceHistory: PracticeHistory): PracticeHistoryVLatest => {
+  switch(practiceHistory.version) {
+    case "2.0":
+      return practiceHistory
+    case "1.0":
+      return updatePracticeHistoryVersionFromV1toV2(practiceHistory)
+    default:
+      return updatePracticeHistoryVersionFromV1toV2(
+        updatePracticeHistoryVersionFromV0toV1(practiceHistory)
+      )
+  }
 }

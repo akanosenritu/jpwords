@@ -7,14 +7,13 @@ import {
   Redirect,
 } from "react-router-dom";
 import {WordsView} from "./WordsView/WordsView";
-import {ManageWordsView} from "./Manage/ManageWordsView/ManageWordsView";
-import {ManageWordNotesView} from "./Manage/ManageWordNotesView/ManageWordNotesView";
 import {GrammarView} from "./GrammarView/GrammarView";
 import {Navigation} from "./General/Navigation";
 import {UserProvider} from "./data/User";
 import {Settings} from "./SettingsView/Settings";
 import {Test} from "./Test/Test";
 import {PracticeHistoryProvider} from "./data/PracticeHistory/PracticeHistoryProvider";
+import {ManageView} from "./Manage/Manage";
 
 function App() {
   return (
@@ -23,7 +22,7 @@ function App() {
         <UserProvider>
           <PracticeHistoryProvider>
             <Navigation />
-            <div style={{minWidth: 320, maxWidth: 700, margin: "auto", position:"relative"}}>
+            <div>
               <Switch>
                 <Route path={"/words"}>
                   <WordsView />
@@ -37,11 +36,8 @@ function App() {
                 <Route path={"/test"}>
                   <Test />
                 </Route>
-                <Route path={"/manageWords"}>
-                  <ManageWordsView />
-                </Route>
-                <Route path={"/manageWordNotes"}>
-                  <ManageWordNotesView />
+                <Route path={"/manage"}>
+                  <ManageView />
                 </Route>
                 <Route exact path={"/"}>
                   <Redirect to={"words/practiceWordList"} />

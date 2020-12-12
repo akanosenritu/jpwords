@@ -29,7 +29,7 @@ export const PracticeWordListView: React.FC = () => {
   const continuePractice = () => {
     setCurrentState("practice");
   };
-  return <div style={{maxWidth: 500, margin: "auto"}}>
+  return <div style={{minWidth: 320, maxWidth: 500, margin: "auto", position:"relative"}}>
     {practiceHistory?
       <>
         {currentState === "start" && <PracticeWordListViewOverview startPractice={startPractice}/>}

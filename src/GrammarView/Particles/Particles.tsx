@@ -14,7 +14,7 @@ export const Particles: React.FC<ParticlesProps> = props => {
   const problems = shuffle(Object.entries(particleProblemsData.particles).map(([k, v]) => {
     return Object.keys(new Array(v).fill(0)).map(index => [k, parseInt(index)+1])
   }).flat())
-  return  <div>
+  return  <div style={{minWidth: 320, maxWidth: 700, margin: "auto", position:"relative"}}>
     <DummyGeneratorContext.Provider value={particlesGenerator}>
       {problems.map(([p, i], index) => {
         const particle = p as string

@@ -25,18 +25,18 @@ export const updatePracticeHistoryWithPracticeResult = (practiceHistory: Practic
   wordIdsPracticed.forEach((wordIdPracticed, index) => {
     const practiceQuality = practiceQualities[index];
     if (updatedWordsHistory[wordIdPracticed] !== undefined) {
-      updatedWordsHistory[wordIdPracticed].nPractices += 1
-      let newStrength = calculateStrength(updatedWordsHistory[wordIdPracticed].strength, practiceQuality);
+      updatedWordsHistory[wordIdPracticed][1] += 1
+      let newStrength = calculateStrength(updatedWordsHistory[wordIdPracticed][2], practiceQuality);
       if (newStrength < 0) newStrength = 0;
-      updatedWordsHistory[wordIdPracticed].strength = newStrength;
-      updatedWordsHistory[wordIdPracticed].nextPracticeDate = calculateNextPracticeDate(newStrength, updatedWordsHistory[wordIdPracticed].nPractices, TIME_FACTOR).toISOString();
+      updatedWordsHistory[wordIdPracticed][2] = newStrength;
+      updatedWordsHistory[wordIdPracticed][0] = calculateNextPracticeDate(newStrength, updatedWordsHistory[wordIdPracticed][1], TIME_FACTOR).toISOString();
     } else {
       const strength = calculateStrength(2.5, practiceQuality);
-      updatedWordsHistory[wordIdPracticed] = {
-        strength: strength,
-        nPractices: 1,
-        nextPracticeDate: calculateNextPracticeDate(strength, 1, TIME_FACTOR).toISOString()
-      };
+      updatedWordsHistory[wordIdPracticed] = [
+        calculateNextPracticeDate(strength, 1, TIME_FACTOR).toISOString(),
+        1,
+        strength
+      ]
     }
   })
   const newHistory = practiceHistory;
@@ -56,8 +56,8 @@ export const chooseWordsToPractice = (wordList: WordList, practiceHistory: Pract
       untouchedWords.push(word);
       continue
     }
-    const nextPracticeDate = new Date(wordHistory.nextPracticeDate);
-    if (wordHistory.nPractices === 0) {
+    const nextPracticeDate = new Date(wordHistory[0]);
+    if (wordHistory[1] === 0) {
       untouchedWords.push(word);
       continue;
     } else if ((nextPracticeDate.getTime() - Date.now()) < 0) {
@@ -89,11 +89,11 @@ export const calculateProgressForWordList = (practiceHistory: PracticeHistoryVLa
       countUntouched += 1
       continue
     }
-    if (wordHistory.nPractices === 0) {
+    if (wordHistory[1] === 0) {
       countUntouched += 1
       continue
     }
-    const nextPracticeDate = new Date(wordHistory.nextPracticeDate);
+    const nextPracticeDate = new Date(wordHistory[0]);
     if (nextPracticeDate.getTime() - Date.now() > 0) {
       countReviewed += 1
     } else {
