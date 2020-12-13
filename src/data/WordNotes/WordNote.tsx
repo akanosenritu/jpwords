@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Box, Typography} from "@material-ui/core";
 import wordNotesData from "./wordNotes.json";
 import {WordType} from "../Word/Word";

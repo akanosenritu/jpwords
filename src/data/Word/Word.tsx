@@ -1,6 +1,5 @@
 import React from "react";
 import wordData from "../words.json";
-import * as uuid from "uuid"
 import {WordNoteType} from "../WordNotes/WordNote";
 
 const prepareAvailableWords = (): {[key: string]: WordType}  => {
@@ -84,11 +83,13 @@ export const prepareWordV2: (arr: string[]) => WordType[] = arr => {
 }
 
 const isAnswerCorrectWithKana = (word: WordType, answer: string): boolean => {
+  if (!word.kana) return false
   if (word.kana.replace("～", "") === answer) return true
   return !!word.kana && word.kana === answer
 }
 
 const isAnswerCorrectWithKanji = (word: WordType, answer: string): boolean => {
+  if (!word.kanji) return false
   if (word.kanji.replace("～", "") === answer) return true
   return !!word.kanji && word.kanji === answer
 }
