@@ -16,8 +16,7 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
-      backgroundColor: "#99c2ff"
+      flexGrow: 1
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -40,14 +39,14 @@ export const Navigation: React.FC = () => {
     logout()
   }
   return <div className={classes.root}>
-    <AppBar position="static" color={"default"}>
+    <AppBar position="static" color={"primary"}>
       <Toolbar variant={"dense"} style={{display:"flex", justifyContent: "space-between"}}>
         <Box display={"flex"}>
-          <Box mx={3}>
-            <Typography variant={"h6"}><MyLink to={"/words/practiceWordList/"}>Vocabulary</MyLink></Typography>
+          <Box mx={1}>
+            <MyLink to={"/words/practiceWordList/"}><Button style={{textTransform: "none", color:"white"}}><Typography variant={"h6"}>Vocabulary</Typography></Button></MyLink>
           </Box>
-          <Box mx={3}>
-            <Typography variant={"h6"}><MyLink to={"/grammar/particles/"}>Grammar</MyLink></Typography>
+          <Box mx={1}>
+            <MyLink to={"/grammar/particles/"}><Button style={{textTransform: "none", color:"white"}}><Typography variant={"h6"}>Grammar</Typography></Button></MyLink>
           </Box>
         </Box>
         <Box>
