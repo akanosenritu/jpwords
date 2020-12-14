@@ -1,8 +1,8 @@
 import React, {useContext, useState} from "react";
 import {Box, Button} from "@material-ui/core";
-import {HiddenContext} from "../../GrammarView/HiddenContext";
+import {HiddenContext} from "../GrammarView/HiddenContext";
 import {shuffle} from "lodash";
-import {DummyGeneratorContext} from "../../GrammarView/DummyGeneratorContext";
+import {DummyGeneratorContext} from "../GrammarView/DummyGeneratorContext";
 
 type DummyButtonProps = {
   isDisabled: boolean

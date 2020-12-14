@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {HiddenContext} from "../../GrammarView/HiddenContext";
+import {HiddenContext} from "../GrammarView/HiddenContext";
 
 export const Hide: React.FC = props => {
   const hidden = useContext(HiddenContext)
