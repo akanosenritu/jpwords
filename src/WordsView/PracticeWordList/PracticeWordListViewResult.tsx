@@ -20,28 +20,37 @@ const Chart: React.FC<ChartProps> = props => {
     getColors("WRONG").main,
     "lightgray"
   ]
-  const data = [
-    {title: 'Reviewed', value: props.reviewed, color: colors[0]},
-    {title: 'NeedsReview', value: props.needsReview, color: colors[1]},
-    {title: 'Untouched', value: props.untouched, color: colors[2]},
-  ]
+  const total = props.reviewed + props.needsReview + props.untouched
+  const getLabel = (num: number) => {
+    const percent = 100 * num  / total
+    if (percent < 1) return "<1%"
+    return `${percent.toFixed(0)}%`
+  }
+  const dataAndLabels = [
+    [
+      {title: 'Reviewed', value: props.reviewed, color: colors[0]},
+      colors[0]
+    ] as const,
+    [
+      {title: 'NeedsReview', value: props.needsReview, color: colors[1]},
+      colors[1]
+    ] as const,
+    [
+      {title: 'Untouched', value: props.untouched, color: colors[2]},
+      colors[2]
+    ] as const
+  ].filter(datum => datum[0].value > 0)
   return <PieChart
-    data={data}
+    data={dataAndLabels.map(entry => entry[0])}
     lineWidth={15}
     startAngle={180}
-    paddingAngle={5}
+    paddingAngle={dataAndLabels.length > 1? 5: 0}
     animate={true}
     label={({dataEntry}) => {
-      const percent = 100 * dataEntry.value / data.map(datum => datum.value).reduce((a, b) => a + b);
-      if (percent < 1) {
-        return ""
-      } else {
-        return `${(100 * dataEntry.value / data.map(datum => datum.value).reduce((a, b) => a + b)).toFixed(0)}%`
-      }
-
+      return getLabel(dataEntry.value)
     }}
     labelStyle={(index) => ({
-      fill: colors[index],
+      fill: dataAndLabels[index][1],
       fontSize: "10px"
     })}
   />
