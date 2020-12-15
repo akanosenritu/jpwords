@@ -1,14 +1,15 @@
 import React, {ChangeEvent, useState} from "react";
 import {useStyles} from "./Styles";
 import * as wanakana from "wanakana";
-import {evaluateAnswer, WordType} from "../../data/Word/Word";
 
 type PracticeInputProps = {
   isHardMode: boolean,
   previousUserInput: string,
-  word: WordType,
   onCorrectAnswer: (userInput: string) => void,
   onWrongAnswer: (userInput: string) => void,
+  evaluateAnswer: (userInput: string) => boolean,
+  isKatakana: boolean,
+  placeholder: string
 }
 
 export const PracticeInput: React.FC<PracticeInputProps> = props => {
@@ -19,9 +20,9 @@ export const PracticeInput: React.FC<PracticeInputProps> = props => {
     const convertAnswer = (answer: string, isKatakana: boolean) => {
       return isKatakana? wanakana.toKatakana(event.currentTarget.value, {IMEMode: true}): wanakana.toHiragana(event.currentTarget.value, {IMEMode: true})
     }
-    const newAnswer = props.isHardMode? event.target.value: convertAnswer(event.target.value, wanakana.isKatakana(props.word.kana));
-    const evaluation = evaluateAnswer(props.word, newAnswer, props.isHardMode);
-    if (evaluation === "CORRECT" && !isComposing) {
+    const newAnswer = props.isHardMode? event.target.value: convertAnswer(event.target.value, props.isKatakana);
+    const evaluation = props.evaluateAnswer(newAnswer);
+    if (evaluation && !isComposing) {
       props.onCorrectAnswer(newAnswer)
     }
     setAnswer(newAnswer);
@@ -34,15 +35,14 @@ export const PracticeInput: React.FC<PracticeInputProps> = props => {
   }
   const onCompositionEnd = () => {
     setIsComposing(false);
-    const evaluation = evaluateAnswer(props.word, answer, props.isHardMode);
-    if (evaluation === "CORRECT") {
+    if (props.evaluateAnswer(answer)) {
       props.onCorrectAnswer(answer)
     }
   }
   return <input
-    className={styles.answerInput} value={answer} onChange={onChangeEvent} placeholder={`translate ${props.word.meaning}`}
+    className={styles.answerInput} value={answer} onChange={onChangeEvent} placeholder={props.placeholder}
     autoFocus={true} onKeyPress={onKeyboardEvent2}
     onCompositionStart={()=>setIsComposing(true)} onCompositionEnd={onCompositionEnd}
-    key={props.word.meaning}
+    key={props.placeholder}
   />
 }

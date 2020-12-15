@@ -1,10 +1,11 @@
 import React from "react";
-import {WordType} from "../../data/Word/Word";
+import {evaluateAnswer, WordType} from "../../data/Word/Word";
 import {DisplayWordWithFurigana} from "../../data/Word/DisplayWordWithFurigana";
 import {Box, Typography} from "@material-ui/core";
 import {useStyles} from "./Styles";
 import {PracticeInput} from "./PracticeInput";
 import {getColors} from "../../WordsView/Styles";
+import * as wanakana from "wanakana";
 
 type TryProps = {
   word: WordType,
@@ -18,6 +19,10 @@ type TryProps = {
 export const Try: React.FC<TryProps> = props => {
   const styles = useStyles();
   const {main, backGround} = getColors("WRONG")
+  const evaluate = (userInput: string) => {
+    const evaluation = evaluateAnswer(props.word, userInput, props.isHardMode);
+    return evaluation === "CORRECT";
+  }
   return <div style={{textAlign: "center", width:"100%"}}>
     <Box mt={4}>
       <Typography variant={"h4"}>{props.word.meaning}</Typography>
@@ -31,7 +36,9 @@ export const Try: React.FC<TryProps> = props => {
         style={{backgroundColor: props.isSecond? backGround: "", borderColor: props.isSecond? main: ""}}
       >
         <PracticeInput
-          word={props.word}
+          placeholder={`translate ${props.word.meaning}`}
+          evaluateAnswer={evaluate}
+          isKatakana={wanakana.isKatakana(props.word.kana)}
           isHardMode={props.isHardMode}
           onCorrectAnswer={props.onCorrectAnswer}
           onWrongAnswer={props.onWrongAnswer}
