@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import {DebugContext} from "../General/Contexts";
 import {Particles} from "./Particles/Particles";
+import {SentencePatterns} from "./SentencePatterns/SentencePatterns";
+import {GrammarViewEntrance} from "./GrammarViewEntrance";
 
 
 export const GrammarView: React.FC = () => {
@@ -18,6 +20,12 @@ export const GrammarView: React.FC = () => {
     <Switch>
       <Route path={`${match.path}/particles`}>
         <Particles />
+      </Route>
+      <Route path={`${match.path}/sentencePatterns`}>
+        <SentencePatterns />
+      </Route>
+      <Route exact path={`${match.path}`}>
+        <GrammarViewEntrance />
       </Route>
     </Switch>
   </DebugContext.Provider>

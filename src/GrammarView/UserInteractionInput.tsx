@@ -38,7 +38,16 @@ export const useStyles = makeStyles({
 
 export const UserInteractionInput: React.FC<UserInteractionProps> = props => {
   const classes = useStyles()
-  const evaluate = (userInput: string) => userInput === props.answer
+  const evaluate = (userInput: string) => {
+    const trimmed = userInput.replaceAll(" ", "").replaceAll("　", "")
+    if (trimmed === props.answer) return true
+    if (props.otherPossibleAnswers) {
+      for (const otherPossibleAnswer of props.otherPossibleAnswers) {
+        if (trimmed === otherPossibleAnswer) return true
+      }
+    }
+    return false
+  }
   const [didCorrectlyAnswer, setDidCorrectlyAnswer] = useState(false)
   const onCorrectlyAnswered = () => {
     setDidCorrectlyAnswer(true)

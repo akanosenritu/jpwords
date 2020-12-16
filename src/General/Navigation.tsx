@@ -46,7 +46,7 @@ export const Navigation: React.FC = () => {
             <MyLink to={"/words/practiceWordList/"}><Button style={{textTransform: "none", color:"white"}}><Typography variant={"h6"}>Vocabulary</Typography></Button></MyLink>
           </Box>
           <Box mx={1}>
-            <MyLink to={"/grammar/particles/"}><Button style={{textTransform: "none", color:"white"}}><Typography variant={"h6"}>Grammar</Typography></Button></MyLink>
+            <MyLink to={"/grammar/"}><Button style={{textTransform: "none", color:"white"}}><Typography variant={"h6"}>Grammar</Typography></Button></MyLink>
           </Box>
         </Box>
         <Box>

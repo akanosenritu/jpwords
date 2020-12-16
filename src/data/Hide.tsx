@@ -8,6 +8,10 @@ export const Hide: React.FC = props => {
     shown = hidden?
       `(${new Array(props.children.length).fill("　").join("")})`:
       <span style={{color: "#33cc33"}}><b>{props.children}</b></span>
+  } else {
+    shown = hidden?
+      `(　　　)`:
+      <span style={{color: "#33cc33"}}><b>{props.children}</b></span>
   }
   return <>
     {shown}
