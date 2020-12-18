@@ -1,10 +1,8 @@
 import React, {useContext, useState} from "react";
-import {initialConfigurations, useConfigurations} from "../data/Storage/Configurations";
 import {useFormik} from "formik";
-import {Box, Button, Checkbox, CircularProgress} from "@material-ui/core";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import {Box, Button, CircularProgress} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import {Header} from "../General/Components/Header";
+import {H5} from "../General/Components/Headers";
 import {UserContext} from "../data/User";
 
 type InitialStatus = {
@@ -63,7 +61,7 @@ export const AccountSettingsTab: React.FC= (props) => {
   })
   return <div style={{paddingLeft: 10}}>
     <form onSubmit={formik.handleSubmit}>
-      <Header content={"Change password"}/>
+      <H5>Change password</H5>
       <TextField
         fullWidth={true} name={"oldPassword"} label={"Old password"} placeholder={"old password"} value={formik.values.oldPassword}
         error={!!formik.errors.oldPassword} helperText={formik.errors.oldPassword} autoComplete={"off"} onChange={formik.handleChange}

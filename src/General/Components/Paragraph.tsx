@@ -1,7 +1,7 @@
 import React from "react";
 
 export const Paragraph: React.FC = props => {
-  return <div style={{paddingLeft: 10, paddingTop:20}}>
+  return <div style={{padding: 15}}>
     {props.children}
   </div>
 }

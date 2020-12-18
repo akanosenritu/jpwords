@@ -1,22 +1,14 @@
 import {SentencePatternProblem} from "../SentencePatternProblem";
 import {Typography} from "@material-ui/core";
-import {Header} from "../../../../General/Components/Header";
+import {H5} from "../../../../General/Components/Headers";
 import {Paragraph} from "../../../../General/Components/Paragraph"
+import {problems} from "./から・まで";
 
-<Header content={<Typography variant={"h5"}>から・まで: From, Until</Typography>} />
+<H5>から・まで: From, Until</H5>
 
 <Paragraph>
-</Paragraph>
-<Paragraph>
-  <SentencePatternProblem sentencePattern={"から・まで"} index={1} />
-  <SentencePatternProblem sentencePattern={"から・まで"} index={2} />
-  <SentencePatternProblem sentencePattern={"から・まで"} index={3} />
-  <SentencePatternProblem sentencePattern={"から・まで"} index={4} />
-  <SentencePatternProblem sentencePattern={"から・まで"} index={5} />
-  <SentencePatternProblem sentencePattern={"から・まで"} index={6} />
-  <SentencePatternProblem sentencePattern={"から・まで"} index={7} />
-  <SentencePatternProblem sentencePattern={"から・まで"} index={8} />
-  <SentencePatternProblem sentencePattern={"から・まで"} index={9} />
-  <SentencePatternProblem sentencePattern={"から・まで"} index={10} />
+  {problems.map(problem => {
+    return React.createElement(problem)
+  })}
 </Paragraph>
 

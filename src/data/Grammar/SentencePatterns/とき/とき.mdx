@@ -1,44 +1,32 @@
 import {SentencePatternProblem} from "../SentencePatternProblem";
 import {Typography} from "@material-ui/core";
-import {Header} from "../../../../General/Components/Header";
-import {Paragraph} from "../../../../General/Components/Paragraph"
+import {problems} from "./とき";
 
-<Header content={<Typography variant={"h5"}>とき: When</Typography>} />
+<h5>とき: When</h5>
 
-<Paragraph>
+<p>
   Use the dictionary form or Ta-form. The former is used when the sub clause (the part before とき) finishes after or at the same time with the main clause (the part after とき), and the latter is used when the sub clause finishes before the main clause.
-</Paragraph>
-<Paragraph>
-  <Typography variant={"h6"}>With verbs</Typography>
-  <Paragraph>
-    <SentencePatternProblem sentencePattern={"とき"} index={1} />
-    <SentencePatternProblem sentencePattern={"とき"} index={6} />
-    <SentencePatternProblem sentencePattern={"とき"} index={2} />
-    <SentencePatternProblem sentencePattern={"とき"} index={3} />
-    <SentencePatternProblem sentencePattern={"とき"} index={7} />
-    <SentencePatternProblem sentencePattern={"とき"} index={4} />
-    <SentencePatternProblem sentencePattern={"とき"} index={8} />
-    <SentencePatternProblem sentencePattern={"とき"} index={5} />
-  </Paragraph>
+</p>
+<p>
+  <h6>With verbs</h6>
+  <p>
+    {problems.slice(0, 8).map(problem => {
+      return React.createElement(problem)
+    })}
+  </p>
 
-  <Typography variant="h6" style={{marginTop: 20}}>With adjectives</Typography>
-  <Paragraph>
-    {/* i-adjective */}
-    <SentencePatternProblem sentencePattern={"とき"} index={9} />
-    <SentencePatternProblem sentencePattern={"とき"} index={11} />
-    <SentencePatternProblem sentencePattern={"とき"} index={10} />
-    <SentencePatternProblem sentencePattern={"とき"} index={12} />
-    {/* na-adjective */}
-    <SentencePatternProblem sentencePattern={"とき"} index={13} />
-    <SentencePatternProblem sentencePattern={"とき"} index={14} />
-    <SentencePatternProblem sentencePattern={"とき"} index={15} />
-  </Paragraph>
+  <h6>With adjectives</h6>
+  <p>
+    {problems.slice(8, 15).map(problem => {
+      return React.createElement(problem)
+    })}
+  </p>
 
-  <Typography variant="h6" style={{marginTop: 20}}>With の</Typography>
-  <Paragraph>
-    <SentencePatternProblem sentencePattern={"とき"} index={16} />
-    <SentencePatternProblem sentencePattern={"とき"} index={17} />
-    <SentencePatternProblem sentencePattern={"とき"} index={18} />
-  </Paragraph>
-</Paragraph>
+  <h6>With の</h6>
+  <p>
+    {problems.slice(15, 18).map(problem => {
+      return React.createElement(problem)
+    })}
+  </p>
+</p>
 

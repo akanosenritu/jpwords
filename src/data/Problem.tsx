@@ -1,13 +1,15 @@
 import React, {useContext, useState} from "react";
 import {HiddenContext} from "../GrammarView/HiddenContext";
 import {UserInteractionContext} from "../GrammarView/UserInteractionContext";
+import {NLPTLevel} from "./NLPTLevel";
 
 type ProblemProps = {
   answer: string,
   otherPossibleAnswers?: string[],
   dummies?: string[],
   translation?: string,
-  rationale?: React.ReactElement
+  rationale?: React.ReactElement,
+  targetLevel?: NLPTLevel
 }
 
 export const Problem: React.FC<ProblemProps> = props => {

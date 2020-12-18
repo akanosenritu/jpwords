@@ -33,6 +33,7 @@ const PracticeCardSentencePattern: React.FC<PracticeCardSentencePatternProps> = 
   return <Card className={classes.startPracticeWordListCard} variant={"outlined"}>
     <CardContent>
       <Typography variant={"h6"}>{props.sentencePattern} ({props.nPractices} practices)</Typography>
+      <Typography variant={"body1"}>Practice how to use {props.sentencePattern} in various situations.</Typography>
     </CardContent>
     <CardActions style={{justifyContent: "center"}}>
       <Button variant={"contained"} size={"small"} color={"primary"} onClick={onClickStart}>Start</Button>
