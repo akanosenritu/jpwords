@@ -1,4 +1,6 @@
 import {getCsrfToken, Success, Failure} from "./API";
+
+
 export type SignUpResult = Success | Failure
 
 export const signUp = async (username: string, password1: string, password2: string): Promise<SignUpResult> => {
@@ -15,19 +17,32 @@ export const signUp = async (username: string, password1: string, password2: str
     })
   })
     .then(res => {
-      if (res.ok) return {
-        status: "success"
-      } as Success
       return res.json().then(data => {
+        if (res.ok) return {
+          status: "success"
+        } as Success
         return {
           "status": "failure",
           "reason": data["error"]
-        }
+        } as Failure
       })
+    })
+    .catch(() => {
+      return {
+        status: "failure",
+        reason: "unknown reason"
+      } as Failure
     })
 }
 
-export type LoginResult = Success | Failure
+
+type LoginSuccess = {
+  status: "success",
+  isAdmin: boolean,
+  isStaff: boolean
+}
+
+export type LoginResult = LoginSuccess | Failure
 
 export const login = async (username: string, password: string): Promise<LoginResult> => {
   const headers = new Headers()
@@ -43,15 +58,18 @@ export const login = async (username: string, password: string): Promise<LoginRe
     })
   })
     .then(res => {
-      if (res.ok) return {status: "success"}
-      return res.json().then(data => {
-        return {
-          status: "failure",
-          reason: data["error"]
-        }
-      })
+      if (res.ok) return res.json()
+        .then(data => {
+          if (data.detail === "success") return  {status: "success", isStaff: !!data.isStaff, isAdmin: !!data.isAdmin} as LoginSuccess
+          return {status: "failure", reason: data.error} as Failure
+        })
+      return {status: "failure", reason: "unknown reason"} as Failure
+    })
+    .catch(() => {
+        return {status: "failure", reason: "unknown reason"} as Failure
     })
 }
+
 
 export const isLoggedIn = async (): Promise<boolean> => {
   return fetch("/api/check-login/")
@@ -59,6 +77,7 @@ export const isLoggedIn = async (): Promise<boolean> => {
       return res.status === 200
     })
 }
+
 
 export type LogoutResult = Success | Failure
 
@@ -71,14 +90,19 @@ export const logout = async (): Promise<LogoutResult> => {
     headers: headers
   })
     .then(res => {
-      if (res.ok) return {status: "success"}
       return res.json().then(data => {
-        return {
-          status: "failure",
-          reason: data["error"]
-        }})
+        if (res.ok) return {status: "success"} as Success
+        return {status: "failure", reason: "unknown reason"} as Failure
       })
+      })
+    .catch(err => {
+      return {
+        status: "failure",
+        reason: "unknown reason"
+      } as Failure
+    })
 }
+
 
 export type ResetPasswordResult = Success | Failure
 
@@ -99,12 +123,18 @@ export const resetPassword = async (username: string, oldPassword: string, newPa
     body: JSON.stringify(body)
   })
     .then(res => {
-      if (res.ok) return {status: "success"}
       return res.json().then(data => {
+        if (res.ok) return {status: "success"} as Success
         return {
           status: "failure",
           reason: data["error"]
-        }
+        } as Failure
       })
+    })
+    .catch(err => {
+      return {
+        status: "failure",
+        reason: "unknown reason"
+      } as Failure
     })
 }

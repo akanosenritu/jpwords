@@ -10,8 +10,16 @@ export type AuthenticatedUser = {
   status: "Authenticated",
   username: string,
 }
+export type AdminUser = {
+  status: "Admin",
+  username: string
+}
+export type StaffUser = {
+  status: "Staff",
+  username: string
+}
 
-export type User = AnonymousUser | AuthenticatedUser
+export type User = AnonymousUser | AuthenticatedUser | AdminUser | StaffUser
 
 type UserContextValue = {
   user: User,

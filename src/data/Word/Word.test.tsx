@@ -1,4 +1,4 @@
-import {availableWords, Category, categoryList, evaluateAnswer, isAnswerCorrect} from "./Word";
+import {availableWords, Category, categoryList, evaluateAnswer} from "./Word";
 import {getAvailableWordLists, WordList} from "../WordLists/WordList";
 import wordData from "../words.json";
 

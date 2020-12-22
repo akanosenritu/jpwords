@@ -39,11 +39,13 @@ export const post = async (url: string, data: object) => {
   })
 }
 
-export const put = (url: string, data: object) => {
+export const put = async (url: string, data: object) => {
+  const csrfToken = await getCsrfToken()
   return myFetch("/api/" + url, {
     method: "PUT",
     headers:{
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrfToken
     },
     body: JSON.stringify(data)
   })

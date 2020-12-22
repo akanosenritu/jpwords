@@ -48,12 +48,13 @@ export const Navigation: React.FC = () => {
           <Box mx={1}>
             <MyLink to={"/grammar/"}><Button style={{textTransform: "none", color:"white"}}><Typography variant={"h6"}>Grammar</Typography></Button></MyLink>
           </Box>
+
         </Box>
         <Box>
           {user.status === "Authenticated" ?
             <Box display={"inline-block"}>
               <Box mr={4} display={"inline-block"}>
-                Logged in as <span style={{color: "green", fontWeight: "bold"}}>{user.username}</span>
+                Logged in as <span style={{color: "#ff9f80", fontWeight: "bold"}}>{user.username}</span>
               </Box>
               <Button onClick={onClickLogout}>Logout</Button>
             </Box>:

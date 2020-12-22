@@ -1,6 +1,7 @@
 import {prepareWordV2, WordType} from "../Word/Word";
 import wordListN4 from "./wordlist-N4[1].json";
 import wordListN5 from "./wordlist-N5[1].json";
+import wordListN3 from "./wordlist-N3[1].json"
 import {isLanguage, Language} from "../Language";
 
 export type WordList = {
@@ -24,7 +25,7 @@ const loadWordListVersion1 = (target: any) => {
 };
 
 const availableWordLists: {[lang in Language]: WordList[]} = {
-  "ENG": [loadWordListVersion1(wordListN5), loadWordListVersion1(wordListN4)],
+  "ENG": [loadWordListVersion1(wordListN5), loadWordListVersion1(wordListN4), loadWordListVersion1(wordListN3)],
   "ESP": []
 };
 

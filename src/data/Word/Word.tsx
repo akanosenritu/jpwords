@@ -1,4 +1,3 @@
-import React from "react";
 import wordData from "../words.json";
 import {WordNoteType} from "../WordNotes/WordNote";
 

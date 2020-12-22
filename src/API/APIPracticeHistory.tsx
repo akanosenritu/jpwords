@@ -43,7 +43,13 @@ export const retrievePracticeHistory = (user: User): Promise<RetrievePracticeHis
       return {
         status: "success",
         practiceHistory: practiceHistory
-      }
+      } as RetrievePracticeHistorySuccess
+    })
+    .catch(err => {
+      return {
+        status: "failure",
+        reason: "unknown reason"
+      } as Failure
     })
 }
 

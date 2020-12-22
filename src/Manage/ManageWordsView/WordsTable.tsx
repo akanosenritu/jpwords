@@ -10,8 +10,10 @@ import {Button, Box} from "@material-ui/core";
 import {SearchBox} from "../../General/Components/SearchBox";
 import {APIWordType} from "../../API/APIWord";
 import {APICategoryType, retrieveAPICategories} from "../../API/APICategory";
+import {APIWordListType, isWordUsedInWordList, retrieveAPIWordLists} from "../../API/APIWordList";
+import {PlayAudioButton} from "../../General/Components/PlayAudioButton";
 
-const columns = ["UUID", "Kanji", "Kana", "Meaning", "Category", "Actions"]
+const columns = ["UUID", "Kanji", "Kana", "Meaning", "Category", "Lists", "Audio", "Actions"]
 
 type WordsTableProps = {
   words: APIWordType[],
@@ -23,6 +25,7 @@ type WordsTableProps = {
 
 export const WordsTable: React.FC<WordsTableProps> = props => {
   const [wordsShown, setWordsShown] = useState<{[wordUUID: string]: boolean}>(props.words.reduce((obj, word) => Object.assign(obj, {[word.uuid]: true}), {}));
+
   const [categoriesDict, setCategoriesDict] = useState<{[uuid: string]: APICategoryType}|null>(null)
   const loadCategoriesData = () => {
     retrieveAPICategories()
@@ -38,6 +41,18 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
   useEffect(() => {
     loadCategoriesData()
   }, [])
+
+  const [wordLists, setWordLists] = useState<APIWordListType[]>([]);
+  const loadWordListsData = () => {
+    retrieveAPIWordLists()
+      .then(data => {
+        setWordLists(data)
+      })
+  }
+  useEffect(() => {
+    loadWordListsData()
+  }, [])
+
   const [page, setPage] = React.useState(0);
   const [query, setQuery] = useState("");
   const [searchBy, setSearchBy] = useState("kana");
@@ -61,6 +76,7 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
     setWordsShown(result.reduce((obj, word) => Object.assign(obj, {[word.uuid]: true}), {}))
     setPage(0);
   }
+
   return <Box>
     <Box display={"flex"} justifyContent={"center"} mb={2}>
       <SearchBox onSearch={onSearch} query={query} searchBy={searchBy}/>
@@ -81,9 +97,11 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
               <TableCell key={"kana"}>{word.kana}</TableCell>
               <TableCell key={"meaning"}>{word.meaning}</TableCell>
               <TableCell key={"category"}>{categoriesDict && word.category.map((categoryUUID: string | number) => categoriesDict[categoryUUID].name).join(", ")}</TableCell>
-              <TableCell>
+              <TableCell key={"wordList"}>{wordLists.filter(wordList => isWordUsedInWordList(word.uuid, wordList)).map(wordList => wordList.name).join(", ")}</TableCell>
+              <TableCell key={"audio"}><PlayAudioButton wordUUID={word.uuid} /></TableCell>
+              <TableCell key={"actions"}>
                 {props.actionButtons.map(actionButton => {
-                  return <Button style={{padding: 0}} size={"small"} onClick={()=>actionButton.action(word)}>{actionButton.buttonName}</Button>
+                  return <Button key={actionButton.buttonName} style={{padding: 0}} size={"small"} onClick={()=>actionButton.action(word)}>{actionButton.buttonName}</Button>
                 })}
               </TableCell>
             </TableRow>

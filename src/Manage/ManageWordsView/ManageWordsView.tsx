@@ -9,6 +9,7 @@ import {EditWordDrawer} from "./EditWordDrawer";
 import {WordsTable} from "./WordsTable";
 import {InspectWordDrawer} from "./InspectWordDrawer";
 import {APIWordType, createAPIWord, retrieveAPIWords, updateAPIWord} from "../../API/APIWord";
+import {AudioDrawer} from "./AudioDrawer";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -97,6 +98,11 @@ export const ManageWordsView: React.FC = () => {
     setWordConcerning(word);
     setIsDrawerOpen(true);
   }
+  const onClickOpenAudioManager = (word: APIWordType) => {
+    setDrawer("audioManager")
+    setWordConcerning(word)
+    setIsDrawerOpen(true)
+  }
   return <div className={classes.manageWordsView}>
     <Grid container>
       <Grid item xs={6}>
@@ -115,7 +121,8 @@ export const ManageWordsView: React.FC = () => {
         words={wordsData}
         actionButtons={[
           {buttonName: "EDIT", action: onClickOpenEditor},
-          {buttonName: "INSPECT", action: onClickOpenInspector}
+          {buttonName: "INSPECT", action: onClickOpenInspector},
+          {buttonName: "AUDIO", action: onClickOpenAudioManager}
         ]}
       />
       {drawer === "editor" && wordConcerning && <EditWordDrawer
@@ -123,6 +130,10 @@ export const ManageWordsView: React.FC = () => {
         word={wordConcerning} createOrModifyWord={createOrModifyWord}
       />}
       {drawer === "inspector" && wordConcerning && <InspectWordDrawer
+        key={wordConcerning.uuid} isOpen={isDrawerOpen} onClose={()=>{setIsDrawerOpen(false); setDrawer("")}}
+        word={wordConcerning}
+      />}
+      {drawer === "audioManager" && wordConcerning && <AudioDrawer
         key={wordConcerning.uuid} isOpen={isDrawerOpen} onClose={()=>{setIsDrawerOpen(false); setDrawer("")}}
         word={wordConcerning}
       />}
