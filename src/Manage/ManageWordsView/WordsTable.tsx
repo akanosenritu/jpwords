@@ -11,9 +11,8 @@ import {SearchBox} from "../../General/Components/SearchBox";
 import {APIWordType} from "../../API/APIWord";
 import {APICategoryType, retrieveAPICategories} from "../../API/APICategory";
 import {APIWordListType, isWordUsedInWordList, retrieveAPIWordLists} from "../../API/APIWordList";
-import {PlayAudioButton} from "../../General/Components/PlayAudioButton";
 
-const columns = ["UUID", "Kanji", "Kana", "Meaning", "Category", "Lists", "Audio", "Actions"]
+const columns = ["UUID", "Kanji", "Kana", "Meaning", "Category", "Lists", "Actions"]
 
 type WordsTableProps = {
   words: APIWordType[],
@@ -56,7 +55,7 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
   const [page, setPage] = React.useState(0);
   const [query, setQuery] = useState("");
   const [searchBy, setSearchBy] = useState("kana");
-  const rowsPerPage = 25;
+  const rowsPerPage = 100;
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -98,7 +97,6 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
               <TableCell key={"meaning"}>{word.meaning}</TableCell>
               <TableCell key={"category"}>{categoriesDict && word.category.map((categoryUUID: string | number) => categoriesDict[categoryUUID].name).join(", ")}</TableCell>
               <TableCell key={"wordList"}>{wordLists.filter(wordList => isWordUsedInWordList(word.uuid, wordList)).map(wordList => wordList.name).join(", ")}</TableCell>
-              <TableCell key={"audio"}><PlayAudioButton wordUUID={word.uuid} /></TableCell>
               <TableCell key={"actions"}>
                 {props.actionButtons.map(actionButton => {
                   return <Button key={actionButton.buttonName} style={{padding: 0}} size={"small"} onClick={()=>actionButton.action(word)}>{actionButton.buttonName}</Button>
@@ -111,10 +109,10 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
           style={{width: 500, marginLeft: "auto", marginRight: 0}}
           component="div"
           count={props.words.filter(word => wordsShown[word.uuid]).length}
-          rowsPerPage={25}
+          rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
-          rowsPerPageOptions={[25]}
+          rowsPerPageOptions={[100]}
         />
       </Table>
     </TableContainer>

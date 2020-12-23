@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import {PracticeWordWithInput} from "./PracticeWordWithInput";
-import {availableWords, WordType} from "../../data/Word/Word";
+import {WordType} from "../../data/Word/Word";
 import {wordTypeExamples} from "../../data/Word/Word.test";
 
 describe("test inputs2", () => {

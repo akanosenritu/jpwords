@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import {PracticeHistoryVLatest} from "./PracticeHistory";
 import {Dialog, Typography} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-import {getAvailableWordLists} from "../WordLists/WordList";
 import {calculateProgressForWordList} from "./PracticeHistoryUtils";
+import {WordListsContext} from "../WordLists/WordListsProvider";
 
 type Props = {
   localHistory: PracticeHistoryVLatest,
@@ -36,6 +36,7 @@ type ArbitratorEntryProps = {
 }
 
 const ArbitratorEntry: React.FC<ArbitratorEntryProps> = props => {
+  const {wordLists} = useContext(WordListsContext)
   return <Grid item xs={6} style={{border: "3px solid darkgray", borderRadius: 10}}>
     <p style={{textAlign: "center", fontWeight: "bold"}}>{props.location}</p>
     <p>
@@ -47,7 +48,7 @@ const ArbitratorEntry: React.FC<ArbitratorEntryProps> = props => {
     <p>
       Progress for word lists: <br />
       {
-        getAvailableWordLists("ENG").map(wordList => {
+        wordLists.map(wordList => {
           return <><span style={{marginLeft: 10}}>{wordList.name}: {calculateProgressForWordList(props.practiceHistory, wordList).progress.toFixed(1)}%</span><br /></>
         })
       }

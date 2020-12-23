@@ -2,21 +2,15 @@ import React, {useContext, useState} from "react";
 import {PracticeWordListViewDoPractice} from "./PracticeWordListViewDoPractice";
 import {PracticeWordListViewResult} from "./PracticeWordListViewResult";
 import {PracticeWordListViewOverview} from "./PracticeWordListViewOverview";
-import {getAvailableWordLists, WordList} from "../../data/WordLists/WordList";
+import {WordList} from "../../data/WordLists/WordList";
 import {TrainerResult} from "./Trainer/TrainerResult";
-import {initialConfigurations, useConfigurations} from "../../data/Storage/Configurations";
 import {PracticeHistoryContext} from "../../data/PracticeHistory/PracticeHistoryProvider";
 import {updatePracticeHistoryWithPracticeResult} from "../../data/PracticeHistory/PracticeHistoryUtils";
 type PracticeWordListViewState = "start" | "practice" | "end"
 
 export const PracticeWordListView: React.FC = () => {
-  const {configurations} = useConfigurations(initialConfigurations);
   const [currentState, setCurrentState] = useState<PracticeWordListViewState>("start");
-  const [wordListToPractice, setWordListToPractice] = useState<WordList|null>(
-    getAvailableWordLists(configurations.language).length > 0?
-      getAvailableWordLists(configurations.language)[0]:
-      null
-  );
+  const [wordListToPractice, setWordListToPractice] = useState<WordList|null>(null);
   const {practiceHistory, updatePracticeHistory} = useContext(PracticeHistoryContext)
   const startPractice = (wordList: WordList) => {
     setWordListToPractice(wordList);

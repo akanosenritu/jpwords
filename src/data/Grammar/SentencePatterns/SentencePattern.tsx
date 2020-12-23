@@ -17,7 +17,7 @@ export const SentencePattern: React.FC<Props> = props => {
       .then(() => {
         window.scrollTo(0, 0)
       })
-  }, [])
+  }, [props.sentencePattern])
   const components = {
     h5: H5,
     h6: H6,

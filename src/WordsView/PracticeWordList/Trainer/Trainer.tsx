@@ -1,12 +1,13 @@
 import React, {useContext, useState} from "react";
 import {WordType} from "../../../data/Word/Word";
-import {Box, Button, Dialog, LinearProgress} from "@material-ui/core";
+import {Box, Button, Dialog} from "@material-ui/core";
 import {sample} from "lodash";
 import {PracticeWordWithInput} from "../../../PracticeMethods/PracticeWordWithInput/PracticeWordWithInput";
 import {DebugContext} from "../../../General/Contexts";
 import {WordNotes} from "../../../data/WordNotes/WordNote";
 import ReportIcon from '@material-ui/icons/Report';
 import {ReportProblem} from "../ReportProblem";
+import {ProgressBar} from "./ProgressBar";
 
 type PracticeViewBaseProps = {
   words: WordType[],
@@ -54,8 +55,8 @@ export const Trainer2: React.FC<PracticeViewBaseProps> = props => {
   };
   const word = props.words[wordQueue[0]];
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
-  return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
-    <LinearProgress variant={"determinate"} style={{width: "100%"}} value={numberDoneWords * 100 / props.words.length}/>
+  return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} mt={2}>
+    <ProgressBar progress={numberDoneWords * 100 / props.words.length} />
     <PracticeWordWithInput word={word} onNext={onNext} key={`${word.kanji}-${word.kana}-${word.meaning}-${practiceQualities[wordQueue[0]]}`}/>
     <WordNotes word={word}/>
     <div>

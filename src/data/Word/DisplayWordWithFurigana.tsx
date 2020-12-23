@@ -1,5 +1,4 @@
 import React from "react";
-import * as wanakana from "wanakana";
 import {fit} from "furigana";
 import {WordType} from "./Word";
 

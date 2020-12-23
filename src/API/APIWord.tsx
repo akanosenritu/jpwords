@@ -14,6 +14,22 @@ export const retrieveAPIWords = () => {
     .then(data => data as APIWordType[])
 }
 
+type RetrieveAPIWordsWithPaginationResult = {
+  words: APIWordType[],
+  total: number
+}
+
+export const retrieveAPIWordsWithPagination = (limit: number, offset: number): Promise<RetrieveAPIWordsWithPaginationResult> => {
+  return get("words/", new Map([["limit", limit.toString()], ["offset", offset.toString()]]))
+    .then(res => res.json())
+    .then(data => {
+      return {
+        words: data.results as APIWordType[],
+        total: data.count
+      }
+    })
+}
+
 export const updateAPIWord = (word: APIWordType) => {
   return put(`words/${word.uuid}/`, word)
     .then(res => res.json())

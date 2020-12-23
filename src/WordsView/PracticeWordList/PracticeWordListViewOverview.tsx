@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Box, Button, Card, CardActions, CardContent, Typography} from "@material-ui/core";
-import {getAvailableWordLists, WordList} from "../../data/WordLists/WordList";
+import {WordList} from "../../data/WordLists/WordList";
 import {usePracticeViewStyles} from "./PracticeViewStyle";
-import {initialConfigurations, useConfigurations} from "../../data/Storage/Configurations";
+import {WordListsContext} from "../../data/WordLists/WordListsProvider";
 
 type StartPracticeByWordListCardProps = {
   wordList: WordList,
@@ -30,8 +30,7 @@ type StartPracticeByWordListProps = {
 }
 
 const StartPracticeByWordList: React.FC<StartPracticeByWordListProps> = (props) => {
-  const {configurations} = useConfigurations(initialConfigurations)
-  const wordLists = getAvailableWordLists(configurations.language)
+  const {wordLists} = useContext(WordListsContext)
   return <Box mt={2} p={1}>
     <Box style={{borderLeft: "2px solid lightgray", paddingLeft: 10}}>
       <Typography variant={"h6"}>General Word Lists</Typography>

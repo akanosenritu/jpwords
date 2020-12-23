@@ -1,23 +1,24 @@
-import wordData from "../words.json";
 import {WordNoteType} from "../WordNotes/WordNote";
 
-const prepareAvailableWords = (): {[key: string]: WordType}  => {
+export const prepareWord = (data: any) => {
+  const word: WordType = {
+    uuid: data.uuid,
+    kana: data.kana,
+    kanji: data.kanji,
+    meaning: data.meaning,
+    category: data.category as Category[]
+  };
+  return word
+}
+
+export const prepareWordsDict = (data: object[]): {[key: string]: WordType}  => {
   let availableWords: { [key: string]: WordType } = {};
-  for (let wordDatum of wordData.words) {
-    const word: WordType = {
-      uuid: wordDatum.uuid,
-      kana: wordDatum.kana,
-      kanji: wordDatum.kanji,
-      meaning: wordDatum.meaning,
-      category: wordDatum.category as Category[]
-    };
+  for (let datum of data) {
+    const word = prepareWord(datum)
     availableWords[word.uuid] = word
   }
   return availableWords;
 }
-
-export const availableWords = prepareAvailableWords();
-export const wordsDataLastEditDate = wordData.lastEdit;
 
 export const categoryList = [
   '',
@@ -75,9 +76,9 @@ export type WordType = {
 }
 
 
-export const prepareWordV2: (arr: string[]) => WordType[] = arr => {
-  return arr.map(id => {
-    return availableWords[id];
+export const prepareWordV2 = (ids: string[], words: {[id: string]: WordType}): WordType[] => {
+  return ids.map(id => {
+    return words[id];
   }) as WordType[]
 }
 
@@ -93,15 +94,17 @@ const isAnswerCorrectWithKanji = (word: WordType, answer: string): boolean => {
   return !!word.kanji && word.kanji === answer
 }
 
-export const searchWords = (searchString: string) => {
-  return Object.values(availableWords).filter(word => {
-    return word.kana === searchString || word.kanji === searchString
-  });
-};
-
 type answerEvaluationResultType = "CORRECT" | "WRONG"
 
 export const evaluateAnswer = (word: WordType, answer: string, rejectKana?: boolean): answerEvaluationResultType => {
   if (!rejectKana && isAnswerCorrectWithKana(word, answer)) return "CORRECT"
   return isAnswerCorrectWithKanji(word, answer)? "CORRECT": "WRONG"
+}
+
+export const loadWords = async (): Promise<{[wordUUID: string]: WordType}> => {
+  return import("../words.json")
+    .then(data => {
+      const words = data.words.map(word => prepareWord(word))
+      return prepareWordsDict(words)
+    })
 }

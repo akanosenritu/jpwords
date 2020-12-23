@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {Box, Button, TextField, Typography} from "@material-ui/core";
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {FormikErrors, useFormik} from "formik";
-import * as wanakana from "wanakana";
-import Select from "react-select-material-ui";
-import {DrawerBase} from "../DrawerBase";
-import {APIWordType} from "../../API/APIWord";
-import {APICategoryType, retrieveAPICategories} from "../../API/APICategory";
+import React, {useEffect, useState} from "react"
+import {createFilter} from "react-select"
+import {Box, Button, TextField, Typography} from "@material-ui/core"
+import {createStyles, makeStyles, Theme} from "@material-ui/core/styles"
+import {FormikErrors, useFormik} from "formik"
+import * as wanakana from "wanakana"
+import Select from "react-select-material-ui"
+import {DrawerBase} from "../DrawerBase"
+import {APIWordType} from "../../API/APIWord"
+import {APICategoryType, retrieveAPICategories} from "../../API/APICategory"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,7 +78,10 @@ const Editor: React.FC<EditorProps> = props => {
       onChange={formik.handleChange} error={!!formik.errors.kana} helperText={formik.errors.kana} autoComplete={"off"}
     />
     <Select
-      SelectProps={{isMulti: true}} options={categoryOptions} onChange={handleCategoryChange} name={"category"} label={"Category"}
+      SelectProps={{
+        isMulti: true,
+        filterOption: createFilter({matchFrom: "start"})
+      }} options={categoryOptions} onChange={handleCategoryChange} name={"category"} label={"Category"}
       fullWidth={true} values={formik.values.category} error={!!formik.errors.category} helperText={formik.errors.category}
     />
     <TextField
