@@ -8,8 +8,8 @@ import {
 import {EditWordDrawer} from "./EditWordDrawer";
 import {WordsTable} from "./WordsTable";
 import {InspectWordDrawer} from "./InspectWordDrawer";
-import {APIWordType, createAPIWord, retrieveAPIWords, updateAPIWord} from "../../API/APIWord";
-import {AudioDrawer} from "./AudioDrawer";
+import {APIWordType, createAPIWord, retrieveAPIWords, updateAPIWord, deleteAPIWord} from "../../API/APIWord";
+import {DeleteWordDrawer} from "./DeleteWordDrawer";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,12 +36,14 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
+type DrawerString = "Editor" | "Inspector" | "Deleter" | ""
+
 export const ManageWordsView: React.FC = () => {
   const classes = useStyles();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [wordConcerning, setWordConcerning] = useState<APIWordType|null>(null);
   const [wordsData, setWordsData] = useState<APIWordType[]>([])
-  const [drawer, setDrawer] = useState("");
+  const [drawer, setDrawer] = useState<DrawerString>("");
   const createOrModifyWord = (word: APIWordType) => {
     if (word.uuid === "") {
       createAPIWord(word)
@@ -56,13 +58,31 @@ export const ManageWordsView: React.FC = () => {
       updateAPIWord(word)
         .then(data => {
           console.log("Update of a word succeeded.")
-          loadWords()
+          const index = wordsData.findIndex(word => word.uuid === data.uuid)
+          const newWordsData = [...wordsData]
+          newWordsData[index] = data
+          setWordsData(newWordsData)
         })
         .catch(err => {
           console.log("Update of a word failed.", err)
         })
     }
   };
+  const deleteWord = (word: APIWordType, replaceToUUID?: string) => {
+    deleteAPIWord(word, replaceToUUID)
+      .then(result => {
+        if (result.status === "success") {
+          setWordsData(wordsData => {
+            const index = wordsData.findIndex(w => w.uuid === word.uuid)
+            if (index === -1) return wordsData
+            const newWordsData = [...wordsData]
+            newWordsData.splice(index, 1)
+            return newWordsData
+          })
+        }
+        else console.log("deletion of the word failed.", result.reason)
+      })
+  }
   const loadWords = () => {
     retrieveAPIWords()
       .then(data => {
@@ -76,6 +96,13 @@ export const ManageWordsView: React.FC = () => {
   useEffect(() => {
     loadWords()
   }, [])
+
+  // click handlers for the action buttons
+  const onClickOpenDrawer = (word: APIWordType, drawer: DrawerString) => {
+    setDrawer(drawer)
+    setWordConcerning(word)
+    setIsDrawerOpen(true)
+  }
   const onClickAddNewWord = () => {
     const blankWord: APIWordType = {
       uuid: "",
@@ -84,25 +111,23 @@ export const ManageWordsView: React.FC = () => {
       meaning: "",
       category: []
     }
-    setDrawer("editor");
-    setWordConcerning(blankWord);
-    setIsDrawerOpen(true);
+    onClickOpenDrawer(blankWord, "Editor")
   }
   const onClickOpenEditor = (word: APIWordType) => {
-    setDrawer("editor");
-    setWordConcerning(word);
-    setIsDrawerOpen(true);
+    onClickOpenDrawer(word, "Editor")
   }
   const onClickOpenInspector = (word: APIWordType) => {
-    setDrawer("inspector");
-    setWordConcerning(word);
-    setIsDrawerOpen(true);
+    onClickOpenDrawer(word, "Inspector")
   }
-  const onClickOpenAudioManager = (word: APIWordType) => {
-    setDrawer("audioManager")
-    setWordConcerning(word)
-    setIsDrawerOpen(true)
+  const onClickOpenDeleter = (word: APIWordType) => {
+    onClickOpenDrawer(word, "Deleter")
   }
+
+  const handleDrawerClose = () => {
+    setDrawer("")
+    setIsDrawerOpen(false)
+  }
+
   return <div className={classes.manageWordsView}>
     <Grid container>
       <Grid item xs={6}>
@@ -117,26 +142,42 @@ export const ManageWordsView: React.FC = () => {
     </Grid>
     <Box mt={2} style={{maxHeight: "100%"}}>
       <WordsTable
-        key={wordsData.length}
         words={wordsData}
         actionButtons={[
           {buttonName: "EDIT", action: onClickOpenEditor},
           {buttonName: "INSPECT", action: onClickOpenInspector},
-          {buttonName: "AUDIO", action: onClickOpenAudioManager}
+          {buttonName: "DELETE", action: onClickOpenDeleter}
         ]}
       />
-      {drawer === "editor" && wordConcerning && <EditWordDrawer
-        key={wordConcerning.uuid} isOpen={isDrawerOpen} onClose={()=>{setIsDrawerOpen(false); setDrawer("")}}
-        word={wordConcerning} createOrModifyWord={createOrModifyWord}
-      />}
-      {drawer === "inspector" && wordConcerning && <InspectWordDrawer
-        key={wordConcerning.uuid} isOpen={isDrawerOpen} onClose={()=>{setIsDrawerOpen(false); setDrawer("")}}
-        word={wordConcerning}
-      />}
-      {drawer === "audioManager" && wordConcerning && <AudioDrawer
-        key={wordConcerning.uuid} isOpen={isDrawerOpen} onClose={()=>{setIsDrawerOpen(false); setDrawer("")}}
-        word={wordConcerning}
-      />}
+      {drawer === "Editor" && wordConcerning &&
+        <EditWordDrawer
+          createOrModifyWord={createOrModifyWord}
+          isOpen={isDrawerOpen}
+          key={wordConcerning.uuid}
+          onClose={handleDrawerClose}
+          word={wordConcerning}
+        />
+      }
+      {drawer === "Inspector" && wordConcerning &&
+        <InspectWordDrawer
+          isOpen={isDrawerOpen}
+          key={wordConcerning.uuid}
+          onClose={handleDrawerClose}
+          word={wordConcerning}
+        />
+      }
+      {drawer === "Deleter" && wordConcerning &&
+        <DeleteWordDrawer
+          deleteWord={deleteWord}
+          isOpen={isDrawerOpen}
+          key={wordConcerning.uuid}
+          onClose={handleDrawerClose}
+          isValidWordUUID={(uuid: string) => {
+            return wordsData.findIndex(word => word.uuid === uuid) !== -1
+          }}
+          word={wordConcerning}
+        />
+      }
     </Box>
   </div>
 }

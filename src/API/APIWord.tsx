@@ -1,4 +1,4 @@
-import {get, post, put} from "./API";
+import {Failure, get, post, put, Success} from "./API";
 
 export type APIWordType = {
   uuid: string,
@@ -42,3 +42,19 @@ export const createAPIWord = (word: APIWordType) => {
     .then(data => data as APIWordType)
 }
 
+type DeleteAPIWordResult = Success | Failure
+export const deleteAPIWord = (word: APIWordType, replaceToUUID?: string): Promise<DeleteAPIWordResult> => {
+  const data: any = {}
+  if (replaceToUUID) {
+    data["word_replace_to_uuid"] = replaceToUUID
+  }
+  return post(`words/${word.uuid}/delete_word/`, data)
+    .then(res => res.json())
+    .then(data => {
+      if (data.detail === "success") return {status: "success"} as Success
+      return {status: "failure", reason: data.error} as Failure
+    })
+    .catch(err => {
+      return {status: "failure", reason: "unknown reason"} as Failure
+    })
+}

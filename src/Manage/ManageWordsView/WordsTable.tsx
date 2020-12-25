@@ -11,6 +11,7 @@ import {SearchBox} from "../../General/Components/SearchBox";
 import {APIWordType} from "../../API/APIWord";
 import {APICategoryType, retrieveAPICategories} from "../../API/APICategory";
 import {APIWordListType, isWordUsedInWordList, retrieveAPIWordLists} from "../../API/APIWordList";
+import {MyTableCell} from "./MyTableCell";
 
 const columns = ["UUID", "Kanji", "Kana", "Meaning", "Category", "Lists", "Actions"]
 
@@ -23,7 +24,7 @@ type WordsTableProps = {
 }
 
 export const WordsTable: React.FC<WordsTableProps> = props => {
-  const [wordsShown, setWordsShown] = useState<{[wordUUID: string]: boolean}>(props.words.reduce((obj, word) => Object.assign(obj, {[word.uuid]: true}), {}));
+  const [hiddenWordUUIDs, setHiddenWordUUIDs] = useState<{[wordUUID: string]: boolean}>({});
 
   const [categoriesDict, setCategoriesDict] = useState<{[uuid: string]: APICategoryType}|null>(null)
   const loadCategoriesData = () => {
@@ -63,16 +64,30 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
     setQuery(query)
     setSearchBy(searchBy)
     const re = new RegExp(query);
-    let result: APIWordType[];
+    const newHiddenWordUUIDs: {[wordUUID: string]: boolean} = {};
     if (["kana", "kanji", "meaning", "uuid"].includes(searchBy)) {
-      // @ts-ignore
-      result = props.words.filter(word => word[searchBy].search(re) !== -1)
+      for (let i=0; i < props.words.length; i++) {
+        const word = props.words[i]
+        // @ts-ignore
+        if (word[searchBy].search(re) === -1) {
+          newHiddenWordUUIDs[word.uuid] = true
+        }
+      }
     } else if (searchBy === "category") {
-      result = props.words.filter(word => word.category.join(",").search(re) !== -1)
-    } else {
-      result = [];
+      if (!categoriesDict) {
+        console.log("search by category failed because no category data is present.")
+        return
+      }
+      props.words.forEach(word => {
+        newHiddenWordUUIDs[word.uuid] =
+          word.category.map(cat => {
+            const categoryName = categoriesDict[cat].name
+            return categoryName.search(re) === -1
+          })
+            .every(bool => bool)
+      })
     }
-    setWordsShown(result.reduce((obj, word) => Object.assign(obj, {[word.uuid]: true}), {}))
+    setHiddenWordUUIDs(newHiddenWordUUIDs)
     setPage(0);
   }
 
@@ -80,6 +95,15 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
     <Box display={"flex"} justifyContent={"center"} mb={2}>
       <SearchBox onSearch={onSearch} query={query} searchBy={searchBy}/>
     </Box>
+    <TablePagination
+      style={{width: 500, marginLeft: "auto", marginRight: 0}}
+      component="div"
+      count={props.words.filter(word => !hiddenWordUUIDs[word.uuid]).length}
+      rowsPerPage={rowsPerPage}
+      page={page}
+      onChangePage={handleChangePage}
+      rowsPerPageOptions={[100]}
+    />
     <TableContainer>
       <Table size={"small"} stickyHeader={true}>
         <TableHead>
@@ -89,12 +113,12 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.words.filter(word => wordsShown[word.uuid]).slice(page * rowsPerPage, page*rowsPerPage+rowsPerPage).map(word => (
+          {props.words.filter(word => !hiddenWordUUIDs[word.uuid]).slice(page * rowsPerPage, page*rowsPerPage+rowsPerPage).map(word => (
             <TableRow key={word.uuid}>
-              <TableCell key={"uuid"}>{word.uuid}</TableCell>
-              <TableCell key={"kanji"}>{word.kanji}</TableCell>
-              <TableCell key={"kana"}>{word.kana}</TableCell>
-              <TableCell key={"meaning"}>{word.meaning}</TableCell>
+              <MyTableCell key={"uuid"}>{word.uuid}</MyTableCell>
+              <MyTableCell key={"kanji"}>{word.kanji}</MyTableCell>
+              <MyTableCell key={"kana"}>{word.kana}</MyTableCell>
+              <MyTableCell key={"meaning"}>{word.meaning}</MyTableCell>
               <TableCell key={"category"}>{categoriesDict && word.category.map((categoryUUID: string | number) => categoriesDict[categoryUUID].name).join(", ")}</TableCell>
               <TableCell key={"wordList"}>{wordLists.filter(wordList => isWordUsedInWordList(word.uuid, wordList)).map(wordList => wordList.name).join(", ")}</TableCell>
               <TableCell key={"actions"}>
@@ -105,16 +129,16 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
             </TableRow>
           ))}
         </TableBody>
-        <TablePagination
-          style={{width: 500, marginLeft: "auto", marginRight: 0}}
-          component="div"
-          count={props.words.filter(word => wordsShown[word.uuid]).length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          rowsPerPageOptions={[100]}
-        />
       </Table>
     </TableContainer>
+    <TablePagination
+      style={{width: 500, marginLeft: "auto", marginRight: 0}}
+      component="div"
+      count={props.words.filter(word => !hiddenWordUUIDs[word.uuid]).length}
+      rowsPerPage={rowsPerPage}
+      page={page}
+      onChangePage={handleChangePage}
+      rowsPerPageOptions={[100]}
+    />
   </Box>
 }
