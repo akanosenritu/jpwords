@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {WordType} from "../../data/Word/Word";
-import {initialConfigurations, useConfigurations} from "../../data/Storage/Configurations";
+import {initialConfigurations, useConfigurations} from "../../LocalStorage/Configurations";
 import {Try} from "./Try";
 import {Final} from "./Final";
 

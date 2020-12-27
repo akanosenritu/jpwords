@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Switch, useRouteMatch} from "react-router-dom";
-import sentencePatternsProblemsData from "../../data/Grammar/SentencePatterns/sentencePatternProblems.json"
+import sentencePatternsProblemsData from "../../data/GeneratedData/sentencePatternProblems.json"
 import {SentencePatternEntry} from "./SentencePatternEntry";
 
 export const SentencePatterns: React.FC = props => {

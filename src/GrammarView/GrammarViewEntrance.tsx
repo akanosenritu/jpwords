@@ -2,8 +2,8 @@ import React from "react";
 import {Box, Button, Card, CardActions, CardContent, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {useHistory} from "react-router-dom"
-import sentencePatternsProblemsData from "../data/Grammar/SentencePatterns/sentencePatternProblems.json"
-import particlesProblemsData from "../data/Grammar/Particles/particleProblems.json"
+import sentencePatternsProblemsData from "../data/GeneratedData/sentencePatternProblems.json"
+import particlesProblemsData from "../data/GeneratedData/particleProblems.json"
 
 export const useStyles = makeStyles({
   startPractice: {

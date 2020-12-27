@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {initialConfigurations, useConfigurations} from "../data/Storage/Configurations";
+import {initialConfigurations, useConfigurations} from "../LocalStorage/Configurations";
 import {useFormik} from "formik";
 import {Button, Checkbox} from "@material-ui/core";
 import FormControlLabel from "@material-ui/core/FormControlLabel";

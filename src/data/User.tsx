@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {getUserData, initialUserData, setUserData} from "./Storage/userDataStorage";
+import {getUserData, initialUserData, setUserData} from "../LocalStorage/userDataStorage";
 import * as api from "../API/APIUser"
 import {ResetPasswordResult} from "../API/APIUser";
 

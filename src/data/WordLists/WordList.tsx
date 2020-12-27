@@ -1,6 +1,6 @@
 import {prepareWordV2, WordType} from "../Word/Word";
 import {Language} from "../Language";
-import wordListsData from "./wordLists.json"
+import wordListsData from "../GeneratedData/wordLists.json"
 
 
 export type WordList = {
@@ -26,7 +26,7 @@ export const loadWordListVersion1 = (target: any, wordsDict: {[key: string]: Wor
 };
 
 export const loadWordListVersion1FromFile = (targetFile: string, wordsDict: {[key: string]: WordType}): Promise<WordList> => {
-  return import(`./${targetFile}`)
+  return import(`../GeneratedData/WordLists/${targetFile}`)
     .then(data => loadWordListVersion1(data, wordsDict))
 }
 

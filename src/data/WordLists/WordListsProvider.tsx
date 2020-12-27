@@ -1,7 +1,7 @@
 import React, {useCallback, useContext, useEffect, useState} from "react";
 import {loadWordListsForLanguage, WordList} from "./WordList";
 import {WordContext} from "../Word/WordProvider";
-import {initialConfigurations, useConfigurations} from "../Storage/Configurations";
+import {initialConfigurations, useConfigurations} from "../../LocalStorage/Configurations";
 
 
 type WordListsContextType = {

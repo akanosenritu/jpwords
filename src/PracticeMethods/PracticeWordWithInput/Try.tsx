@@ -1,6 +1,6 @@
 import React from "react";
 import {evaluateAnswer, WordType} from "../../data/Word/Word";
-import {DisplayWordWithFurigana} from "../../data/Word/DisplayWordWithFurigana";
+import {DisplayWordWithFurigana} from "../../General/Components/DisplayWordWithFurigana";
 import {Box, Typography} from "@material-ui/core";
 import {useStyles} from "./Styles";
 import {PracticeInput} from "./PracticeInput";

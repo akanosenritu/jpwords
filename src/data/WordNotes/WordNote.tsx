@@ -1,8 +1,8 @@
 import React from "react";
 import {Box, Typography} from "@material-ui/core";
-import wordNotesData from "./wordNotes.json";
+import wordNotesData from "../GeneratedData/wordNotes.json";
 import {WordType} from "../Word/Word";
-import {initialConfigurations, useConfigurations} from "../Storage/Configurations";
+import {initialConfigurations, useConfigurations} from "../../LocalStorage/Configurations";
 import {WordNoteContent} from "./WordNoteContent";
 
 export const wordNotesDataLastEditDate = wordNotesData.lastEdit;

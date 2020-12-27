@@ -1,7 +1,7 @@
 import React　from "react";
 import {DummyGeneratorContext} from "../DummyGeneratorContext";
 import {shuffle} from "lodash"
-import particleProblemsData from "../../data/Grammar/Particles/particleProblems.json"
+import particleProblemsData from "../../data/GeneratedData/particleProblems.json"
 import {ParticleProblem} from "../../data/Grammar/Particles/ParticleProblem";
 import {Typography} from "@material-ui/core";
 import {particlesGenerator} from "../../data/Grammar/Particles/Utils";

@@ -1,4 +1,4 @@
-import {loadPracticeHistoryFromLocalStorage, savePracticeHistoryLocally} from "../Storage/PracticeHistory";
+import {loadPracticeHistoryFromLocalStorage, savePracticeHistoryLocally} from "../../LocalStorage/PracticeHistory";
 import {retrievePracticeHistory, savePracticeHistoryRemotely} from "../../API/APIPracticeHistory";
 import {User} from "../User";
 import * as uuid from "uuid"

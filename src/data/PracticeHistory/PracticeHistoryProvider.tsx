@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {UserContext} from "../User";
 import {createBlankHistory, loadPracticeHistory, PracticeHistoryVLatest, savePracticeHistory} from "./PracticeHistory";
-import {Arbitrator} from "./Arbitrator";
+import {PracticeHistoryArbitrator} from "../../General/Components/PracticeHistoryArbitrator";
 
 type PracticeHistoryProviderValue = {
   practiceHistory: PracticeHistoryVLatest,
@@ -37,7 +37,7 @@ export const PracticeHistoryProvider: React.FC = props => {
             setPracticeHistory(result.practiceHistory)
             break
           case "conflict":
-            setArbitrator(<Arbitrator localHistory={result.localPracticeHistory} remoteHistory={result.remotePracticeHistory} onArbitrated={onArbitrated} />)
+            setArbitrator(<PracticeHistoryArbitrator localHistory={result.localPracticeHistory} remoteHistory={result.remotePracticeHistory} onArbitrated={onArbitrated} />)
         }
       })
   }, [user])
