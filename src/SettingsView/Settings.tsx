@@ -6,6 +6,7 @@ import {PracticeSettingsTab} from "./PracticeSettingsTab";
 import Typography from "@material-ui/core/Typography";
 import {AccountSettingsTab} from "./AccountSettingsTab";
 import {UserContext} from "../data/User";
+import {LanguageSettingsTab} from "./LanguageSettingsTab";
 
 type TabPanelProps = {
   value: any,
@@ -60,7 +61,7 @@ export const Settings: React.FC = props => {
         }
       </TabPanel>
       <TabPanel value={tabIndex} index={1}>
-        <p>Currently only English is available.</p>
+        <LanguageSettingsTab />
       </TabPanel>
       <TabPanel value={tabIndex} index={2}>
         <PracticeSettingsTab />

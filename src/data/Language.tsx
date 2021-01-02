@@ -1,4 +1,4 @@
-const languages = ["ENG", "ESP"]
+export const languages = ["ENG", "ESP"]
 
 export type Language = typeof languages[number]
 

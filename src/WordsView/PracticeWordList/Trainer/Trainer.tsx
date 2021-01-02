@@ -55,6 +55,7 @@ export const Trainer2: React.FC<PracticeViewBaseProps> = props => {
   };
   const word = props.words[wordQueue[0]];
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
+  console.log(word)
   return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} mt={2}>
     <ProgressBar progress={numberDoneWords * 100 / props.words.length} />
     <PracticeWordWithInput word={word} onNext={onNext} key={`${word.kanji}-${word.kana}-${word.meaning}-${practiceQualities[wordQueue[0]]}`}/>

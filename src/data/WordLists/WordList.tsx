@@ -11,6 +11,7 @@ export type WordList = {
   description: string,
   wordCount: number
   wordsFiles: string[]
+  hidden: boolean
 }
 
 export const loadWordListVersion1 = (target: any, wordsDict: {[key: string]: WordType}): WordList => {
@@ -21,7 +22,8 @@ export const loadWordListVersion1 = (target: any, wordsDict: {[key: string]: Wor
     description: target.description,
     wordCount: target.wordCount,
     words: prepareWordV2(target.words, wordsDict),
-    wordsFiles: ["words.json"]
+    wordsFiles: ["words.json"],
+    hidden: target.hidden
   } as WordList
 };
 

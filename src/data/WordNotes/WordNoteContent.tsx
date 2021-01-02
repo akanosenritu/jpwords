@@ -5,7 +5,7 @@ type WordNoteContentProps = {
 }
 
 export const WordNoteContent: React.FC<WordNoteContentProps> = (props) => {
-  const Content = lazy(()=> import(`../GeneratedData/WordNotes/${props.uuid}.mdx`))
+  const Content = lazy(()=> import(`./Contents/${props.uuid}.mdx`))
   return <Suspense fallback={<div>...loading</div>} >
     <Content />
   </Suspense>

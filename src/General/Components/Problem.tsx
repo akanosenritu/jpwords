@@ -2,12 +2,15 @@ import React, {useContext, useState} from "react";
 import {HiddenContext} from "../../GrammarView/HiddenContext";
 import {UserInteractionContext} from "../../GrammarView/UserInteractionContext";
 import {NLPTLevel} from "../../data/NLPTLevel";
+import {Language} from "../../data/Language";
+import {initialConfigurations, useConfigurations} from "../../LocalStorage/Configurations";
 
 type ProblemProps = {
   answer: string,
   otherPossibleAnswers?: string[],
   dummies?: string[],
   translation?: string,
+  translations: {[lang in Language]: string},
   rationale?: React.ReactElement,
   targetLevel?: NLPTLevel
 }
@@ -15,9 +18,13 @@ type ProblemProps = {
 export const Problem: React.FC<ProblemProps> = props => {
   const [isHidden, setIsHidden] = useState(true)
   const UserInteraction = useContext(UserInteractionContext)
+  const {configurations} = useConfigurations(initialConfigurations)
+
+  const translation = props.translations? props.translations[configurations.language]: props.translation
+
   return <HiddenContext.Provider value={isHidden}>
     <p>{props.children}</p>
-    {props.translation && <p style={{marginLeft: 10, fontSize: "1rem"}}>{props.translation}</p>}
+    {translation && <p style={{marginLeft: 10, fontSize: "1rem"}}>{translation}</p>}
     <UserInteraction
       answer={props.answer}
       onCorrectlyAnswered={()=>setIsHidden(false)}

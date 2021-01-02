@@ -1,0 +1,32 @@
+import {SentencePatternProblem} from "../../SentencePatternProblem";
+import {Typography} from "@material-ui/core";
+import {problems} from "./とき";
+
+<h5>とき: When</h5>
+
+<p>
+  Use the dictionary form or Ta-form. The former is used when the sub clause (the part before とき) finishes after or at the same time with the main clause (the part after とき), and the latter is used when the sub clause finishes before the main clause.
+</p>
+<p>
+  <h6>With verbs</h6>
+  <p>
+    {problems.slice(0, 8).map(problem => {
+      return React.createElement(problem)
+    })}
+  </p>
+
+  <h6>With adjectives</h6>
+  <p>
+    {problems.slice(8, 15).map(problem => {
+      return React.createElement(problem)
+    })}
+  </p>
+
+  <h6>With の</h6>
+  <p>
+    {problems.slice(15, 18).map(problem => {
+      return React.createElement(problem)
+    })}
+  </p>
+</p>
+

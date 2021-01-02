@@ -1,4 +1,6 @@
 import {WordNoteType} from "../WordNotes/WordNote";
+import {Language} from "../Language";
+import wordNoteData from "../GeneratedData/wordNotes.json"
 
 export const prepareWord = (data: any) => {
   const word: WordType = {
@@ -6,15 +8,17 @@ export const prepareWord = (data: any) => {
     kana: data.kana,
     kanji: data.kanji,
     meaning: data.meaning,
-    category: data.category as Category[]
+    category: data.category as Category[],
+    associatedWordNotes: data.associatedWordNotes.map((uuid: string) => {
+      return wordNoteData.find(wordNote => wordNote.uuid === uuid)
+    }).filter((wordNote: WordNoteType | undefined) => wordNote)
   };
   return word
 }
 
-export const prepareWordsDict = (data: object[]): {[key: string]: WordType}  => {
+export const prepareWordsDict = (words: WordType[]): {[key: string]: WordType}  => {
   let availableWords: { [key: string]: WordType } = {};
-  for (let datum of data) {
-    const word = prepareWord(datum)
+  for (const word of words) {
     availableWords[word.uuid] = word
   }
   return availableWords;
@@ -71,7 +75,7 @@ export type WordType = {
   kanji: string,
   kana: string,
   category: Category[],
-  meaning: string,
+  meaning: {[lang in Language]: string},
   associatedWordNotes?: WordNoteType[]
 }
 

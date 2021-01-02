@@ -3,9 +3,9 @@ import {Box, Button, Dialog, Grid, TextField, Typography} from "@material-ui/cor
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {FormikErrors, useFormik} from "formik";
 import Select from "react-select-material-ui";
-import {DrawerBase} from "../DrawerBase"
+import {DrawerBase} from "../../General/Drawers/DrawerBase"
 import {PrintMarkDown} from "../../General/Components/PrintMarkDown";
-import {WordsTable} from "../ManageWordsView/WordsTable";
+import {WordsTable} from "../../General/WordsTable/WordsTable";
 import {APIWordNoteType} from "../../API/APIWordNote";
 import {APIWordType, retrieveAPIWords} from "../../API/APIWord";
 import {APICategoryType, retrieveAPICategories} from "../../API/APICategory";
@@ -69,9 +69,11 @@ const WordPicker: React.FC<WordPickerProps> = props => {
       <Button variant={"outlined"} color={"primary"} onClick={onSave}>Save</Button>
       <Button variant={"outlined"} onClick={onClose}>Close</Button>
     </Box>
-    <WordsTable key={wordsData.length} words={wordsData} actionButtons={[
-      {buttonName: "ADD", action: (word) => onSelect(word)}
-    ]} />
+    <WordsTable
+      actionButtons={[
+        {buttonName: "Add", action: onSelect}
+      ]}
+    />
   </Box>
 }
 
@@ -117,7 +119,7 @@ type EditorProps = {
   onClose: () => void
 }
 
-const Editor: React.FC<EditorProps> = props => {
+export const WordNoteEditor: React.FC<EditorProps> = props => {
   const classes = useStyles();
   const [isContentEditorOpen, setIsContentEditorOpen] = useState(false);
   const [isWordPickerOpen, setIsWordPickerOpen] = useState(false)
@@ -144,7 +146,6 @@ const Editor: React.FC<EditorProps> = props => {
   const formik = useFormik({
     initialValues: props.wordNote,
     validate: (values) => {
-      console.log("validating...")
       const errors: FormikErrors<APIWordType> = {};
     },
     onSubmit: ()=>{
@@ -154,13 +155,15 @@ const Editor: React.FC<EditorProps> = props => {
   });
   const categoryOptions = categoriesData.map(category => ({value: category.uuid, label: category.name}));
   const handleCategoryChange = (values: any[]) => {
-    formik.setFieldValue("associatedCategories", values? values: [])
+    formik.setFieldValue("associated_categories", values? values: [])
   }
   const handleWordPickerClose = (words: APIWordType[]) => {
-    formik.setFieldValue("associatedWords", words.map(word => word.uuid).sort())
+    console.log(words)
+    formik.setFieldValue("associated_words", words.map(word => word.uuid).sort())
     setIsWordPickerOpen(false);
   }
   // @ts-ignore
+  console.log(formik.values)
   return <form onSubmit={formik.handleSubmit} className={classes.editor}>
     <Box style={{borderLeft: "5px solid lightgray", paddingLeft: 10}} ml={1}>
       <Typography variant={"h6"}>Edit a word note</Typography>
@@ -171,9 +174,9 @@ const Editor: React.FC<EditorProps> = props => {
       onChange={formik.handleChange} error={!!formik.errors.title} helperText={formik.errors.title} autoComplete={"off"}
     />
     <Box m={2}>
-      <Button style={{textTransform: "none"}} onClick={()=>setIsWordPickerOpen(true)}><Typography variant={"body1"} display={"inline"}>Associated words: {formik.values.associatedWords? formik.values.associatedWords.length: 0}</Typography></Button>
+      <Button style={{textTransform: "none"}} onClick={()=>setIsWordPickerOpen(true)}><Typography variant={"body1"} display={"inline"}>Associated words: {formik.values.associated_words? formik.values.associated_words.length: 0}</Typography></Button>
       <div>
-        {formik.values.associatedWords && formik.values.associatedWords.map(wordUUID => {
+        {formik.values.associated_words && formik.values.associated_words.map(wordUUID => {
           const word = wordsData.find(wordDatum => wordDatum.uuid === wordUUID)
           if (word) {
             return <Typography variant={"body2"}>{`${word.kana} (${word.uuid})`}</Typography>
@@ -184,15 +187,15 @@ const Editor: React.FC<EditorProps> = props => {
       </div>
     </Box>
     <Select
-      SelectProps={{isMulti: true}} options={categoryOptions} onChange={handleCategoryChange} name={"associatedCategories"} label={"Associated Category"}
-      fullWidth={true} values={formik.values.associatedCategories} error={!!formik.errors.associatedCategories} helperText={formik.errors.associatedCategories}
+      SelectProps={{isMulti: true}} options={categoryOptions} onChange={handleCategoryChange} name={"associated_categories"} label={"Associated Category"}
+      fullWidth={true} values={formik.values.associated_categories} error={!!formik.errors.associated_categories} helperText={formik.errors.associated_categories}
     />
     <Box style={{fontSize: 14}} m={2} onClick={()=>setIsContentEditorOpen(true)}>
     </Box>
     <Dialog open={isWordPickerOpen} fullScreen={true}>
       <WordPicker
         onClose={handleWordPickerClose}
-        selectedWords={formik.values.associatedWords? formik.values.associatedWords.map(associatedWordUUID => {
+        selectedWords={formik.values.associated_words? formik.values.associated_words.map(associatedWordUUID => {
           return wordsData.find(wordDatum => wordDatum.uuid === associatedWordUUID)
         }): []}
       />
@@ -212,7 +215,7 @@ type EditWordDrawerProps = {
 
 export const EditWordNoteDrawer: React.FC<EditWordDrawerProps> = props => {
   return <DrawerBase
-    isOpen={props.isOpen} onClose={props.onClose}
-    inside={<Editor wordNote={props.wordNote} createOrModifyWordNote={props.createOrModifyWordNote} onClose={props.onClose}/>}
+    onClose={props.onClose}
+    inside={<WordNoteEditor wordNote={props.wordNote} createOrModifyWordNote={props.createOrModifyWordNote} onClose={props.onClose}/>}
   />
 }

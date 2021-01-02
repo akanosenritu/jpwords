@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Box, Button, CircularProgress, TextField} from "@material-ui/core";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {FormikErrors, useFormik} from "formik"
-import {DrawerBase} from "../DrawerBase";
+import {DrawerBase} from "../../General/Drawers/DrawerBase";
 import {APIWordType} from "../../API/APIWord";
 import {H5, H6} from "../../General/Components/Headers";
 import {Paragraph} from "../../General/Components/Paragraph";
@@ -104,7 +104,7 @@ type AudioDrawerProps = {
 
 export const AudioDrawer: React.FC<AudioDrawerProps> = props => {
   return <DrawerBase
-    isOpen={props.isOpen} onClose={props.onClose}
+    onClose={props.onClose}
     inside={<AudioManager word={props.word} onClose={props.onClose} />}
   />
 }

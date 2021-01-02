@@ -17,3 +17,7 @@ export const retrieveAPIWordLists = () => {
 export const isWordUsedInWordList = (wordUUID: string, wordList: APIWordListType): boolean => {
   return wordList.words.includes(wordUUID)
 }
+
+export const searchWordLists = (query: RegExp|string, wordLists: APIWordListType[]): APIWordListType[] => {
+  return wordLists.filter(wordList => wordList.name.search(query) !== -1)
+}

@@ -1,14 +1,11 @@
 import React from "react";
 import {Box, Typography} from "@material-ui/core";
-import wordNotesData from "../GeneratedData/wordNotes.json";
 import {WordType} from "../Word/Word";
 import {initialConfigurations, useConfigurations} from "../../LocalStorage/Configurations";
 import {WordNoteContent} from "./WordNoteContent";
 
-export const wordNotesDataLastEditDate = wordNotesData.lastEdit;
-
 export type WordNoteType = {
-  id: string,
+  uuid: string,
   title: string,
   description?: string,
 };
@@ -23,11 +20,12 @@ type WordNotesProps = {
 
 export const WordNotes: React.FC<WordNotesProps> = (props) => {
   const wordNotes = props.word.associatedWordNotes? props.word.associatedWordNotes: [];
+  console.log(wordNotes)
   return <Box pt={4} style={{width: "100%"}}>
     {wordNotes.length > 0 && <div style={{width: "80%", margin: "auto", border: "1px solid lightgray", borderRadius: 25}}>
       <Box>
         {wordNotes.map(wordNote => {
-          return <WordNote2 wordNote={wordNote} key={wordNote.id} />
+          return <WordNote2 wordNote={wordNote} key={wordNote.uuid} />
         })}
       </Box>
     </div>}
@@ -42,7 +40,7 @@ export const WordNote2: React.FC<WordNoteProps> = (props) => {
     </p>
     {!configurations.hideWordNotes && <>
       <Box style={{fontSize: 14}}>
-        <WordNoteContent uuid={props.wordNote.id} />
+        <WordNoteContent uuid={props.wordNote.uuid} />
       </Box>
     </>
     }

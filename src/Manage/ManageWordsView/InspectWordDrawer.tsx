@@ -1,5 +1,4 @@
 import React from "react";
-import {DrawerBase} from "../DrawerBase";
 import {Box, List, Typography} from "@material-ui/core";
 import {APIWordType} from "../../API/APIWord";
 
@@ -19,14 +18,4 @@ const Inspector: React.FC<InspectorProps> = (props) => {
       <Typography variant={"h6"}>Word Practice History</Typography>
     </Box>
   </Box>
-}
-
-type InspectWordDrawerProps = {
-  onClose: () => void,
-  isOpen: boolean,
-  word: APIWordType,
-}
-
-export const InspectWordDrawer: React.FC<InspectWordDrawerProps> = props => {
-  return <DrawerBase isOpen={props.isOpen} onClose={props.onClose} inside={<Inspector word={props.word} />} />
 }

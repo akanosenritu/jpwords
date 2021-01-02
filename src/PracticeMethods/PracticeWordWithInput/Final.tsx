@@ -5,6 +5,7 @@ import {Box, Typography} from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 import {useStyles} from "./Styles";
 import {getColors} from "../../WordsView/Styles";
+import {initialConfigurations, useConfigurations} from "../../LocalStorage/Configurations";
 
 type FinalProps = {
   word: WordType,
@@ -21,9 +22,10 @@ export const Final: React.FC<FinalProps> = props => {
       props.onNext()
     }
   }
+  const {configurations} = useConfigurations(initialConfigurations)
   return <div style={{textAlign: "center", width:"100%"}}>
     <Box mt={4}>
-      <Typography variant={"h4"}>{props.word.meaning}</Typography>
+      <Typography variant={"h4"}>{props.word.meaning[configurations.language]}</Typography>
     </Box>
     <Box mt={4} style={{minHeight: 50}}>
       <Typography variant={"h5"}><DisplayWordWithFurigana word={props.word} /></Typography>
@@ -33,7 +35,7 @@ export const Final: React.FC<FinalProps> = props => {
         <input
           className={styles.answerInput} value={props.userInput} readOnly={true}
           autoFocus={true} onKeyPress={onKeyboardEvent2}
-          key={props.word.meaning}
+          key={props.word.meaning[configurations.language]}
         />
         <CheckIcon className={styles.answerInputIcon} />
       </div>

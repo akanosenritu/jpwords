@@ -4,9 +4,20 @@ export let token: null|string = null
 export type Success = {
   status: "success"
 }
+export const success: Success = {
+  status: "success"
+}
 export type Failure = {
   status: "failure",
   reason: string
+}
+export const unknownError: Failure = {
+  status: "failure",
+  reason: "unknown error"
+}
+export const defaultValueError: Failure = {
+  status: "failure",
+  reason: "default value"
 }
 
 const myFetch = (input: RequestInfo, init?: RequestInit) => {

@@ -14,7 +14,6 @@ type PracticeWordListViewDoPracticeProps = {
 
 export const PracticeWordListViewDoPractice: React.FC<PracticeWordListViewDoPracticeProps> = (props) => {
   const {practiceHistory} = useContext(PracticeHistoryContext)
-  // @ts-ignore
   const words = shuffle(chooseWordsToPractice(props.wordListToPractice, practiceHistory, 20));
   const finishPractice = (wordsDone: WordType[], practiceQualities: number[]) => {
     const practiceResult = {
