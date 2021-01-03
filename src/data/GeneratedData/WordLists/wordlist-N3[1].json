@@ -550,7 +550,6 @@
     "53eec160-4c1f-4dbc-911e-44c831f580dd",
     "541217ae-4123-4e76-874f-bab757f9ab13",
     "541715d4-b69f-4d20-9d39-b368db6ea486",
-    "541fdca4-1856-40b1-9626-d5b376243f78",
     "542ec96f-19ed-44f0-a889-3a5ba114f9c0",
     "5431d21b-dabc-4e75-a42e-1f8fe8db7c77",
     "546e07fd-2742-4586-a544-9dbe019e04da",
@@ -1682,5 +1681,6 @@
     "ffc3a345-b158-4d14-9856-c10ecb74429f"
   ],
   "description": "Based on N3 word list retrieved from http://www.tanos.co.uk/jlpt/jlpt3/vocab/VocabList.N3.pdf",
-  "wordCount": 1677
+  "hidden": false,
+  "wordCount": 1676
 }

@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-export const ManageWordsView: React.FC = () => {
+const ManageWordsView: React.FC = () => {
   const classes = useStyles();
 
   return <div className={classes.manageWordsView}>
@@ -51,3 +51,5 @@ export const ManageWordsView: React.FC = () => {
     </Box>
   </div>
 }
+
+export default ManageWordsView

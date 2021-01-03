@@ -69,7 +69,7 @@ export const GrammarViewEntrance: React.FC = (props) => {
       </Box>
       <Box mt={2}>
         {Object.entries(sentencePatternsProblemsData.sentencePatterns).map(kv => {
-          return <PracticeCardSentencePattern sentencePattern={kv[0]} nPractices={kv[1]} />
+          return <PracticeCardSentencePattern sentencePattern={kv[0]} nPractices={kv[1]} key={kv[0]} />
         })}
       </Box>
     </Box>

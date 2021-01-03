@@ -13,10 +13,17 @@ import {UserProvider} from "./data/User";
 import {Settings} from "./SettingsView/Settings";
 import {Test} from "./Test/Test";
 import {PracticeHistoryProvider} from "./data/PracticeHistory/PracticeHistoryProvider";
-import {ManageView} from "./Manage/Manage";
+import {ManageView} from "./Manage/ManageView";
+import {createMuiTheme, ThemeProvider} from "@material-ui/core";
+
+const theme = createMuiTheme({
+  typography: {
+    fontSize: 14,
+  },
+});
 
 function App() {
-  return (
+  return <ThemeProvider theme={theme}>
     <div>
       <Router>
         <UserProvider>
@@ -48,7 +55,7 @@ function App() {
         </UserProvider>
       </Router>
     </div>
-  );
+  </ThemeProvider>
 }
 
 export default App;

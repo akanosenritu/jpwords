@@ -12,7 +12,6 @@ import {DrawerBase, DrawerBaseProps} from "../../General/Drawers/DrawerBase";
 import {WordNoteEditor} from "./EditWordNoteDrawer";
 import {APIWordNotesContext} from "../../API/APIWordNoteProvider";
 import Box from "@material-ui/core/Box";
-import {SearchBox} from "../../General/WordsTable/SearchBox";
 
 const COLUMNS = ["UUID", "Title", "A. Words", "A. Categories", "Actions"]
 
@@ -52,7 +51,8 @@ export const WordNotesTable: React.FC<WordNotesTableProps> = props => {
       title: "",
       associated_categories: [] as string[],
       associated_words: [] as string[],
-      is_published: false
+      is_published: false,
+      content: ""
     }
     onClickOpenEditor(blankWordNote)
   };

@@ -2,11 +2,9 @@ import React, {useState} from "react";
 import {initialConfigurations, useConfigurations} from "../LocalStorage/Configurations";
 import {useFormik} from "formik";
 import {Button} from "@material-ui/core";
-import Select from "@material-ui/core/Select";
-import {languages} from "../data/Language";
-import MenuItem from "@material-ui/core/MenuItem";
+import {LanguageSelector} from "../General/Components/LanguageSelector";
 
-export const LanguageSettingsTab: React.FC= (props) => {
+export const LanguageSettingsTab: React.FC= () => {
   const {configurations, setConfigurations} = useConfigurations(initialConfigurations);
   const [savedAt, setSavedAt] = useState("");
   const formik = useFormik({
@@ -19,17 +17,7 @@ export const LanguageSettingsTab: React.FC= (props) => {
 
   return <form onSubmit={formik.handleSubmit}>
     <div style={{paddingLeft: 10, marginBottom: 10}}>
-      <Select
-        value={formik.values.language}
-        name={"language"}
-        onChange={formik.handleChange}
-        fullWidth={true}
-        variant={"outlined"}
-      >
-        {languages.map(language => {
-          return <MenuItem value={language}>{language}</MenuItem>
-        })}
-        </Select>
+      <LanguageSelector language={configurations.language} onSelected={language => formik.setFieldValue("language", language)} />
     </div>
     <div style={{display:"flex", justifyContent: "center"}}>
       <div><Button type={"submit"} variant={"outlined"} color={"primary"}>Save</Button></div>

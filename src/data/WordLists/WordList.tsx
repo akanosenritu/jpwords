@@ -33,5 +33,6 @@ export const loadWordListVersion1FromFile = (targetFile: string, wordsDict: {[ke
 }
 
 export const loadWordListsForLanguage = async (language: Language, wordsDict: {[key: string]: WordType}): Promise<WordList[]> => {
-  return Promise.all(wordListsData.ENG.map(file => loadWordListVersion1FromFile(file, wordsDict)))
+  // @ts-ignore
+  return Promise.all(wordListsData[language].map(file => loadWordListVersion1FromFile(file, wordsDict)))
 }

@@ -7,7 +7,8 @@ export type APIWordNoteType = {
   associated_words: string[]
   associated_categories: string[],
   title: string,
-  is_published: boolean
+  is_published: boolean,
+  content: string,
 }
 
 type RetrieveAPIWordNotesSuccess = {

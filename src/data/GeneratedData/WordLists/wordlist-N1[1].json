@@ -3364,5 +3364,6 @@
     "fffb0a84-3ce7-4710-bce0-c5b586462e79"
   ],
   "description": "Based on N1 word list retrieved from http://www.tanos.co.uk/jlpt/jlpt1/vocab/VocabList.N1.pdf",
+  "hidden": false,
   "wordCount": 3359
 }

@@ -25,6 +25,7 @@ const searchByCandidates = [
   "kana",
   "kanji",
   "meaning",
+  "category",
   "wordList",
 ]
 

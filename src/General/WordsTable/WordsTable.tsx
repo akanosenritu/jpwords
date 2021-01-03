@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -18,8 +18,6 @@ import {createTranslation, updateTranslation} from "../../API/APITranslation";
 import {Editor} from "../Drawers/Editor";
 import {DrawerBase, DrawerBaseProps} from "../Drawers/DrawerBase";
 import {Remover} from "../Drawers/Remover";
-import {APIWordNoteType, retrieveAPIWordNotes, useAPIWordNotes} from "../../API/APIWordNote";
-import {APIWordNotesContext} from "../../API/APIWordNoteProvider";
 import {WordsTableWordNotesCell} from "./WordsTableWordNotesCell";
 
 const columns = ["UUID", "Kanji", "Kana", "Meaning", "Category", "Lists", "WordNotes", "Actions"]
@@ -64,9 +62,6 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
   useEffect(() => {
     loadWordListsData()
   }, [])
-
-  // word notes data
-  const {wordNotes, getWordNotes} = useContext(APIWordNotesContext)
 
   // handle edits
   const handleMeaningEdit = async (word: APIWordType, value: string) => {

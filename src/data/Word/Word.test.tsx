@@ -8,25 +8,33 @@ export const wordTypeExamples = [
     kanji: "例",
     kana: "れい",
     category: ["n"] as Category[],
-    meaning: "example"
+    meaning: {
+      ENG: "example"
+    }
   },
   {
     uuid: "22d662b7-98a9-4ef6-b8b7-1763d33f2e2d",
     kanji: "意味",
     kana: "いみ",
     category: ["n-vs"] as Category[],
-    meaning: "meaning"
+    meaning: {
+      ENG: "meaning"
+    }
   },
   {
     uuid: "8e41dff0-81ca-4e70-b2dd-9116b8679642",
-    meaning: "ten",
+    meaning: {
+      ENG: "ten"
+    },
     kana: "じゅう",
     kanji: "十",
     category: ["num"] as Category[]
   },
   {
     uuid: "6a45ac20-d511-4931-9c75-eabd682a5ef5",
-    meaning: "counter for occurrences",
+    meaning: {
+      ENG: "counter for occurrences"
+    },
     kana: "～ど",
     kanji: "～度",
     category: ["n-suf"] as Category[]

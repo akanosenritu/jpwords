@@ -10,7 +10,7 @@ type Props = {
 export const SentencePattern: React.FC<Props> = props => {
   const [content, setContent] = useState(<div>Loading..</div>)
   useEffect(() => {
-    import(`./${props.sentencePattern}/${props.sentencePattern}.mdx`)
+    import(`./SentencePatterns/${props.sentencePattern}/${props.sentencePattern}.mdx`)
       .then(component => {
         setContent(React.createElement(component.default))
       })

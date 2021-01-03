@@ -8,7 +8,7 @@ export const SentencePatterns: React.FC = props => {
   const sentencePatterns = Object.keys(sentencePatternsProblemsData.sentencePatterns)
   return <Switch>
     {sentencePatterns.map(sentencePattern => {
-      return <Route path={`${match.path}/${sentencePattern}`}>
+      return <Route path={`${match.path}/${sentencePattern}`} key={sentencePattern}>
         <SentencePatternEntry sentencePattern={sentencePattern} />
       </Route>
     })}

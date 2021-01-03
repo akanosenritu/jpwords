@@ -1,5 +1,5 @@
 {
-  "lastEdit": "2020-12-31T17:09:36.674441",
+  "lastEdit": "2021-01-03T22:44:30.345304",
   "words": [
     {
       "uuid": "b9fae1d0-916e-4dfe-a044-17fa99b6de70",
@@ -406,12 +406,14 @@
       "kanji": "赤ちゃん",
       "meaning": {
         "ENG": "baby, infant",
-        "ESP": "el bebé"
+        "ESP": "el bebito, la bebita"
       },
       "category": [
         "n"
       ],
-      "associatedWordNotes": []
+      "associatedWordNotes": [
+        "825fc264-4f38-4a53-99af-2817ca704229"
+      ]
     },
     {
       "uuid": "b5a70579-e418-4909-83fb-0bc7199e26d3",
@@ -463,7 +465,9 @@
       "category": [
         "n"
       ],
-      "associatedWordNotes": []
+      "associatedWordNotes": [
+        "825fc264-4f38-4a53-99af-2817ca704229"
+      ]
     },
     {
       "uuid": "77545cac-28f5-48f5-b4a4-4e9934b19cd5",
@@ -1331,7 +1335,8 @@
       "kana": "あたり",
       "kanji": "当たり",
       "meaning": {
-        "ENG": "hit, success"
+        "ENG": "hit, success",
+        "ESP": "el golpe"
       },
       "category": [
         "n"
@@ -1343,7 +1348,8 @@
       "kana": "あたりまえ",
       "kanji": "当たり前",
       "meaning": {
-        "ENG": "usual, common, ordinary"
+        "ENG": "a matter of course",
+        "ESP": "el evidente"
       },
       "category": [
         "n",
@@ -1352,21 +1358,15 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "ffbb7ca6-a0a0-45e4-a5b5-97ce632ad239",
-      "kana": "あたりまえ",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "192d470d-a0d5-4f0b-8a75-fa82728d530c",
       "kana": "あたる",
       "kanji": "当たる",
       "meaning": {
+        "ESP": "tener éxito, chocar",
         "ENG": "to be hit, to be successful,to be equivalent to"
       },
       "category": [
+        "v-pl-ni",
         "v5r",
         "vi"
       ],
@@ -1377,7 +1377,8 @@
       "kana": "あちこち",
       "kanji": "",
       "meaning": {
-        "ENG": "here and there"
+        "ENG": "here and there",
+        "ESP": "aquí y allá"
       },
       "category": [
         "adv",
@@ -1429,6 +1430,7 @@
       "kana": "あっか",
       "kanji": "悪化",
       "meaning": {
+        "ESP": "el deterioro",
         "ENG": "deterioration"
       },
       "category": [
@@ -1442,7 +1444,8 @@
       "kana": "あっけない",
       "kanji": "呆気ない",
       "meaning": {
-        "ENG": "not enough, too quick (short long etc.)"
+        "ENG": "not enough, too quick (short long etc.)",
+        "ESP": "insatisfactorio"
       },
       "category": [
         "adj"
@@ -1454,6 +1457,7 @@
       "kana": "あっさり",
       "kanji": "",
       "meaning": {
+        "ESP": "sin esfuerzo, rápidamente",
         "ENG": "easily, readily, quickly"
       },
       "category": [
@@ -1466,7 +1470,8 @@
       "kana": "あっしゅく",
       "kanji": "圧縮",
       "meaning": {
-        "ENG": "compression, condensation, pressure"
+        "ENG": "compression, condensation, pressure",
+        "ESP": "la compresión"
       },
       "category": [
         "n",
@@ -1493,7 +1498,8 @@
       "kana": "あっぱく",
       "kanji": "圧迫",
       "meaning": {
-        "ENG": "pressure, oppression"
+        "ENG": "pressure, oppression",
+        "ESP": "la opresión"
       },
       "category": [
         "n",
@@ -1545,7 +1551,8 @@
       "kana": "あつかい",
       "kanji": "扱い",
       "meaning": {
-        "ENG": "treatment, service"
+        "ENG": "treatment, service",
+        "ESP": "el manejo"
       },
       "category": [
         "n"
@@ -1557,7 +1564,8 @@
       "kana": "あつかう",
       "kanji": "扱う",
       "meaning": {
-        "ENG": "to handle, to deal with,to treat"
+        "ENG": "to handle, to deal with,to treat",
+        "ESP": "tratar"
       },
       "category": [
         "v5u"
@@ -1569,6 +1577,7 @@
       "kana": "あつかましい",
       "kanji": "厚かましい",
       "meaning": {
+        "ESP": "descarado",
         "ENG": "impudent, shameless, brazen"
       },
       "category": [
@@ -1581,6 +1590,7 @@
       "kana": "あつまり",
       "kanji": "集まり",
       "meaning": {
+        "ESP": "la reunión",
         "ENG": "gathering, meeting,assembly,collection"
       },
       "category": [
@@ -1622,6 +1632,7 @@
       "kana": "あつらえる",
       "kanji": "誂える",
       "meaning": {
+        "ESP": "pedir",
         "ENG": "to give an order, to place an order"
       },
       "category": [
@@ -1634,6 +1645,7 @@
       "kana": "あつりょく",
       "kanji": "圧力",
       "meaning": {
+        "ESP": "la presión",
         "ENG": "stress, pressure"
       },
       "category": [
@@ -1658,6 +1670,7 @@
       "kana": "あてさき",
       "kanji": "宛先",
       "meaning": {
+        "ESP": "el destino",
         "ENG": "address"
       },
       "category": [
@@ -1682,6 +1695,7 @@
       "kana": "あてな",
       "kanji": "宛名",
       "meaning": {
+        "ESP": "el destinatario",
         "ENG": "address, direction"
       },
       "category": [
@@ -1746,6 +1760,7 @@
       "kana": "あと",
       "kanji": "跡",
       "meaning": {
+        "ESP": "el rastro, los restos",
         "ENG": "trace, remains"
       },
       "category": [
@@ -1758,7 +1773,8 @@
       "kana": "あとつぎ",
       "kanji": "跡継ぎ",
       "meaning": {
-        "ENG": "heir, successor"
+        "ENG": "heir, successor",
+        "ESP": "el sucesor"
       },
       "category": [
         "n"
@@ -1782,7 +1798,8 @@
       "kana": "あな",
       "kanji": "穴",
       "meaning": {
-        "ENG": "hole"
+        "ENG": "hole",
+        "ESP": "el agujero"
       },
       "category": [
         "n"
@@ -1860,19 +1877,12 @@
       "kana": "あばれる",
       "kanji": "暴れる",
       "meaning": {
+        "ESP": "rabiar, actuar violentamente",
         "ENG": "to act violently, to rage"
       },
       "category": [
         "v1"
       ],
-      "associatedWordNotes": []
-    },
-    {
-      "uuid": "7c9cd120-b8d0-40c8-a583-e32e8b156724",
-      "kana": "あひら",
-      "kanji": "あひら",
-      "meaning": {},
-      "category": [],
       "associatedWordNotes": []
     },
     {
@@ -1890,31 +1900,16 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "7f2e8265-8d21-48d1-b880-e854920e53a7",
-      "kana": "あびる",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "5fa6b45b-8d1c-4a1b-908b-e85b7e3d8534",
       "kana": "あふれる",
       "kanji": "溢れる",
       "meaning": {
+        "ESP": "desbordar",
         "ENG": "to flood, to overflow, to brim over"
       },
       "category": [
         "v1"
       ],
-      "associatedWordNotes": []
-    },
-    {
-      "uuid": "f103230e-6f97-4a3b-bff7-cc8637a50d09",
-      "kana": "あふれる",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
       "associatedWordNotes": []
     },
     {
@@ -1935,7 +1930,8 @@
       "kana": "あぶら",
       "kanji": "油",
       "meaning": {
-        "ENG": "oil"
+        "ENG": "oil",
+        "ESP": "el óleo"
       },
       "category": [
         "n"
@@ -1947,7 +1943,8 @@
       "kana": "あぶら",
       "kanji": "脂",
       "meaning": {
-        "ENG": "fat, tallow, lard"
+        "ENG": "fat, tallow, lard",
+        "ESP": "la grasa"
       },
       "category": [
         "n"
@@ -1959,7 +1956,8 @@
       "kana": "あぶらえ",
       "kanji": "油絵",
       "meaning": {
-        "ENG": "oil painting"
+        "ENG": "oil painting",
+        "ESP": "la pintura al óleo"
       },
       "category": [
         "n"
@@ -1971,6 +1969,7 @@
       "kana": "あぶる",
       "kanji": "",
       "meaning": {
+        "ESP": "tostar, asar",
         "ENG": "to scorch"
       },
       "category": [
@@ -1983,6 +1982,7 @@
       "kana": "あべこべ",
       "kanji": "",
       "meaning": {
+        "ESP": "el inverso",
         "ENG": "contrary, opposite, inverse"
       },
       "category": [
@@ -2035,7 +2035,8 @@
       "kana": "あまぐ",
       "kanji": "雨具",
       "meaning": {
-        "ENG": "rain gear"
+        "ENG": "rain gear",
+        "ESP": "el impermeable"
       },
       "category": [
         "n"
@@ -2069,29 +2070,14 @@
     {
       "uuid": "af71e8b3-f820-4042-8eb4-addf39f88bca",
       "kana": "あまり",
-      "kanji": "",
-      "meaning": {
-        "ESP": "excedente",
-        "ENG": "not very, not much"
-      },
-      "category": [
-        "adv",
-        "n",
-        "n-suf"
-      ],
-      "associatedWordNotes": []
-    },
-    {
-      "uuid": "541fdca4-1856-40b1-9626-d5b376243f78",
-      "kana": "あまり",
       "kanji": "余り",
       "meaning": {
-        "ENG": "not very (used as adverb), not much"
+        "ESP": "el excedente",
+        "ENG": "surplus, excessively"
       },
       "category": [
         "adv",
         "n",
-        "n-adj-na",
         "n-suf"
       ],
       "associatedWordNotes": []
@@ -2113,7 +2099,8 @@
       "kana": "あみ",
       "kanji": "網",
       "meaning": {
-        "ENG": "net, network"
+        "ENG": "net, network",
+        "ESP": "la red"
       },
       "category": [
         "n"
@@ -2125,7 +2112,8 @@
       "kana": "あみもの",
       "kanji": "編物",
       "meaning": {
-        "ENG": "knitting, web"
+        "ENG": "knitting, web",
+        "ESP": "el tejer"
       },
       "category": [
         "n"
@@ -2137,6 +2125,7 @@
       "kana": "あむ",
       "kanji": "編む",
       "meaning": {
+        "ESP": "tejer",
         "ENG": "to knit"
       },
       "category": [
@@ -2175,6 +2164,7 @@
       "kana": "あやうい",
       "kanji": "危うい",
       "meaning": {
+        "ESP": "peligroso",
         "ENG": "dangerous, critical, grave"
       },
       "category": [
@@ -2187,7 +2177,8 @@
       "kana": "あやしい",
       "kanji": "怪しい",
       "meaning": {
-        "ENG": "suspicious, dubious, doubtful"
+        "ENG": "suspicious, dubious, doubtful",
+        "ESP": "sospechoso"
       },
       "category": [
         "adj"
@@ -2199,7 +2190,8 @@
       "kana": "あやつる",
       "kanji": "操る",
       "meaning": {
-        "ENG": "to manipulate, to operate, to pull strings"
+        "ENG": "to manipulate, to operate, to pull strings",
+        "ESP": "controlar"
       },
       "category": [
         "vt"
@@ -3061,14 +3053,6 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "885fc163-890c-41c1-896e-17242d1823dd",
-      "kana": "いい/よい",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "e29c6ba1-28cd-494d-95a5-e32191352d1c",
       "kana": "いいえ",
       "kanji": "",
@@ -3599,14 +3583,6 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "7073d286-16df-495d-a3b0-ffbc893b4194",
-      "kana": "いくつ",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "5058c6b3-4412-4c67-819c-642d58f24d3e",
       "kana": "いくぶん",
       "kanji": "幾分",
@@ -3631,14 +3607,6 @@
         "adv",
         "n"
       ],
-      "associatedWordNotes": []
-    },
-    {
-      "uuid": "37fecbcd-00a8-463a-85a0-ea1ec99300b2",
-      "kana": "いくら",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
       "associatedWordNotes": []
     },
     {
@@ -4004,14 +3972,6 @@
       "category": [
         "n"
       ],
-      "associatedWordNotes": []
-    },
-    {
-      "uuid": "bf108ab3-06fc-434f-927d-ffe4f0783320",
-      "kana": "いす",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
       "associatedWordNotes": []
     },
     {
@@ -4545,14 +4505,6 @@
       "category": [
         "n-adv"
       ],
-      "associatedWordNotes": []
-    },
-    {
-      "uuid": "97ddfbd8-a1a0-47af-835d-597ca759a0f0",
-      "kana": "いちばん",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
       "associatedWordNotes": []
     },
     {
@@ -5854,14 +5806,6 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "9d6faa4f-7324-42cf-a31b-7029ec32b28f",
-      "kana": "いろいろ",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "a3b07b4d-23e8-403f-b87d-f0ab3be3a63f",
       "kana": "いろん",
       "kanji": "異論",
@@ -7120,6 +7064,7 @@
       "kana": "うまれる",
       "kanji": "生まれる",
       "meaning": {
+        "ESP": "nacer",
         "ENG": "to be born"
       },
       "category": [
@@ -8689,14 +8634,6 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "d75588a4-6532-47dd-b333-a2acf0e460a3",
-      "kana": "おいしい",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "cf684bde-9cee-464b-a539-fca96d91cb6b",
       "kana": "おいだす",
       "kanji": "追い出す",
@@ -10106,14 +10043,6 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "e44215f7-7647-4559-a1ff-21443099f510",
-      "kana": "おじいさん",
-      "kanji": "伯父/叔父",
-      "meaning": {},
-      "category": [],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "d2074a3a-89eb-4397-96cf-6c6097aa40fa",
       "kana": "おじぎ",
       "kanji": "御辞儀",
@@ -10161,14 +10090,6 @@
       "category": [
         "n"
       ],
-      "associatedWordNotes": []
-    },
-    {
-      "uuid": "443e2e8b-c3a3-4a61-8d36-a65f28e6de7b",
-      "kana": "おじさん",
-      "kanji": "伯父/叔父",
-      "meaning": {},
-      "category": [],
       "associatedWordNotes": []
     },
     {
@@ -15113,25 +15034,12 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "27a66f84-1a96-4390-b6d8-164b252cb2eb",
-      "kana": "かた",
-      "kanji": "方",
-      "meaning": {
-        "ENG": "way of doing"
-      },
-      "category": [
-        "n",
-        "n-adv",
-        "n-suf"
-      ],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "f51b8bd7-a1a5-43aa-9e9b-24f14cd1b5ef",
       "kana": "かた",
       "kanji": "方",
       "meaning": {
-        "ENG": "person"
+        "ENG": "person",
+        "ESP": "la persona"
       },
       "category": [
         "n"
@@ -16136,14 +16044,6 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "7e8d4175-b048-42ef-9d89-2bca1ba47897",
-      "kana": "かばん",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "b34e30ec-cd8b-489d-a5b3-37f0cb83c144",
       "kana": "かひん",
       "kanji": "下品",
@@ -16957,14 +16857,6 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "9e381795-f379-489c-a450-7ef5ce4dc333",
-      "kana": "かわ",
-      "kanji": "川/河",
-      "meaning": {},
-      "category": [],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "9b27cec7-1da1-4e76-9eac-5bc2f802cec7",
       "kana": "かわいい",
       "kanji": "可愛い",
@@ -16975,14 +16867,6 @@
       "category": [
         "adj"
       ],
-      "associatedWordNotes": []
-    },
-    {
-      "uuid": "bdd0f3f1-0e3f-4ae2-8b9d-88b233d22b0c",
-      "kana": "かわいい",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
       "associatedWordNotes": []
     },
     {
@@ -20750,14 +20634,6 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "67b0dc61-a8c3-411d-be0e-eb274de0c4b9",
-      "kana": "きゅう / く",
-      "kanji": "九",
-      "meaning": {},
-      "category": [],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "e64a68dd-98e1-4776-8f40-472cd8a16929",
       "kana": "きゅうえん",
       "kanji": "救援",
@@ -23328,14 +23204,6 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "adbf3912-93fe-4ed4-a311-09b04606276a",
-      "kana": "ください",
-      "kanji": "",
-      "meaning": {},
-      "category": [],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "eef8b226-462b-4823-b790-3b8363016a05",
       "kana": "くださる",
       "kanji": "",
@@ -25404,7 +25272,8 @@
       "kana": "けっこう",
       "kanji": "結構",
       "meaning": {
-        "ENG": "nice, enough"
+        "ESP": "el considerable",
+        "ENG": "substantialness"
       },
       "category": [
         "n",
@@ -26534,18 +26403,6 @@
       "associatedWordNotes": []
     },
     {
-      "uuid": "59ab65a0-91db-4cf7-8b44-c57c35285bbc",
-      "kana": "げんかん",
-      "kanji": "玄関",
-      "meaning": {
-        "ENG": "entrance way (in Japanese house)"
-      },
-      "category": [
-        "n"
-      ],
-      "associatedWordNotes": []
-    },
-    {
       "uuid": "f41c9b9e-c6e5-44f1-976d-7c9c1317d2d2",
       "kana": "げんかん",
       "kanji": "玄関",
@@ -26563,7 +26420,7 @@
       "kana": "げんき",
       "kanji": "元気",
       "meaning": {
-        "ESP": "vigor",
+        "ESP": "el vigor",
         "ENG": "health, vigor"
       },
       "category": [
@@ -29464,7 +29321,8 @@
       "kana": "こちら",
       "kanji": "",
       "meaning": {
-        "ENG": "this way"
+        "ENG": "this way",
+        "ESP": "aquí"
       },
       "category": [
         "n"
@@ -29568,7 +29426,8 @@
       "kana": "こっち",
       "kanji": "",
       "meaning": {
-        "ENG": "(1) this person, (2) this direction, (3) this side, (4) thereafter"
+        "ENG": "(1) this person, (2) this direction, (3) this side, (4) thereafter",
+        "ESP": "aquí"
       },
       "category": [
         "n"
@@ -31250,6 +31109,7 @@
       "kana": "ごはん",
       "kanji": "御飯",
       "meaning": {
+        "ESP": "los platos",
         "ENG": "rice (cooked), meal"
       },
       "category": [
@@ -31490,7 +31350,8 @@
       "kana": "さあ",
       "kanji": "",
       "meaning": {
-        "ENG": "come now, well"
+        "ENG": "come now, well",
+        "ESP": "quién sabe?"
       },
       "category": [
         "conj",
@@ -33449,6 +33310,7 @@
       "kana": "さらいねん",
       "kanji": "さ来年",
       "meaning": {
+        "ESP": "",
         "ENG": "year after next"
       },
       "category": [
