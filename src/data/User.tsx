@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {getUserData, initialUserData, setUserData} from "../LocalStorage/userDataStorage";
+import {getUserData, initialUserData, setUserData} from "../LocalStorage/UserDataStorage";
 import * as api from "../API/APIUser"
 import {ResetPasswordResult} from "../API/APIUser";
 
 export type AnonymousUser = {
   status: "Anonymous"
 }
-export type AuthenticatedUser = {
+export type NormalUser = {
   status: "Authenticated",
   username: string,
 }
@@ -19,7 +19,8 @@ export type StaffUser = {
   username: string
 }
 
-export type User = AnonymousUser | AuthenticatedUser | AdminUser | StaffUser
+export type AuthenticatedUser = NormalUser | AdminUser | StaffUser
+export type User = AnonymousUser | AuthenticatedUser
 
 type UserContextValue = {
   user: User,
@@ -61,29 +62,36 @@ export const UserContext = React.createContext<UserContextValue>(defaultUserCont
 
 export const UserProvider: React.FC = (props) => {
   const [user, setUser] = useState<User>({status: "Anonymous"})
-  useEffect(() => {
-    api.isLoggedIn()
-      .then(bool => {
-        if (bool) {
-          setUser({
-            status: "Authenticated",
-            username: getUserData(initialUserData).username
-          })
-        }})
-  }, [])
-  const login = async (username: string, password: string) => {
-    return api.login(username, password)
-      .then(result => {
-        if (result.status === "success") {
-          setUser({
-            status: "Authenticated",
-            username: username
-          })
-          setUserData({username: username})
-        }
-        return result
-      })
+
+  const verifyStatus = async () => {
+    const username = getUserData(initialUserData).username
+    const result = await api.isLoggedIn()
+    if (result.status === "success" && result.isLoggedIn) {
+      let user: User
+      if (result.isAdmin) user = {status: "Admin", username}
+      else if (result.isStaff) user = {status: "Staff", username}
+      else user = {status: "Authenticated", username}
+      setUser(user)
+    }
   }
+  useEffect(() => {
+    verifyStatus()
+  }, [])
+
+  const login = async (username: string, password: string) => {
+    const result = await api.login(username, password)
+    if (result.status === "success") {
+      let user: User
+      if (result.isAdmin) user = {status: "Admin", username}
+      else if (result.isStaff) user = {status: "Staff", username}
+      else user = {status: "Authenticated", username}
+
+      setUser(user)
+      setUserData({username: username})
+    }
+    return result
+  }
+
   const logout = async () => {
     return api.logout()
       .then(result => {
@@ -127,4 +135,12 @@ export const UserProvider: React.FC = (props) => {
   return <UserContext.Provider value={{user, login, logout, signUp, resetPassword}}>
     {props.children}
   </UserContext.Provider>
+}
+
+export const isStaff = (user: User): boolean => {
+  return user.status === "Staff" || user.status === "Admin"
+}
+
+export const isAuthenticated = (user: User): user is AuthenticatedUser => {
+  return user.status !== "Anonymous"
 }

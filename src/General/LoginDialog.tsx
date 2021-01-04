@@ -52,6 +52,7 @@ export const LoginDialog: React.FC<Props> = (props) => {
         .then(result => {
           if (result.status === "success") {
             setStatus({name: "success"})
+            console.log("login succeeded.")
             setTimeout(()=>props.close(), 2000)
           } else {
             setStatus({name: "error", reason: result.reason})
@@ -62,7 +63,7 @@ export const LoginDialog: React.FC<Props> = (props) => {
         })
     }
   })
-
+  console.log(status)
   return <>
     <DialogTitle>Login</DialogTitle>
     <DialogContent>
@@ -77,7 +78,7 @@ export const LoginDialog: React.FC<Props> = (props) => {
           type={"password"}
         />
         <Box m={"auto"}>
-          <Button type={"submit"}>Login</Button>
+          <Button type={"submit"} disabled={status.name==="loggingIn"}>Login</Button>
           <div style={{verticalAlign: "-20%", display: "inline-block"}}>
             {status.name === "loggingIn" && <CircularProgress size={20}/>}
           </div>

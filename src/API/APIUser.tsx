@@ -1,4 +1,4 @@
-import {getCsrfToken, Success, Failure} from "./API";
+import {getCsrfToken, Success, Failure, unknownError} from "./API";
 
 
 export type SignUpResult = Success | Failure
@@ -49,33 +49,46 @@ export const login = async (username: string, password: string): Promise<LoginRe
   const csrfToken = await getCsrfToken()
   headers.append("X-CSRFToken", csrfToken)
   headers.append("Content-Type", "application/json")
-  return fetch('/api/login/', {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify({
-      username: username,
-      password: password
+
+  try {
+    const res = await fetch('/api/login/', {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
     })
-  })
-    .then(res => {
-      if (res.ok) return res.json()
-        .then(data => {
-          if (data.detail === "success") return  {status: "success", isStaff: !!data.isStaff, isAdmin: !!data.isAdmin} as LoginSuccess
-          return {status: "failure", reason: data.error} as Failure
-        })
-      return {status: "failure", reason: "unknown reason"} as Failure
-    })
-    .catch(() => {
-        return {status: "failure", reason: "unknown reason"} as Failure
-    })
+
+    const data = await res.json()
+    if (data.detail === "Success") return  {status: "success", isStaff: !!data.isStaff, isAdmin: !!data.isAdmin} as LoginSuccess
+    return {status: "failure", reason: data.error} as Failure
+
+  } catch(err) {
+    return unknownError
+  }
 }
 
+type UserIsLoggedIn = {
+  status: "success",
+  isLoggedIn: true,
+  isAdmin: boolean,
+  isStaff: boolean
+}
+type UserIsNotLoggedIn = {
+  status: "success",
+  isLoggedIn: false
+}
 
-export const isLoggedIn = async (): Promise<boolean> => {
-  return fetch("/api/check-login/")
-    .then(res => {
-      return res.status === 200
-    })
+export const isLoggedIn = async (): Promise<UserIsLoggedIn|UserIsNotLoggedIn|Failure> => {
+  try {
+    const res = await fetch("/api/check-login/")
+    const data = await res.json()
+    if (!res.ok) return {status: "success", isLoggedIn: false}
+    return {status: "success", isLoggedIn: true, isStaff: data.isStaff, isAdmin: data.isAdmin}
+  } catch (err) {
+    return unknownError
+  }
 }
 
 

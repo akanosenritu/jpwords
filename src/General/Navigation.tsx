@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import {MyLink} from "./Components/MyLink";
 import {Dialog} from "@material-ui/core";
 import {LoginDialog} from "./LoginDialog";
-import {UserContext} from "../data/User";
+import {isAuthenticated, UserContext} from "../data/User";
 import Box from "@material-ui/core/Box"
 import {SignUpDialog} from "./SignUpDialog";
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -51,7 +51,7 @@ export const Navigation: React.FC = () => {
 
         </Box>
         <Box>
-          {user.status === "Authenticated" ?
+          {isAuthenticated(user) ?
             <Box display={"inline-block"}>
               <Box mr={4} display={"inline-block"}>
                 Logged in as <span style={{color: "#ff9f80", fontWeight: "bold"}}>{user.username}</span>

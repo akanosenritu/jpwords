@@ -8,7 +8,6 @@ export type APIWordNoteType = {
   associated_categories: string[],
   title: string,
   is_published: boolean,
-  content: string,
 }
 
 type RetrieveAPIWordNotesSuccess = {
@@ -103,4 +102,19 @@ export const useAPIWordNotes = () => {
     loadWordNotesData()
   }, [])
   return {wordNotes, getWordNotes}
+}
+
+type GetWordNoteContentTextFromGithubSuccess = {
+  status: "success",
+  text: string
+}
+export const getWordNoteContentTextFromGithub = async (uuid: string): Promise<GetWordNoteContentTextFromGithubSuccess|Failure> => {
+  try {
+    const res = await fetch(`https://raw.githubusercontent.com/akanosenritu/jpwords/master/src/data/WordNotes/Contents/${uuid}.mdx`)
+    if (!res.ok) return {status: "failure", reason: `${res.status}: ${res.statusText}`}
+    const text = await res.text()
+    return {status: "success", text}
+  } catch(err) {
+    return unknownError
+  }
 }

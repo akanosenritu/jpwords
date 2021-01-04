@@ -52,7 +52,6 @@ export const WordNotesTable: React.FC<WordNotesTableProps> = props => {
       associated_categories: [] as string[],
       associated_words: [] as string[],
       is_published: false,
-      content: ""
     }
     onClickOpenEditor(blankWordNote)
   };

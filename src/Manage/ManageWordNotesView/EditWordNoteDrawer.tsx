@@ -9,8 +9,8 @@ import {APIWordNoteType} from "../../API/APIWordNote";
 import {APIWordType, retrieveAPIWords} from "../../API/APIWord";
 import {APICategoryType, retrieveAPICategories} from "../../API/APICategory";
 import {ContentEditor} from "../../General/Dialogs/ContentEditor";
-import {WordNoteContentPreview} from "../../General/Dialogs/WordNoteContentPreview";
 import {H6} from "../../General/Components/Headers";
+import {WordNoteContent} from "../../data/WordNotes/WordNoteContent";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -116,10 +116,7 @@ export const WordNoteEditor: React.FC<EditorProps> = props => {
     formik.setFieldValue("associated_words", words.map(word => word.uuid).sort())
     setIsWordPickerOpen(false);
   }
-  const handleContentEditorClose = (content: string) => {
-    formik.setFieldValue("content", content)
-    setIsContentEditorOpen(false)
-  }
+
   return <form onSubmit={formik.handleSubmit} className={classes.editor}>
     <Box style={{borderLeft: "5px solid lightgray", paddingLeft: 10}} ml={1}>
       <Typography variant={"h6"}>Edit a word note</Typography>
@@ -148,11 +145,10 @@ export const WordNoteEditor: React.FC<EditorProps> = props => {
     />
     <Box style={{fontSize: 14}} m={2} onClick={()=>setIsContentEditorOpen(true)}>
       <H6>Content</H6>
-      {formik.values.content
-        ? <WordNoteContentPreview content={formik.values.content} />
-        : "WRITE CONTENT"
-      }
+      <Box mt={1}>
+        <WordNoteContent uuid={props.wordNote.uuid} />
       </Box>
+    </Box>
     <Dialog open={isWordPickerOpen} fullScreen={true}>
       <WordPicker
         onClose={handleWordPickerClose}
@@ -164,7 +160,6 @@ export const WordNoteEditor: React.FC<EditorProps> = props => {
     <Dialog open={isContentEditorOpen} fullScreen={true}>
       <ContentEditor
         onClose={()=>setIsContentEditorOpen(false)}
-        onSave={handleContentEditorClose}
         wordNote={props.wordNote}
       />
     </Dialog>
