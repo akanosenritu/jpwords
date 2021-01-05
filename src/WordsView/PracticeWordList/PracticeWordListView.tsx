@@ -2,7 +2,7 @@ import React, {useContext, useState} from "react";
 import {PracticeWordListViewDoPractice} from "./PracticeWordListViewDoPractice";
 import {PracticeWordListViewResult} from "./PracticeWordListViewResult";
 import {PracticeWordListViewOverview} from "./PracticeWordListViewOverview";
-import {WordList} from "../../data/WordLists/WordList";
+import {WordList, WordListLoaded} from "../../data/WordLists/WordList";
 import {TrainerResult} from "./Trainer/TrainerResult";
 import {PracticeHistoryContext} from "../../data/PracticeHistory/PracticeHistoryProvider";
 import {updatePracticeHistoryWithPracticeResult} from "../../data/PracticeHistory/PracticeHistoryUtils";
@@ -12,7 +12,7 @@ export const PracticeWordListView: React.FC = () => {
   const [currentState, setCurrentState] = useState<PracticeWordListViewState>("start");
   const [wordListToPractice, setWordListToPractice] = useState<WordList|null>(null);
   const {practiceHistory, updatePracticeHistory} = useContext(PracticeHistoryContext)
-  const startPractice = (wordList: WordList) => {
+  const startPractice = (wordList: WordListLoaded) => {
     setWordListToPractice(wordList);
     setCurrentState("end");
   };
@@ -27,8 +27,8 @@ export const PracticeWordListView: React.FC = () => {
     {practiceHistory?
       <>
         {currentState === "start" && <PracticeWordListViewOverview startPractice={startPractice}/>}
-        {currentState === "practice" && wordListToPractice && <PracticeWordListViewDoPractice wordListToPractice={wordListToPractice} finishPractice={finishPractice}/>}
-        {currentState === "end" && wordListToPractice && <PracticeWordListViewResult wordList={wordListToPractice} continuePractice={continuePractice}/>}
+        {currentState === "practice" && wordListToPractice && wordListToPractice.status === "loaded" && <PracticeWordListViewDoPractice wordListToPractice={wordListToPractice} finishPractice={finishPractice}/>}
+        {currentState === "end" && wordListToPractice  && wordListToPractice.status === "loaded" && <PracticeWordListViewResult wordList={wordListToPractice} continuePractice={continuePractice}/>}
       </>:
       <div>Loading...</div>
     }

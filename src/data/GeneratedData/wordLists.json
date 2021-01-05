@@ -1,11 +1,8 @@
 {
   "ENG": [
-    "wordlist-N1[1].json",
-    "wordlist-N2[1].json",
-    "wordlist-N3[1].json",
-    "wordlist-N4[1].json",
-    "wordlist-N5[1].json",
-    "wordlist-Words with word notes[1].json"
+    "N4.json",
+    "N5.json",
+    "Words with word notes.json"
   ],
   "ESP": []
 }

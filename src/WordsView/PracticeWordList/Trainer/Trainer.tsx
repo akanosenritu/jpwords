@@ -48,14 +48,13 @@ export const Trainer2: React.FC<PracticeViewBaseProps> = props => {
       if (!wasCorrect) {
         const pos = sample([2, 3, 4]) as number;
         newWordQueue.splice(pos, 0, currentWord);
-        console.log(`the answer was not correct, therefore inserted ${props.words[currentWord].kanji} ${pos} words later. Current word queue is:`, newWordQueue);
+        // console.log(`the answer was not correct, therefore inserted ${props.words[currentWord].kanji} ${pos} words later. Current word queue is:`, newWordQueue);
       }
       return newWordQueue;
     })
   };
   const word = props.words[wordQueue[0]];
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
-  console.log(word)
   return <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} mt={2}>
     <ProgressBar progress={numberDoneWords * 100 / props.words.length} />
     <PracticeWordWithInput word={word} onNext={onNext} key={`${word.kanji}-${word.kana}-${word.meaning}-${practiceQualities[wordQueue[0]]}`}/>

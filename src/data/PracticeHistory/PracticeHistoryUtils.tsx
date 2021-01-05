@@ -1,5 +1,5 @@
 import {PracticeHistoryVLatest} from "./PracticeHistory";
-import {WordList} from "../WordLists/WordList";
+import {WordList, WordListLoaded} from "../WordLists/WordList";
 import {WordType} from "../Word/Word";
 import {shuffle} from "lodash";
 
@@ -45,7 +45,7 @@ export const updatePracticeHistoryWithPracticeResult = (practiceHistory: Practic
   return newHistory;
 };
 
-export const chooseWordsToPractice = (wordList: WordList, practiceHistory: PracticeHistoryVLatest, quantity: number): WordType[] => {
+export const chooseWordsToPractice = (wordList: WordListLoaded, practiceHistory: PracticeHistoryVLatest, quantity: number): WordType[] => {
   const words = shuffle(wordList.words);
   const untouchedWords = [] as WordType[];
   const result = [] as WordType[];
@@ -78,7 +78,7 @@ type CalculateProgressForWordListResult = {
   progress: number
 }
 
-export const calculateProgressForWordList = (practiceHistory: PracticeHistoryVLatest, wordList: WordList): CalculateProgressForWordListResult => {
+export const calculateProgressForWordList = (practiceHistory: PracticeHistoryVLatest, wordList: WordListLoaded): CalculateProgressForWordListResult => {
   let countReviewed = 0;
   let countNeedsReview = 0;
   let countUntouched = 0;

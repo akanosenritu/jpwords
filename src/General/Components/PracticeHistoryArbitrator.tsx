@@ -36,7 +36,7 @@ type ArbitratorEntryProps = {
 }
 
 const ArbitratorEntry: React.FC<ArbitratorEntryProps> = props => {
-  const {wordLists} = useContext(WordListsContext)
+  const {wordLists, loadWords} = useContext(WordListsContext)
   return <Grid item xs={6} style={{border: "3px solid darkgray", borderRadius: 10}}>
     <p style={{textAlign: "center", fontWeight: "bold"}}>{props.location}</p>
     <p>
@@ -49,6 +49,10 @@ const ArbitratorEntry: React.FC<ArbitratorEntryProps> = props => {
       Progress for word lists: <br />
       {
         wordLists.map(wordList => {
+          if (wordList.status === "initial") {
+            loadWords(wordList)
+            return <><span style={{marginLeft: 10}}>Loading</span><br /></>
+          }
           return <><span style={{marginLeft: 10}}>{wordList.name}: {calculateProgressForWordList(props.practiceHistory, wordList).progress.toFixed(1)}%</span><br /></>
         })
       }

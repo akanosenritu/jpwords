@@ -3,7 +3,7 @@ import {Route, Switch, useRouteMatch} from "react-router-dom";
 import sentencePatternsProblemsData from "../../data/GeneratedData/sentencePatternProblems.json"
 import {SentencePatternEntry} from "./SentencePatternEntry";
 
-export const SentencePatterns: React.FC = props => {
+const SentencePatterns: React.FC = props => {
   const match = useRouteMatch();
   const sentencePatterns = Object.keys(sentencePatternsProblemsData.sentencePatterns)
   return <Switch>
@@ -12,5 +12,7 @@ export const SentencePatterns: React.FC = props => {
         <SentencePatternEntry sentencePattern={sentencePattern} />
       </Route>
     })}
-    </Switch>
+  </Switch>
 }
+
+export default SentencePatterns

@@ -4,7 +4,6 @@ import {WordType} from "../Word/Word";
 import {initialConfigurations, useConfigurations} from "../../LocalStorage/Configurations";
 import {WordNoteContent} from "./WordNoteContent";
 import {LanguageProvider} from "../Language";
-import {Failure} from "../../API/API";
 
 export type WordNoteType = {
   uuid: string,

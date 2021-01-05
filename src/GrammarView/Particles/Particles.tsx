@@ -12,7 +12,7 @@ type ParticlesProps = {
 
 }
 
-export const Particles: React.FC<ParticlesProps> = props => {
+const Particles: React.FC<ParticlesProps> = props => {
   const problems = shuffle(Object.entries(particleProblemsData.particles).map(([k, v]) => {
     return Object.keys(new Array(v).fill(0)).map(index => [k, parseInt(index)+1])
   }).flat())
@@ -31,3 +31,5 @@ export const Particles: React.FC<ParticlesProps> = props => {
     </DummyGeneratorContext.Provider>
   </div>
 }
+
+export default Particles

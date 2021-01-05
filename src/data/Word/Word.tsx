@@ -106,9 +106,11 @@ export const evaluateAnswer = (word: WordType, answer: string, rejectKana?: bool
 }
 
 export const loadWords = async (): Promise<{[wordUUID: string]: WordType}> => {
-  return import("../GeneratedData/words.json")
-    .then(data => {
-      const words = data.words.map(word => prepareWord(word))
-      return prepareWordsDict(words)
-    })
+  const data = await import("../GeneratedData/words.json")
+  const obj: {[wordUUID: string]: WordType} = {}
+  for (const wordUUID in data.words) {
+    // @ts-ignore
+    obj[wordUUID] = prepareWord(data.words[wordUUID])
+  }
+  return obj
 }

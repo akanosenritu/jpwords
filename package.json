@@ -27,6 +27,7 @@
     "@types/use-persisted-state": "^0.3.0",
     "@types/uuid": "^8.3.0",
     "@types/wanakana": "^4.0.0",
+    "adm-zip": "^0.5.1",
     "formik": "^2.2.5",
     "furigana": "^0.19.1",
     "js-cookie": "^2.2.1",
@@ -47,12 +48,14 @@
     "react-window": "^1.8.6",
     "remark-gfm": "^1.0.0",
     "serve": "^11.3.2",
+    "source-map-explorer": "^2.5.1",
     "typescript": "4.1.3",
     "use-persisted-state": "^0.3.3",
     "uuid": "^8.3.1",
     "wanakana": "^4.0.2"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "node_modules/.bin/react-scripts start",
     "heroku-postbuild": "npm run build",
     "build": "node_modules/.bin/react-scripts build",

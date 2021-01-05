@@ -1,4 +1,4 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 import {
   Switch,
   Route,
@@ -6,10 +6,10 @@ import {
   useLocation
 } from "react-router-dom";
 import {DebugContext} from "../General/Contexts";
-import {Particles} from "./Particles/Particles";
-import {SentencePatterns} from "./SentencePatterns/SentencePatterns";
 import {GrammarViewEntrance} from "./GrammarViewEntrance";
 
+const Particles = lazy(() => import("./Particles/Particles"))
+const SentencePatterns = lazy(() => import("./SentencePatterns/SentencePatterns"))
 
 export const GrammarView: React.FC = () => {
   const match = useRouteMatch();
@@ -17,16 +17,18 @@ export const GrammarView: React.FC = () => {
   const params = new URLSearchParams(location.search.substring(1));
   const debug = params.get("debug");
   return <DebugContext.Provider value={!!debug}>
-    <Switch>
-      <Route path={`${match.path}/particles`}>
-        <Particles />
-      </Route>
-      <Route path={`${match.path}/sentencePatterns`}>
-        <SentencePatterns />
-      </Route>
-      <Route exact path={`${match.path}`}>
-        <GrammarViewEntrance />
-      </Route>
-    </Switch>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Switch>
+        <Route path={`${match.path}/particles`}>
+          <Particles />
+        </Route>
+        <Route path={`${match.path}/sentencePatterns`}>
+          <SentencePatterns />
+        </Route>
+        <Route exact path={`${match.path}`}>
+          <GrammarViewEntrance />
+        </Route>
+      </Switch>
+    </Suspense>
   </DebugContext.Provider>
 };

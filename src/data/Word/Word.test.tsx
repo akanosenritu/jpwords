@@ -1,5 +1,5 @@
 import {Category, evaluateAnswer, loadWords} from "./Word";
-import {loadWordListsForLanguage, WordList} from "../WordLists/WordList";
+import {loadWordListsForLanguage} from "../WordLists/WordList";
 import wordData from "../GeneratedData/words.json";
 
 export const wordTypeExamples = [
@@ -57,47 +57,24 @@ describe("test WordType related functions", () => {
 })
 
 describe("test integrity of words data", () => {
+  test("confirm every word in the word list for English is present in words.json", async () => {
+    const wordsDict = await loadWords()
+    const wordLists = await loadWordListsForLanguage("ENG", wordsDict)
+    for (let wordList of wordLists.map(wordListInitial => wordListInitial.load())) {
+      for (const word of wordList.words) {
+        expect(word).toBeDefined();
+      }
+    }
+  })
   test("confirm the uuid of a word is unique", () => {
     let counts: {[wordUUID: string]: number} = {};
-    for (let wordDatum of wordData.words) {
-      if (counts[wordDatum.uuid]) counts[wordDatum.uuid] += 1
-      else counts[wordDatum.uuid] = 1
+    for (let wordUUID in wordData.words) {
+      if (counts[wordUUID]) counts[wordUUID] += 1
+      else counts[wordUUID] = 1
     }
     for (let wordUUID in counts) {
       expect(counts[wordUUID]).toBe(1);
     }
   })
 
-  test("confirm every word in the word list for English is present in words.json", async () => {
-    const wordsDict = await loadWords()
-    const wordLists = await loadWordListsForLanguage("ENG", wordsDict)
-    for (let wordList of wordLists) {
-      for (const word of wordList.words) {
-        expect(word).toBeDefined();
-      }
-    }
-  })
-
-  /**
-  test("confirm the category of a word is included in the category list", () => {
-    for (let wordUUID in availableWords) {
-      const word = availableWords[wordUUID];
-      for (let category of word.category) {
-        expect(categoryList.includes(category)).toBe(true);
-      }
-    }
-  })
-   **/
-
-  /**
-  test("confirm the similarWordUUIDs of a word is a valid reference", () => {
-    for (let wordUUID in availableWords) {
-      const word = availableWords[wordUUID];
-      if (!word.similarWordUUIDs) return
-      for (let similarWordUUID of word.similarWordUUIDs) {
-        expect(availableWords.hasOwnProperty(similarWordUUID)).toBe(true);
-      }
-    }
-  })
-   **/
 })

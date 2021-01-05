@@ -1,18 +1,34 @@
-import React, {useContext} from "react";
-import {Box, Button, Card, CardActions, CardContent, Typography} from "@material-ui/core";
-import {WordList} from "../../data/WordLists/WordList";
+import React, {useContext, useState} from "react";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card"
+import CardActions from "@material-ui/core/CardActions"
+import CardContent from "@material-ui/core/CardContent"
+import Typography from "@material-ui/core/Typography";
+import {WordList, WordListLoaded} from "../../data/WordLists/WordList";
 import {usePracticeViewStyles} from "./PracticeViewStyle";
 import {WordListsContext} from "../../data/WordLists/WordListsProvider";
 
 type StartPracticeByWordListCardProps = {
   wordList: WordList,
-  onClickStart: (wordList: WordList) => void;
+  onClickStart: (wordList: WordListLoaded) => void;
 }
 
 const StartPracticeByWordListCard: React.FC<StartPracticeByWordListCardProps> = (props) => {
   const classes = usePracticeViewStyles();
-  const onClickStart = () => {
-    props.onClickStart(props.wordList)
+  const {loadWords} = useContext(WordListsContext)
+
+  const [wasStartButtonPushed, setWasStartButtonPushed] = useState(false)
+  const onClickStart = async () => {
+    setWasStartButtonPushed(true)
+    if (props.wordList.status === "initial") {
+      const result = await loadWords(props.wordList)
+      if (result.status === "success") {
+        props.onClickStart(result.data)
+      }
+    } else {
+      props.onClickStart(props.wordList)
+    }
   };
   return <Card className={classes.startPracticeWordListCard} variant={"outlined"}>
     <CardContent>
@@ -20,13 +36,15 @@ const StartPracticeByWordListCard: React.FC<StartPracticeByWordListCardProps> = 
       <Typography variant={"body1"}>{props.wordList.description}</Typography>
     </CardContent>
     <CardActions style={{justifyContent: "center"}}>
-      <Button variant={"contained"} size={"small"} color={"primary"} onClick={onClickStart}>Start</Button>
+      <Button variant={"contained"} size={"small"} color={"primary"} onClick={onClickStart} disabled={wasStartButtonPushed}>
+        {wasStartButtonPushed? "Loading": "Start"}
+      </Button>
     </CardActions>
   </Card>
 };
 
 type StartPracticeByWordListProps = {
-  startPractice: (wordList: WordList) => void
+  startPractice: (wordList: WordListLoaded) => void
 }
 
 const StartPracticeByWordList: React.FC<StartPracticeByWordListProps> = (props) => {
@@ -37,14 +55,14 @@ const StartPracticeByWordList: React.FC<StartPracticeByWordListProps> = (props) 
     </Box>
     <Box mt={2}>
       {wordLists.length > 0? wordLists.map(wordList => {
-        return <StartPracticeByWordListCard wordList={wordList} onClickStart={props.startPractice} key={wordList.name} />
+        return <StartPracticeByWordListCard wordList={wordList} onClickStart={props.startPractice} key={`${wordList.uuid}-${wordList.status}`} />
       }): "No available list."}
     </Box>
   </Box>
 };
 
 type PracticeWordListViewOverviewProps = {
-  startPractice: (wordList: WordList) => void;
+  startPractice: (wordList: WordListLoaded) => void;
 }
 
 export const PracticeWordListViewOverview: React.FC<PracticeWordListViewOverviewProps> = (props) => {

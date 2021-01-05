@@ -1,12 +1,16 @@
 import React, {useContext} from "react";
-import {Box, Button, Grid, Typography} from "@material-ui/core";
-import {WordList} from "../../data/WordLists/WordList";
+import {WordListLoaded} from "../../data/WordLists/WordList";
 import {PieChart} from 'react-minimal-pie-chart';
 import {getColors} from "../Styles";
 import {useHistory} from "react-router-dom";
 import Backdrop from "@material-ui/core/Backdrop";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import {PracticeHistoryContext} from "../../data/PracticeHistory/PracticeHistoryProvider";
 import {calculateProgressForWordList} from "../../data/PracticeHistory/PracticeHistoryUtils";
+
 
 type ChartProps = {
   reviewed: number,
@@ -57,7 +61,7 @@ const Chart: React.FC<ChartProps> = props => {
 }
 
 type PracticeWordListViewResultProps = {
-  wordList: WordList,
+  wordList: WordListLoaded,
   continuePractice: () => void
 }
 
@@ -117,7 +121,7 @@ export const PracticeWordListViewResult: React.FC<PracticeWordListViewResultProp
       </div>
       <div>
         <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} mt={2}>
-          {countReviewed !== props.wordList.words.length ?
+          {countReviewed !== props.wordList.wordCount ?
             <Button variant={"outlined"} color={"primary"} onClick={props.continuePractice}>Continue</Button> :
             <Button variant={"outlined"} color={"primary"} onClick={()=>browserHistory.go(0)}>Return to selection</Button>
           }

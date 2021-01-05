@@ -1,14 +1,14 @@
 import React, {useContext} from "react";
 import {WordType} from "../../data/Word/Word";
 import {Trainer2} from "./Trainer/Trainer";
-import {WordList} from "../../data/WordLists/WordList";
+import {WordListLoaded} from "../../data/WordLists/WordList";
 import {TrainerResult} from "./Trainer/TrainerResult";
 import {shuffle} from "lodash";
 import {PracticeHistoryContext} from "../../data/PracticeHistory/PracticeHistoryProvider";
 import {chooseWordsToPractice} from "../../data/PracticeHistory/PracticeHistoryUtils";
 
 type PracticeWordListViewDoPracticeProps = {
-    wordListToPractice: WordList,
+    wordListToPractice: WordListLoaded,
     finishPractice: (practiceResult: TrainerResult) => void;
 }
 
