@@ -1,5 +1,5 @@
 import {PracticeHistoryVLatest} from "./PracticeHistory";
-import {WordList, WordListLoaded} from "../WordLists/WordList";
+import {WordListLoaded} from "../WordLists/WordList";
 import {WordType} from "../Word/Word";
 import {shuffle} from "lodash";
 

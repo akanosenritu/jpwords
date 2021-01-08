@@ -1,10 +1,11 @@
 import {get} from "./API";
+import {APIWordType} from "./APIWord";
 
 export type APIWordListType = {
   uuid: string,
   name: string,
   language: string,
-  words: string[]
+  words: APIWordType[],
   description: string
 }
 
@@ -15,7 +16,7 @@ export const retrieveAPIWordLists = () => {
 }
 
 export const isWordUsedInWordList = (wordUUID: string, wordList: APIWordListType): boolean => {
-  return wordList.words.includes(wordUUID)
+  return wordList.words.findIndex(word => word.uuid === wordUUID) !== -1
 }
 
 export const searchWordLists = (query: RegExp|string, wordLists: APIWordListType[]): APIWordListType[] => {

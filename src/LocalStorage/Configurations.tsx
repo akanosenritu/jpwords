@@ -1,7 +1,7 @@
 import createPersistedState from 'use-persisted-state';
 import {Language} from "../data/Language";
 const useConfigurationsState = createPersistedState('configurations');
-const CURRENT_VERSION = 0.2
+const CURRENT_VERSION = 0.3
 
 type Configurations = {
   autoContinueNextWord: boolean,
@@ -15,14 +15,14 @@ export const initialConfigurations = {
   autoContinueNextWord: false,
   hardMode: false,
   hideWordNotes: false,
-  language: "ENG" as Language,
-  version: 0.2
+  language: "en" as Language,
+  version: 0.3
 }
 
 export const useConfigurations = (initialConfiguration: Configurations) => {
   let [configurations, setConfigurations] = useConfigurationsState(initialConfiguration);
   if (configurations.version !== CURRENT_VERSION) {
-    configurations = Object.assign(initialConfigurations, configurations)
+    configurations = initialConfiguration
   }
   return {
     configurations,

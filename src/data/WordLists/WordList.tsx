@@ -5,6 +5,7 @@ import wordListsData from "../GeneratedData/wordLists.json"
 type WordListData = {
   [lang in Language]: any
 }
+
 const getWordListsData = () => {
   return wordListsData as WordListData
 }

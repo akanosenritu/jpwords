@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from "@material-ui/core/TablePagination";
 import {Button} from "@material-ui/core";
-import {APIWordNoteType} from "../../API/APIWordNote";
+import {APIWordNoteType, orderGeneration} from "../../API/APIWordNote";
 import {DrawerBase, DrawerBaseProps} from "../../General/Drawers/DrawerBase";
 import {WordNoteEditor} from "./EditWordNoteDrawer";
 import {APIWordNotesContext} from "../../API/APIWordNoteProvider";
@@ -56,9 +56,14 @@ export const WordNotesTable: React.FC<WordNotesTableProps> = props => {
     onClickOpenEditor(blankWordNote)
   };
 
+  const onClickGenerate = () => {
+    orderGeneration()
+  }
+
   return <Box>
     <Box display={"flex"} justifyContent={"center"} mb={2}>
       <Button variant={"outlined"} onClick={onClickAddNewWordNote}>Add new word note</Button>
+      <Button variant={"outlined"} onClick={onClickGenerate}>Generate</Button>
     </Box>
     <TablePagination
       style={{width: 500, marginLeft: "auto", marginRight: 0}}

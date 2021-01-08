@@ -39,8 +39,8 @@ export const Editor: React.FC<EditorProps> = props => {
       const errors: FormikErrors<APIWordType> = {};
       if (values.kana === "") {
         errors.kana = "Kana must not be empty."
-      } else if (!wanakana.isHiragana(values.kana)) {
-        errors.kana = "The inputted Kana is not in Hiragana."
+      } else if (!Array.from(values.kana).map(letter => wanakana.isKana(letter) || letter === "～").reduce((acc, val) => acc && val)) {
+        errors.kana = "Only Kanas and ～ are allowed here."
       }
       if (values.category.length === 0) {
         errors.category = "At least one category must be set."

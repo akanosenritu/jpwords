@@ -10,6 +10,7 @@ export type PracticeHistoryV0 = {
   userName?: string,
   version: number,
 }
+
 export type PracticeHistoryV1 = {
   lastPracticeDate: string,
   wordsHistory: {[key: string]: WordHistoryV2},
@@ -17,6 +18,7 @@ export type PracticeHistoryV1 = {
   version: "1.0",
   hash: string
 }
+
 export type PracticeHistoryV2 = {
   lastPracticeDate: string,
   wordsHistory: {[key: string]: WordHistoryV3},
@@ -24,6 +26,7 @@ export type PracticeHistoryV2 = {
   version: "2.0",
   hash: string
 }
+
 export type PracticeHistory = PracticeHistoryV0 | PracticeHistoryV1 | PracticeHistoryV2
 export type PracticeHistoryVLatest = PracticeHistoryV2
 

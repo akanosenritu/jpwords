@@ -118,3 +118,7 @@ export const getWordNoteContentTextFromGithub = async (uuid: string): Promise<Ge
     return unknownError
   }
 }
+
+export const orderGeneration = () => {
+  return post("word-notes/generate/", {})
+}
