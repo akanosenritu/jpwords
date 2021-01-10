@@ -32,8 +32,8 @@ export const APIWordNotesProvider: React.FC = props => {
 
   const getWordNotes = (word: APIWordType) => {
     return wordNotes.filter(wordNote => {
-      for (const wordUUID of wordNote.associated_words) {
-        if (wordUUID === word.uuid) return true
+      for (const associatedWord of wordNote.associated_words) {
+        if (associatedWord.uuid === word.uuid) return true
       }
       for (const categoryUUID of wordNote.associated_categories) {
         for (const categoryUUID_ of word.category) {

@@ -1,13 +1,28 @@
-import {Failure, get, post, put, unknownError} from "./API";
-import {useEffect, useState} from "react";
+import {delete_, get, post, put} from "./API";
 import {APIWordType} from "./APIWord";
+import {Success, Failure, success, unknownFailure} from "../General/Result"
 
 export type APIWordNoteType = {
   uuid: string,
-  associated_words: string[]
+  associated_words: APIWordType[],
   associated_categories: string[],
   title: string,
   is_published: boolean,
+}
+
+type POSTableAPIWordNoteType = {
+  uuid: string,
+  associated_word_uuids: string[],
+  associated_categories: string[],
+  title: string,
+  is_published: boolean
+}
+
+const convertAPIWordNoteToPOSTable = (wordNote: APIWordNoteType): POSTableAPIWordNoteType => {
+  return {
+    ...wordNote,
+    associated_word_uuids: wordNote.associated_words.map(word => word.uuid)
+  }
 }
 
 type RetrieveAPIWordNotesSuccess = {
@@ -27,10 +42,7 @@ export const retrieveAPIWordNotes = async (): Promise<RetrieveAPIWordNotesSucces
       reason: data.error
     }
   } catch (e) {
-    return {
-      status: "failure",
-      reason: "unknown reason"
-    }
+    return unknownFailure
   }
 }
 
@@ -40,7 +52,7 @@ type UpdateAPIWordNoteSuccess = {
 }
 export const updateAPIWordNote = async (wordNote: APIWordNoteType): Promise<UpdateAPIWordNoteSuccess|Failure> => {
   try {
-    const res = await put(`word-notes/${wordNote.uuid}/`, wordNote)
+    const res = await put(`word-notes/${wordNote.uuid}/`, convertAPIWordNoteToPOSTable(wordNote))
     const data = await res.json()
     if (res.ok) return {
       status: "success",
@@ -51,7 +63,7 @@ export const updateAPIWordNote = async (wordNote: APIWordNoteType): Promise<Upda
       reason: data.error
     }
   } catch (e) {
-    return unknownError
+    return unknownFailure
   }
 
 }
@@ -62,7 +74,7 @@ type CreateAPIWordNoteSuccess = {
 }
 export const createAPIWordNote = async (wordNote: APIWordNoteType): Promise<CreateAPIWordNoteSuccess|Failure> => {
   try {
-    const res = await post(`word-notes/`, wordNote)
+    const res = await post(`word-notes/`, convertAPIWordNoteToPOSTable(wordNote))
     const data = await res.json()
     if (res.ok) return {
       status: "success",
@@ -73,52 +85,21 @@ export const createAPIWordNote = async (wordNote: APIWordNoteType): Promise<Crea
       reason: data.error || data.errors
     }
   } catch (e) {
-    return unknownError
-  }
-}
-
-export const useAPIWordNotes = () => {
-  const [wordNotes, setWordNotes] = useState<APIWordNoteType[]>([])
-  const getWordNotes = (word: APIWordType) => {
-    return wordNotes.filter(wordNote => {
-      for (const wordUUID of wordNote.associated_words) {
-        if (wordUUID === word.uuid) return true
-      }
-      for (const categoryUUID of wordNote.associated_categories) {
-        for (const categoryUUID_ of word.category) {
-          if (categoryUUID === categoryUUID_) return true
-        }
-      }
-      return false
-    })
-  }
-  const loadWordNotesData = async () => {
-    const result = await retrieveAPIWordNotes()
-    if (result.status === "success") {
-      setWordNotes(result.wordNotes)
-    }
-  }
-  useEffect(()=>{
-    loadWordNotesData()
-  }, [])
-  return {wordNotes, getWordNotes}
-}
-
-type GetWordNoteContentTextFromGithubSuccess = {
-  status: "success",
-  text: string
-}
-export const getWordNoteContentTextFromGithub = async (uuid: string): Promise<GetWordNoteContentTextFromGithubSuccess|Failure> => {
-  try {
-    const res = await fetch(`https://raw.githubusercontent.com/akanosenritu/jpwords/master/src/data/WordNotes/Contents/${uuid}.mdx`)
-    if (!res.ok) return {status: "failure", reason: `${res.status}: ${res.statusText}`}
-    const text = await res.text()
-    return {status: "success", text}
-  } catch(err) {
-    return unknownError
+    return unknownFailure
   }
 }
 
 export const orderGeneration = () => {
   return post("word-notes/generate/", {})
+}
+
+export const deleteAPIWordNote = async (wordNote: APIWordNoteType): Promise<Success|Failure> => {
+  try {
+    const res = await delete_(`word-notes/${wordNote.uuid}/`)
+    if (res.ok) return success
+    const data = await res.json()
+    return {status: "failure", reason: data.errors}
+  } catch  {
+    return unknownFailure
+  }
 }

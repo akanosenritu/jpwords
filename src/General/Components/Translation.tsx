@@ -16,13 +16,13 @@ export const Translation: React.FC<Props> = props => {
 export const EnglishTranslation: React.FC = props => {
   const language = useContext(LanguageContext)
   return <>
-    {language === "ENG" && props.children}
+    {language === "en" && props.children}
   </>
 }
 
 export const SpanishTranslation: React.FC = props => {
   const language = useContext(LanguageContext)
   return <>
-    {language === "ESP" && props.children}
+    {language === "es" && props.children}
   </>
 }

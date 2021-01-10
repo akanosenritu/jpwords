@@ -62,6 +62,16 @@ export const put = async (url: string, data: object) => {
   })
 }
 
+export const delete_ = async (url: string) => {
+  const csrfToken = await getCsrfToken()
+  return myFetch("/api/" + url, {
+    method: "DELETE",
+    headers: {
+      "X-CSRFToken": csrfToken
+    }
+  })
+}
+
 export const setCsrfToken = async (): Promise<string> => {
   return fetch("/api/set-csrf-token/")
     .then(res => res.json())

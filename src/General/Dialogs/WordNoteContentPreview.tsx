@@ -3,14 +3,14 @@ import {LiveError, LivePreview, LiveProvider} from "react-live";
 import {getCode} from "../MDXUtils";
 import {wordNoteContentMDXComponents, WordNoteContentMDXProvider} from "../../data/WordNotes/WordNoteContent";
 import {mdx} from "@mdx-js/react";
-import {LanguageContext} from "../../data/Language";
+import {LanguageContext2} from "../../data/Language";
 
 type Props = {
   content: string
 }
 
 export const WordNoteContentPreview: React.FC<Props> = props => {
-  const language = useContext(LanguageContext)
+  const {language} = useContext(LanguageContext2)
 
   return <WordNoteContentMDXProvider>
     <LiveProvider

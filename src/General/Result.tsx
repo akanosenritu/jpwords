@@ -2,6 +2,10 @@ export type Success = {
   status: "success"
 }
 
+export const success: Success = {
+  status: "success"
+}
+
 export type SuccessWithData<T> = {
   status: "success"
   data: T

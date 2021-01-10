@@ -1,17 +1,20 @@
-import React, {useContext, useState} from "react";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from "@material-ui/core/TablePagination";
-import {Button} from "@material-ui/core";
+import React, {useContext, useState} from "react"
+
+// material-ui
+import Box from "@material-ui/core/Box"
+import Button from "@material-ui/core/Button"
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import TablePagination from "@material-ui/core/TablePagination"
+
 import {APIWordNoteType, orderGeneration} from "../../API/APIWordNote";
 import {DrawerBase, DrawerBaseProps} from "../../General/Drawers/DrawerBase";
 import {WordNoteEditor} from "./EditWordNoteDrawer";
 import {APIWordNotesContext} from "../../API/APIWordNoteProvider";
-import Box from "@material-ui/core/Box";
 
 const COLUMNS = ["UUID", "Title", "A. Words", "A. Categories", "Actions"]
 
@@ -49,9 +52,9 @@ export const WordNotesTable: React.FC<WordNotesTableProps> = props => {
     const blankWordNote: APIWordNoteType = {
       uuid: "",
       title: "",
-      associated_categories: [] as string[],
-      associated_words: [] as string[],
-      is_published: false,
+      associated_categories: [],
+      associated_words: [],
+      is_published: false
     }
     onClickOpenEditor(blankWordNote)
   };

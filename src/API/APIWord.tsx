@@ -1,13 +1,15 @@
 import {Failure, get, post, put, Success} from "./API";
 import {Language} from "../data/Language";
 import {APITranslation} from "./APITranslation";
+import {ConciseAPIWordListType} from "./APIWordList"
 
 export type APIWordType = {
   uuid: string,
   kanji: string,
   kana: string,
   category: string[]
-  meaning: APITranslation[]
+  meaning: APITranslation[],
+  word_lists: ConciseAPIWordListType[]
 }
 
 export const retrieveAPIWords = () => {

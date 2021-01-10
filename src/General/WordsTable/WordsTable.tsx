@@ -51,18 +51,6 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
     loadCategoriesData()
   }, [])
 
-  // word lists data
-  const [wordLists, setWordLists] = useState<APIWordListType[]>([])
-  const loadWordListsData = () => {
-    retrieveAPIWordLists()
-      .then(data => {
-        setWordLists(data)
-      })
-  }
-  useEffect(() => {
-    loadWordListsData()
-  }, [])
-
   // handle edits
   const handleMeaningEdit = async (word: APIWordType, value: string) => {
     const language = configurations.language
@@ -284,7 +272,7 @@ export const WordsTable: React.FC<WordsTableProps> = props => {
           {words.map(word => {
             const meaning = getMeaning(word, configurations.language)
             const category = categoriesDict? word.category.map((categoryUUID: string | number) => categoriesDict[categoryUUID].name).join(", "): ""
-            const wordList = wordLists.filter(wordList => isWordUsedInWordList(word.uuid, wordList)).map(wordList => wordList.name).join(", ")
+            const wordList = word.word_lists.map(wordList => wordList.name).join(", ")
             return <TableRow key={word.uuid} style={{backgroundColor: getRowColor(word), transition: "background-color 0.5s ease-out"}}>
               <MyTableCell key={"uuid"}>{word.uuid}</MyTableCell>
               <MyTableCell key={`kanji-${word.kanji}`}>

@@ -9,6 +9,12 @@ export type APIWordListType = {
   description: string
 }
 
+export type ConciseAPIWordListType = {
+  uuid: string,
+  name: string,
+  language: string
+}
+
 export const retrieveAPIWordLists = () => {
   return get("word-lists/")
     .then(res => res.json())

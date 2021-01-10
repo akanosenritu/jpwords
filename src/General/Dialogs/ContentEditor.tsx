@@ -1,89 +1,67 @@
-import {APIWordNoteType, getWordNoteContentTextFromGithub} from "../../API/APIWordNote";
-import React, {ChangeEvent, createElement, useCallback, useEffect, useState} from "react";
-import {Box, Button, Grid, TextField} from "@material-ui/core";
-import {WordNoteContentPreview} from "./WordNoteContentPreview";
-import {initialConfigurations, useConfigurations} from "../../LocalStorage/Configurations";
-import {LanguageProvider} from "../../data/Language";
-import {LanguageSelector} from "../Components/LanguageSelector";
-import {getEditingData, setEditingData} from "../../LocalStorage/EditingData";
+import React, {useCallback, useEffect, useState} from "react"
+
+// material-ui
+import Box from "@material-ui/core/Box"
+import CloseIcon from '@material-ui/icons/Close'
+import Grid from "@material-ui/core/Grid"
+import IconButton from "@material-ui/core/IconButton"
+
+
+import {APIWordNoteType} from "../../API/APIWordNote"
+import {
+  APIWordNoteContentType,
+  createBlankAPIWordNoteContent,
+  getAPIWordNoteContent
+} from "../../API/APIWordNoteContent"
+import {ContentEditorEntry} from "./ContentEditor/ContentEditorEntry"
+import {Language} from "../../data/Language"
+import {CreateNewContent} from "./ContentEditor/CreateNewContent"
+import {Typography} from "@material-ui/core"
+
 
 type ContentEditorProps = {
   onClose: ()=>void,
   wordNote: APIWordNoteType
 }
 
-const getIdentifierString = (uuid: string) => {
-  return `word-note-${uuid}`
-}
-
 export const ContentEditor: React.FC<ContentEditorProps> = props => {
-  const [content, setContent] = useState("");
-  const loadContent = useCallback(async () => {
-    
-    const loadContentFromLocalStorage = () => {
-      return getEditingData(getIdentifierString(props.wordNote.uuid))
-    }
-    const loadContentFromGithub = async () => {
-      return await getWordNoteContentTextFromGithub(props.wordNote.uuid)
-    }
-    
-    const result = loadContentFromLocalStorage()
-    if (result.status === "success") setContent(result.data)
-    else {
-      const result2 = await loadContentFromGithub()
-      if (result2.status === "success") setContent(result2.text)
-      else setContent("ERROR")
+  const [contents, setContents] = useState<APIWordNoteContentType[]>([])
+  const loadContents = useCallback(async () => {
+    const result = await getAPIWordNoteContent(props.wordNote.uuid)
+    if (result.status === "success") {
+      setContents(result.data)
     }
   }, [props.wordNote.uuid])
-  
   useEffect(() => {
-    loadContent()
-  }, [loadContent])
+    loadContents()
+  }, [loadContents])
 
-  const onSave = () => {
-    setEditingData(getIdentifierString(props.wordNote.uuid), content)
+  const createNewContent = (languages: Language[]) => {
+    const blankContent = createBlankAPIWordNoteContent(props.wordNote, languages)
+    setContents([...contents, blankContent])
   }
 
-  const onDownload = () => {
-    const fileName = `${props.wordNote.uuid}.mdx`
-    const aElement = document.createElement("a")
-    aElement.download = fileName
-    aElement.href = URL.createObjectURL(new Blob([content], {type : 'text/plain'}))
-    aElement.click()
-  }
-
-  const {configurations} = useConfigurations(initialConfigurations)
-  const [language, setLanguage] = useState(configurations.language)
-  return <LanguageProvider language={language}>
-    <Box m={1}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Box display={"flex"} justifyContent={"center"} mt={2}>
-            <Button color={"primary"} variant={"contained"} onClick={()=>{onSave();props.onClose()}}>Save</Button>
-            <Button color={"primary"} variant={"contained"} onClick={onDownload}>Download</Button>
-            <Button color={"secondary"} variant={"contained"} onClick={loadContent}>Reload</Button>
-            <Button variant={"contained"} onClick={()=>props.onClose()}>Close</Button>
-            <Box ml={2} style={{width: 200}}>
-              <LanguageSelector language={language} onSelected={language => setLanguage(language)} />
-            </Box>
+  return <Box m={1}>
+    <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"} mx={3}>
+          <Typography variant={"h5"}>Edit word note contents</Typography>
+          <Box display={"flex"}>
+            <CreateNewContent onClickCreateNew={createNewContent} />
+            <IconButton onClick={props.onClose}>
+              <CloseIcon fontSize={"large"} />
+            </IconButton>
           </Box>
-        </Grid>
-        <Grid item xs={6}>
-          <Box ml={3} mr={1}>
-            <LanguageProvider language={language}>
-              <WordNoteContentPreview content={content} key={language} />
-            </LanguageProvider>
-          </Box>
-        </Grid>
-        <Grid item xs={6}>
-          <Box mr={3} >
-            <TextField
-              onChange={(event: ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => setContent(event.target.value)}
-              value={content} variant={"outlined"} fullWidth inputProps={{fontSize: 20}} multiline={true}
-            />
-          </Box>
-        </Grid>
+        </Box>
       </Grid>
-    </Box>
-  </LanguageProvider>
+      <Grid item xs={12}>
+        {contents.map(content => {
+          return <Box m={1}>
+            <ContentEditorEntry wordNoteContent={content} reload={loadContents}/>
+          </Box>
+        })}
+        {contents.length === 0 && <Typography variant={"h6"}>No content is attached to this word note. Add one from the top right add button.</Typography>}
+      </Grid>
+    </Grid>
+  </Box>
 }
